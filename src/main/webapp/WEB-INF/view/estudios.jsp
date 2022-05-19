@@ -4,7 +4,7 @@
     Author     : Alfonso 100%
 --%>
 
-<%@page import="es.trabajotaw.dto.EstudioDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.EstudioDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

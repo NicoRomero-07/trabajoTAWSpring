@@ -4,7 +4,7 @@
     Author     : Nicolás Zhao (100%)
 --%>
 
-<%@page import="es.trabajotaw.dto.UsuarioDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%

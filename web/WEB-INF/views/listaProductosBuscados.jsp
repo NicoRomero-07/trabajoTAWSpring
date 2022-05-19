@@ -6,8 +6,8 @@
 
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="es.trabajotaw.dto.ProductoDTO"%>
-<%@page import="es.trabajotaw.entity.Producto"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.ProductoDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.entity.Producto"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

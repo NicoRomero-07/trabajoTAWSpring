@@ -5,12 +5,12 @@
 --%>
 
 <%@page import="java.util.Map"%>
-<%@page import="es.trabajotaw.dto.UsuarioDTO"%>
-<%@page import="es.trabajotaw.dto.ListaUsuarioDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO"%>
 <%@page import="java.util.List"%>
 <%--
-<%@page import="es.trabajotaw.entity.Usuario"%>
-<%@page import="es.trabajotaw.entity.ListaUsuario"%>
+<%@page import="Usuario"%>
+<%@page import="ListaUsuario"%>
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

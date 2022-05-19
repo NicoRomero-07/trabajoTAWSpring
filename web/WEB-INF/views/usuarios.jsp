@@ -4,8 +4,8 @@
     Author     : nicor
 --%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="es.trabajotaw.dto.UsuarioDTO"%>
-<%@page import="es.trabajotaw.entity.Usuario"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.entity.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

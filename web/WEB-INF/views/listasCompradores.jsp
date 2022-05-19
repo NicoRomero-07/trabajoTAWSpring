@@ -4,8 +4,8 @@
     Author     : Nicolás Zhao (100%)
 --%>
 
-<%@page import="es.trabajotaw.dto.ListaUsuarioDTO"%>
-<%--<%@page import="es.trabajotaw.entity.ListaUsuario"%> --%>
+<%@page import="es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO"%>
+<%--<%@page import="ListaUsuario"%> --%>
 
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

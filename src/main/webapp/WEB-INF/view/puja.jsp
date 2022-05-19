@@ -4,9 +4,9 @@
     Author     : Victor
 --%>
 
-<%@page import="es.trabajotaw.dto.PujaDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.PujaDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="es.trabajotaw.dto.ProductoDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.ProductoDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
