@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Fri May 20 01:22:22 CEST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-dea1-1bed-00000232b558 
+Fri May 20 11:58:20 CEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-e0e7-5a9c-00000203c818 
 on database directory C:\Users\Alfonso\Documents\Estudios\TercerSemestre\TecAplWeb\trabajoTAWSpring\trabajoTAWSpring\db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
 Loaded from file:/C:/Users/Alfonso/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
@@ -12,9 +12,9 @@ os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
 ----------------------------------------------------------------
-Fri May 20 01:25:07 CEST 2022:
-Shutting down instance a816c00e-0180-dea1-1bed-00000232b558 on database directory C:\Users\Alfonso\Documents\Estudios\TercerSemestre\TecAplWeb\trabajoTAWSpring\trabajoTAWSpring\db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
-Fri May 20 01:25:07 CEST 2022 Thread[Thread-18,5,main] Cleanup action starting
+Fri May 20 11:59:22 CEST 2022:
+Shutting down instance a816c00e-0180-e0e7-5a9c-00000203c818 on database directory C:\Users\Alfonso\Documents\Estudios\TercerSemestre\TecAplWeb\trabajoTAWSpring\trabajoTAWSpring\db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
+Fri May 20 11:59:22 CEST 2022 Thread[Thread-18,5,main] Cleanup action starting
 ERROR XBM0I: Directory db cannot be removed.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
@@ -34,7 +34,7 @@ ERROR XBM0I: Directory db cannot be removed.
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 Cleanup action completed
-Fri May 20 01:25:07 CEST 2022 Thread[Thread-18,5,main] Cleanup action starting
+Fri May 20 11:59:22 CEST 2022 Thread[Thread-18,5,main] Cleanup action starting
 ERROR XBM0I: Directory db cannot be removed.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
