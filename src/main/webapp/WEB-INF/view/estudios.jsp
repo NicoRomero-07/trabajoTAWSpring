@@ -4,8 +4,8 @@
     Author     : Alfonso 100%
 --%>
 
-<%@page import="es.trabajotaw.trabajotaw.dto.EstudioDTO"%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.entity.Estudio" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@
     </head>
     <%
         String filtroNombre = (String) request.getAttribute("filtroNombre");
-        List<EstudioDTO> estudios = (List) request.getAttribute("estudios");
+        List<Estudio> estudios = (List) request.getAttribute("estudios");
     %>
     <body>
         <jsp:include page="cabecera2.jsp" /> 
@@ -36,7 +36,7 @@
                     <td>DESCRIPCION</td>   
                 </tr>
             <%
-                for (EstudioDTO est : estudios) {
+                for (Estudio est : estudios) {
             %> 
                     <tr>
                         <td><%= est.getIdEstudio()%></td>

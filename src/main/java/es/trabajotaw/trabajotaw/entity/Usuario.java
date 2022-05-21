@@ -5,9 +5,6 @@
  */
 package es.trabajotaw.trabajotaw.entity;
 
-
-import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -268,23 +265,4 @@ public class Usuario {
     public void setCategoriaFavorita(Categoria c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public UsuarioDTO toDTO() {
-        UsuarioDTO dto = new UsuarioDTO();
-
-        dto.setIdUsuario(idUsuario);
-        dto.setNombreUsuario(nombreUsuario);
-        dto.setContrasenya(contrasenya);
-        dto.setNombre(nombre);
-        dto.setPrimerApellido(primerApellido);
-        dto.setSegundoApellido(segundoApellido);
-        dto.setEmail(email);
-        dto.setDireccion(direccion.toDTO());
-        dto.setSexo(sexo);
-        dto.setTipoUsuario(tipoUsuario.toDTO());
-        dto.setFechaNacimiento(fechaNacimiento);
-
-        return dto;
-    }
-
 }

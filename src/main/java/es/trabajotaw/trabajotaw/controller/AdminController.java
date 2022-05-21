@@ -1,7 +1,6 @@
 package es.trabajotaw.trabajotaw.controller;
 
 import es.trabajotaw.trabajotaw.dao.UsuarioRepository;
-import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
 import es.trabajotaw.trabajotaw.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,12 +13,13 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@RequestMapping("administrador")
 public class AdminController {
 
     @Autowired
     private UsuarioRepository usuariosRepository;
 
-    @GetMapping(value = "/admin")
+    @GetMapping(value = "/")
     public String inicio(Model model, HttpSession session){
         List<Usuario> usuarios = usuariosRepository.findAll();
         model.addAttribute(usuarios);

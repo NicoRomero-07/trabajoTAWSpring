@@ -5,8 +5,6 @@
  */
 package es.trabajotaw.trabajotaw.entity;
 
-import es.trabajotaw.trabajotaw.dto.TipoUsuarioDTO;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -95,15 +93,6 @@ public class TipoUsuario   {
     @Override
     public String toString() {
         return "es.trabajotaw.entity.TipoUsuario[ idTipoUsuario=" + idTipoUsuario + " ]";
-    }
-
-    public TipoUsuarioDTO toDTO() {
-        TipoUsuarioDTO categoriaDTO = new TipoUsuarioDTO();
-
-        categoriaDTO.setIdTipoUsuario(idTipoUsuario);
-        categoriaDTO.setTipo(tipo);
-
-        return categoriaDTO;
     }
 
 }

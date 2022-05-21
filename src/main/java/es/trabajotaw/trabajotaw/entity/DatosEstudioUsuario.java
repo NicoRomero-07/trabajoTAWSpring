@@ -5,9 +5,6 @@
  */
 package es.trabajotaw.trabajotaw.entity;
 
-
-import es.trabajotaw.trabajotaw.dto.DatosEstudioUsuarioDTO;
-
 import javax.persistence.*;
 
 /**
@@ -140,19 +137,6 @@ public class DatosEstudioUsuario   {
         return "es.trabajotaw.entity.DatosEstudioUsuario[ id=" + id + " ]";
     }
 
-    public DatosEstudioUsuarioDTO toDTO () {
-        DatosEstudioUsuarioDTO dto = new DatosEstudioUsuarioDTO();
-
-        dto.setId(id);
-        dto.setNombre(nombre);
-        dto.setApellidos(apellidos);
-        dto.setIngresos(ingresos);
-        dto.setAscendente(ascendente);
-        dto.setEstudio(estudio.toDTO());
-
-        return dto;
-    }
-    
     
     
 }
