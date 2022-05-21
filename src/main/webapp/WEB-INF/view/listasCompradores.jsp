@@ -25,7 +25,7 @@
         <%
             if (listas!= null && !listas.isEmpty()){
         %>
-        <form method="post" action="ListaCompradorServlet">
+        <form method="POST" action="/filtro">
             Nombre: <input type="text" name="filtroNombre" value="" />
             <input type="submit" value="Filtrar" />
         </form>
@@ -45,7 +45,7 @@
             <tr>
                 <td><%= lista.getIdListaUsuario() %></td>
                 <td><%= lista.getNombre()%></td>        
-                <td><a href="ListaCompradorNuevoEditarServlet?id=<%= lista.getIdListaUsuario() %>">Editar</a></td>      
+                <td><a href="edit/<%= lista.getIdListaUsuario() %>">Editar</a></td>
                 <td><a href="ListaCompradorBorrarServlet?id=<%= lista.getIdListaUsuario() %>">Borrar</a></td>       
                 <td><a href="ListaCompradorEnviarNotificacionServlet?id=<%= lista.getIdListaUsuario() %>">Notificar promociones</a></td>
                 <td><a href="CompradorServlet?id=<%= lista.getIdListaUsuario() %>">Ver compradores</a></td>
@@ -62,6 +62,6 @@
             }
         %>
         <br>
-        <a href="ListaCompradorNuevoEditarServlet">Crear nueva lista ...</a>
+        <a href="nuevo">Crear nueva lista ...</a>
     </body>
 </html>

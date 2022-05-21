@@ -5,9 +5,9 @@
 --%>
 
 <%@page import="java.util.Map"%>
-<%@page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO"%>
-<%@page import="es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO"%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.entity.ListaUsuario" %>
+<%@ page import="es.trabajotaw.trabajotaw.entity.Usuario" %>
 <%--
 <%@page import="Usuario"%>
 <%@page import="ListaUsuario"%>
@@ -20,9 +20,9 @@
         <title>Nueva lista</title>
     </head>
     <%
-            ListaUsuarioDTO listaComprador = (ListaUsuarioDTO)request.getAttribute("listaComprador");
+            ListaUsuario listaComprador = (ListaUsuario)request.getAttribute("listaComprador");
             Boolean error = (Boolean) request.getAttribute("error");
-            Map<UsuarioDTO,List<ListaUsuarioDTO>> relaciones = (Map<UsuarioDTO,List<ListaUsuarioDTO>>) request.getAttribute("relaciones");
+            Map<Usuario,List<ListaUsuario>> relaciones = (Map<Usuario,List<ListaUsuario>>) request.getAttribute("relaciones");
     %>    
     <body>
         <jsp:include page="cabeceraMarketing.jsp" /> 
@@ -31,7 +31,7 @@
             if (error== null || !error){
            
         %>
-        <form method="POST" action="ListaCompradorGuardarServlet">
+        <form method="POST" action="save">
             <input type="hidden" name="id" value="<%= listaComprador==null? "": listaComprador.getIdListaUsuario() %>" />
             <table>
                 <tr>
@@ -43,8 +43,8 @@
                 </tr>
                     <%                  
                         String checked;
-                        for (Map.Entry<UsuarioDTO,List<ListaUsuarioDTO>> entry : relaciones.entrySet()){
-                            List<ListaUsuarioDTO> listasRelacionadas = entry.getValue();
+                        for (Map.Entry<Usuario,List<ListaUsuario>> entry : relaciones.entrySet()){
+                            List<ListaUsuario> listasRelacionadas = entry.getValue();
                             checked = "";
                             if(listaComprador != null && listasRelacionadas != null && listasRelacionadas.contains(listaComprador)){
                                 checked = "checked";
