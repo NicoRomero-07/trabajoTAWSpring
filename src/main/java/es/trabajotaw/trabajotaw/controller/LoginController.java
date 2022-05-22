@@ -38,7 +38,7 @@ public class LoginController {
             session.setAttribute("usuario", user);
 
             if(user.getTipoUsuario().getTipo().equalsIgnoreCase("Administrador")){
-                goTo = "redirect:/administrador/";
+                goTo = "redirect:/administrador/vistaAdministrador";
             }else if (user.getTipoUsuario().getTipo().equalsIgnoreCase("Analista")){
                 goTo = "redirect:/analista/";
             }else if (user.getTipoUsuario().getTipo().equalsIgnoreCase("Marketing")){
