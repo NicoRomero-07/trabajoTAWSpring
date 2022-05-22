@@ -6,8 +6,8 @@
 
 <%--Pablo (100%)--%>
 
-<%@page import="trabajoTAW.dto.ProductoDTO"%>
-<%@page import="trabajoTAW.entity.Categoria"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.ProductoDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.entity.Categoria"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

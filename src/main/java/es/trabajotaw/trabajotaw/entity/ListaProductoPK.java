@@ -7,8 +7,6 @@ package es.trabajotaw.trabajotaw.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
 
 /**
  *
@@ -77,7 +75,7 @@ public class ListaProductoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "trabajoTAW.entity.ListaProductoPK[ producto=" + producto + ", usuario=" + usuario + " ]";
+        return "es.trabajotaw.entity.ListaProductoPK[ producto=" + producto + ", usuario=" + usuario + " ]";
     }
     
 }

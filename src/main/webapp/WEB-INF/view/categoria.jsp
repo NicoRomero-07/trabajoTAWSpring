@@ -4,8 +4,8 @@
     Author     : nicor
 --%>
 
-<%@page import="trabajoTAW.dto.CategoriaDTO"%>
-<%@page import="trabajoTAW.entity.Categoria"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.CategoriaDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.entity.Categoria"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

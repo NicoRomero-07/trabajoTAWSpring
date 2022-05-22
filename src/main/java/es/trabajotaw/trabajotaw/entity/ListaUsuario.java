@@ -6,7 +6,6 @@ package es.trabajotaw.trabajotaw.entity;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "LISTA_USUARIO")
@@ -92,7 +91,7 @@ public class ListaUsuario   {
 
     @Override
     public String toString() {
-        return "trabajoTAW.entity.ListaUsuario[ idListaUsuario=" + idListaUsuario + " ]";
+        return "es.trabajotaw.entity.ListaUsuario[ idListaUsuario=" + idListaUsuario + " ]";
     }
     
     

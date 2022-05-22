@@ -4,11 +4,8 @@
  * and open the template in the editor.
  */
 package es.trabajotaw.trabajotaw.entity;
-
-
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 /**
  *
@@ -157,8 +154,7 @@ public class Direccion   {
 
     @Override
     public String toString() {
-        return "trabajoTAW.entity.Direccion[ idDireccion=" + idDireccion + " ]";
+        return "es.trabajotaw.entity.Direccion[ idDireccion=" + idDireccion + " ]";
     }
-
     
 }

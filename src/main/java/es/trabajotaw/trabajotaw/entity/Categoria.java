@@ -7,7 +7,6 @@ package es.trabajotaw.trabajotaw.entity;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 /**
  *
@@ -110,7 +109,7 @@ public class Categoria   {
 
     @Override
     public String toString() {
-        return "trabajoTAW.entity.Categoria[ idCategoria=" + idCategoria + " ]";
+        return "es.trabajotaw.entity.Categoria[ idCategoria=" + idCategoria + " ]";
     }
 
    

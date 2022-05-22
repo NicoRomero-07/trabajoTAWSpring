@@ -4,10 +4,7 @@
  * and open the template in the editor.
  */
 package es.trabajotaw.trabajotaw.entity;
-
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
 
 /**
  *
@@ -145,8 +142,7 @@ public class DatosEstudioProducto   {
 
     @Override
     public String toString() {
-        return "trabajoTAW.entity.DatosEstudioProducto[ id=" + id + " ]";
+        return "es.trabajotaw.entity.DatosEstudioProducto[ id=" + id + " ]";
     }
-
     
 }

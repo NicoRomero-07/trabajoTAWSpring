@@ -4,9 +4,9 @@
     Author     : Alfonso 100 %
 --%>
 
-<%@page import="trabajoTAW.dto.DatosEstudioUsuarioDTO"%>
-<%@page import="trabajoTAW.dto.DatosEstudioProductoDTO"%>
-<%@page import="trabajoTAW.dto.EstudioDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.DatosEstudioUsuarioDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.DatosEstudioProductoDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.EstudioDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

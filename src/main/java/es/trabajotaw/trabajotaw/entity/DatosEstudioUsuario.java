@@ -5,10 +5,8 @@
  */
 package es.trabajotaw.trabajotaw.entity;
 
-
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
+
 /**
  *
  * @author nicol
@@ -136,11 +134,9 @@ public class DatosEstudioUsuario   {
 
     @Override
     public String toString() {
-        return "trabajoTAW.entity.DatosEstudioUsuario[ id=" + id + " ]";
+        return "es.trabajotaw.entity.DatosEstudioUsuario[ id=" + id + " ]";
     }
-    
 
-    
     
     
 }

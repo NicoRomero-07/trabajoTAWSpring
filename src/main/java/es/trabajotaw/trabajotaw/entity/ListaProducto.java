@@ -6,8 +6,6 @@
 package es.trabajotaw.trabajotaw.entity;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
 
 /**
  *
@@ -89,7 +87,7 @@ public class ListaProducto   {
 
     @Override
     public String toString() {
-        return "trabajoTAW.entity.ListaProducto[ listaProductoPK=" + listaProductoPK + " ]";
+        return "es.trabajotaw.entity.ListaProducto[ listaProductoPK=" + listaProductoPK + " ]";
     }
 
     

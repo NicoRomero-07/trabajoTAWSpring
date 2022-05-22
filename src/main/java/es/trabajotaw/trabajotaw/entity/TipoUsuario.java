@@ -7,7 +7,6 @@ package es.trabajotaw.trabajotaw.entity;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 /**
  *
@@ -93,7 +92,7 @@ public class TipoUsuario   {
 
     @Override
     public String toString() {
-        return "trabajoTAW.entity.TipoUsuario[ idTipoUsuario=" + idTipoUsuario + " ]";
+        return "es.trabajotaw.entity.TipoUsuario[ idTipoUsuario=" + idTipoUsuario + " ]";
     }
 
 }

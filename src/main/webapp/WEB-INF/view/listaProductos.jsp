@@ -7,8 +7,8 @@
 <%--Pablo (100%)--%>
 
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="trabajoTAW.dto.ProductoDTO"%>
-<%@page import="trabajoTAW.entity.Producto"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.ProductoDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.entity.Producto"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -5,14 +5,14 @@
 --%>
 
 <%@page import="java.util.Iterator"%>
-<%@page import="trabajoTAW.dto.UsuarioDTO"%>
-<%@page import="trabajoTAW.dto.CategoriaDTO"%>
-<%@page import="trabajoTAW.dto.TipoUsuarioDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.CategoriaDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.TipoUsuarioDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="trabajoTAW.entity.Categoria"%>
-<%@page import="trabajoTAW.entity.Usuario"%>
-<%@page import="trabajoTAW.entity.TipoUsuario"%>
+<%@page import="es.trabajotaw.trabajotaw.entity.Categoria"%>
+<%@page import="es.trabajotaw.trabajotaw.entity.Usuario"%>
+<%@page import="es.trabajotaw.trabajotaw.entity.TipoUsuario"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

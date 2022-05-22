@@ -4,7 +4,7 @@
     Author     : Victor
 --%>
 
-<%@page import="trabajoTAW.dto.ProductoDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.ProductoDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

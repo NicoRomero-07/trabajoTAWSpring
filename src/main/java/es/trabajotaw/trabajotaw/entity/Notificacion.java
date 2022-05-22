@@ -7,7 +7,6 @@ package es.trabajotaw.trabajotaw.entity;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 
 @Entity
@@ -116,7 +115,7 @@ public class Notificacion   {
 
     @Override
     public String toString() {
-        return "trabajoTAW.entity.Notificacion[ idNotificacion=" + idNotificacion + " ]";
+        return "es.trabajotaw.entity.Notificacion[ idNotificacion=" + idNotificacion + " ]";
     }
     
 }

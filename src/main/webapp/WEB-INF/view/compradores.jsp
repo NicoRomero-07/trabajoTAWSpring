@@ -3,12 +3,12 @@
     Created on : 20-abr-2022, 15:18:27
     Author     : Nicolás Zhao (100%)
 --%>
-<%@page import="trabajoTAW.dto.ListaUsuarioDTO"%>
-<%@page import="trabajoTAW.dto.UsuarioDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%--
-<%@page import="trabajoTAW.entity.ListaUsuario"%>
-<%@page import="trabajoTAW.entity.Usuario"%>
+<%@page import="ListaUsuario"%>
+<%@page import="Usuario"%>
 --%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

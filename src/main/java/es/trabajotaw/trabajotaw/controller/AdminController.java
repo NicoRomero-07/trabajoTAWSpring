@@ -13,13 +13,14 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@RequestMapping("administrador")
 public class AdminController {
 
     @Autowired
     private UsuarioRepository usuariosRepository;
 
-    @RequestMapping(value = "/admin",method = RequestMethod.GET)
-    public String inicio(Model model, HttpSession sesion){
+    @GetMapping(value = "/")
+    public String inicio(Model model, HttpSession session){
         List<Usuario> usuarios = usuariosRepository.findAll();
         model.addAttribute(usuarios);
         return "administrador";

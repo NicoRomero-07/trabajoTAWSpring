@@ -3,12 +3,11 @@
     Created on : 15-may-2022, 9:57:20
     Author     : Nicolás Zhao (100%)
 --%>
-
-<%@page import="trabajoTAW.dto.UsuarioDTO"%>
+<%@ page import="es.trabajotaw.trabajotaw.entity.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    UsuarioDTO user = (UsuarioDTO)session.getAttribute("usuario");
+    Usuario user = (Usuario)session.getAttribute("usuario");
     if (user == null) {
         response.sendRedirect(request.getContextPath());
     }

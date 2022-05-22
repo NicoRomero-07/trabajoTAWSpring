@@ -5,11 +5,10 @@
  */
 package es.trabajotaw.trabajotaw.entity;
 
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
+
 /**
  *
  * @author nicol
@@ -260,11 +259,10 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "trabajoTAW.entity.Usuario[ idUsuario=" + idUsuario + " ]";
+        return "es.trabajotaw.entity.Usuario[ idUsuario=" + idUsuario + " ]";
     }
 
     public void setCategoriaFavorita(Categoria c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

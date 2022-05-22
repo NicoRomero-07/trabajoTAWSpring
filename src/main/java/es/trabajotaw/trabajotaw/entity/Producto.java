@@ -8,7 +8,6 @@ package es.trabajotaw.trabajotaw.entity;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 /**
  *
@@ -239,7 +238,7 @@ public class Producto   {
 
     @Override
     public String toString() {
-        return "trabajoTAW.entity.Producto[ idProducto=" + idProducto + " ]";
+        return "es.trabajotaw.entity.Producto[ idProducto=" + idProducto + " ]";
     }
     
     
