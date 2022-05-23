@@ -10,5 +10,4 @@ import java.util.List;
 public interface EstudioRepository extends JpaRepository<Estudio, Integer> {
 
     List<Estudio> findByNombreContaining(String nombre);
-
 }

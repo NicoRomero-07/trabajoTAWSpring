@@ -4,11 +4,11 @@
     Author     : Alfon
 --%>
 
-<%@page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO"%>
+<%@ page import="es.trabajotaw.trabajotaw.entity.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    UsuarioDTO user = (UsuarioDTO)session.getAttribute("usuario");
+    Usuario user = (Usuario)session.getAttribute("usuario");
     if (user == null) {
         response.sendRedirect(request.getContextPath());
     }

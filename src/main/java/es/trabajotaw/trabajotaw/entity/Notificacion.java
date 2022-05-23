@@ -4,6 +4,8 @@
  */
 package es.trabajotaw.trabajotaw.entity;
 
+import es.trabajotaw.trabajotaw.dto.NotificacionDTO;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -117,5 +119,13 @@ public class Notificacion   {
     public String toString() {
         return "es.trabajotaw.entity.Notificacion[ idNotificacion=" + idNotificacion + " ]";
     }
-    
+
+    public NotificacionDTO toDTO(){
+        NotificacionDTO dto = new NotificacionDTO();
+        dto.setIdNotificacion(idNotificacion);
+        dto.setFechaEnvio(fechaEnvio);
+        dto.setContenido(contenido);
+        dto.setNotificante(notificante.toDTO());
+        return dto;
+    }
 }

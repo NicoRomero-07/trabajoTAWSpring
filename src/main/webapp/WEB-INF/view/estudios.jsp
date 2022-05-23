@@ -4,8 +4,8 @@
     Author     : Alfonso 100%
 --%>
 
-<%@page import="es.trabajotaw.trabajotaw.dto.EstudioDTO"%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.dto.EstudioDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -43,10 +43,10 @@
                         <td><%= est.getNombre()%> </td>            
                         <td><%= est.getAnalista().getNombre()%></td>
                         <td><%= est.getDescripcion()%></td>   
-                        <td><a href="EstudiosBorrarServlet?id=<%= est.getIdEstudio() %>">Borrar</a></td> 
-                        <td><a href="EstudioNuevoEditarServlet?id=<%= est.getIdEstudio()%>">Editar</a></td>
-                        <td><a href="EstudioCopiarServlet?id=<%= est.getIdEstudio()%>">Copiar</a></td>
-                        <td><a href="EstudioVisualizarServlet?id=<%= est.getIdEstudio()%>">Visualizar</a></td>
+                        <td><a href="delete/<%= est.getIdEstudio() %>">Borrar</a></td>
+                        <td><a href="edit/<%= est.getIdEstudio()%>">Editar</a></td>
+                        <td><a href="copy/<%= est.getIdEstudio()%>">Copiar</a></td>
+                        <td><a href="show/<%= est.getIdEstudio()%>">Visualizar</a></td>
                     </tr>
             <%
                 }

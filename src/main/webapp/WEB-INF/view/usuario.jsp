@@ -5,9 +5,6 @@
 --%>
 
 <%@page import="java.util.Iterator"%>
-<%@page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO"%>
-<%@page import="es.trabajotaw.trabajotaw.dto.CategoriaDTO"%>
-<%@page import="es.trabajotaw.trabajotaw.dto.TipoUsuarioDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="es.trabajotaw.trabajotaw.entity.Categoria"%>
@@ -23,10 +20,8 @@
         <title>JSP Page</title>
     </head>
     <%
-        String tipoUsuario = (String)request.getAttribute("tipoUsuario");
-        List<TipoUsuarioDTO> listaTipoUsuario = (List)request.getAttribute("tipoUsuarios");
-        List<CategoriaDTO> listaCategorias = (List)request.getAttribute("categorias");
-        List<CategoriaDTO> listaCategoriasUsuario = (List)request.getAttribute("categoriasFavoritas");
+        List<TipoUsuario> listaTipoUsuario = (List)request.getAttribute("tipoUsuarios");
+        List<Categoria> listaCategorias = (List)request.getAttribute("categorias");
         List<Character> listaSexo = new ArrayList();
         listaSexo.add('H');
         listaSexo.add('M');
@@ -34,13 +29,15 @@
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         listaTipoVia.add("OFICINA");
         listaTipoVia.add("CALLE");
-        UsuarioDTO usuario = (UsuarioDTO)request.getAttribute("usuario");
+        Usuario usuario = (Usuario)request.getAttribute("usuario");
+        List<Categoria> listaCategoriasUsuario = usuario.getCategoriaList();
+        String tipoUsuario = usuario.getTipoUsuario().getTipo();
     %> 
     <body>
         <%if(tipoUsuario!=null){%>
             <jsp:include page="cabecera.jsp" /> 
         <%}%>
-        <a href="UsuariosServlet">Volver</a>
+        <a href="/administrador/administrarUsuarios">Volver</a>
         <h1>Datos del usuario</h1>
         <form method="POST" action="UsuarioGuardarServlet">
             <input type="hidden" name="idDireccion" value="<%= usuario==null? "": usuario.getDireccion().getIdDireccion() %>" />
@@ -70,7 +67,7 @@
             <select name="tipoUsuario">
             <% 
                 if(tipoUsuario != null && tipoUsuario.equalsIgnoreCase("Administrador")){
-                    for (TipoUsuarioDTO uu : listaTipoUsuario) {
+                    for (TipoUsuario uu : listaTipoUsuario) {
                     String selected = "";
                     if (usuario != null && usuario.getTipoUsuario().getTipo().equals(uu.getTipo())) {
                         selected = "selected";
@@ -83,7 +80,7 @@
             <% 
                     }
                 }else{
-                    for (TipoUsuarioDTO uu : listaTipoUsuario.subList(1, 3)) {
+                    for (TipoUsuario uu : listaTipoUsuario.subList(1, 3)) {
                     String selected = "";
                     if (usuario != null && usuario.getTipoUsuario().getTipo().equals(uu.getTipo())) {
                         selected = "selected";
@@ -101,7 +98,7 @@
             
             <% 
                 
-                for (CategoriaDTO dc: listaCategorias) {
+                for (Categoria dc: listaCategorias) {
                     String checked = "";
                     if(tipoUsuario!=null && listaCategoriasUsuario !=null && listaCategoriasUsuario.contains(dc)) checked = "checked";
             %>
