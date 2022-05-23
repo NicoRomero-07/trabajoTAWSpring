@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
-    @Query("select u from Usuario u where u.nombreUsuario = :usuario and u.contrasenya = :clave")
-    Usuario comprobarUsuario(@Param("usuario") String strusuario, @Param("clave") String strclave);
+    @Query("select u from Usuario u where upper(u.nombreUsuario) like upper(:usuario) and upper(u.contrasenya) like upper(:clave)")
+    Usuario comprobarUsuario(@Param("usuario") String nombreUsuario, @Param("clave") String clave);
 
 }

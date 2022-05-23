@@ -14,8 +14,17 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
-    @Autowired
+
     private UsuarioService us;
+
+    public UsuarioService getUs() {
+        return us;
+    }
+
+    @Autowired
+    public void setUs(UsuarioService us) {
+        this.us = us;
+    }
 
     @GetMapping("/")
     public String doInit () {
@@ -28,7 +37,6 @@ public class LoginController {
 
         UsuarioDTO user = this.us.comprobarUsuario(usuario, clave);
         String goTo;
-
 
         if (user == null) {
             String strError = "El usuario o la clave son incorrectos";
