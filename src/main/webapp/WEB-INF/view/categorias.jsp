@@ -37,8 +37,8 @@
         <td><%= categoria.getIdCategoria() %></td>
         <td><%= categoria.getNombre() %></td>
         
-        <td><a href="CategoriaBorrarServlet?id=<%= categoria.getIdCategoria() %>">Borrar</a></td> 
-        <td><a href="/administrador/administrarCategoria?id=<%= categoria.getIdCategoria() %>">Editar</a></td>
+        <td><a href="/administrador/borrarCategoria/<%= categoria.getIdCategoria() %>">Borrar</a></td>
+        <td><a href="/administrador/administrarCategoria/<%= categoria.getIdCategoria() %>">Editar</a></td>
         
     </tr>
     <%

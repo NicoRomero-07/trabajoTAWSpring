@@ -57,8 +57,8 @@
                 <td><%= prod.getEnPromocion()? "Si":"No" %></td>
                 <td><%= prod.getPublicador()==null ? "":prod.getPublicador().getNombreUsuario() %></td>
                 <td><%= prod.getComprador()==null? "":prod.getComprador().getNombreUsuario() %></td>
-                <td><a href="ProductoBorrarServlet?id=<%= prod.getIdProducto() %>">Borrar</a></td> 
-                <td><a href="/administrador/administrarProducto?id=<%= prod.getIdProducto() %>">Editar</a></td>
+                <td><a href="/administrador/borrarProducto/<%= prod.getIdProducto() %>">Borrar</a></td>
+                <td><a href="/administrador/administrarProducto/<%= prod.getIdProducto() %>">Editar</a></td>
             </tr>
                 <%
                   }  

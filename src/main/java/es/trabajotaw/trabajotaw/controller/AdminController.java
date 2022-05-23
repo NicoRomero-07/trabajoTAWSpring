@@ -11,10 +11,7 @@ import es.trabajotaw.trabajotaw.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -44,8 +41,8 @@ public class AdminController {
         return "usuarios";
     }
 
-    @GetMapping(value = "/administrarUsuario")
-    public String doAdministrarUsuario(Model model, HttpSession session, @RequestParam("id") Integer id){
+    @GetMapping(value = "/administrarUsuario/{id}")
+    public String doAdministrarUsuario(Model model, HttpSession session, @PathVariable("id") Integer id){
 
         Usuario usuario = usuariosRepository.getById(id);
         List<TipoUsuario> tipoUsuarios = tiposUsuarioRepository.findAll();
@@ -64,8 +61,8 @@ public class AdminController {
         return "categorias";
     }
 
-    @GetMapping(value = "/administrarCategoria")
-    public String doAdministrarCategoria(Model model, HttpSession session, @RequestParam("id") Integer id){
+    @GetMapping(value = "/administrarCategoria/{id}")
+    public String doAdministrarCategoria(Model model, HttpSession session, @PathVariable("id") Integer id){
         Categoria categoria = categoriasRepository.getById(id);
         model.addAttribute("categoria", categoria);
         return "categoria";
@@ -78,8 +75,8 @@ public class AdminController {
         return "productos";
     }
 
-    @GetMapping(value = "/administrarProducto")
-    public String doAdministrarProducto(Model model, HttpSession session, @RequestParam("id") Integer id){
+    @GetMapping(value = "/administrarProducto/{id}")
+    public String doAdministrarProducto(Model model, HttpSession session, @PathVariable("id") Integer id){
         Producto producto = productosRepository.getById(id);
         List<Categoria> categorias = categoriasRepository.findAll();
         model.addAttribute("categorias", categorias);
