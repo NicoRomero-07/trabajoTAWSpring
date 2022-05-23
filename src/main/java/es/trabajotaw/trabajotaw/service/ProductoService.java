@@ -94,7 +94,7 @@ public class ProductoService {
 
         this.rellenarProducto(producto, nombreProducto, descripcion, precioSalida, imagen, fechaInicio, fechaFin, comprador, publicador, promocion, categoria);
 
-        this.productoRepository.create(producto);
+        this.productoRepository.save(producto);
     }
 
     public void modificarProducto (Integer id,
@@ -104,7 +104,7 @@ public class ProductoService {
 
         this.rellenarProducto(producto, nombreProducto, descripcion, precioSalida, imagen, fechaInicio, fechaFin, comprador, publicador, promocion, categoria);
 
-        this.productoRepository.edit(producto);
+        this.productoRepository.save(producto);
     }
     
     public ProductoDTO buscarProducto(Integer id){
@@ -113,13 +113,13 @@ public class ProductoService {
     }
 
     public List<ProductoDTO> listaProductosLogin(Integer idUsuario) {
-        return this.listaEntityADTO(this.productoRepository.getProductoPublicadorId(idUsuario));
+        return this.listaEntityADTO(this.productoRepository.listaProductosPublicadorId(idUsuario));
     }
     
     public void borrarProducto (Integer id) {
         Producto producto = this.productoRepository.find(id);
 
-        this.productoRepository.remove(producto);
+        this.productoRepository.delete(producto);
     }
     
     public List<ProductoDTO> buscarProductosComprados(Integer idProducto){

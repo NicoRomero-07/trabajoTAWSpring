@@ -13,7 +13,7 @@ import java.util.List;
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
     @Query("select p FROM Producto p where p.publicador.idUsuario = :publicadorid")
-    List<ProductoDTO> listaProductosPublicadorId(@Param("publicadorid") Integer publicadorid);
+    List<Producto> listaProductosPublicadorId(@Param("publicadorid") Integer publicadorid);
 
-
+    List<Producto> findByNombreProducto(String busqueda);
 }
