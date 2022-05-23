@@ -3,42 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package trabajoTAW.service;
+package es.trabajotaw.trabajotaw.service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.persistence.Query;
-import javax.servlet.http.HttpSession;
-import trabajoTAW.dao.CategoriaFacade;
-import trabajoTAW.dao.DatosEstudioProductoFacade;
-import trabajoTAW.dao.EstudioFacade;
-import trabajoTAW.dao.ProductoFacade;
-import trabajoTAW.dao.UsuarioFacade;
-import trabajoTAW.dto.ProductoDTO;
-import trabajoTAW.dto.PujaDTO;
-import trabajoTAW.dto.UsuarioDTO;
-import trabajoTAW.entity.Categoria;
-import trabajoTAW.entity.DatosEstudioProducto;
-import trabajoTAW.entity.Estudio;
-import trabajoTAW.entity.Producto;
-import trabajoTAW.entity.Producto;
-import trabajoTAW.entity.Usuario;
+
+import es.trabajotaw.trabajotaw.dao.ProductoRepository;
+import es.trabajotaw.trabajotaw.dao.UsuarioRepository;
+import es.trabajotaw.trabajotaw.dto.ProductoDTO;
+import es.trabajotaw.trabajotaw.entity.Producto;
+import es.trabajotaw.trabajotaw.entity.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Victor (58%) Alfonso (9%) Pablo (9%)
  */
 
-@Stateless
+@Service
 public class ProductoService {
-    
-    @EJB ProductoFacade pf;
-    @EJB EstudioFacade  ef;
-    @EJB UsuarioFacade uf;
-    @EJB CategoriaFacade cf;
+    @Autowired
+    private ProductoRepository productoRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     @EJB DatosEstudioProductoFacade  depf;
     
     public List<ProductoDTO> listaEntityADTO(List<Producto> lista) {
@@ -56,9 +46,9 @@ public class ProductoService {
         List<Producto> productos = null;
 
         if (busqueda == null || busqueda.isEmpty()) {
-            productos = this.pf.findAll();        
+            productos = this.productoRepository.findAll();
         } else {
-            productos = this.pf.findByNombreProducto(busqueda);
+            productos = this.productoRepository.findByNombreProducto(busqueda);
         }
         
         return this.listaEntityADTO(productos);                
@@ -76,7 +66,7 @@ public class ProductoService {
         producto.setFechaFinSubasta(fechaFin);
         
         if(!"".equals(comprador)){
-            List<Usuario> usuarios = uf.findByNombreUsuario(comprador);
+            List<Usuario> usuarios = usuarioRepository.findByNombreUsuario(comprador);
             if(!usuarios.isEmpty()){
                Usuario compradorUser = usuarios.get(0);
                producto.setComprador(compradorUser); 
@@ -86,7 +76,7 @@ public class ProductoService {
         }
 
         if(!"".equals(publicador)){
-            List<Usuario> usuarios = uf.findByNombreUsuario(publicador);
+            List<Usuario> usuarios = usuarioRepository.findByNombreUsuario(publicador);
             if(!usuarios.isEmpty()){
                 Usuario publicadorUser = usuarios.get(0);
                 producto.setPublicador(publicadorUser);
@@ -104,42 +94,42 @@ public class ProductoService {
 
         this.rellenarProducto(producto, nombreProducto, descripcion, precioSalida, imagen, fechaInicio, fechaFin, comprador, publicador, promocion, categoria);
 
-        this.pf.create(producto);
+        this.productoRepository.create(producto);
     }
 
     public void modificarProducto (Integer id,
                               String nombreProducto, String descripcion, Double precioSalida, String imagen, Date fechaInicio, Date fechaFin, String comprador, String publicador, Boolean promocion, Integer categoria) {
         
-        Producto producto = this.pf.find(id);
+        Producto producto = this.productoRepository.find(id);
 
         this.rellenarProducto(producto, nombreProducto, descripcion, precioSalida, imagen, fechaInicio, fechaFin, comprador, publicador, promocion, categoria);
 
-        this.pf.edit(producto);
+        this.productoRepository.edit(producto);
     }
     
     public ProductoDTO buscarProducto(Integer id){
-        Producto p = pf.find(id);
+        Producto p = productoRepository.find(id);
         return p.toDTO();
     }
 
     public List<ProductoDTO> listaProductosLogin(Integer idUsuario) {
-        return this.listaEntityADTO(this.pf.getProductoPublicadorId(idUsuario));
+        return this.listaEntityADTO(this.productoRepository.getProductoPublicadorId(idUsuario));
     }
     
     public void borrarProducto (Integer id) {
-        Producto producto = this.pf.find(id);
+        Producto producto = this.productoRepository.find(id);
 
-        this.pf.remove(producto);        
+        this.productoRepository.remove(producto);
     }
     
     public List<ProductoDTO> buscarProductosComprados(Integer idProducto){
-        List<Producto> productos = pf.productosComprados(idProducto);
+        List<Producto> productos = productoRepository.productosComprados(idProducto);
         return this.listaEntityADTO(productos);
     }
     
 
     public List<ProductoDTO> buscarProductosPujados(Integer idUsuario){
-        List<Producto> productos = pf.productosPujados(idUsuario);
+        List<Producto> productos = productoRepository.productosPujados(idUsuario);
         return this.listaEntityADTO(productos);
     }
     
@@ -148,9 +138,9 @@ public class ProductoService {
         List<Producto> productos = null;
 
         if (filtro == null || filtro.isEmpty()) {
-            productos = this.pf.filtrarProductosComprados(idProducto, null);
+            productos = this.productoRepository.filtrarProductosComprados(idProducto, null);
         } else {
-            productos = this.pf.filtrarProductosComprados(idProducto, filtro);
+            productos = this.productoRepository.filtrarProductosComprados(idProducto, filtro);
         }
         
         return this.listaEntityADTO(productos); 
@@ -158,11 +148,11 @@ public class ProductoService {
     
     public List<ProductoDTO> visualizarEstudio(Integer idEstudioProducto){
         DatosEstudioProducto estudioProducto = this.depf.find(idEstudioProducto);
-        List<Producto> productos = pf.visualizarEstudio(estudioProducto);
+        List<Producto> productos = productoRepository.visualizarEstudio(estudioProducto);
         List<ProductoDTO> productosDTO = this.listaEntityADTO(productos);
         return productosDTO;
     }
     public List<ProductoDTO> getProductosEnPromocion(){
-        return this.listaEntityADTO(this.pf.getProductosPromocion());
+        return this.listaEntityADTO(this.productoRepository.getProductosPromocion());
     }
 }
