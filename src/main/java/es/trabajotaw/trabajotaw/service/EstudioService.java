@@ -18,7 +18,7 @@ public class EstudioService {
         if (filtroNombre == null || filtroNombre.isEmpty()) {
             estudios = this.estudioRepository.findAll();
         } else {
-            estudios = this.estudioRepository.findByNombre(filtroNombre);
+            estudios = this.estudioRepository.findByNombreContaining(filtroNombre);
         }
 
         return this.listaEntityADTO(estudios);

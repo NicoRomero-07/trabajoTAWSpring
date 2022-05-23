@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface EstudioRepository extends JpaRepository<Estudio, Integer> {
 
-    @Query("select e from Estudio e where upper(e.nombre) like upper(:nombre)")
-    List<Estudio> findByNombre(@Param("nombre") String nombre);
+    List<Estudio> findByNombreContaining(String nombre);
 
 }
