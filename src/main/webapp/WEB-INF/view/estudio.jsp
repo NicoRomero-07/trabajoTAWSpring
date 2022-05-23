@@ -20,7 +20,7 @@
     %> 
     <body>
         <h1>Datos del estudio</h1>
-        <form method="POST" action="EstudioGuardarServlet">
+        <form method="POST" action="saveEstudio">
             <input type="hidden" name="id" value="<%= estudio == null ? "" : estudio.getIdEstudio()%>" />
             
             Nombre: 
@@ -61,7 +61,7 @@
             <input type="radio" name="element" value="vendedor"  <%= estudio == null || estudio.getVendedor() == Boolean.FALSE ? "" : "checked" %>/>Vendedor<br>
             <input type="radio" name="element" value="producto" <%= estudio == null || estudio.getProducto() == Boolean.FALSE ? "" : "checked" %> />Producto<br><br>
             
-            <button type="submit" value="Enviar"><a href="DatosEstudioNuevoEditarServlet?id=<%= estudio == null || estudio.getIdEstudio() == null ? "" : estudio.getIdEstudio() %>">Editar</a></button>
+            <button type="submit" value="Enviar"><a href="datosEstudio/<%= estudio == null || estudio.getIdEstudio() == null ? "" : estudio.getIdEstudio() %>">Editar</a></button>
         </form>
     </body>
 </html>

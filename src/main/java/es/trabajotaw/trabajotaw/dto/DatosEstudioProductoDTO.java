@@ -5,6 +5,7 @@
  */
 package es.trabajotaw.trabajotaw.dto;
 
+import es.trabajotaw.trabajotaw.entity.Estudio;
 
 /**
  *
@@ -18,7 +19,7 @@ public class DatosEstudioProductoDTO {
     private Boolean promocion;
     private Double precioSalida;
     private Double precioActual;
-    private EstudioDTO estudio;
+    private Estudio estudio;
     
     public DatosEstudioProductoDTO() {
     }
@@ -72,11 +73,11 @@ public class DatosEstudioProductoDTO {
         this.precioActual = precioActual;
     }
     
-    public EstudioDTO getEstudio() {
+    public Estudio getEstudio() {
         return estudio;
     }
 
-    public void setEstudio(EstudioDTO estudio) {
+    public void setEstudio(Estudio estudio) {
         this.estudio = estudio;
     }
     

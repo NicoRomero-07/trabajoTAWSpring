@@ -181,8 +181,4 @@ public class Estudio   {
 
         return dto;
     }
-
-
-    
-    
 }

@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     /*
@@ -13,5 +15,12 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     Usuario comprobarUsuario(@Param("usuario") String strusuario, @Param("clave") String strclave);
     */
     Usuario findByNombreUsuarioAndContrasenya(String nombreUsuario,String contrasenya);
+
+    @Query("select u from Usuario u where upper(u.tipoUsuario.tipo) like upper('analista')")
+    List<Usuario> getAnalistas();
+
+    @Query("select u from Usuario u where upper(u.tipoUsuario.tipo) like upper('administrador')")
+    List<Usuario> getAdministradores();
+
 
 }

@@ -148,11 +148,11 @@ public class DatosEstudioUsuario   {
         dto.setApellidos(apellidos);
         dto.setIngresos(ingresos);
         dto.setAscendente(ascendente);
-        dto.setEstudio(estudio.toDTO());
+        dto.setEstudio(estudio);
 
         return dto;
     }
-    
-    
-    
+
+
+
 }
