@@ -26,7 +26,7 @@ public class EstudiosController {
         if (filtroNombre == null || filtroNombre.isEmpty()) {
             estudios = this.estudioRepository.findAll();
         } else {
-            estudios = this.estudioRepository.findByNombre(filtroNombre);
+            estudios = this.estudioRepository.findByNombreContaining(filtroNombre);
             model.addAttribute("filtroNombre", filtroNombre);
         }
         model.addAttribute("estudios",estudios);
