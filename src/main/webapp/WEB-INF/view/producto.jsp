@@ -16,7 +16,7 @@
     </head>
     <body>
         <h1>Producto</h1>
-        <a href="/administrador/administrarProducto">Volver</a>
+        <a href="/administrador/administrarProductos">Volver</a>
         <form method="POST" action="ProductoGuardarServlet">
             <%
                 Producto producto = (Producto) request.getAttribute("producto");

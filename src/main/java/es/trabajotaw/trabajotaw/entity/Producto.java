@@ -5,6 +5,8 @@
  */
 package es.trabajotaw.trabajotaw.entity;
 
+import es.trabajotaw.trabajotaw.dto.ProductoDTO;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -214,6 +216,26 @@ public class Producto   {
 
     public void setPujaList(List<Puja> pujaList) {
         this.pujaList = pujaList;
+    }
+
+    public ProductoDTO toDTO() {
+        ProductoDTO dto = new ProductoDTO();
+
+        dto.setIdProducto(idProducto);
+        dto.setNombre(nombre);
+        dto.setDescripcion(descripcion);
+        dto.setCategoria(categoria);
+        dto.setUrlFoto(urlFoto);
+        dto.setPublicador(publicador.toDTO());
+        dto.setPrecioSalida(precioSalida);
+        dto.setFechaInicioSubasta(fechaInicioSubasta);
+        dto.setFechaFinSubasta(fechaFinSubasta);
+        dto.setEnPromocion(enPromocion);
+        if(comprador != null){
+            dto.setComprador(comprador.toDTO());
+        }
+
+        return dto;
     }
 
     @Override
