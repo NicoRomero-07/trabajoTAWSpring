@@ -4,6 +4,7 @@ import es.trabajotaw.trabajotaw.dao.CategoriaRepository;
 import es.trabajotaw.trabajotaw.dao.ProductoRepository;
 import es.trabajotaw.trabajotaw.dao.TipoUsuarioRepository;
 import es.trabajotaw.trabajotaw.dao.UsuarioRepository;
+import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
 import es.trabajotaw.trabajotaw.entity.Categoria;
 import es.trabajotaw.trabajotaw.entity.Producto;
 import es.trabajotaw.trabajotaw.entity.TipoUsuario;
