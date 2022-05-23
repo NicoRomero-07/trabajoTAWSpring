@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : administrador
     Created on : 27-abr-2022, 19:13:49
     Author     : nicor
@@ -13,8 +13,8 @@
     </head>
     <body>
         <h1>Opciones de administrador</h1>
-        Administrar usuarios:   <a href="UsuariosServlet"><input type="button" value="Administrar"/> </a><br>
-        Administrar categorias: <a href="CategoriasServlet"><input type="button" value="Administrar"/> </a><br>
-        Administrar productos:  <a href="ProductosServlet"><input type="button" value="Administrar"/> </a><br>
+        Administrar usuarios:   <a href="/administrador/administrarUsuarios"><input type="button" value="Administrar"/> </a><br>
+        Administrar categorias: <a href="/administrador/administrarCategorias"><input type="button" value="Administrar"/> </a><br>
+        Administrar productos:  <a href="/administrador/administrarProductos"><input type="button" value="Administrar"/> </a><br>
     </body>
 </html>
