@@ -16,4 +16,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     List<Producto> listaProductosPublicadorId(@Param("publicadorid") Integer publicadorid);
 
     List<Producto> findByNombreContaining(String busqueda);
+
+    @Query("select p from Producto p where p.comprador.idUsuario = :idUsuario")
+    List<Producto> listaProductosComprados(@Param("idUsuario") Integer idUsuario);
 }
