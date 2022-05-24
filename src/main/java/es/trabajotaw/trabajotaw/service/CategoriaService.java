@@ -3,23 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package trabajoTAW.service;
+package es.trabajotaw.trabajotaw.service;
+
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import trabajoTAW.dao.CategoriaFacade;
-import trabajoTAW.dto.CategoriaDTO;
-import trabajoTAW.entity.Categoria;
 
 /**
  *
  * @author nicor
  */
-@Stateless
+@Service
 public class CategoriaService {
+    /*
     @EJB CategoriaFacade cf;
     private List<CategoriaDTO> listaEntityADTO (List<Categoria> lista) {
         List<CategoriaDTO> listaDTO = null;
@@ -81,4 +78,6 @@ public class CategoriaService {
         this.cf.edit(categoria);
     }
 
+
+     */
 }

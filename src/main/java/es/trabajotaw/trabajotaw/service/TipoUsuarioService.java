@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package trabajoTAW.service;
+
+package es.trabajotaw.trabajotaw.service;
+
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import trabajoTAW.dao.TipoUsuarioFacade;
-import trabajoTAW.dto.TipoUsuarioDTO;
-import trabajoTAW.entity.TipoUsuario;
+
 
 /**
  *
  * @author nicor
  */
-@Stateless
+@Service
 public class TipoUsuarioService {
+    /*
     @EJB TipoUsuarioFacade tuf;
     private List<TipoUsuarioDTO> listaEntityADTO (List<TipoUsuario> lista) {
         List<TipoUsuarioDTO> listaDTO = null;
@@ -79,4 +79,7 @@ public class TipoUsuarioService {
 
         this.tuf.edit(tipoUsuario);
     }
+
+     */
 }
+

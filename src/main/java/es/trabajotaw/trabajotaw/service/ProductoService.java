@@ -3,44 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package trabajoTAW.service;
+package es.trabajotaw.trabajotaw.service;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.persistence.Query;
-import javax.servlet.http.HttpSession;
-import trabajoTAW.dao.CategoriaFacade;
-import trabajoTAW.dao.DatosEstudioProductoFacade;
-import trabajoTAW.dao.EstudioFacade;
-import trabajoTAW.dao.ProductoFacade;
-import trabajoTAW.dao.UsuarioFacade;
-import trabajoTAW.dto.ProductoDTO;
-import trabajoTAW.dto.PujaDTO;
-import trabajoTAW.dto.UsuarioDTO;
-import trabajoTAW.entity.Categoria;
-import trabajoTAW.entity.DatosEstudioProducto;
-import trabajoTAW.entity.Estudio;
-import trabajoTAW.entity.Producto;
-import trabajoTAW.entity.Producto;
-import trabajoTAW.entity.Usuario;
+
+
+
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Victor (58%) Alfonso (9%) Pablo (9%)
  */
 
-@Stateless
+@Service
 public class ProductoService {
-    
-    @EJB ProductoFacade pf;
-    @EJB EstudioFacade  ef;
-    @EJB UsuarioFacade uf;
-    @EJB CategoriaFacade cf;
-    @EJB DatosEstudioProductoFacade  depf;
-    
+    /*
     public List<ProductoDTO> listaEntityADTO(List<Producto> lista) {
         List<ProductoDTO> listaDTO = null;
         if (lista != null) {
@@ -165,4 +144,6 @@ public class ProductoService {
     public List<ProductoDTO> getProductosEnPromocion(){
         return this.listaEntityADTO(this.pf.getProductosPromocion());
     }
+
+     */
 }

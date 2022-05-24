@@ -2,50 +2,33 @@
  *
  * @author Nicolás Zhao(23,5%), Alfonso(23,5%), Nico Alvarez(nicor) (53%)
  */
-package trabajoTAW.service;
+package es.trabajotaw.trabajotaw.service;
+
+import es.trabajotaw.trabajotaw.dao.*;
+import es.trabajotaw.trabajotaw.dto.*;
+import es.trabajotaw.trabajotaw.entity.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-
-import trabajoTAW.dao.CategoriaFacade;
-import trabajoTAW.dao.DatosEstudioUsuarioFacade;
-import trabajoTAW.dao.DireccionFacade;
-import trabajoTAW.dao.EstudioFacade;
-import trabajoTAW.dao.ListaUsuarioFacade;
-import trabajoTAW.dao.NotificacionFacade;
-import trabajoTAW.dao.TipoUsuarioFacade;
-import trabajoTAW.dao.UsuarioFacade;
-
-import trabajoTAW.dto.CategoriaDTO;
-import trabajoTAW.dto.ListaUsuarioDTO;
-import trabajoTAW.dto.NotificacionDTO;
-import trabajoTAW.dto.UsuarioDTO;
-import trabajoTAW.entity.Categoria;
-
-import trabajoTAW.entity.DatosEstudioUsuario;
-import trabajoTAW.entity.TipoUsuario;
-import trabajoTAW.entity.Usuario;
-import trabajoTAW.entity.Direccion;
-import trabajoTAW.entity.Estudio;
-import trabajoTAW.entity.ListaUsuario;
-import trabajoTAW.entity.Notificacion;
 
 
-@Stateless
+@Service
 public class UsuarioService {
-    @EJB TipoUsuarioFacade tuf;
-    @EJB CategoriaFacade cf;
-    @EJB UsuarioFacade uf;
-    @EJB DireccionFacade df;
-    @EJB DatosEstudioUsuarioFacade deuf;
-    @EJB EstudioFacade ef;
-    @EJB CategoriaService cs;
-    @EJB ListaUsuarioFacade lf;
-    @EJB NotificacionFacade nf;
+    @Autowired
+    private UsuarioRepository ur;
+    @Autowired
+    private DireccionRepository dr;
+    @Autowired
+    private CategoriaRepository cr;
+    @Autowired
+    private TipoUsuarioRepository tur;
+    @Autowired
+    private EstudioRepository er;
     
+/*
     private List<UsuarioDTO> listaEntityADTO (List<Usuario> lista) {
         List<UsuarioDTO> listaDTO = null;
         if (lista != null) {
@@ -61,28 +44,28 @@ public class UsuarioService {
         List<Usuario> usuarios = null;
 
         if (filtroNombre == null || filtroNombre.isEmpty()) {
-            usuarios = this.uf.findAll();        
+            usuarios = this.ur.findAll();        
         } else {
-            usuarios = this.uf.findByNombreUsuario(filtroNombre);
+            usuarios = this.ur.findByNombreUsuario(filtroNombre);
         }
         
         return this.listaEntityADTO(usuarios);                
     } 
     
     public List<UsuarioDTO> getCompradores(){
-        List<Usuario> compradores = this.uf.getCompradores();
+        List<Usuario> compradores = this.ur.getCompradores();
         return listaEntityADTO(compradores);
     }
     
     public UsuarioDTO buscarUsuario (Integer id) {
-        Usuario usuario = this.uf.find(id);
+        Usuario usuario = this.ur.getById(id);
         return usuario.toDTO();
     }
     
     public void borrarUsuario (Integer id) {
-        Usuario usuario = this.uf.find(id);
+        Usuario usuario = this.ur.getById(id);
 
-        this.uf.remove(usuario);        
+        this.ur.delete(usuario);
     }
     
     private void rellenarUsuario (Usuario usuario,
@@ -100,18 +83,18 @@ public class UsuarioService {
         List<Categoria> categorias = new ArrayList<>();
         if(categoriasStr!=null){
             for(String c : categoriasStr){
-                Categoria ca = this.cf.find(Integer.parseInt(c));
+                Categoria ca = this.cr.getById(Integer.parseInt(c));
                 categorias.add(ca);
             }
         }
             
         usuario.setCategoriaList(categorias);
         
-        TipoUsuario tu = this.tuf.find(tipoUsuario);
+        TipoUsuario tu = this.tur.getById(tipoUsuario);
         usuario.setTipoUsuario(tu);
         
         usuario.setFechaNacimiento(fechaNacimiento);
-        Direccion dd = this.df.find(direccion);
+        Direccion dd = this.dr.getById(direccion);
         
         usuario.setDireccion(dd);
                        
@@ -124,7 +107,7 @@ public class UsuarioService {
 
         this.rellenarUsuario(usuario, nombreUsuario, contrasenya, nombre, primerApellido, segundoApellido, email, direccion, sexo, tipoUsuario, fechaNacimiento,categoriasStr);
 
-        this.uf.create(usuario);
+        this.ur.save(usuario);
     }
 
     public void modificarUsuario (Integer id,
@@ -132,44 +115,44 @@ public class UsuarioService {
                               String segundoApellido, String email, Integer direccion, Character sexo, 
                               Integer tipoUsuario, Date fechaNacimiento,String[] categoriasStr) {
         
-        Usuario usuario = this.uf.find(id);
+        Usuario usuario = this.ur.getById(id);
 
         this.rellenarUsuario(usuario, nombreUsuario, contrasenya, nombre, primerApellido,
                 segundoApellido, email, direccion, sexo, tipoUsuario, fechaNacimiento, categoriasStr);
 
-        this.uf.edit(usuario);
+        this.ur.save(usuario);
     }
-    
+
     public void modificarUsuario(Integer id, List<Integer> lista){
         
-        Usuario usuario = this.uf.find(id);
+        Usuario usuario = this.ur.getById(id);
         
         List<ListaUsuario> listas = new ArrayList<>();
         for(Integer c : lista){
-            ListaUsuario l = this.lf.find(c);
+            ListaUsuario l = this.lf.getById(c);
             listas.add(l);
         }
         usuario.setListaUsuarioList(listas);
         
-        this.uf.edit(usuario);
+        this.ur.edit(usuario);
     }
     
     public void modificarNotificacionesUsuario(Integer id, List<Integer> lista){
         
-        Usuario usuario = this.uf.find(id);
+        Usuario usuario = this.ur.getById(id);
         
         List<Notificacion> listas = new ArrayList<>();
         for(Integer c : lista){
-            Notificacion l = this.nf.find(c);
+            Notificacion l = this.nf.getById(c);
             listas.add(l);
         }
         usuario.setNotificacionList(listas);
         
-        this.uf.edit(usuario);
+        this.ur.edit(usuario);
     }
     
     public List<CategoriaDTO> categoriasUsuario(Integer id){
-        Usuario usuario = this.uf.find(id);
+        Usuario usuario = this.ur.getById(id);
         List<CategoriaDTO> categoriasDTO = new ArrayList();
         List<Categoria> categorias = usuario.getCategoriaList();
         
@@ -180,32 +163,32 @@ public class UsuarioService {
     }
     
     public List<UsuarioDTO> visualizarEstudio(Integer idEstudio,Integer idEstudioUsuario){
-        Estudio estudio = this.ef.find(idEstudio);
-        DatosEstudioUsuario estudioUsuario = this.deuf.find(idEstudioUsuario);
-        List<Usuario> usuarios = this.uf.visualizarEstudio(estudio,estudioUsuario);
+        Estudio estudio = this.ef.getById(idEstudio);
+        DatosEstudioUsuario estudioUsuario = this.deuf.getById(idEstudioUsuario);
+        List<Usuario> usuarios = this.ur.visualizarEstudio(estudio,estudioUsuario);
         List<UsuarioDTO> usuariosDTO = this.listaEntityADTO(usuarios);
         return usuariosDTO;
     }
 
     public List<UsuarioDTO> getAnalistas(){
-        List<Usuario> usuarios = this.uf.getAnalistas();
+        List<Usuario> usuarios = this.ur.getAnalistas();
         return this.listaEntityADTO(usuarios);
     }
     
     public List<UsuarioDTO> getAdministradores(){
-        List<Usuario> usuarios = this.uf.getAdministradores();
+        List<Usuario> usuarios = this.ur.getAdministradores();
         return this.listaEntityADTO(usuarios);
     }
     
     public List<Double> getIngresosUsuarios(Integer idEstudio,Integer idEstudioUsuario){
-        Estudio estudio = this.ef.find(idEstudio);
-        DatosEstudioUsuario estudioUsuario = this.deuf.find(idEstudioUsuario);
-        List<Double> ingresos = this.uf.getIngresosUsuarios(estudio,estudioUsuario);
+        Estudio estudio = this.ef.getById(idEstudio);
+        DatosEstudioUsuario estudioUsuario = this.deuf.getById(idEstudioUsuario);
+        List<Double> ingresos = this.ur.getIngresosUsuarios(estudio,estudioUsuario);
         return ingresos;
     }
     
     public List<ListaUsuarioDTO> listasUsuario(Integer id){
-        Usuario usuario = this.uf.find(id);
+        Usuario usuario = this.ur.getById(id);
         List<ListaUsuarioDTO> listaDTO = new ArrayList();
         List<ListaUsuario> listas = usuario.getListaUsuarioList();
         
@@ -216,7 +199,7 @@ public class UsuarioService {
     }
     
     public List<NotificacionDTO> notificacionesUsuario (Integer id){
-        Usuario usuario = this.uf.find(id);
+        Usuario usuario = this.ur.getById(id);
         List<NotificacionDTO> notificacionDTO = new ArrayList();
         List<Notificacion> notificaciones = usuario.getNotificacionList();
         
@@ -227,12 +210,14 @@ public class UsuarioService {
     }
     
     public UsuarioDTO getUsuarioPujaMax(Integer idProducto) {
-        return this.uf.getUsuarioPujaMax(idProducto).toDTO();
+        return this.ur.getUsuarioPujaMax(idProducto).toDTO();
     }
     
     public UsuarioDTO comprobarUsuario(String nombreUsuario,String clave){
-        Usuario usuario = this.uf.comprobarUsuario(nombreUsuario, clave);
+        Usuario usuario = this.ur.comprobarUsuario(nombreUsuario, clave);
         return usuario == null ? null : usuario.toDTO();
     }
-    
+
+
+     */
 }

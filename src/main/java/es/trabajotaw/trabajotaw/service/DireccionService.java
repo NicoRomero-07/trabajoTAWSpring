@@ -3,25 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package trabajoTAW.service;
+package es.trabajotaw.trabajotaw.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import trabajoTAW.dao.DireccionFacade;
-import trabajoTAW.dto.DireccionDTO;
-import trabajoTAW.entity.Direccion;
-//import static trabajoTAW.entity.ListaProductoPK_.usuario;
-import trabajoTAW.entity.Usuario;
+
+
+import org.springframework.stereotype.Service;
+
 
 /**
  *
  * @author nicor
  */
-@Stateless
+@Service
 public class DireccionService {
-    
+    /*
     @EJB DireccionFacade df;
     
     private List<DireccionDTO> listaEntityADTO (List<Direccion> lista) {
@@ -91,6 +88,6 @@ public class DireccionService {
         Direccion direccion = (Direccion) df.findByCalleNumero(calle,Integer.parseInt(numero));
         return direccion;
     }
-    
-    
+
+     */
 }
