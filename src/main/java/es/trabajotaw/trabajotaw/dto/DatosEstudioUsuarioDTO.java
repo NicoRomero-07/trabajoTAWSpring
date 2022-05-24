@@ -6,6 +6,8 @@
 package es.trabajotaw.trabajotaw.dto;
 
 
+import es.trabajotaw.trabajotaw.entity.Estudio;
+
 /**
  *
  * @author Alfonso 100%
@@ -16,7 +18,7 @@ public class DatosEstudioUsuarioDTO {
     private Boolean apellidos;
     private Boolean ingresos;
     private Boolean ascendente;
-    private EstudioDTO estudio;
+    private Estudio estudio;
     
     public DatosEstudioUsuarioDTO() {
     }
@@ -61,11 +63,11 @@ public class DatosEstudioUsuarioDTO {
         this.ascendente = ascendente;
     }
 
-    public EstudioDTO getEstudio() {
+    public Estudio getEstudio() {
         return estudio;
     }
 
-    public void setEstudio(EstudioDTO estudio) {
+    public void setEstudio(Estudio estudio) {
         this.estudio = estudio;
     }
     

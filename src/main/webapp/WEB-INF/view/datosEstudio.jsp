@@ -21,7 +21,7 @@
         String errorCantidad = (String) request.getAttribute("error");
     %>
     <body>
-        <form method="POST" action="DatosEstudioGuardarServlet">
+        <form method="POST" action="saveDatosEstudio">
             
             <input type="hidden" name="idEstudio" value="<%= estudio == null ? "" : estudio.getIdEstudio()%>" />
             <input type="hidden" name="idEstudioProducto" value="<%= estudioProducto == null ? "" : estudioProducto.getId() %>" />

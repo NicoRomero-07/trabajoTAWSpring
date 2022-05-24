@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Mon May 23 12:00:46 CEST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-f05c-a8f5-000001597838 
-on database directory C:\Users\nicor\OneDrive\UMA\Tercero\Tecnología de aplicaciones web\intelliJ\trabajoTAW\db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
-Loaded from file:/C:/Users/nicor/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+Mon May 23 19:41:08 CEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-f202-2318-000001f2c4e8 
+on database directory C:\Users\alfon\Documents\1Estudios\Universidad\TercerCurso\SegundoSemestre\TecAplWeb\trabajoTAWSpringBoot\trabajoTAWSpring\db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
+Loaded from file:/C:/Users/alfon/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
-java.runtime.version=17.0.2+8-LTS-86
-user.dir=C:\Users\nicor\OneDrive\UMA\Tercero\Tecnología de aplicaciones web\intelliJ\trabajoTAW
+java.runtime.version=17.0.1+12-39
+user.dir=C:\Users\alfon\Documents\1Estudios\Universidad\TercerCurso\SegundoSemestre\TecAplWeb\trabajoTAWSpringBoot\trabajoTAWSpring
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
