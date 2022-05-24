@@ -7,6 +7,8 @@
 <%@page import="es.trabajotaw.trabajotaw.entity.Categoria"%>
 <%@page import="java.util.List"%>
 <%@ page import="es.trabajotaw.trabajotaw.entity.Producto" %>
+<%@ page import="es.trabajotaw.trabajotaw.dto.ProductoDTO" %>
+<%@ page import="es.trabajotaw.trabajotaw.dto.CategoriaDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,9 +19,9 @@
     <body>
         <h1>Producto</h1>
         <a href="/administrador/administrarProductos">Volver</a>
-        <form method="POST" action="ProductoGuardarServlet">
+        <form method="POST" action="/administrador/guardarProducto">
             <%
-                Producto producto = (Producto) request.getAttribute("producto");
+                ProductoDTO producto = (ProductoDTO) request.getAttribute("producto");
             %>
             <input type="hidden" name="id" value="<%= producto==null ? "":producto.getIdProducto() %>"/>
             Nombre del Producto: <input type="text" name="nombreproducto" value="<%=producto==null ? "": producto.getNombre()%>" /><br><br>
@@ -34,9 +36,9 @@
             Categoría:
             <select name="categoria">
             <%
-                List<Categoria> categorias = (List) request.getAttribute("categorias");
+                List<CategoriaDTO> categorias = (List) request.getAttribute("categorias");
                 
-                for(Categoria c : categorias) {
+                for(CategoriaDTO c : categorias) {
                     String selected = "";
                     if(producto!=null && c.equals(producto.getCategoria())) selected ="selected";
             %>  

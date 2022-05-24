@@ -12,6 +12,9 @@
 <%@page import="es.trabajotaw.trabajotaw.entity.TipoUsuario"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.dto.TipoUsuarioDTO" %>
+<%@ page import="es.trabajotaw.trabajotaw.dto.CategoriaDTO" %>
+<%@ page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,8 +23,8 @@
         <title>JSP Page</title>
     </head>
     <%
-        List<TipoUsuario> listaTipoUsuario = (List)request.getAttribute("tipoUsuarios");
-        List<Categoria> listaCategorias = (List)request.getAttribute("categorias");
+        List<TipoUsuarioDTO> listaTipoUsuario = (List)request.getAttribute("tipoUsuarios");
+        List<CategoriaDTO> listaCategorias = (List)request.getAttribute("categorias");
         List<Character> listaSexo = new ArrayList();
         listaSexo.add('H');
         listaSexo.add('M');
@@ -29,8 +32,8 @@
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         listaTipoVia.add("OFICINA");
         listaTipoVia.add("CALLE");
-        Usuario usuario = (Usuario)request.getAttribute("usuario");
-        List<Categoria> listaCategoriasUsuario = usuario.getCategoriaList();
+        UsuarioDTO usuario = (UsuarioDTO) request.getAttribute("usuario");
+        List<CategoriaDTO> listaCategoriasUsuario = (List<CategoriaDTO>) request.getAttribute("categoriasFavoritas");
         String tipoUsuario = usuario.getTipoUsuario().getTipo();
     %> 
     <body>
@@ -67,7 +70,7 @@
             <select name="tipoUsuario">
             <% 
                 if(tipoUsuario != null && tipoUsuario.equalsIgnoreCase("Administrador")){
-                    for (TipoUsuario uu : listaTipoUsuario) {
+                    for (TipoUsuarioDTO uu : listaTipoUsuario) {
                     String selected = "";
                     if (usuario != null && usuario.getTipoUsuario().getTipo().equals(uu.getTipo())) {
                         selected = "selected";
@@ -80,7 +83,7 @@
             <% 
                     }
                 }else{
-                    for (TipoUsuario uu : listaTipoUsuario.subList(1, 3)) {
+                    for (TipoUsuarioDTO uu : listaTipoUsuario.subList(1, 3)) {
                     String selected = "";
                     if (usuario != null && usuario.getTipoUsuario().getTipo().equals(uu.getTipo())) {
                         selected = "selected";
@@ -98,7 +101,7 @@
             
             <% 
                 
-                for (Categoria dc: listaCategorias) {
+                for (CategoriaDTO dc: listaCategorias) {
                     String checked = "";
                     if(tipoUsuario!=null && listaCategoriasUsuario !=null && listaCategoriasUsuario.contains(dc)) checked = "checked";
             %>

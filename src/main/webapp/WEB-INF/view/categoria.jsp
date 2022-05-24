@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="es.trabajotaw.trabajotaw.entity.Categoria"%>
+<%@ page import="es.trabajotaw.trabajotaw.dto.CategoriaDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,7 @@
         <title>JSP Page</title>
     </head>
     <% 
-        Categoria categoria = (Categoria)request.getAttribute("categoria");
+        CategoriaDTO categoria = (CategoriaDTO)request.getAttribute("categoria");
     %> 
     <body>
         <jsp:include page="cabecera.jsp" /> 

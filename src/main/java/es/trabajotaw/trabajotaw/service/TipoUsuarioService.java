@@ -5,9 +5,16 @@
  */
 package es.trabajotaw.trabajotaw.service;
 
+import es.trabajotaw.trabajotaw.dao.TipoUsuarioRepository;
+import es.trabajotaw.trabajotaw.dao.TipoUsuarioRepositoryCustom;
+import es.trabajotaw.trabajotaw.dao.TipoUsuarioRepositoryCustomImpl;
+import es.trabajotaw.trabajotaw.dto.TipoUsuarioDTO;
+import es.trabajotaw.trabajotaw.entity.TipoUsuario;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,8 +22,12 @@ import java.util.ArrayList;
  */
 @Service
 public class TipoUsuarioService {
-    /*
-    @EJB TipoUsuarioFacade tuf;
+    
+    @Autowired
+    TipoUsuarioRepository tur;
+    @Autowired
+    TipoUsuarioRepositoryCustom turcI;
+    
     private List<TipoUsuarioDTO> listaEntityADTO (List<TipoUsuario> lista) {
         List<TipoUsuarioDTO> listaDTO = null;
         if (lista != null) {
@@ -32,23 +43,23 @@ public class TipoUsuarioService {
         List<TipoUsuario> tipoUsuarios = null;
 
         if (filtroNombre == null || filtroNombre.isEmpty()) {
-            tipoUsuarios = this.tuf.findAll();        
+            tipoUsuarios = this.tur.findAll();        
         } else {
-            tipoUsuarios = this.tuf.findByTipo(filtroNombre);
+            tipoUsuarios = this.turcI.findByTipo(filtroNombre);
         }
         
         return this.listaEntityADTO(tipoUsuarios);                
     } 
     
     public TipoUsuarioDTO buscarTipoUsuario (Integer id) {
-        TipoUsuario tipoUsuario = this.tuf.find(id);
+        TipoUsuario tipoUsuario = this.tur.getById(id);
         return tipoUsuario.toDTO();
     }
     
     public void borrarTipoUsuario (Integer id) {
-        TipoUsuario tipoUsuario = this.tuf.find(id);
+        TipoUsuario tipoUsuario = this.tur.getById(id);
 
-        this.tuf.remove(tipoUsuario);        
+        this.tur.delete(tipoUsuario);
     }
     
     private void rellenarTipoUsuario (TipoUsuario tipoUsuario,
@@ -64,18 +75,18 @@ public class TipoUsuarioService {
 
         this.rellenarTipoUsuario(tipoUsuario, nombreTipoUsuario);
 
-        this.tuf.create(tipoUsuario);
+        this.tur.save(tipoUsuario);
     }
 
     public void modificarTipoUsuario (Integer id,
                               String nombreTipoUsuario) {
         
-        TipoUsuario tipoUsuario = this.tuf.find(id);
+        TipoUsuario tipoUsuario = this.tur.getById(id);
 
         this.rellenarTipoUsuario(tipoUsuario, nombreTipoUsuario);
 
-        this.tuf.edit(tipoUsuario);
+        this.tur.save(tipoUsuario);
     }
 
-     */
+
 }

@@ -6,6 +6,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="es.trabajotaw.trabajotaw.entity.Usuario"%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -41,8 +42,8 @@
             <th></th>
         </tr>
     <%
-            List<Usuario> usuarios = (List)request.getAttribute("usuarios");
-                for (Usuario user: usuarios) {
+            List<UsuarioDTO> usuarios = (List)request.getAttribute("usuarios");
+                for (UsuarioDTO user: usuarios) {
     %> 
     
     <tr>

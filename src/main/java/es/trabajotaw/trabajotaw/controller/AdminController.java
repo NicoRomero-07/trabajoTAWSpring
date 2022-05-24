@@ -4,11 +4,18 @@ import es.trabajotaw.trabajotaw.dao.CategoriaRepository;
 import es.trabajotaw.trabajotaw.dao.ProductoRepository;
 import es.trabajotaw.trabajotaw.dao.TipoUsuarioRepository;
 import es.trabajotaw.trabajotaw.dao.UsuarioRepository;
+import es.trabajotaw.trabajotaw.dto.CategoriaDTO;
+import es.trabajotaw.trabajotaw.dto.ProductoDTO;
+import es.trabajotaw.trabajotaw.dto.TipoUsuarioDTO;
 import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
 import es.trabajotaw.trabajotaw.entity.Categoria;
 import es.trabajotaw.trabajotaw.entity.Producto;
 import es.trabajotaw.trabajotaw.entity.TipoUsuario;
 import es.trabajotaw.trabajotaw.entity.Usuario;
+import es.trabajotaw.trabajotaw.service.CategoriaService;
+import es.trabajotaw.trabajotaw.service.ProductoService;
+import es.trabajotaw.trabajotaw.service.TipoUsuarioService;
+import es.trabajotaw.trabajotaw.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,13 +29,13 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    private UsuarioRepository usuariosRepository;
+    private UsuarioService usuariosService;
     @Autowired
-    private CategoriaRepository categoriasRepository;
+    private CategoriaService categoriasService;
     @Autowired
-    private ProductoRepository productosRepository;
+    private ProductoService productosService;
     @Autowired
-    private TipoUsuarioRepository tiposUsuarioRepository;
+    private TipoUsuarioService tiposUsuarioService;
 
     @GetMapping(value = "/vistaAdministrador")
     public String inicio(Model model, HttpSession session){
@@ -37,7 +44,7 @@ public class AdminController {
 
     @GetMapping(value = "/administrarUsuarios")
     public String doAdministrarUsuarios(Model model, HttpSession session){
-        List<Usuario> usuarios = usuariosRepository.findAll();
+        List<UsuarioDTO> usuarios = usuariosService.listarUsuarios(null);
         model.addAttribute("usuarios", usuarios);
         return "usuarios";
     }
@@ -45,9 +52,11 @@ public class AdminController {
     @GetMapping(value = "/administrarUsuario/{id}")
     public String doAdministrarUsuario(Model model, HttpSession session, @PathVariable("id") Integer id){
 
-        Usuario usuario = usuariosRepository.getById(id);
-        List<TipoUsuario> tipoUsuarios = tiposUsuarioRepository.findAll();
-        List<Categoria> categorias = categoriasRepository.findAll();
+        UsuarioDTO usuario = usuariosService.buscarUsuario(id);
+        List<TipoUsuarioDTO> tipoUsuarios = tiposUsuarioService.listarTipoUsuarios(null);
+        List<CategoriaDTO> categorias = categoriasService.listarCategorias(null);
+        List<CategoriaDTO> categoriasFavoritas = usuariosService.categoriasUsuario(id);
+        model.addAttribute("categoriasFavoritas", categoriasFavoritas);
         model.addAttribute("categorias", categorias);
         model.addAttribute("usuario", usuario);
         model.addAttribute("tipoUsuarios", tipoUsuarios);
@@ -55,33 +64,61 @@ public class AdminController {
         return "usuario";
     }
 
+    @GetMapping(value = "/borrarUsuario/{id}")
+    public String doBorrarUsuario(Model model, HttpSession session, @PathVariable("id") Integer id){
+        usuariosService.borrarUsuario(id);
+        return "redirect:/administrador/administrarUsuarios";
+    }
+
     @GetMapping(value = "/administrarCategorias")
     public String doAdministrarCategorias(Model model, HttpSession session){
-        List<Categoria> categorias = categoriasRepository.findAll();
+        List<CategoriaDTO> categorias = categoriasService.listarCategorias(null);
         model.addAttribute("categorias", categorias);
         return "categorias";
     }
 
     @GetMapping(value = "/administrarCategoria/{id}")
     public String doAdministrarCategoria(Model model, HttpSession session, @PathVariable("id") Integer id){
-        Categoria categoria = categoriasRepository.getById(id);
+        CategoriaDTO categoria = null;
+        if(id!=null){
+            categoria = categoriasService.buscarCategoria(id);
+        }
         model.addAttribute("categoria", categoria);
         return "categoria";
     }
 
+    @GetMapping(value = "/borrarCategoria/{id}")
+    public String doBorrarCategoria(Model model, HttpSession session, @PathVariable("id") Integer id){
+        categoriasService.borrarCategoria(id);
+        return "redirect:/administrador/administrarCategorias";
+    }
+
+    @GetMapping(value="/GuardarCategoria/{id}")
+    public String doGuardarCategoria(Model model, HttpSession session,@PathVariable("id") Integer id){
+
+        categoriasService.modificarCategoria(id,null);
+        return "redirect:/administrador/administrarCategorias";
+    }
+
     @GetMapping(value = "/administrarProductos")
     public String doAdministrarProductos(Model model, HttpSession session){
-        List<Producto> productos = productosRepository.findAll();
+        List<ProductoDTO> productos = productosService.listarProductos(null);
         model.addAttribute("productos", productos);
         return "productos";
     }
 
     @GetMapping(value = "/administrarProducto/{id}")
     public String doAdministrarProducto(Model model, HttpSession session, @PathVariable("id") Integer id){
-        Producto producto = productosRepository.getById(id);
-        List<Categoria> categorias = categoriasRepository.findAll();
+        ProductoDTO producto = productosService.buscarProducto(id);
+        List<CategoriaDTO> categorias = categoriasService.listarCategorias(null);
         model.addAttribute("categorias", categorias);
         model.addAttribute("producto", producto);
         return "producto";
+    }
+
+    @GetMapping(value = "/borrarProducto/{id}")
+    public String doBorrarProducto(Model model, HttpSession session, @PathVariable("id") Integer id){
+        productosService.borrarProducto(id);
+        return "redirect:/administrador/administrarProductos";
     }
 }

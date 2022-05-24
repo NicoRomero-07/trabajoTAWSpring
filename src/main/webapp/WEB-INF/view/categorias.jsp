@@ -6,6 +6,7 @@
 
 <%@page import="es.trabajotaw.trabajotaw.entity.Categoria"%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.dto.CategoriaDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,8 +30,8 @@
             <th></th>
         </tr>
     <%
-            List<Categoria> categorias = (List)request.getAttribute("categorias");
-                for (Categoria categoria: categorias) {
+            List<CategoriaDTO> categorias = (List)request.getAttribute("categorias");
+                for (CategoriaDTO categoria: categorias) {
     %> 
     
     <tr>
@@ -45,6 +46,6 @@
                 }
     %>
     </table>
-    <a href="CategoriaNuevoEditarServlet">Crear nueva categoria ... </a>
+    <a href="/administrador/administrarCategoria/>">Crear nueva categoria ... </a>
     </body>
 </html>
