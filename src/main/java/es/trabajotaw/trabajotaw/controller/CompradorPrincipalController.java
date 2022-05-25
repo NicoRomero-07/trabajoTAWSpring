@@ -32,4 +32,22 @@ public class CompradorPrincipalController {
         model.addAttribute("productosComprados", productos);
         return "productosComprados";
     }
+
+    @GetMapping(value = "/productosFavoritos")
+    public String doVerProductosFavoritos(Model model, HttpSession session){
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        List<ProductoDTO> productos = productosService.buscarProductosFavoritos(usuario.toDTO().getIdUsuario());
+        model.addAttribute("productosFavoritos", productos);
+        return "productosFavoritos";
+    }
+
+    @GetMapping(value = "/notificaciones")
+    public String doVerProductosNotificados(Model model, HttpSession session){
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        List<ProductoDTO> favoritos = productosService.buscarProductosFavoritos(usuario.toDTO().getIdUsuario());
+        List<ProductoDTO> pujas = productosService.buscarProductosPujados(usuario.toDTO().getIdUsuario());
+        model.addAttribute("favoritos", favoritos);
+        model.addAttribute("pujas", pujas);
+        return "notificaciones";
+    }
 }

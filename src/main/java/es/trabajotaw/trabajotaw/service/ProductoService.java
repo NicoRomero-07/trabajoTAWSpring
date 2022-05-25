@@ -128,6 +128,11 @@ public class ProductoService {
             return this.listaEntityADTO(productos);
         }
 
+    public List<ProductoDTO> buscarProductosFavoritos(Integer idUsuario) {
+        List<Producto> productos = productoRepository.listaProductosFavoritos(idUsuario);
+        return this.listaEntityADTO(productos);
+    }
+
 
 
         public List<ProductoDTO> filtrarProductosComprados(Integer idProducto, String filtro){

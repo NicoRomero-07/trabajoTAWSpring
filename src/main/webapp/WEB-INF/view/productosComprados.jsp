@@ -50,7 +50,7 @@
                 %>
             </tr>
         </table>
-            <a href="/comprador">Volver</a>
+            <a href="/comprador/vistaComprador">Volver</a>
 
     </body>
 </html>

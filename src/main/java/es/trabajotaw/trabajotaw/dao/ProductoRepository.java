@@ -27,4 +27,13 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     @Query("select p from Producto p join Puja pu on"
             + " p.idProducto = pu.producto.idProducto where pu.comprador.idUsuario = :idUsuario")
     List<Producto> listaProductosPujados(@Param("idUsuario") Integer idUsuario);
+
+    @Query("select p from Producto p join ListaProducto lp on"
+            + " p.idProducto = lp.producto1.idProducto where lp.usuario1.idUsuario = :idUsuario")
+    List<Producto> listaProductosFavoritos(@Param("idUsuario") Integer idUsuario);
+
+    @Query("select p from Producto p join ListaProducto lp on"
+            + " p.idProducto = lp.producto1.idProducto where lp.usuario1.idUsuario = :idUsuario and"
+            + " upper(lp.producto1.nombre) like upper(:filtro)")
+    List<Producto> filtrarProductosFavoritos(@Param("idUsuario") Integer idUsuario, @Param("filtro") String filtro);
 }
