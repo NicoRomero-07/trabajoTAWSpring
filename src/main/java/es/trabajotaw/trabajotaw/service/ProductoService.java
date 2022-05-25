@@ -37,7 +37,7 @@ public class ProductoService {
         }
 
         public List<ProductoDTO> listarProductos(String busqueda) {
-            List<Producto> productos = null;
+            List<Producto> productos;
 
             if (busqueda == null || busqueda.isEmpty()) {
                 productos = this.productoRepository.findAll();
@@ -116,22 +116,22 @@ public class ProductoService {
             this.productoRepository.delete(producto);
         }
 
-        /*
-        public List<ProductoDTO> buscarProductosComprados(Integer idProducto) {
-            List<Producto> productos = productoRepository.productosComprados(idProducto);
+
+        public List<ProductoDTO> buscarProductosComprados(Integer idUsuario) {
+            List<Producto> productos = productoRepository.listaProductosComprados(idUsuario);
             return this.listaEntityADTO(productos);
         }
 
 
         public List<ProductoDTO> buscarProductosPujados(Integer idUsuario) {
-            List<Producto> productos = productoRepository.productosPujados(idUsuario);
+            List<Producto> productos = productoRepository.listaProductosPujados(idUsuario);
             return this.listaEntityADTO(productos);
         }
 
 
 
         public List<ProductoDTO> filtrarProductosComprados(Integer idProducto, String filtro){
-            List<Producto> productos = null;
+            List<Producto> productos;
 
             if (filtro == null || filtro.isEmpty()) {
                 productos = this.productoRepository.filtrarProductosComprados(idProducto, null);
@@ -141,6 +141,7 @@ public class ProductoService {
 
             return this.listaEntityADTO(productos);
         }
+        /*
 
         public List<ProductoDTO> visualizarEstudio(Integer idEstudioProducto){
             DatosEstudioProducto estudioProducto = this.depf.find(idEstudioProducto);
