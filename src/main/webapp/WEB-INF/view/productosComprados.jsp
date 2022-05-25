@@ -33,7 +33,7 @@
             </tr>
             
                 <%
-                List<ProductoDTO> productos = (List)request.getAttribute("productos");
+                List<ProductoDTO> productos = (List)request.getAttribute("productosComprados");
                 SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yy");
 
                 for (ProductoDTO prod: productos) {
@@ -50,7 +50,7 @@
                 %>
             </tr>
         </table>
-            <a href="CompradorPrincipalServlet">Volver</a>
+            <a href="/comprador">Volver</a>
 
     </body>
 </html>
