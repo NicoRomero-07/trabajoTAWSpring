@@ -1,4 +1,6 @@
-<%-- 
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%--
     Document   : estudio
     Created on : 17-abr-2022, 20:57:42
     Author     : Alfonso 100%
@@ -6,6 +8,7 @@
 
 <%@page import="es.trabajotaw.trabajotaw.dto.EstudioDTO"%>
 <%@page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.EstudioDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,7 +23,7 @@
     %> 
     <body>
         <h1>Datos del estudio</h1>
-        <form method="POST" action="saveEstudio">
+        <form:form method="POST" action="saveEstudio">
             <input type="hidden" name="id" value="<%= estudio == null ? "" : estudio.getIdEstudio()%>" />
             
             Nombre: 
@@ -62,6 +65,6 @@
             <input type="radio" name="element" value="producto" <%= estudio == null || estudio.getProducto() == Boolean.FALSE ? "" : "checked" %> />Producto<br><br>
             
             <button type="submit" value="Enviar"><a href="datosEstudio/<%= estudio == null || estudio.getIdEstudio() == null ? "" : estudio.getIdEstudio() %>">Editar</a></button>
-        </form>
+        </form:form>
     </body>
 </html>
