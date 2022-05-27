@@ -24,7 +24,10 @@
     %>
     <body>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
         <form method="POST" action="saveDatosEstudio">
             
             <input type="hidden" name="idEstudio" value="<%= estudio == null ? "" : estudio.getIdEstudio()%>" />

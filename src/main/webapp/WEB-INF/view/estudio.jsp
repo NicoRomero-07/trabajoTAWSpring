@@ -1,6 +1,11 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
+=======
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -32,7 +37,11 @@
             <form:hidden  path="idEstudio" />
 =======
         <h1>Datos del estudio</h1>
+<<<<<<< HEAD
         <form method="POST" action="saveEstudio">
+=======
+        <form:form method="POST" action="saveEstudio">
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
             <input type="hidden" name="id" value="<%= estudio == null ? "" : estudio.getIdEstudio()%>" />
             
 >>>>>>> main
@@ -56,7 +65,11 @@
 =======
             
             <button type="submit" value="Enviar"><a href="datosEstudio/<%= estudio == null || estudio.getIdEstudio() == null ? "" : estudio.getIdEstudio() %>">Editar</a></button>
+<<<<<<< HEAD
         </form>
 >>>>>>> main
+=======
+        </form:form>
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
     </body>
 </html>
