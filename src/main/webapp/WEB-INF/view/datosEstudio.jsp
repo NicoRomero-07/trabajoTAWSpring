@@ -25,7 +25,10 @@
     <body>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
         <form method="POST" action="saveDatosEstudio">

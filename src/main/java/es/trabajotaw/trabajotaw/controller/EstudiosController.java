@@ -3,9 +3,12 @@ package es.trabajotaw.trabajotaw.controller;
 import es.trabajotaw.trabajotaw.dto.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import es.trabajotaw.trabajotaw.entity.Producto;
 >>>>>>> main
+=======
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 import es.trabajotaw.trabajotaw.service.*;
@@ -34,10 +37,14 @@ public class EstudiosController {
     @GetMapping("analista")
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public String init(Model model, HttpSession session) {
 =======
     public String inicio(Model model, HttpSession session) {
 >>>>>>> main
+=======
+    public String inicio(Model model, HttpSession session) {
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
     public String inicio(Model model, HttpSession session) {
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
@@ -49,10 +56,14 @@ public class EstudiosController {
     @GetMapping("analista/filtro")
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public String filter(Model model, @RequestParam("filtroNombre") String filtroNombre, HttpSession session) {
 =======
     public String filtro(Model model, @RequestParam("filtroNombre") String filtroNombre, HttpSession session) {
 >>>>>>> main
+=======
+    public String filtro(Model model, @RequestParam("filtroNombre") String filtroNombre, HttpSession session) {
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
     public String filtro(Model model, @RequestParam("filtroNombre") String filtroNombre, HttpSession session) {
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
@@ -112,10 +123,14 @@ public class EstudiosController {
     @GetMapping("analista/edit/{id}")
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public String edit(Model model, @PathVariable String id, HttpSession session){
 =======
     public String save(Model model, @PathVariable String id, HttpSession session){
 >>>>>>> main
+=======
+    public String save(Model model, @PathVariable String id, HttpSession session){
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
     public String save(Model model, @PathVariable String id, HttpSession session){
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
@@ -132,6 +147,7 @@ public class EstudiosController {
         return "estudio";
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -161,6 +177,8 @@ public class EstudiosController {
 =======
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
     @PostMapping("analista/save/{id}")
     public String saveEstudio(Model model, HttpSession session,
                               @RequestParam String id,@RequestParam String nombre,
@@ -178,7 +196,10 @@ public class EstudiosController {
 
     @GetMapping("analista/edit/datosEstudio/{id}")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
     public String datosEstudio(Model model, @PathVariable String id, HttpSession session){
@@ -204,6 +225,7 @@ public class EstudiosController {
         return "datosEstudio";
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     @PostMapping("analista/estudio/save/datosEstudio/save")
@@ -254,6 +276,8 @@ public class EstudiosController {
         DatosEstudioProductoDTO estudioProducto;
         DatosEstudioUsuarioDTO estudioUsuario;
 =======
+=======
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
     @PostMapping("analista/edit/datosEstudio/saveDatosEstudio")
     public String saveDatosEstudio(Model model,
                                    @RequestParam String idEstudio,@RequestParam String idEstudioProducto,
@@ -262,6 +286,9 @@ public class EstudiosController {
                                    @RequestParam List<String> estudioUsuario,
                                    HttpSession session) {
         EstudioDTO estudio;
+<<<<<<< HEAD
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 
         Double precioSalida = sprecioSalida != null && !sprecioSalida.isEmpty() ? Double.parseDouble(sprecioSalida) : null;
@@ -278,8 +305,13 @@ public class EstudiosController {
                 Boolean promocion = Boolean.FALSE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (elementsProducto != null) {
                     for (String s : elementsProducto) {
+=======
+                if (estudioProducto != null) {
+                    for (String s : estudioProducto) {
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
                 if (estudioProducto != null) {
                     for (String s : estudioProducto) {
@@ -313,8 +345,13 @@ public class EstudiosController {
                 Boolean ascendente = Boolean.FALSE;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (elementsUsuario != null) {
                     for (String s : elementsUsuario) {
+=======
+                if (estudioUsuario != null) {
+                    for (String s : estudioUsuario) {
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
                 if (estudioUsuario != null) {
                     for (String s : estudioUsuario) {
@@ -338,7 +375,10 @@ public class EstudiosController {
                 }
                 estudioService.save(estudio.getIdEstudio().toString(), null, null, null, null, null, idEstudioUsuario);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
             }

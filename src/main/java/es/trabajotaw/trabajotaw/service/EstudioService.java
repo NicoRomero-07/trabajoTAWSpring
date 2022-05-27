@@ -63,10 +63,14 @@ public class EstudioService {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public EstudioDTO save(String nombre, String analista, String descripcion, String element, String idEstudioProducto, String idEstudioUsuario){
 =======
     public EstudioDTO save(String nombre,String analista,String descripcion,String element,String idEstudioProducto,String idEstudioUsuario){
 >>>>>>> main
+=======
+    public EstudioDTO save(String nombre,String analista,String descripcion,String element,String idEstudioProducto,String idEstudioUsuario){
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
     public EstudioDTO save(String nombre,String analista,String descripcion,String element,String idEstudioProducto,String idEstudioUsuario){
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
@@ -93,10 +97,14 @@ public class EstudioService {
         }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(descripcion != null && !descripcion.isEmpty()){
 =======
         if(analista != null && !analista.isEmpty()){
 >>>>>>> main
+=======
+        if(analista != null && !analista.isEmpty()){
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
         if(analista != null && !analista.isEmpty()){
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
@@ -150,6 +158,9 @@ public class EstudioService {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
         Optional<DatosEstudioProducto> estudioProducto = this.estudioProductoRepository.findById(Integer.parseInt(str));
@@ -162,6 +173,7 @@ public class EstudioService {
             estudioProductonew.setPrecioSalida(estudioProducto.get().getPrecioSalida());
             estudioProductonew.setPromocion(estudioProducto.get().getPromocion());
             estudioProductonew.setVendidos(estudioProducto.get().getVendidos());
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
         DatosEstudioProducto estudioProducto = this.estudioProductoRepository.getById(Integer.parseInt(str));
@@ -177,6 +189,8 @@ public class EstudioService {
 >>>>>>> main
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 
             estudioProductonew.setEstudio(estudionew);
             estudioProductonew.setId(estudionew.getIdEstudio());
@@ -185,6 +199,9 @@ public class EstudioService {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
         }else if(estudioUsuario.isPresent()){
@@ -195,6 +212,7 @@ public class EstudioService {
             estudioUsuarionew.setIngresos(estudioUsuario.get().getIngresos());
             estudioUsuarionew.setNombre(estudioUsuario.get().getNombre());
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         }else if(estudioUsuario != null){
             DatosEstudioUsuario estudioUsuarionew = new DatosEstudioUsuario();
@@ -204,6 +222,8 @@ public class EstudioService {
             estudioUsuarionew.setIngresos(estudioUsuario.getIngresos());
             estudioUsuarionew.setNombre(estudioUsuario.getNombre());
 >>>>>>> main
+=======
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 

@@ -34,10 +34,13 @@ build/
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ### Database Data ###
 ./db/db.lck
 ./derby.log
 =======
+=======
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 ### LOG ###
@@ -45,6 +48,10 @@ deby.log
 
 ### DB ###
 <<<<<<< HEAD
+<<<<<<< HEAD
+./db
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
 ./db
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
