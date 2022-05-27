@@ -14,7 +14,7 @@
         <title>JSP Page</title>
     </head>
     <% 
-        CategoriaDTO categoria = (CategoriaDTO)request.getAttribute("categoria");
+        Categoria categoria = (Categoria)request.getAttribute("categoria");
     %> 
     <body>
         <jsp:include page="cabecera.jsp" /> 

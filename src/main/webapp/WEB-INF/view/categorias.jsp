@@ -30,8 +30,8 @@
             <th></th>
         </tr>
     <%
-            List<CategoriaDTO> categorias = (List)request.getAttribute("categorias");
-                for (CategoriaDTO categoria: categorias) {
+            List<Categoria> categorias = (List)request.getAttribute("categorias");
+                for (Categoria categoria: categorias) {
     %> 
     
     <tr>

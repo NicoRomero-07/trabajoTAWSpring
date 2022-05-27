@@ -41,7 +41,7 @@
                     <tr>
                         <td><%= est.getIdEstudio()%></td>
                         <td><%= est.getNombre()%> </td>            
-                        <td><%= est.getAnalista().getNombre()%></td>
+                        <td><%= est.getAnalista()%></td>
                         <td><%= est.getDescripcion()%></td>   
                         <td><a href="delete/<%= est.getIdEstudio() %>">Borrar</a></td>
                         <td><a href="edit/<%= est.getIdEstudio()%>">Editar</a></td>
@@ -59,6 +59,6 @@
                 <%
             }
             %>
-            <a href="EstudioNuevoEditarServlet">Crear nuevo estudio</a>
+            <a href="create">Crear nuevo estudio</a>
     </body>
 </html>

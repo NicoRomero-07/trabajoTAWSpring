@@ -7,7 +7,10 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@ page import="es.trabajotaw.trabajotaw.entity.Producto" %>
+<<<<<<< HEAD
 <%@ page import="es.trabajotaw.trabajotaw.dto.ProductoDTO" %>
+=======
+>>>>>>> alfon
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -42,10 +45,10 @@
             </tr>
             
                 <%
-                List<ProductoDTO> productos = (List)request.getAttribute("productos");
+                List<Producto> productos = (List)request.getAttribute("productos");
                 SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yy");
 
-                for (ProductoDTO prod: productos) {
+                for (Producto prod: productos) {
                 %>
             <tr>
                 <td><%= prod.getIdProducto()%></td>

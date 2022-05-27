@@ -20,113 +20,113 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProductoService {
-        @Autowired
-        private ProductoRepository productoRepository;
-        @Autowired
-        private UsuarioRepository usuarioRepository;
+    @Autowired
+    private ProductoRepository productoRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-        public List<ProductoDTO> listaEntityADTO(List<Producto> lista) {
-            List<ProductoDTO> listaDTO = null;
-            if (lista != null) {
-                listaDTO = new ArrayList<>();
-                for (Producto p : lista) {
-                    listaDTO.add(p.toDTO());
-                }
+    public List<ProductoDTO> listaEntityADTO(List<Producto> lista) {
+        List<ProductoDTO> listaDTO = null;
+        if (lista != null) {
+            listaDTO = new ArrayList<>();
+            for (Producto p : lista) {
+                listaDTO.add(p.toDTO());
             }
-            return listaDTO;
+        }
+        return listaDTO;
+    }
+
+    public List<ProductoDTO> listarProductos(String busqueda) {
+        List<Producto> productos;
+
+        if (busqueda == null || busqueda.isEmpty()) {
+            productos = this.productoRepository.findAll();
+        } else {
+            productos = this.productoRepository.findByNombreContaining(busqueda);
         }
 
-        public List<ProductoDTO> listarProductos(String busqueda) {
-            List<Producto> productos;
+        return this.listaEntityADTO(productos);
+    }
 
-            if (busqueda == null || busqueda.isEmpty()) {
-                productos = this.productoRepository.findAll();
-            } else {
-                productos = this.productoRepository.findByNombreContaining(busqueda);
+
+    private void rellenarProducto(Producto producto,
+                                  String nombreProducto, String descripcion, Double precioSalida, String imagen, Date fechaInicio, Date fechaFin, String comprador, String publicador, Boolean promocion, Integer categoria) {
+
+        producto.setNombre(nombreProducto);
+        producto.setDescripcion(descripcion);
+        producto.setPrecioSalida(precioSalida);
+        producto.setUrlFoto(imagen);
+        producto.setFechaInicioSubasta(fechaInicio);
+        producto.setFechaFinSubasta(fechaFin);
+
+        if (!"".equals(comprador)) {
+            List<Usuario> usuarios = usuarioRepository.findByNombreUsuario(comprador);
+            if (!usuarios.isEmpty()) {
+                Usuario compradorUser = usuarios.get(0);
+                producto.setComprador(compradorUser);
             }
-
-            return this.listaEntityADTO(productos);
+        } else {
+            producto.setComprador(null);
         }
 
-
-        private void rellenarProducto(Producto producto,
-                                      String nombreProducto, String descripcion, Double precioSalida, String imagen, Date fechaInicio, Date fechaFin, String comprador, String publicador, Boolean promocion, Integer categoria) {
-
-            producto.setNombre(nombreProducto);
-            producto.setDescripcion(descripcion);
-            producto.setPrecioSalida(precioSalida);
-            producto.setUrlFoto(imagen);
-            producto.setFechaInicioSubasta(fechaInicio);
-            producto.setFechaFinSubasta(fechaFin);
-
-            if (!"".equals(comprador)) {
-                List<Usuario> usuarios = usuarioRepository.findByNombreUsuario(comprador);
-                if (!usuarios.isEmpty()) {
-                    Usuario compradorUser = usuarios.get(0);
-                    producto.setComprador(compradorUser);
-                }
-            } else {
-                producto.setComprador(null);
+        if (!"".equals(publicador)) {
+            List<Usuario> usuarios = usuarioRepository.findByNombreUsuario(publicador);
+            if (!usuarios.isEmpty()) {
+                Usuario publicadorUser = usuarios.get(0);
+                producto.setPublicador(publicadorUser);
             }
-
-            if (!"".equals(publicador)) {
-                List<Usuario> usuarios = usuarioRepository.findByNombreUsuario(publicador);
-                if (!usuarios.isEmpty()) {
-                    Usuario publicadorUser = usuarios.get(0);
-                    producto.setPublicador(publicadorUser);
-                }
-            }
-
-            producto.setEnPromocion(promocion);
-
-            producto.setCategoria(categoria);
-
         }
 
-        public void crearProducto(String nombreProducto, String descripcion, Double precioSalida, String imagen, Date fechaInicio, Date fechaFin, String comprador, String publicador, Boolean promocion, Integer categoria) {
-            Producto producto = new Producto();
+        producto.setEnPromocion(promocion);
 
-            this.rellenarProducto(producto, nombreProducto, descripcion, precioSalida, imagen, fechaInicio, fechaFin, comprador, publicador, promocion, categoria);
+        producto.setCategoria(categoria);
 
-            this.productoRepository.save(producto);
-        }
+    }
 
-        public void modificarProducto(Integer id,
-                                      String nombreProducto, String descripcion, Double precioSalida, String imagen, Date fechaInicio, Date fechaFin, String comprador, String publicador, Boolean promocion, Integer categoria) {
+    public void crearProducto(String nombreProducto, String descripcion, Double precioSalida, String imagen, Date fechaInicio, Date fechaFin, String comprador, String publicador, Boolean promocion, Integer categoria) {
+        Producto producto = new Producto();
 
-            Producto producto = this.productoRepository.getById(id);
+        this.rellenarProducto(producto, nombreProducto, descripcion, precioSalida, imagen, fechaInicio, fechaFin, comprador, publicador, promocion, categoria);
 
-            this.rellenarProducto(producto, nombreProducto, descripcion, precioSalida, imagen, fechaInicio, fechaFin, comprador, publicador, promocion, categoria);
+        this.productoRepository.save(producto);
+    }
 
-            this.productoRepository.save(producto);
-        }
+    public void modificarProducto(Integer id,
+                                  String nombreProducto, String descripcion, Double precioSalida, String imagen, Date fechaInicio, Date fechaFin, String comprador, String publicador, Boolean promocion, Integer categoria) {
 
-        public ProductoDTO buscarProducto(Integer id) {
-            Producto p = productoRepository.getById(id);
-            return p.toDTO();
-        }
+        Producto producto = this.productoRepository.getById(id);
 
-        public List<ProductoDTO> listaProductosLogin(Integer idUsuario) {
-            return this.listaEntityADTO(this.productoRepository.listaProductosPublicadorId(idUsuario));
-        }
+        this.rellenarProducto(producto, nombreProducto, descripcion, precioSalida, imagen, fechaInicio, fechaFin, comprador, publicador, promocion, categoria);
 
-        public void borrarProducto(Integer id) {
-            Producto producto = this.productoRepository.getById(id);
+        this.productoRepository.save(producto);
+    }
 
-            this.productoRepository.delete(producto);
-        }
+    public ProductoDTO buscarProducto(Integer id) {
+        Producto p = productoRepository.getById(id);
+        return p.toDTO();
+    }
+
+    public List<ProductoDTO> listaProductosLogin(Integer idUsuario) {
+        return this.listaEntityADTO(this.productoRepository.listaProductosPublicadorId(idUsuario));
+    }
+
+    public void borrarProducto(Integer id) {
+        Producto producto = this.productoRepository.getById(id);
+
+        this.productoRepository.delete(producto);
+    }
 
 
-        public List<ProductoDTO> buscarProductosComprados(Integer idUsuario) {
-            List<Producto> productos = productoRepository.listaProductosComprados(idUsuario);
-            return this.listaEntityADTO(productos);
-        }
+    public List<ProductoDTO> buscarProductosComprados(Integer idUsuario) {
+        List<Producto> productos = productoRepository.listaProductosComprados(idUsuario);
+        return this.listaEntityADTO(productos);
+    }
 
 
-        public List<ProductoDTO> buscarProductosPujados(Integer idUsuario) {
-            List<Producto> productos = productoRepository.listaProductosPujados(idUsuario);
-            return this.listaEntityADTO(productos);
-        }
+    public List<ProductoDTO> buscarProductosPujados(Integer idUsuario) {
+        List<Producto> productos = productoRepository.listaProductosPujados(idUsuario);
+        return this.listaEntityADTO(productos);
+    }
 
     public List<ProductoDTO> buscarProductosFavoritos(Integer idUsuario) {
         List<Producto> productos = productoRepository.listaProductosFavoritos(idUsuario);
@@ -135,29 +135,26 @@ public class ProductoService {
 
 
 
-        public List<ProductoDTO> filtrarProductosComprados(Integer idProducto, String filtro){
-            List<Producto> productos;
+    public List<ProductoDTO> filtrarProductosComprados(Integer idProducto, String filtro){
+        List<Producto> productos;
 
-            if (filtro == null || filtro.isEmpty()) {
-                productos = this.productoRepository.filtrarProductosComprados(idProducto, null);
-            } else {
-                productos = this.productoRepository.filtrarProductosComprados(idProducto, filtro);
-            }
-
-            return this.listaEntityADTO(productos);
+        if (filtro == null || filtro.isEmpty()) {
+            productos = this.productoRepository.filtrarProductosComprados(idProducto, null);
+        } else {
+            productos = this.productoRepository.filtrarProductosComprados(idProducto, filtro);
         }
-        /*
 
+        return this.listaEntityADTO(productos);
+    }
+        /*
         public List<ProductoDTO> visualizarEstudio(Integer idEstudioProducto){
             DatosEstudioProducto estudioProducto = this.depf.find(idEstudioProducto);
             List<Producto> productos = productoRepository.visualizarEstudio(estudioProducto);
             List<ProductoDTO> productosDTO = this.listaEntityADTO(productos);
             return productosDTO;
         }
-
         public List<ProductoDTO> getProductosEnPromocion() {
             return this.listaEntityADTO(this.productoRepository.getProductosPromocion());
         }
-
      */
 }

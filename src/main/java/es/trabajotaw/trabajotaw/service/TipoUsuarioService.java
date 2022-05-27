@@ -22,12 +22,12 @@ import java.util.List;
  */
 @Service
 public class TipoUsuarioService {
-    
+
     @Autowired
     TipoUsuarioRepository tur;
     @Autowired
     TipoUsuarioRepositoryCustom turcI;
-    
+
     private List<TipoUsuarioDTO> listaEntityADTO (List<TipoUsuario> lista) {
         List<TipoUsuarioDTO> listaDTO = null;
         if (lista != null) {
@@ -38,38 +38,38 @@ public class TipoUsuarioService {
         }
         return listaDTO;
     }
-    
+
     public List<TipoUsuarioDTO> listarTipoUsuarios (String filtroNombre) {
         List<TipoUsuario> tipoUsuarios = null;
 
         if (filtroNombre == null || filtroNombre.isEmpty()) {
-            tipoUsuarios = this.tur.findAll();        
+            tipoUsuarios = this.tur.findAll();
         } else {
             tipoUsuarios = this.turcI.findByTipo(filtroNombre);
         }
-        
-        return this.listaEntityADTO(tipoUsuarios);                
-    } 
-    
+
+        return this.listaEntityADTO(tipoUsuarios);
+    }
+
     public TipoUsuarioDTO buscarTipoUsuario (Integer id) {
         TipoUsuario tipoUsuario = this.tur.getById(id);
         return tipoUsuario.toDTO();
     }
-    
+
     public void borrarTipoUsuario (Integer id) {
         TipoUsuario tipoUsuario = this.tur.getById(id);
 
         this.tur.delete(tipoUsuario);
     }
-    
+
     private void rellenarTipoUsuario (TipoUsuario tipoUsuario,
-                              String nombreTipoUsuario) {
-        
+                                      String nombreTipoUsuario) {
+
         tipoUsuario.setTipo(nombreTipoUsuario);
-        
-                       
+
+
     }
-    
+
     public void crearTipoUsuario (String nombreTipoUsuario) {
         TipoUsuario tipoUsuario = new TipoUsuario();
 
@@ -79,8 +79,8 @@ public class TipoUsuarioService {
     }
 
     public void modificarTipoUsuario (Integer id,
-                              String nombreTipoUsuario) {
-        
+                                      String nombreTipoUsuario) {
+
         TipoUsuario tipoUsuario = this.tur.getById(id);
 
         this.rellenarTipoUsuario(tipoUsuario, nombreTipoUsuario);
