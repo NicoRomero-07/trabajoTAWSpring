@@ -61,7 +61,11 @@ public class EstudioService {
         estudioRepository.delete(estudio);
     }
 
+<<<<<<< HEAD
     public EstudioDTO save(String nombre, String analista, String descripcion, String element, String idEstudioProducto, String idEstudioUsuario){
+=======
+    public EstudioDTO save(String nombre,String analista,String descripcion,String element,String idEstudioProducto,String idEstudioUsuario){
+>>>>>>> main
         Estudio estudio = new Estudio();
         estudio = rellenarEstudio(estudio,nombre,analista,descripcion,element,idEstudioProducto,idEstudioUsuario);
         estudioRepository.save(estudio);
@@ -83,7 +87,11 @@ public class EstudioService {
             Usuario user = this.usuarioRepository.getById(Integer.parseInt(analista));
             estudio.setAnalista(user);
         }
+<<<<<<< HEAD
         if(descripcion != null && !descripcion.isEmpty()){
+=======
+        if(analista != null && !analista.isEmpty()){
+>>>>>>> main
             estudio.setDescripcion(descripcion);
         }
         if(element != null && !element.isEmpty()){
@@ -132,6 +140,7 @@ public class EstudioService {
 
         estudioRepository.save(estudionew);
 
+<<<<<<< HEAD
         Optional<DatosEstudioProducto> estudioProducto = this.estudioProductoRepository.findById(Integer.parseInt(str));
         Optional<DatosEstudioUsuario> estudioUsuario = this.estudioUsuarioRepository.findById(Integer.parseInt(str));
 
@@ -142,12 +151,25 @@ public class EstudioService {
             estudioProductonew.setPrecioSalida(estudioProducto.get().getPrecioSalida());
             estudioProductonew.setPromocion(estudioProducto.get().getPromocion());
             estudioProductonew.setVendidos(estudioProducto.get().getVendidos());
+=======
+        DatosEstudioProducto estudioProducto = this.estudioProductoRepository.getById(Integer.parseInt(str));
+        DatosEstudioUsuario estudioUsuario = this.estudioUsuarioRepository.getById(Integer.parseInt(str));
+
+        if(estudioProducto != null){
+            DatosEstudioProducto estudioProductonew = new DatosEstudioProducto();
+            estudioProductonew.setCategorias(estudioProducto.getCategorias());
+            estudioProductonew.setPrecioActual(estudioProducto.getPrecioActual());
+            estudioProductonew.setPrecioSalida(estudioProducto.getPrecioSalida());
+            estudioProductonew.setPromocion(estudioProducto.getPromocion());
+            estudioProductonew.setVendidos(estudioProducto.getVendidos());
+>>>>>>> main
 
             estudioProductonew.setEstudio(estudionew);
             estudioProductonew.setId(estudionew.getIdEstudio());
             estudioProductoRepository.save(estudioProductonew);
             estudionew.setDatosEstudioProducto(estudioProductonew);
 
+<<<<<<< HEAD
         }else if(estudioUsuario.isPresent()){
             DatosEstudioUsuario estudioUsuarionew = new DatosEstudioUsuario();
 
@@ -155,6 +177,15 @@ public class EstudioService {
             estudioUsuarionew.setAscendente(estudioUsuario.get().getAscendente());
             estudioUsuarionew.setIngresos(estudioUsuario.get().getIngresos());
             estudioUsuarionew.setNombre(estudioUsuario.get().getNombre());
+=======
+        }else if(estudioUsuario != null){
+            DatosEstudioUsuario estudioUsuarionew = new DatosEstudioUsuario();
+
+            estudioUsuarionew.setApellidos(estudioUsuario.getApellidos());
+            estudioUsuarionew.setAscendente(estudioUsuario.getAscendente());
+            estudioUsuarionew.setIngresos(estudioUsuario.getIngresos());
+            estudioUsuarionew.setNombre(estudioUsuario.getNombre());
+>>>>>>> main
 
             estudioUsuarionew.setEstudio(estudionew);
             estudioUsuarionew.setId(estudionew.getIdEstudio());

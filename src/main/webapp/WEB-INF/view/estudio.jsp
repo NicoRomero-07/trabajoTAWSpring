@@ -23,12 +23,19 @@
         <title> Estudio </title>
     </head>
     <body>
+<<<<<<< HEAD
         <%
             EstudioDTO estudio = (EstudioDTO) request.getAttribute("estudio");
         %>
     <h1>Datos del estudio</h1>
         <form:form method="POST" action="/analista/save" modelAttribute="estudio">
             <form:hidden  path="idEstudio" />
+=======
+        <h1>Datos del estudio</h1>
+        <form method="POST" action="saveEstudio">
+            <input type="hidden" name="id" value="<%= estudio == null ? "" : estudio.getIdEstudio()%>" />
+            
+>>>>>>> main
             Nombre: 
             <form:input size="20"  maxlength="20" path="nombre" required="true" /> <br><br>
             
@@ -43,7 +50,13 @@
             <input type="radio" name="element" value="comprador" <%= estudio == null || estudio.getComprador() == Boolean.FALSE ? "" : "checked" %>/>Comprador<br>
             <input type="radio" name="element" value="vendedor"  <%= estudio == null || estudio.getVendedor() == Boolean.FALSE ? "" : "checked" %>/>Vendedor<br>
             <input type="radio" name="element" value="producto" <%= estudio == null || estudio.getProducto() == Boolean.FALSE ? "" : "checked" %> />Producto<br><br>
+<<<<<<< HEAD
             <form:button>Enviar</form:button>
         </form:form>
+=======
+            
+            <button type="submit" value="Enviar"><a href="datosEstudio/<%= estudio == null || estudio.getIdEstudio() == null ? "" : estudio.getIdEstudio() %>">Editar</a></button>
+        </form>
+>>>>>>> main
     </body>
 </html>

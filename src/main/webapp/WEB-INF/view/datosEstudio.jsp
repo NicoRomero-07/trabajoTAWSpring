@@ -23,6 +23,14 @@
         String errorCantidad = (String) request.getAttribute("error");
     %>
     <body>
+<<<<<<< HEAD
+=======
+        <form method="POST" action="saveDatosEstudio">
+            
+            <input type="hidden" name="idEstudio" value="<%= estudio == null ? "" : estudio.getIdEstudio()%>" />
+            <input type="hidden" name="idEstudioProducto" value="<%= estudioProducto == null ? "" : estudioProducto.getId() %>" />
+            <input type="hidden" name="idEstudioUsuario" value="<%= estudioUsuario == null ? "" : estudioUsuario.getId() %>" />
+>>>>>>> main
         <%
         if(estudio.getProducto()){
         %>
