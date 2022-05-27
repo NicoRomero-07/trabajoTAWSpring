@@ -32,8 +32,41 @@ build/
 ### VS Code ###
 .vscode/
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+### Database Data ###
+./db/db.lck
+./derby.log
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+### Database Data ###
+./db/db.lck
+./derby.log
+=======
+=======
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+>>>>>>> main
 ### LOG ###
 deby.log
 
 ### DB ###
+<<<<<<< HEAD
 ./db
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+./db
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+./db
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+./db
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+>>>>>>> alfon
+>>>>>>> main

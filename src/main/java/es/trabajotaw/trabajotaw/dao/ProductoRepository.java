@@ -16,4 +16,24 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     List<Producto> listaProductosPublicadorId(@Param("publicadorid") Integer publicadorid);
 
     List<Producto> findByNombreContaining(String busqueda);
+
+    @Query("select p from Producto p where p.comprador.idUsuario = :idUsuario")
+    List<Producto> listaProductosComprados(@Param("idUsuario") Integer idUsuario);
+
+    @Query("select p from Producto p where p.comprador.idUsuario = :idUsuario and"
+            + " upper(p.nombre) like upper(:filtro)")
+    List<Producto> filtrarProductosComprados(@Param("idUsuario") Integer idUsuario, @Param("filtro") String filtro);
+
+    @Query("select p from Producto p join Puja pu on"
+            + " p.idProducto = pu.producto.idProducto where pu.comprador.idUsuario = :idUsuario")
+    List<Producto> listaProductosPujados(@Param("idUsuario") Integer idUsuario);
+
+    @Query("select p from Producto p join ListaProducto lp on"
+            + " p.idProducto = lp.producto1.idProducto where lp.usuario1.idUsuario = :idUsuario")
+    List<Producto> listaProductosFavoritos(@Param("idUsuario") Integer idUsuario);
+
+    @Query("select p from Producto p join ListaProducto lp on"
+            + " p.idProducto = lp.producto1.idProducto where lp.usuario1.idUsuario = :idUsuario and"
+            + " upper(lp.producto1.nombre) like upper(:filtro)")
+    List<Producto> filtrarProductosFavoritos(@Param("idUsuario") Integer idUsuario, @Param("filtro") String filtro);
 }

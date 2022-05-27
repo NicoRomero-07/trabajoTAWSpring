@@ -6,6 +6,7 @@
 
 <%@page import="es.trabajotaw.trabajotaw.entity.Categoria"%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.dto.CategoriaDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -45,6 +46,6 @@
                 }
     %>
     </table>
-    <a href="CategoriaNuevoEditarServlet">Crear nueva categoria ... </a>
+    <a href="/administrador/administrarCategoria/>">Crear nueva categoria ... </a>
     </body>
 </html>

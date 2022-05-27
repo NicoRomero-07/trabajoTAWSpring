@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="es.trabajotaw.trabajotaw.entity.Categoria"%>
+<%@ page import="es.trabajotaw.trabajotaw.dto.CategoriaDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

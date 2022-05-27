@@ -83,7 +83,7 @@ public class EstudioService {
             Usuario user = this.usuarioRepository.getById(Integer.parseInt(analista));
             estudio.setAnalista(user);
         }
-        if(analista != null && !analista.isEmpty()){
+        if(descripcion != null && !descripcion.isEmpty()){
             estudio.setDescripcion(descripcion);
         }
         if(element != null && !element.isEmpty()){

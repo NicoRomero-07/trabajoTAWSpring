@@ -1,16 +1,42 @@
 ----------------------------------------------------------------
+<<<<<<< HEAD
 Fri May 27 15:46:36 CEST 2022:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0181-05c4-da1c-00000208aea8 
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+Tue May 24 16:48:34 CEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-f68a-8165-000001da8250 
+on database directory C:\Users\nicor\OneDrive\UMA\Tercero\Tecnología de aplicaciones web\intelliJ\trabajoTAW\db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
+Loaded from file:/C:/Users/nicor/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+=======
+Wed May 25 13:59:31 CEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0180-fb16-184f-0000049fac40 
+on database directory C:\Users\alfon\Documents\1Estudios\Universidad\TercerCurso\SegundoSemestre\TecAplWeb\trabajoTAWSpringBoot\trabajoTAWSpring\db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
+Loaded from file:/C:/Users/alfon/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+>>>>>>> alfon
+java.vendor=Oracle Corporation
+java.runtime.version=17.0.2+8-LTS-86
+user.dir=C:\Users\nicor\OneDrive\UMA\Tercero\Tecnología de aplicaciones web\intelliJ\trabajoTAW
+=======
+Fri May 27 14:10:39 CEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0181-056d-015c-0000031e9e90 
+>>>>>>> main
 on database directory C:\Users\Alfonso\Documents\Estudios\TercerSemestre\TecAplWeb\trabajoTAWSpring\trabajoTAWSpring\db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
 Loaded from file:/C:/Users/Alfonso/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=17.0.2+8-LTS-86
 user.dir=C:\Users\Alfonso\Documents\Estudios\TercerSemestre\TecAplWeb\trabajoTAWSpring\trabajoTAWSpring
+>>>>>>> alfon
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> main
 ----------------------------------------------------------------
 Fri May 27 15:47:06 CEST 2022:
 Shutting down instance a816c00e-0181-05c4-da1c-00000208aea8 on database directory C:\Users\Alfonso\Documents\Estudios\TercerSemestre\TecAplWeb\trabajoTAWSpring\trabajoTAWSpring\db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
@@ -54,3 +80,8 @@ ERROR XBM0I: Directory db cannot be removed.
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 Cleanup action completed
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> alfon
+>>>>>>> main

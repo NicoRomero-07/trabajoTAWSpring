@@ -38,7 +38,7 @@
             </tr>
             
                 <%
-                List<ProductoDTO> productos = (List)request.getAttribute("productos");
+                List<ProductoDTO> productos = (List)request.getAttribute("productosFavoritos");
                 SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yy");
 
                 for (ProductoDTO prod: productos) {
@@ -71,7 +71,7 @@
                 %>
             </tr>
         </table>
-            <a href="CompradorPrincipalServlet">Volver</a>
+            <a href="/comprador/vistaComprador">Volver</a>
 
     </body>
 </html>
