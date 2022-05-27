@@ -23,10 +23,6 @@
         String errorCantidad = (String) request.getAttribute("error");
     %>
     <body>
-<<<<<<< HEAD
-
-=======
->>>>>>> main
         <%
         if(estudio.getProducto()){
         %>
