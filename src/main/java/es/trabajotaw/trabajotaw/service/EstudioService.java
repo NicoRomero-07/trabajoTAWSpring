@@ -5,7 +5,6 @@ import es.trabajotaw.trabajotaw.dao.DatosEstudioUsuarioRepository;
 import es.trabajotaw.trabajotaw.dao.EstudioRepository;
 import es.trabajotaw.trabajotaw.dao.UsuarioRepository;
 import es.trabajotaw.trabajotaw.dto.EstudioDTO;
-import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
 import es.trabajotaw.trabajotaw.entity.DatosEstudioProducto;
 import es.trabajotaw.trabajotaw.entity.DatosEstudioUsuario;
 import es.trabajotaw.trabajotaw.entity.Estudio;

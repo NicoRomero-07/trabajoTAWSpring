@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
+=======
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 <%--
     Document   : estudio
     Created on : 17-abr-2022, 20:57:42
@@ -38,7 +43,6 @@
             <input type="radio" name="element" value="comprador" <%= estudio == null || estudio.getComprador() == Boolean.FALSE ? "" : "checked" %>/>Comprador<br>
             <input type="radio" name="element" value="vendedor"  <%= estudio == null || estudio.getVendedor() == Boolean.FALSE ? "" : "checked" %>/>Vendedor<br>
             <input type="radio" name="element" value="producto" <%= estudio == null || estudio.getProducto() == Boolean.FALSE ? "" : "checked" %> />Producto<br><br>
-
             <form:button>Enviar</form:button>
         </form:form>
     </body>

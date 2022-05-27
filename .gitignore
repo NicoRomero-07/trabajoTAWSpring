@@ -32,6 +32,14 @@ build/
 ### VS Code ###
 .vscode/
 
+<<<<<<< HEAD
 ### Database Data ###
 ./db/db.lck
 ./derby.log
+=======
+### LOG ###
+deby.log
+
+### DB ###
+./db
+>>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
