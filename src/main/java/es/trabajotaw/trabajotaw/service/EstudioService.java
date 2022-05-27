@@ -61,7 +61,7 @@ public class EstudioService {
         estudioRepository.delete(estudio);
     }
 
-    public EstudioDTO save(String nombre, String analista, String descripcion, String element, String idEstudioProducto, String idEstudioUsuario){
+    public EstudioDTO save(String nombre,String analista,String descripcion,String element,String idEstudioProducto,String idEstudioUsuario){
         Estudio estudio = new Estudio();
         estudio = rellenarEstudio(estudio,nombre,analista,descripcion,element,idEstudioProducto,idEstudioUsuario);
         estudioRepository.save(estudio);
@@ -83,8 +83,7 @@ public class EstudioService {
             Usuario user = this.usuarioRepository.getById(Integer.parseInt(analista));
             estudio.setAnalista(user);
         }
-
-        if(descripcion != null && !descripcion.isEmpty()){
+        if(analista != null && !analista.isEmpty()){
             estudio.setDescripcion(descripcion);
         }
         if(element != null && !element.isEmpty()){
@@ -157,6 +156,10 @@ public class EstudioService {
             estudioUsuarionew.setIngresos(estudioUsuario.get().getIngresos());
             estudioUsuarionew.setNombre(estudioUsuario.get().getNombre());
 
+            estudioUsuarionew.setEstudio(estudionew);
+            estudioUsuarionew.setId(estudionew.getIdEstudio());
+            estudioUsuarioRepository.save(estudioUsuarionew);
+            estudionew.setDatosEstudioUsuario(estudioUsuarionew);
         }
         estudioRepository.save(estudionew);
 
