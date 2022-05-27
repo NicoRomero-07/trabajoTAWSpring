@@ -1,7 +1,6 @@
 package es.trabajotaw.trabajotaw.controller;
 
 import es.trabajotaw.trabajotaw.dto.*;
-import es.trabajotaw.trabajotaw.entity.Producto;
 import es.trabajotaw.trabajotaw.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -141,16 +140,14 @@ public class EstudiosController {
         return "datosEstudio";
     }
 
-    @PostMapping("analista/save/datosEstudio/{id}")
+    @PostMapping("analista/edit/datosEstudio/saveDatosEstudio")
     public String saveDatosEstudio(Model model,
                                    @RequestParam String idEstudio,@RequestParam String idEstudioProducto,
-                                   @RequestParam String[] elementsProducto,@RequestParam String sprecioSalida,
+                                   @RequestParam List<String> estudioProducto,@RequestParam String sprecioSalida,
                                    @RequestParam String sprecioActual,@RequestParam String idEstudioUsuario,
-                                   @RequestParam String[] elementsUsuario,
+                                   @RequestParam List<String> estudioUsuario,
                                    HttpSession session) {
         EstudioDTO estudio;
-        DatosEstudioProductoDTO estudioProducto;
-        DatosEstudioUsuarioDTO estudioUsuario;
 
         Double precioSalida = sprecioSalida != null && !sprecioSalida.isEmpty() ? Double.parseDouble(sprecioSalida) : null;
         Double precioActual = sprecioActual != null && !sprecioActual.isEmpty() ? Double.parseDouble(sprecioActual) : null;
@@ -165,8 +162,8 @@ public class EstudiosController {
                 Boolean vendidos = Boolean.FALSE;
                 Boolean promocion = Boolean.FALSE;
 
-                if (elementsProducto != null) {
-                    for (String s : elementsProducto) {
+                if (estudioProducto != null) {
+                    for (String s : estudioProducto) {
                         if (s.equals("categorias")) {
                             categorias = Boolean.TRUE;
                         } else if (s.equals("vendidos")) {
@@ -195,8 +192,8 @@ public class EstudiosController {
                 Boolean ingresos = Boolean.FALSE;
                 Boolean ascendente = Boolean.FALSE;
 
-                if (elementsUsuario != null) {
-                    for (String s : elementsUsuario) {
+                if (estudioUsuario != null) {
+                    for (String s : estudioUsuario) {
                         if (s.equals("nombre")) {
                             nombre = Boolean.TRUE;
                         } else if (s.equals("apellidos")) {

@@ -29,7 +29,6 @@ public class LoginController {
         Usuario user = this.usuarioRepository.findByNombreUsuarioAndContrasenya(usuario, clave);
         String goTo;
 
-
         if (user == null) {
             String strError = "El usuario o la clave son incorrectos";
             model.addAttribute("error", strError);
