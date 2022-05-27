@@ -23,20 +23,7 @@
         String errorCantidad = (String) request.getAttribute("error");
     %>
     <body>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
-=======
->>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
-        <form method="POST" action="saveDatosEstudio">
-            
-            <input type="hidden" name="idEstudio" value="<%= estudio == null ? "" : estudio.getIdEstudio()%>" />
-            <input type="hidden" name="idEstudioProducto" value="<%= estudioProducto == null ? "" : estudioProducto.getId() %>" />
-            <input type="hidden" name="idEstudioUsuario" value="<%= estudioUsuario == null ? "" : estudioUsuario.getId() %>" />
->>>>>>> main
+
         <%
         if(estudio.getProducto()){
         %>

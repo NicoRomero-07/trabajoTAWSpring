@@ -4,6 +4,7 @@ import es.trabajotaw.trabajotaw.dto.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import es.trabajotaw.trabajotaw.entity.Producto;
 >>>>>>> main
@@ -11,6 +12,9 @@ import es.trabajotaw.trabajotaw.entity.Producto;
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+import es.trabajotaw.trabajotaw.entity.Producto;
+>>>>>>> main
 import es.trabajotaw.trabajotaw.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +42,7 @@ public class EstudiosController {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public String init(Model model, HttpSession session) {
 =======
     public String inicio(Model model, HttpSession session) {
@@ -48,12 +53,16 @@ public class EstudiosController {
 =======
     public String inicio(Model model, HttpSession session) {
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+    public String inicio(Model model, HttpSession session) {
+>>>>>>> main
         List<EstudioDTO> estudios = this.estudioService.listarClientes(null);
         model.addAttribute("estudios", estudios);
         return "estudios";
     }
 
     @GetMapping("analista/filtro")
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -67,6 +76,9 @@ public class EstudiosController {
 =======
     public String filtro(Model model, @RequestParam("filtroNombre") String filtroNombre, HttpSession session) {
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+    public String filtro(Model model, @RequestParam("filtroNombre") String filtroNombre, HttpSession session) {
+>>>>>>> main
         List<EstudioDTO> estudios = this.estudioService.listarClientes(filtroNombre);
         model.addAttribute("filtroNombre", filtroNombre);
         model.addAttribute("estudios", estudios);
@@ -124,6 +136,7 @@ public class EstudiosController {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public String edit(Model model, @PathVariable String id, HttpSession session){
 =======
     public String save(Model model, @PathVariable String id, HttpSession session){
@@ -134,6 +147,9 @@ public class EstudiosController {
 =======
     public String save(Model model, @PathVariable String id, HttpSession session){
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+    public String save(Model model, @PathVariable String id, HttpSession session){
+>>>>>>> main
         // Cogemos los usuarios analistas y le añadimos los administradores.
         List<UsuarioDTO> listaUsuarios = this.usuarioService.getAnalistas();
         List<UsuarioDTO> listaAdministradores = this.usuarioService.getAdministradores();
@@ -147,6 +163,7 @@ public class EstudiosController {
         return "estudio";
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -179,6 +196,8 @@ public class EstudiosController {
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+>>>>>>> main
     @PostMapping("analista/save/{id}")
     public String saveEstudio(Model model, HttpSession session,
                               @RequestParam String id,@RequestParam String nombre,
@@ -197,11 +216,14 @@ public class EstudiosController {
     @GetMapping("analista/edit/datosEstudio/{id}")
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> main
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+>>>>>>> main
     public String datosEstudio(Model model, @PathVariable String id, HttpSession session){
         
         if (id != null && !id.isEmpty()) {
@@ -225,6 +247,7 @@ public class EstudiosController {
         return "datosEstudio";
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -265,6 +288,8 @@ public class EstudiosController {
                 }
                 estudioService.save(estudio.getIdEstudio().toString(), null, null, null, null, null, estudioUsuario.getId().toString());
 =======
+=======
+>>>>>>> main
     @PostMapping("analista/save/datosEstudio/{id}")
     public String saveDatosEstudio(Model model,
                                    @RequestParam String idEstudio,@RequestParam String idEstudioProducto,
@@ -275,6 +300,7 @@ public class EstudiosController {
         EstudioDTO estudio;
         DatosEstudioProductoDTO estudioProducto;
         DatosEstudioUsuarioDTO estudioUsuario;
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
@@ -290,6 +316,8 @@ public class EstudiosController {
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+>>>>>>> main
 
         Double precioSalida = sprecioSalida != null && !sprecioSalida.isEmpty() ? Double.parseDouble(sprecioSalida) : null;
         Double precioActual = sprecioActual != null && !sprecioActual.isEmpty() ? Double.parseDouble(sprecioActual) : null;
@@ -306,6 +334,7 @@ public class EstudiosController {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (elementsProducto != null) {
                     for (String s : elementsProducto) {
 =======
@@ -316,6 +345,10 @@ public class EstudiosController {
                 if (estudioProducto != null) {
                     for (String s : estudioProducto) {
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+                if (elementsProducto != null) {
+                    for (String s : elementsProducto) {
+>>>>>>> main
                         if (s.equals("categorias")) {
                             categorias = Boolean.TRUE;
                         } else if (s.equals("vendidos")) {
@@ -346,6 +379,7 @@ public class EstudiosController {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 if (elementsUsuario != null) {
                     for (String s : elementsUsuario) {
 =======
@@ -356,6 +390,10 @@ public class EstudiosController {
                 if (estudioUsuario != null) {
                     for (String s : estudioUsuario) {
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+                if (elementsUsuario != null) {
+                    for (String s : elementsUsuario) {
+>>>>>>> main
                         if (s.equals("nombre")) {
                             nombre = Boolean.TRUE;
                         } else if (s.equals("apellidos")) {
@@ -376,11 +414,14 @@ public class EstudiosController {
                 estudioService.save(estudio.getIdEstudio().toString(), null, null, null, null, null, idEstudioUsuario);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> main
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
 =======
 >>>>>>> 71a343530470d070538feb24bdfa57a238b9d4dc
+=======
+>>>>>>> main
             }
             return "redirect:/analista/";
         }
