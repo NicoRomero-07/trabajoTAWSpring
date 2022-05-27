@@ -50,7 +50,7 @@ public class DatosEstudioProducto   {
     @Column(name = "PRECIO_ACTUAL")
     private Double precioActual;
     @JoinColumn(name = "ID", referencedColumnName = "ID_ESTUDIO", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = true)
     private Estudio estudio;
 
     public DatosEstudioProducto() {

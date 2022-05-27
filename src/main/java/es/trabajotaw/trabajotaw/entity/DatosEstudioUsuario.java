@@ -49,7 +49,7 @@ public class DatosEstudioUsuario   {
     @Column(name = "ASCENDENTE")
     private Boolean ascendente;
     @JoinColumn(name = "ID", referencedColumnName = "ID_ESTUDIO", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = true)
     private Estudio estudio;
 
     public DatosEstudioUsuario() {

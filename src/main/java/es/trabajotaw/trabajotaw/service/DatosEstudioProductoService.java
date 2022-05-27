@@ -8,6 +8,8 @@ import es.trabajotaw.trabajotaw.entity.Estudio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class DatosEstudioProductoService {
 
@@ -16,9 +18,9 @@ public class DatosEstudioProductoService {
     @Autowired
     private EstudioRepository estudioRepository;
 
-    public DatosEstudioProductoDTO getById(Integer idEstudio){
-        DatosEstudioProducto estudioProducto = estudioProductoRepository.getById(idEstudio);
-        return estudioProducto == null ? null : estudioProducto.toDTO();
+    public DatosEstudioProductoDTO findById(Integer idEstudio){
+        Optional<DatosEstudioProducto> estudioProducto = estudioProductoRepository.findById(idEstudio);
+        return estudioProducto.isPresent() ? estudioProducto.get().toDTO() : new DatosEstudioProductoDTO();
     }
 
     public void delete(Integer idEstudio){

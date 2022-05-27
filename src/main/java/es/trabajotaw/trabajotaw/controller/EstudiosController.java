@@ -18,11 +18,10 @@ public class EstudiosController {
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
-    private ProductoService productoService;
-    @Autowired
     private DatosEstudioProductoService estudioProductoService;
     @Autowired
     private DatosEstudioUsuarioService estudioUsuarioService;
+
 
     @GetMapping("analista")
     public String init(Model model, HttpSession session) {
@@ -43,10 +42,10 @@ public class EstudiosController {
     public String delete(Model model, @PathVariable String id, HttpSession session){
         EstudioDTO estudio = this.estudioService.getById(Integer.parseInt(id));
         if (estudio.getDatosEstudioProducto() != null) {
-            DatosEstudioProductoDTO estudioProducto = this.estudioProductoService.getById(Integer.parseInt(id));
+            DatosEstudioProductoDTO estudioProducto = this.estudioProductoService.findById(Integer.parseInt(id));
             this.estudioProductoService.delete(estudioProducto.getId());
         } else if (estudio.getDatosEstudioUsuario() != null) {
-            DatosEstudioUsuarioDTO estudioUsuario = this.estudioUsuarioService.getById(Integer.parseInt(id));
+            DatosEstudioUsuarioDTO estudioUsuario = this.estudioUsuarioService.findById(Integer.parseInt(id));
             this.estudioUsuarioService.delete(estudioUsuario.getId());
         }
         this.estudioService.remove(estudio.getIdEstudio());
@@ -106,6 +105,7 @@ public class EstudiosController {
         List<UsuarioDTO> listaUsuarios = this.usuarioService.getAnalistas();
         List<UsuarioDTO> listaAdministradores = this.usuarioService.getAdministradores();
         listaUsuarios.addAll(listaAdministradores);
+        model.addAttribute("estudio",new EstudioDTO());
         model.addAttribute("usuarios", listaUsuarios);
         return "estudio";
     }
@@ -113,13 +113,14 @@ public class EstudiosController {
     @PostMapping("analista/save")
     public String saveEstudio(Model model, HttpSession session,@ModelAttribute("estudio") EstudioDTO estudio,@RequestParam String element){
 
-        if (estudio == null) {    // Crear nuevo estudio
-            EstudioDTO estudioDTO = estudioService.save(estudio.getNombre(),
+        EstudioDTO estudioDTO;
+        if (estudio.getIdEstudio() == null) {    // Crear nuevo estudio
+            estudioDTO = estudioService.save(estudio.getNombre(),
                     estudio.getAnalista().toString(),estudio.getDescripcion(),element,null,null);
         } else {
-            estudioService.save(estudio.getIdEstudio().toString(),estudio.getNombre(),estudio.getAnalista().toString(),estudio.getDescripcion(),element,null,null);
+            estudioDTO = estudioService.save(estudio.getIdEstudio().toString(),estudio.getNombre(),estudio.getAnalista().toString(),estudio.getDescripcion(),element,null,null);
         }
-        return "redirect:/analista/estudio/save/datosEstudio/" + estudio.getIdEstudio();
+        return "redirect:/analista/estudio/save/datosEstudio/" + estudioDTO.getIdEstudio();
     }
 
     @GetMapping("analista/estudio/save/datosEstudio/{id}")
@@ -133,15 +134,12 @@ public class EstudiosController {
             DatosEstudioUsuarioDTO estudioUsuario = null;
 
             if(estudio.getProducto()){
-                estudioProducto = this.estudioProductoService.getById(Integer.parseInt(id));
+                estudioProducto = this.estudioProductoService.findById(Integer.parseInt(id));
             }else{
-                estudioUsuario = this.estudioUsuarioService.getById(Integer.parseInt(id));
+                estudioUsuario = this.estudioUsuarioService.findById(Integer.parseInt(id));
             }
-            if (estudioProducto != null) {
-                model.addAttribute("estudioProducto", estudioProducto);
-            } else if (estudioUsuario != null) {
-                model.addAttribute("estudioUsuario", estudioUsuario);
-            }
+            model.addAttribute("estudioProducto", estudioProducto);
+            model.addAttribute("estudioUsuario", estudioUsuario);
         }
         return "datosEstudio";
     }
@@ -160,29 +158,30 @@ public class EstudiosController {
 
             if (estudio.getProducto()) {
 
-                if (estudioProducto != null) {    // Crear nuevo estudio
+                if (estudioProducto.getId() == null && estudio.getProducto()) {    // Crear nuevo estudio
                     estudioProductoService.save(estudioProducto.getCategorias(),estudioProducto.getVendidos(),
                             estudioProducto.getPromocion(),estudioProducto.getPrecioSalida(),
                             estudioProducto.getPrecioActual(), idEstudio);
-                } else if (estudio.getProducto()) {                                                                // savear estudio
+                }else if(estudio.getProducto()){                                                                // save estudio
                     estudioProductoService.save(estudioProducto.getId().toString(),estudioProducto.getCategorias(),estudioProducto.getVendidos(),
                             estudioProducto.getPromocion(),estudioProducto.getPrecioSalida(),
                             estudioProducto.getPrecioActual(), idEstudio);
                 }
 
                 estudioService.save(estudio.getIdEstudio().toString(), null, null, null,
-                        null, estudioProducto.getId().toString(), null);
+                        null, estudio.getIdEstudio().toString(), null);
 
             } else {
 
-                if (estudioUsuario != null) {    // Crear nuevo estudio
+                if (estudioUsuario.getId() == null && (estudio.getComprador() || estudio.getVendedor())) {    // Crear nuevo estudio
                     estudioUsuarioService.save(estudioUsuario.getNombre(), estudioUsuario.getApellidos(),
                             estudioUsuario.getIngresos(), estudioUsuario.getAscendente(), idEstudio);
-                } else if (estudio.getVendedor() || estudio.getComprador()) {                                                                // save estudio
+                } else if (estudio.getVendedor() || estudio.getComprador()) {   // save estudio
                     estudioUsuarioService.save(estudioUsuario.getId().toString(),estudioUsuario.getNombre(),
                             estudioUsuario.getApellidos(), estudioUsuario.getIngresos(), estudioUsuario.getAscendente(), idEstudio);
                 }
-                estudioService.save(estudio.getIdEstudio().toString(), null, null, null, null, null, estudioUsuario.getId().toString());
+                estudioService.save(estudio.getIdEstudio().toString(), null, null, null,
+                        null, null, estudio.getIdEstudio().toString());
             }
             return "redirect:/analista/";
         }

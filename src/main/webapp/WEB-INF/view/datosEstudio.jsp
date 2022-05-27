@@ -34,7 +34,7 @@
                 Ordenar por:<br>
                 <form:checkbox  path="categorias" value="categorias" />Categorias<br>
                 <form:checkbox path="vendidos" value="vendidos" />Vendidos<br>
-                <form:checkbox path="enPromocion" value="enPromocion" />En promoción<br><br>
+                <form:checkbox path="promocion" value="promocion" />En promoción<br><br>
                 Precio de Salida: &nbsp;&nbsp;
                 <form:input path="precioSalida" size="20" /><br><br>
                 Precio Actual: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
