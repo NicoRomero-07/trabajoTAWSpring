@@ -5,8 +5,8 @@
 --%>
 
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="es.trabajotaw.trabajotaw.dto.ProductoDTO"%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.entity.Producto" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,7 @@
     </head>
     <body>
         <jsp:include page="cabecera.jsp" /> 
-        <a href="AdministradorServlet">Volver</a>
+        <a href="/administrador/vistaAdministrador">Volver</a>
         <h1>Productos</h1>
         
         <form method="post" action="ProductosServlet">
@@ -41,10 +41,10 @@
             </tr>
             
                 <%
-                List<ProductoDTO> productos = (List)request.getAttribute("productos");
+                List<Producto> productos = (List)request.getAttribute("productos");
                 SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yy");
 
-                for (ProductoDTO prod: productos) {
+                for (Producto prod: productos) {
                 %>
             <tr>
                 <td><%= prod.getIdProducto()%></td>
@@ -57,8 +57,8 @@
                 <td><%= prod.getEnPromocion()? "Si":"No" %></td>
                 <td><%= prod.getPublicador()==null ? "":prod.getPublicador().getNombreUsuario() %></td>
                 <td><%= prod.getComprador()==null? "":prod.getComprador().getNombreUsuario() %></td>
-                <td><a href="ProductoBorrarServlet?id=<%= prod.getIdProducto() %>">Borrar</a></td> 
-                <td><a href="ProductoNuevoEditarServlet?id=<%= prod.getIdProducto() %>">Editar</a></td>  
+                <td><a href="/administrador/borrarProducto/<%= prod.getIdProducto() %>">Borrar</a></td>
+                <td><a href="/administrador/administrarProducto/<%= prod.getIdProducto() %>">Editar</a></td>
             </tr>
                 <%
                   }  

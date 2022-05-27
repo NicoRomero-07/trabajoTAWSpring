@@ -1,4 +1,6 @@
-<%-- 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
+<%--
     Document   : estudio
     Created on : 17-abr-2022, 20:57:42
     Author     : Alfonso 100%
@@ -6,6 +8,7 @@
 
 <%@page import="es.trabajotaw.trabajotaw.dto.EstudioDTO"%>
 <%@page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO"%>
+<%@page import="es.trabajotaw.trabajotaw.dto.EstudioDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,54 +17,29 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title> Estudio </title>
     </head>
-    <%
-        List<UsuarioDTO> listaUsuarios = (List)request.getAttribute("usuarios");
-        EstudioDTO estudio = (EstudioDTO) request.getAttribute("estudio");
-    %> 
     <body>
-        <h1>Datos del estudio</h1>
-        <form method="POST" action="EstudioGuardarServlet">
-            <input type="hidden" name="id" value="<%= estudio == null ? "" : estudio.getIdEstudio()%>" />
-            
+        <%
+            EstudioDTO estudio = (EstudioDTO) request.getAttribute("estudio");
+        %>
+    <h1>Datos del estudio</h1>
+        <form:form method="POST" action="/analista/save" modelAttribute="estudio">
+            <form:hidden  path="idEstudio" />
             Nombre: 
-            <input type="text" size="20" name="nombre" value="<%= estudio == null ? "" : estudio.getNombre() %>" required /> <br><br>
+            <form:input size="20"  maxlength="20" path="nombre" required="true" /> <br><br>
             
             Analista: 
-            <select name="analista">
-                <%
-                    if(listaUsuarios != null){
-                        for (UsuarioDTO user : listaUsuarios) {
-                            String selected = "";
-
-                                if (estudio != null && estudio.getAnalista().getIdUsuario().equals(user.getIdUsuario())) {
-                                    selected = "selected";
-                                }
-                    %>
-                    <option <%= selected%> value="<%= user.getIdUsuario() %>" required><%= user.getNombre() %></option>
-
-                    <%
-                        }
-                    }
-                %>          
-            </select><br><br>
+            <form:select path="analista">
+                <form:options items="${usuarios}" itemLabel="nombreUsuario" itemValue="idUsuario"/>
+            </form:select><br><br>
             
             Descripcion:
-            <br><textarea name="descripcion" cols="100" rows="5" maxlength="100"><%= estudio == null || estudio.getDescripcion() == null ? "" : estudio.getDescripcion() %></textarea><br><br>
-            
+            <br><form:textarea cols="100" rows="5" maxlength="100" path="descripcion"></form:textarea><br><br>
             Elementos a estudiar:<br>
-            <input type="radio" name="element" value="comprador" <% 
-            String check = "";
-            if(estudio == null){
-                check = "checked";
-            }else if(estudio.getComprador() == Boolean.TRUE){
-                check = "checked";
-            }
-            %>        
-            <%= check %>/>Comprador<br>
+            <input type="radio" name="element" value="comprador" <%= estudio == null || estudio.getComprador() == Boolean.FALSE ? "" : "checked" %>/>Comprador<br>
             <input type="radio" name="element" value="vendedor"  <%= estudio == null || estudio.getVendedor() == Boolean.FALSE ? "" : "checked" %>/>Vendedor<br>
             <input type="radio" name="element" value="producto" <%= estudio == null || estudio.getProducto() == Boolean.FALSE ? "" : "checked" %> />Producto<br><br>
-            
-            <button type="submit" value="Enviar"><a href="DatosEstudioNuevoEditarServlet?id=<%= estudio == null || estudio.getIdEstudio() == null ? "" : estudio.getIdEstudio() %>">Editar</a></button>
-        </form>
+
+            <form:button>Enviar</form:button>
+        </form:form>
     </body>
 </html>

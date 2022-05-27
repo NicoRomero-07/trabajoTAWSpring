@@ -165,7 +165,7 @@ public class Estudio   {
     public EstudioDTO toDTO () {
         EstudioDTO dto = new EstudioDTO();
 
-        dto.setAnalista(analista.toDTO());
+        dto.setAnalista(analista.getIdUsuario());
         dto.setIdEstudio(idEstudio);
         dto.setNombre(nombre);
         dto.setDescripcion(descripcion);
@@ -173,16 +173,12 @@ public class Estudio   {
         dto.setVendedor(vendedor);
         dto.setProducto(producto);
         if(datosEstudioUsuario != null){
-            dto.setDatosEstudioUsuario(datosEstudioUsuario.toDTO());
+            dto.setDatosEstudioUsuario(datosEstudioUsuario.getId());
         }
         if(datosEstudioProducto != null){
-            dto.setDatosEstudioProducto(datosEstudioProducto.toDTO());
+            dto.setDatosEstudioProducto(datosEstudioProducto.getId());
         }
 
         return dto;
     }
-
-
-    
-    
 }

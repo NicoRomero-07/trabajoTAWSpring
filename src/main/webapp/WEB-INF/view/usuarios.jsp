@@ -4,7 +4,6 @@
     Author     : nicor
 --%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO"%>
 <%@page import="es.trabajotaw.trabajotaw.entity.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,7 +19,7 @@
     <body>
         <jsp:include page="cabecera.jsp" /> 
         
-        <a href="AdministradorServlet">Volver</a>
+        <a href="/administrador/vistaAdministrador">Volver</a>
         <h1>Usuarios</h1>
     <form method="post" action="UsuariosServlet">
             Nombre de Usuario: <input type="text" name="filtroNombre" value="" />
@@ -42,8 +41,8 @@
             <th></th>
         </tr>
     <%
-            List<UsuarioDTO> usuarios = (List)request.getAttribute("usuarios");
-                for (UsuarioDTO user: usuarios) {
+            List<Usuario> usuarios = (List)request.getAttribute("usuarios");
+                for (Usuario user: usuarios) {
     %> 
     
     <tr>
@@ -57,8 +56,8 @@
         <td><%= format.format(user.getFechaNacimiento()) %></td>
         <td><%= user.getSexo().charValue() %></td>
         <td><%= user.getTipoUsuario().getTipo() %></td>
-        <td><a href="UsuarioBorrarServlet?id=<%= user.getIdUsuario() %>">Borrar</a></td> 
-        <td><a href="UsuarioNuevoEditarServlet?id=<%= user.getIdUsuario() %>">Editar</a></td>  
+        <td><a href="/administrador/borrarUsuario/<%= user.getIdUsuario() %>">Borrar</a></td>
+        <td><a href="/administrador/administrarUsuario/<%= user.getIdUsuario() %>">Editar</a></td>
         
     </tr>
     <%

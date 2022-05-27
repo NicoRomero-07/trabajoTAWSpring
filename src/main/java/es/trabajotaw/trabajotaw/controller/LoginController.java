@@ -1,7 +1,7 @@
 package es.trabajotaw.trabajotaw.controller;
 
-import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
-import es.trabajotaw.trabajotaw.service.UsuarioService;
+import es.trabajotaw.trabajotaw.dao.UsuarioRepository;
+import es.trabajotaw.trabajotaw.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,17 +14,8 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
-
-    private UsuarioService us;
-
-    public UsuarioService getUs() {
-        return us;
-    }
-
     @Autowired
-    public void setUs(UsuarioService us) {
-        this.us = us;
-    }
+    private UsuarioRepository usuarioRepository;
 
     @GetMapping("/")
     public String doInit () {
@@ -35,7 +26,7 @@ public class LoginController {
     public String doAutentica (Model model,
                                @RequestParam("nombreusuario") String usuario, @RequestParam("contrasenya") String clave, HttpSession session) {
 
-        UsuarioDTO user = this.us.comprobarUsuario(usuario, clave);
+        Usuario user = this.usuarioRepository.findByNombreUsuarioAndContrasenya(usuario, clave);
         String goTo;
 
         if (user == null) {
@@ -46,11 +37,11 @@ public class LoginController {
             session.setAttribute("usuario", user);
 
             if(user.getTipoUsuario().getTipo().equalsIgnoreCase("Administrador")){
-                goTo = "redirect:/AdministradorController/";
+                goTo = "redirect:/administrador/vistaAdministrador";
             }else if (user.getTipoUsuario().getTipo().equalsIgnoreCase("Analista")){
-                goTo = "redirect:/EstudiosController/";
+                goTo = "redirect:/analista/";
             }else if (user.getTipoUsuario().getTipo().equalsIgnoreCase("Marketing")){
-                goTo = "redirect:/ListaCompradorController/";
+                goTo = "redirect:/marketing/";
             }else if(user.getTipoUsuario().getTipo().equalsIgnoreCase("Comprador")){
                 goTo = "redirect:/CompradorPrincipalController/";
             }else if(user.getTipoUsuario().getTipo().equalsIgnoreCase("Vendedor")){

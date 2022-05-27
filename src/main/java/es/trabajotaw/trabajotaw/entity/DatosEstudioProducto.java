@@ -157,7 +157,7 @@ public class DatosEstudioProducto   {
         dto.setPromocion(promocion);
         dto.setPrecioSalida(precioSalida);
         dto.setPrecioActual(precioActual);
-        dto.setEstudio(estudio.toDTO());
+        dto.setEstudio(estudio);
 
         return dto;
     }

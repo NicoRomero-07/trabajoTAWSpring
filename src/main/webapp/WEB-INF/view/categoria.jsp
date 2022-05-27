@@ -4,7 +4,6 @@
     Author     : nicor
 --%>
 
-<%@page import="es.trabajotaw.trabajotaw.dto.CategoriaDTO"%>
 <%@page import="es.trabajotaw.trabajotaw.entity.Categoria"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,11 +13,11 @@
         <title>JSP Page</title>
     </head>
     <% 
-        CategoriaDTO categoria = (CategoriaDTO)request.getAttribute("categoria");
+        Categoria categoria = (Categoria)request.getAttribute("categoria");
     %> 
     <body>
         <jsp:include page="cabecera.jsp" /> 
-        <a href="CategoriasServlet">Volver</a>
+        <a href="/administrador/administrarCategorias">Volver</a>
         <h1>Datos del usuario</h1>
         <form method="POST" action="CategoriaGuardarServlet">
             <input type="hidden" name="id" value="<%= categoria==null? "": categoria.getIdCategoria() %>" />

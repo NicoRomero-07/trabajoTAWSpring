@@ -14,17 +14,10 @@ package es.trabajotaw.trabajotaw.dto;
 public class EstudioDTO {
     private Integer idEstudio;
     private String nombre;
-    private UsuarioDTO analista;
+    private Integer analista;
     private String descripcion;
     private Boolean comprador;
     private Boolean vendedor;
-    private Boolean producto;
-    private DatosEstudioUsuarioDTO datosEstudioUsuario;
-    private DatosEstudioProductoDTO datosEstudioProducto;
-
-    public EstudioDTO() {
-    }
-
 
     public Integer getIdEstudio() {
         return idEstudio;
@@ -42,11 +35,11 @@ public class EstudioDTO {
         this.nombre = nombre;
     }
 
-    public UsuarioDTO getAnalista() {
+    public Integer getAnalista() {
         return analista;
     }
 
-    public void setAnalista(UsuarioDTO analista) {
+    public void setAnalista(Integer analista) {
         this.analista = analista;
     }
 
@@ -65,7 +58,7 @@ public class EstudioDTO {
     public void setComprador(Boolean comprador) {
         this.comprador = comprador;
     }
-    
+
     public Boolean getVendedor() {
         return vendedor;
     }
@@ -73,7 +66,7 @@ public class EstudioDTO {
     public void setVendedor(Boolean vendedor) {
         this.vendedor = vendedor;
     }
-    
+
     public Boolean getProducto() {
         return producto;
     }
@@ -81,20 +74,28 @@ public class EstudioDTO {
     public void setProducto(Boolean producto) {
         this.producto = producto;
     }
-    
-    public DatosEstudioUsuarioDTO getDatosEstudioUsuario() {
+
+    public Integer getDatosEstudioUsuario() {
         return datosEstudioUsuario;
     }
 
-    public void setDatosEstudioUsuario(DatosEstudioUsuarioDTO datosEstudioUsuario) {
+    public void setDatosEstudioUsuario(Integer datosEstudioUsuario) {
         this.datosEstudioUsuario = datosEstudioUsuario;
     }
 
-    public DatosEstudioProductoDTO getDatosEstudioProducto() {
+    public Integer getDatosEstudioProducto() {
         return datosEstudioProducto;
     }
 
-    public void setDatosEstudioProducto(DatosEstudioProductoDTO datosEstudioProducto) {
+    public void setDatosEstudioProducto(Integer datosEstudioProducto) {
         this.datosEstudioProducto = datosEstudioProducto;
     }
+
+    private Boolean producto;
+    private Integer datosEstudioUsuario;
+    private Integer datosEstudioProducto;
+
+    public EstudioDTO() {
+    }
+
 }
