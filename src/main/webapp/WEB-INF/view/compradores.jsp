@@ -3,14 +3,14 @@
     Created on : 20-abr-2022, 15:18:27
     Author     : Nicolás Zhao (100%)
 --%>
-<%@page import="es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO"%>
-<%@page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%--
 <%@page import="ListaUsuario"%>
 <%@page import="Usuario"%>
 --%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.entity.ListaUsuario" %>
+<%@ page import="es.trabajotaw.trabajotaw.entity.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -36,11 +36,10 @@
         </tr>
     <%
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");    
-        List<UsuarioDTO> compradores = (List)request.getAttribute("compradores");
-        ListaUsuarioDTO lista = (ListaUsuarioDTO) request.getAttribute("lista");
-                for (UsuarioDTO user: compradores) {
-    %> 
-    
+        List<Usuario> compradores = (List)request.getAttribute("compradores");
+        ListaUsuario lista = (ListaUsuario) request.getAttribute("lista");
+                for (Usuario user: compradores) {
+    %>
     <tr>
         <td><%= user.getNombreUsuario() %></td>
         <td><%= user.getContrasenya() %></td>
@@ -51,7 +50,7 @@
         <td><%= formatter.format(user.getFechaNacimiento()) %></td>
         <td><%= user.getSexo().charValue() %></td>
         <td><%= user.getTipoUsuario().getTipo() %></td>
-        <td><a href="CompradorVerMensajeServlet?id=<%= user.getIdUsuario() %>&idlista=<%=lista.getIdListaUsuario() %>">Ver bandeja de mesajes</a></td> 
+        <td><a href="<%= user.getIdUsuario()%>/messages">Ver bandeja de mesajes</a></td>
         
     </tr>
     <%
@@ -59,6 +58,6 @@
     %>
     </table>
     <br/>
-    <a href="ListaCompradorServlet"><input type="button" value="Volver"/></a>
+    <a href="/marketing/return"><input type="button" value="Volver"/></a>
     </body>
 </html>

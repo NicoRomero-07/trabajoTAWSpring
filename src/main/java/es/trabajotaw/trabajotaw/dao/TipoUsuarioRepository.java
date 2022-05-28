@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface TipoUsuarioRepository extends JpaRepository<TipoUsuario, Integer> {
-
+    TipoUsuario findByTipo(String tipo);
 }

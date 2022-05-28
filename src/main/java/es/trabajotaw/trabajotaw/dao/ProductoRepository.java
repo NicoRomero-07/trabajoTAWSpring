@@ -36,4 +36,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
             + " p.idProducto = lp.producto1.idProducto where lp.usuario1.idUsuario = :idUsuario and"
             + " upper(lp.producto1.nombre) like upper(:filtro)")
     List<Producto> filtrarProductosFavoritos(@Param("idUsuario") Integer idUsuario, @Param("filtro") String filtro);
+    List<Producto> findByEnPromocion(boolean enPromocion);
+
 }

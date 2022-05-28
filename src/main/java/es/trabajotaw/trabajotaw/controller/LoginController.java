@@ -53,5 +53,9 @@ public class LoginController {
         }
         return goTo;
     }
-
+    @GetMapping("/salir")
+    public String doExit (HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
 }

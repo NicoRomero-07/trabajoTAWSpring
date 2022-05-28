@@ -1,5 +1,6 @@
 package es.trabajotaw.trabajotaw.dao;
 
+import es.trabajotaw.trabajotaw.entity.TipoUsuario;
 import es.trabajotaw.trabajotaw.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,4 +24,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     List<Usuario> getAdministradores();
 
     List<Usuario> findByNombreUsuario(String comprador);
+
+    List<Usuario> findByTipoUsuario(TipoUsuario tipo);
+
 }
