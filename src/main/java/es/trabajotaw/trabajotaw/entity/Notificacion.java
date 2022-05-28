@@ -7,6 +7,7 @@ package es.trabajotaw.trabajotaw.entity;
 import es.trabajotaw.trabajotaw.dto.NotificacionDTO;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class Notificacion   {
     @Basic(optional = false)
      
     @Column(name = "FECHA_ENVIO")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEnvio;
     @ManyToMany(mappedBy = "notificacionList")
     private List<Usuario> usuarioList;

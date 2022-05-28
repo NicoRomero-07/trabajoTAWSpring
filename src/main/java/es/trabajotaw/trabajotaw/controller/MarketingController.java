@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -103,15 +104,8 @@ public class MarketingController {
             contenido.append("Precio de salida: ").append(promocion.getPrecioSalida()).append("€<br/><br/>");
         }
         Notificacion notificacionCreada = new Notificacion();
-        try{
-            Date now = new Date();
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy hh:mm:ss");
-            String fechaStr = formatter.format(now);
-            Date fecha = formatter.parse(fechaStr);
-            notificacionCreada.setFechaEnvio(fecha);
-        }catch(ParseException e){
-
-        }
+        Date now = new Date();
+        notificacionCreada.setFechaEnvio(now);
         Usuario notificante = (Usuario)session.getAttribute("usuario");
         notificacionCreada.setNotificante(notificante);
         notificacionCreada.setContenido(contenido.toString());

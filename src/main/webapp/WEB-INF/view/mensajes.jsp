@@ -25,7 +25,7 @@
         List<Notificacion> notificaciones = (List)request.getAttribute("notificaciones");
         Usuario comprador = (Usuario)request.getAttribute("comprador");
         ListaUsuario lista = (ListaUsuario) request.getAttribute("lista");
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
     %>
     <body>
         <jsp:include page="cabeceraMarketing.jsp" /> 
