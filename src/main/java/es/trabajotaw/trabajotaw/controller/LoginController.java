@@ -29,7 +29,6 @@ public class LoginController {
         Usuario user = this.usuarioRepository.findByNombreUsuarioAndContrasenya(usuario, clave);
         String goTo;
 
-
         if (user == null) {
             String strError = "El usuario o la clave son incorrectos";
             model.addAttribute("error", strError);
@@ -44,7 +43,7 @@ public class LoginController {
             }else if (user.getTipoUsuario().getTipo().equalsIgnoreCase("Marketing")){
                 goTo = "redirect:/marketing/";
             }else if(user.getTipoUsuario().getTipo().equalsIgnoreCase("Comprador")){
-                goTo = "redirect:/CompradorPrincipalController/";
+                goTo = "redirect:/comprador/vistaComprador";
             }else if(user.getTipoUsuario().getTipo().equalsIgnoreCase("Vendedor")){
                 goTo = "redirect:/ListaVendedorController/";
             }else{

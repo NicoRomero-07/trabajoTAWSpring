@@ -5,6 +5,8 @@
  */
 package es.trabajotaw.trabajotaw.entity;
 
+import es.trabajotaw.trabajotaw.dto.EstudioDTO;
+
 import javax.persistence.*;
 
 /**
@@ -160,4 +162,23 @@ public class Estudio   {
         return "es.trabajotaw.entity.Estudio[ idEstudio=" + idEstudio + " ]";
     }
 
+    public EstudioDTO toDTO () {
+        EstudioDTO dto = new EstudioDTO();
+
+        dto.setAnalista(analista.getIdUsuario());
+        dto.setIdEstudio(idEstudio);
+        dto.setNombre(nombre);
+        dto.setDescripcion(descripcion);
+        dto.setComprador(comprador);
+        dto.setVendedor(vendedor);
+        dto.setProducto(producto);
+        if(datosEstudioUsuario != null){
+            dto.setDatosEstudioUsuario(datosEstudioUsuario.getId());
+        }
+        if(datosEstudioProducto != null){
+            dto.setDatosEstudioProducto(datosEstudioProducto.getId());
+        }
+
+        return dto;
+    }
 }

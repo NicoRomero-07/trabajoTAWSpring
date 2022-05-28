@@ -6,6 +6,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="es.trabajotaw.trabajotaw.entity.Usuario"%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -56,8 +57,8 @@
         <td><%= format.format(user.getFechaNacimiento()) %></td>
         <td><%= user.getSexo().charValue() %></td>
         <td><%= user.getTipoUsuario().getTipo() %></td>
-        <td><a href="UsuarioBorrarServlet?id=<%= user.getIdUsuario() %>">Borrar</a></td> 
-        <td><a href="/administrador/administrarUsuario?id=<%= user.getIdUsuario() %>">Editar</a></td>
+        <td><a href="/administrador/borrarUsuario/<%= user.getIdUsuario() %>">Borrar</a></td>
+        <td><a href="/administrador/administrarUsuario/<%= user.getIdUsuario() %>">Editar</a></td>
         
     </tr>
     <%

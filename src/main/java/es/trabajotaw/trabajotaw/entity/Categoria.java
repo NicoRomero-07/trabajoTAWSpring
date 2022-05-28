@@ -5,6 +5,8 @@
  */
 package es.trabajotaw.trabajotaw.entity;
 
+import es.trabajotaw.trabajotaw.dto.CategoriaDTO;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -112,6 +114,13 @@ public class Categoria   {
         return "es.trabajotaw.entity.Categoria[ idCategoria=" + idCategoria + " ]";
     }
 
-   
+    public CategoriaDTO toDTO() {
+        CategoriaDTO categoriaDTO = new CategoriaDTO();
+
+        categoriaDTO.setIdCategoria(idCategoria);
+        categoriaDTO.setNombre(nombre);
+
+        return categoriaDTO;
+    }
     
 }

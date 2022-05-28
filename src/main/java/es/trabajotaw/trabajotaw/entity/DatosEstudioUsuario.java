@@ -5,6 +5,9 @@
  */
 package es.trabajotaw.trabajotaw.entity;
 
+
+import es.trabajotaw.trabajotaw.dto.DatosEstudioUsuarioDTO;
+
 import javax.persistence.*;
 
 /**
@@ -46,7 +49,7 @@ public class DatosEstudioUsuario   {
     @Column(name = "ASCENDENTE")
     private Boolean ascendente;
     @JoinColumn(name = "ID", referencedColumnName = "ID_ESTUDIO", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = true)
     private Estudio estudio;
 
     public DatosEstudioUsuario() {
@@ -137,6 +140,19 @@ public class DatosEstudioUsuario   {
         return "es.trabajotaw.entity.DatosEstudioUsuario[ id=" + id + " ]";
     }
 
-    
-    
+    public DatosEstudioUsuarioDTO toDTO () {
+        DatosEstudioUsuarioDTO dto = new DatosEstudioUsuarioDTO();
+
+        dto.setId(id);
+        dto.setNombre(nombre);
+        dto.setApellidos(apellidos);
+        dto.setIngresos(ingresos);
+        dto.setAscendente(ascendente);
+        dto.setEstudio(estudio);
+
+        return dto;
+    }
+
+
+
 }

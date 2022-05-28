@@ -34,7 +34,7 @@
                 List<ProductoDTO> pujas = (List) request.getAttribute("pujas");
                 List<ProductoDTO> favoritos = (List) request.getAttribute("favoritos");
                 UsuarioDTO usuario = (UsuarioDTO) request.getAttribute("usuario");
-                
+
                 Set<ProductoDTO> productos = new HashSet();
                 productos.addAll(pujas);
                 productos.addAll(favoritos);
@@ -78,6 +78,6 @@
             
             </tr>
         </table>
-            <a href="CompradorPrincipalServlet">Volver</a>
+            <a href="/comprador/vistaComprador">Volver</a>
     </body>
 </html>

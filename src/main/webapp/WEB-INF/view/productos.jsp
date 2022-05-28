@@ -7,6 +7,10 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@ page import="es.trabajotaw.trabajotaw.entity.Producto" %>
+<<<<<<< HEAD
+<%@ page import="es.trabajotaw.trabajotaw.dto.ProductoDTO" %>
+=======
+>>>>>>> alfon
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -57,8 +61,8 @@
                 <td><%= prod.getEnPromocion()? "Si":"No" %></td>
                 <td><%= prod.getPublicador()==null ? "":prod.getPublicador().getNombreUsuario() %></td>
                 <td><%= prod.getComprador()==null? "":prod.getComprador().getNombreUsuario() %></td>
-                <td><a href="ProductoBorrarServlet?id=<%= prod.getIdProducto() %>">Borrar</a></td> 
-                <td><a href="/administrador/administrarProducto?id=<%= prod.getIdProducto() %>">Editar</a></td>
+                <td><a href="/administrador/borrarProducto/<%= prod.getIdProducto() %>">Borrar</a></td>
+                <td><a href="/administrador/administrarProducto/<%= prod.getIdProducto() %>">Editar</a></td>
             </tr>
                 <%
                   }  

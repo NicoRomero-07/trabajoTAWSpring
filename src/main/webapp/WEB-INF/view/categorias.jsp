@@ -6,6 +6,7 @@
 
 <%@page import="es.trabajotaw.trabajotaw.entity.Categoria"%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.dto.CategoriaDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,14 +38,14 @@
         <td><%= categoria.getIdCategoria() %></td>
         <td><%= categoria.getNombre() %></td>
         
-        <td><a href="CategoriaBorrarServlet?id=<%= categoria.getIdCategoria() %>">Borrar</a></td> 
-        <td><a href="/administrador/administrarCategoria?id=<%= categoria.getIdCategoria() %>">Editar</a></td>
+        <td><a href="/administrador/borrarCategoria/<%= categoria.getIdCategoria() %>">Borrar</a></td>
+        <td><a href="/administrador/administrarCategoria/<%= categoria.getIdCategoria() %>">Editar</a></td>
         
     </tr>
     <%
                 }
     %>
     </table>
-    <a href="CategoriaNuevoEditarServlet">Crear nueva categoria ... </a>
+    <a href="/administrador/administrarCategoria/>">Crear nueva categoria ... </a>
     </body>
 </html>
