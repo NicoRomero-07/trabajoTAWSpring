@@ -4,9 +4,6 @@
     Author     : Nicolás Zhao (100%)
 --%>
 
-<%@page import="es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO"%>
-<%@page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO"%>
-<%@page import="es.trabajotaw.trabajotaw.dto.NotificacionDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%-- 
 <%@page import="ListaUsuario"%>
@@ -14,6 +11,9 @@
 <%@page import="Notificacion"%>
 --%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.entity.Notificacion" %>
+<%@ page import="es.trabajotaw.trabajotaw.entity.ListaUsuario" %>
+<%@ page import="es.trabajotaw.trabajotaw.entity.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,9 +22,9 @@
         <title>Bandeja de mensajes</title>
     </head>
     <%
-        List<NotificacionDTO> notificaciones = (List)request.getAttribute("notificaciones");
-        UsuarioDTO comprador = (UsuarioDTO)request.getAttribute("comprador");
-        ListaUsuarioDTO lista = (ListaUsuarioDTO) request.getAttribute("lista");
+        List<Notificacion> notificaciones = (List)request.getAttribute("notificaciones");
+        Usuario comprador = (Usuario)request.getAttribute("comprador");
+        ListaUsuario lista = (ListaUsuario) request.getAttribute("lista");
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy hh:mm:ss");
     %>
     <body>
@@ -41,12 +41,12 @@
             <th></th>                                                     
         </tr>
         <%
-                for (NotificacionDTO notificacion : notificaciones) {
+                for (Notificacion notificacion : notificaciones) {
         %> 
          <tr>
              <td><%= formatter.format(notificacion.getFechaEnvio())%></td>
              <td><%= notificacion.getContenido() %></td>
-             <td><a href="MensajeBorrarServlet?id=<%= notificacion.getIdNotificacion()%>&idComprador=<%= comprador.getIdUsuario() %>&idlista=<%=lista.getIdListaUsuario() %>">Borrar</a></td> 
+             <td><a href="/marketing/<%=lista.getIdListaUsuario()%>/<%=comprador.getIdUsuario()%>/<%=notificacion.getIdNotificacion()%>/deleteMessage">Borrar</a></td>
          </tr>
         <%
              }
@@ -60,6 +60,6 @@
             }
         %>
         <br/>
-        <a href="CompradorServlet?id=<%=lista.getIdListaUsuario()%>"><input type="button" value="Volver"/></a>
+        <a href="/marketing/<%=lista.getIdListaUsuario()%>/purcharsers"><input type="button" value="Volver"/></a>
     </body>
 </html>

@@ -25,7 +25,7 @@
         <%
             if (listas!= null && !listas.isEmpty()){
         %>
-        <form method="POST" action="/filtro">
+        <form method="POST" action="/marketing/filtro">
             Nombre: <input type="text" name="filtroNombre" value="" />
             <input type="submit" value="Filtrar" />
         </form>
@@ -45,10 +45,10 @@
             <tr>
                 <td><%= lista.getIdListaUsuario() %></td>
                 <td><%= lista.getNombre()%></td>        
-                <td><a href="edit/<%= lista.getIdListaUsuario() %>">Editar</a></td>
-                <td><a href="ListaCompradorBorrarServlet?id=<%= lista.getIdListaUsuario() %>">Borrar</a></td>       
-                <td><a href="ListaCompradorEnviarNotificacionServlet?id=<%= lista.getIdListaUsuario() %>">Notificar promociones</a></td>
-                <td><a href="CompradorServlet?id=<%= lista.getIdListaUsuario() %>">Ver compradores</a></td>
+                <td><a href="<%= lista.getIdListaUsuario() %>/edit">Editar</a></td>
+                <td><a href="<%= lista.getIdListaUsuario() %>/delete">Borrar</a></td>
+                <td><a href="<%= lista.getIdListaUsuario() %>/send">Notificar promociones</a></td>
+                <td><a href="<%= lista.getIdListaUsuario() %>/purcharsers">Ver compradores</a></td>
             </tr>
             <%
                 }
@@ -62,6 +62,6 @@
             }
         %>
         <br>
-        <a href="nuevo">Crear nueva lista ...</a>
+        <a href="0/edit">Crear nueva lista ...</a>
     </body>
 </html>
