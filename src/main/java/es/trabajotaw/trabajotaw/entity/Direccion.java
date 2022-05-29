@@ -71,6 +71,8 @@ public class Direccion   {
         this.codigoPostal = codigoPostal;
     }
 
+
+
     public Integer getIdDireccion() {
         return idDireccion;
     }
@@ -173,6 +175,15 @@ public class Direccion   {
         dto.setTipo(tipo);
 
         return dto;
+    }
+    public Direccion(DireccionDTO dto) {
+        this.setCalle(dto.getCalle());
+        this.setCodigoPostal(dto.getCodigoPostal());
+        this.setIdDireccion(dto.getIdDireccion());
+        this.setNumero(dto.getNumero());
+        this.setPlanta(dto.getPlanta());
+        this.setPuerta(dto.getPuerta());
+        this.setTipo(dto.getTipo());
     }
     
 }

@@ -105,5 +105,9 @@ public class ListaUsuario   {
 
         return dto;
     }
-    
+
+    public ListaUsuario(ListaUsuarioDTO dto){
+        this.setIdListaUsuario(dto.getIdListaUsuario());
+        this.setNombre(dto.getNombre());
+    }
 }

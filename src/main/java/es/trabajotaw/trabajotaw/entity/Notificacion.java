@@ -129,4 +129,11 @@ public class Notificacion   {
         dto.setNotificante(notificante.toDTO());
         return dto;
     }
+
+    public Notificacion(NotificacionDTO dto){
+        this.setIdNotificacion(dto.getIdNotificacion());
+        this.setNotificante(new Usuario(dto.getNotificante()));
+        this.setContenido(dto.getContenido());
+        this.setFechaEnvio(dto.getFechaEnvio());
+    }
 }

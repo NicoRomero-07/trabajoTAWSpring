@@ -287,4 +287,18 @@ public class Usuario {
         return dto;
     }
 
+    public Usuario (UsuarioDTO dto){
+        this.setIdUsuario(dto.getIdUsuario());
+        this.setNombreUsuario(dto.getNombreUsuario());
+        this.setContrasenya(dto.getContrasenya());
+        this.setNombre(dto.getNombre());
+        this.setPrimerApellido(dto.getPrimerApellido());
+        this.setSegundoApellido(dto.getSegundoApellido());
+        this.setEmail(dto.getEmail());
+        this.setDireccion(new Direccion(dto.getDireccion()));
+        this.setSexo(dto.getSexo());
+        this.setTipoUsuario(new TipoUsuario(dto.getTipoUsuario()));
+        this.setFechaNacimiento(dto.getFechaNacimiento());
+    }
+
 }
