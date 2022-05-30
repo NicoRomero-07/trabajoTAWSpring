@@ -70,6 +70,6 @@
                 %>
             </tr>
         </table>
-        <br><a href="ProductoNuevoEditarServlet?usuario=<%=idusuario%>"><input type="submit" value="Nuevo Producto"/></a>
+        <br><a href="/vendedor/publicarProducto"><input type="submit" value="Nuevo Producto"/></a>
     </body>
 </html>

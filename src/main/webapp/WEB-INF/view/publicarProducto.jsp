@@ -8,7 +8,10 @@
 
 <%@page import="es.trabajotaw.trabajotaw.dto.ProductoDTO"%>
 <%@page import="es.trabajotaw.trabajotaw.entity.Categoria"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.dto.CategoriaDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,37 +21,29 @@
     </head>
     <body>
         <h1>Producto</h1>
-        <a href="ListaVendedorServlet">Volver</a>
+        <a href="/vendedor/listaProductos">Volver</a>
+        <spring:url value="/vendedor/guardarProducto"/>
         <%
             ProductoDTO producto = (ProductoDTO) request.getAttribute("producto");
         %>
-        <form method="POST" action="ProductoGuardarServlet<%=producto==null? "": "?id=" + producto.getIdProducto()%>">
-            Nombre del Producto: <input type="text" name="nombreproducto" value="<%=producto==null ? "": producto.getNombre()%>" /><br><br>
-            Descripción: <br><br><textarea name="descripcion" rows="10" cols="50" ><%=producto==null ? "": producto.getDescripcion()%></textarea><br><br>
-            Precio Salida: <input type="number" name="preciosalida" value="<%=producto==null ? "": producto.getPrecioSalida()%>" min="0" /><br><br>
-            URL Imagen: <input type="text" name="imagen" value="<%=producto==null ? "": producto.getUrlFoto()%>" /><br><br>
-            Fecha inicio de subasta: <input type = "date" name="fechaInicio" value="<%=producto==null ? "": new java.sql.Date(producto.getFechaInicioSubasta().getTime()) %>"/><br><br>
-            Fecha fin de subasta: <input type = "date" name="fechaFin" value="<%=producto==null ? "": new java.sql.Date(producto.getFechaFinSubasta().getTime()) %>"/><br><br>
-            Comprador: <input type = "text" name="comprador" value="<%=producto==null ? "": (producto.getComprador()==null ? "": producto.getComprador().getNombreUsuario()) %>"/><br><br>
-            Promocion: <input type = "checkbox" name="promocion" <%= producto==null ? "":producto.getEnPromocion() ? "checked":"" %> value="<%=producto==null ? "": producto.getEnPromocion() %>"/><br><br>
-            Publicador: <input type = "text" name="publicador" value="<%=producto==null ? "": producto.getPublicador().getNombreUsuario() %>"/><br><br>
-            
-            Categoría:
-            <select name="categoria">
-            <%
-                List<Categoria> categorias = (List) request.getAttribute("categorias");
-                
-                for(Categoria c : categorias) {
-                    String selected = "";
-                    if(producto!=null && c.equals(producto.getCategoria())) selected ="selected";
-            %>  
-            <option value="<%= c.getIdCategoria()%>" <%=selected%>><%=c.getNombre()%></option>
-            <%
-                }
-            %>
-            </select>
-            
-            <input type="submit" value="Enviar" />
+        <form:form method="post" modelAttribute="producto">
+            Nombre del Producto: <form:input path="nombre" type="text" />
+            Descripción: <form:input path="descripcion" type="text" />
+            Precio Salida: <form:input path="precioSalida" type="text" />
+            URL Imagen: <form:input path="urlFoto" type="text" />
+            Fecha inicio de subasta: <form:input path="fechInicioSubasta" type="text" />
+            Fecha fin de subasta: <form:input path="fechFinSubasta" type="text" />
+            Comprador: <form:input path="comprador" type="text" />
+            Publicador: <form:input path="publicador" type="text" />
+            Categoria: <form:select path="categoria">
+                            <%
+                                List<CategoriaDTO> categorias = (List) request.getAttribute("categorias");
+                            %>
+                            <form:options items="&{categorias}" itemLabel="nombre" itemValue="idCategoria"/>
+            </form:select>
+            <form:button>Enviar</form:button>
+        </form:form>
+
         </form>
     </body>
 </html>
