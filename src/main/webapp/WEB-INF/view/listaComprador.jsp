@@ -9,12 +9,8 @@
 <%@page import="java.util.List"%>
 <%@ page import="es.trabajotaw.trabajotaw.entity.ListaUsuario" %>
 <%@ page import="es.trabajotaw.trabajotaw.entity.Usuario" %>
-
-<%--
-<%@page import="Usuario"%>
-<%@page import="ListaUsuario"%>
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
