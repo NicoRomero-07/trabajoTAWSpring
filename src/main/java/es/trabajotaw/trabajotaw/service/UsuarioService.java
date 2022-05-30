@@ -1,10 +1,7 @@
 package es.trabajotaw.trabajotaw.service;
 
 import es.trabajotaw.trabajotaw.dao.*;
-import es.trabajotaw.trabajotaw.dto.CategoriaDTO;
-import es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO;
-import es.trabajotaw.trabajotaw.dto.NotificacionDTO;
-import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
+import es.trabajotaw.trabajotaw.dto.*;
 import es.trabajotaw.trabajotaw.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,12 +54,20 @@ public class UsuarioService {
         return usuario.toDTO();
     }
 
+    public List<UsuarioDTO> buscarPorTipoUsuario(TipoUsuarioDTO tipoUsuarioDTO){
+        List<Usuario> listaUsuarios =  ur.findByTipoUsuario(new TipoUsuario(tipoUsuarioDTO));
+        return this.listaEntityADTO(listaUsuarios);
+    }
+
     public void borrarUsuario (Integer id) {
         Usuario usuario = this.ur.getById(id);
 
         this.ur.delete(usuario);
     }
-
+    public void guardarUsuario(UsuarioDTO usuarioDTO){
+        Usuario usuario = new Usuario(usuarioDTO);
+        this.ur.save(usuario);
+    }
     private void rellenarUsuario (Usuario usuario,
                                   String nombreUsuario, String contrasenya, String nombre, String primerApellido,
                                   String segundoApellido, String email, Integer direccion, Character sexo,

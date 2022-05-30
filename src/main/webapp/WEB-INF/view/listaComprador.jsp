@@ -41,7 +41,7 @@
                     <th>Compradores:</th>
                 </tr>
                 <c:forEach var="item" items="${compradores}">
-                    <tr><td><form:checkbox path="usuarioList" value="${item}" label="${item.nombreUsuario}"/></td></tr>
+                    <tr><td><form:checkbox path="usuarioDTOList" value="${item}" label="${item.nombreUsuario}"/></td></tr>
                 </c:forEach>
             </table>
                 <br/>

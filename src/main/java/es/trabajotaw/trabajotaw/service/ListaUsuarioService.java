@@ -53,7 +53,11 @@ public class ListaUsuarioService {
     public void borrarLista (Integer id) {
         this.listaUsuarioRepository.deleteById(id);
     }
-    
+
+    public void guardarLista (ListaUsuarioDTO listaUsuarioDTO){
+        ListaUsuario listaUsuario = new ListaUsuario(listaUsuarioDTO);
+        listaUsuarioRepository.save(listaUsuario);
+    }
     
     private void rellenarLista (ListaUsuario lista,
                               String nombre, String[] listas) {
@@ -84,7 +88,6 @@ public class ListaUsuarioService {
         
         this.listaUsuarioRepository.save(lista);
     }
-    
     
     public List<UsuarioDTO> usuariosRelacionados(Integer id){
         ListaUsuario listaUsuario = this.listaUsuarioRepository.findById(id).orElse(null);

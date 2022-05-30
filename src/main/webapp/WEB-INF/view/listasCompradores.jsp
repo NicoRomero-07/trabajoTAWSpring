@@ -4,10 +4,9 @@
     Author     : Nicolás Zhao (100%)
 --%>
 
-<%--<%@page import="ListaUsuario"%> --%>
-
 <%@page import="java.util.List"%>
 <%@ page import="es.trabajotaw.trabajotaw.entity.ListaUsuario" %>
+<%@ page import="es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +15,7 @@
         <title>Listado de listas de compradores</title>
     </head>
     <%
-        List<ListaUsuario> listas = (List)request.getAttribute("listasCompradores");
+        List<ListaUsuarioDTO> listas = (List)request.getAttribute("listasCompradores");
     %>
     <body>
         <jsp:include page="cabeceraMarketing.jsp" /> 
@@ -40,7 +39,7 @@
                 <th></th>
             </tr>
             <%
-                for (ListaUsuario lista: listas) {
+                for (ListaUsuarioDTO lista: listas) {
             %>
             <tr>
                 <td><%= lista.getIdListaUsuario() %></td>

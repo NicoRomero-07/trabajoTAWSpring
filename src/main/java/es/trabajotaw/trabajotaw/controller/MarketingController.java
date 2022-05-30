@@ -1,10 +1,13 @@
 package es.trabajotaw.trabajotaw.controller;
 
 import es.trabajotaw.trabajotaw.dao.*;
+import es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO;
+import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
 import es.trabajotaw.trabajotaw.entity.ListaUsuario;
 import es.trabajotaw.trabajotaw.entity.Notificacion;
 import es.trabajotaw.trabajotaw.entity.Producto;
 import es.trabajotaw.trabajotaw.entity.Usuario;
+import es.trabajotaw.trabajotaw.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,31 +25,31 @@ import java.util.List;
 @RequestMapping("marketing")
 public class MarketingController {
     @Autowired
-    ListaUsuarioRepository listaUsuarioRepository;
+    ListaUsuarioService listaUsuarioService;
     @Autowired
-    UsuarioRepository usuarioRepository;
+    UsuarioService usuarioService;
     @Autowired
-    TipoUsuarioRepository tipoUsuarioRepository;
+    TipoUsuarioService tipoUsuarioService;
     @Autowired
-    ProductoRepository productoRepository;
+    ProductoService productoService;
     @Autowired
-    NotificacionRepository notificacionRepository;
+    NotificacionService notificacionService;
 
     @GetMapping("/")
     public String inicio(Model model, HttpSession session){
-        model.addAttribute("listasCompradores",this.listaUsuarioRepository.findAll());
+        model.addAttribute("listasCompradores",this.listaUsuarioService.listarListas(null));
         return "listasCompradores";
     }
     @PostMapping("/filtro")
     public String filtro(Model model, @RequestParam("filtroNombre") String filtroNombre){
-        model.addAttribute("listasCompradores",this.listaUsuarioRepository.findByNombreContaining(filtroNombre));
+        model.addAttribute("listasCompradores",this.listaUsuarioService.listarListas(filtroNombre));
         return "listasCompradores";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable int id){
-        ListaUsuario listaComprador = this.listaUsuarioRepository.findById(id).orElse(new ListaUsuario());
-        List<Usuario> compradores = this.usuarioRepository.findByTipoUsuario(this.tipoUsuarioRepository.findByTipo("Comprador"));
+        ListaUsuarioDTO listaComprador = this.listaUsuarioService.buscarLista(id);
+        List<UsuarioDTO> compradores = this.usuarioService.getCompradores();
         model.addAttribute("listaComprador",listaComprador);
         model.addAttribute("lista",listaComprador);
         model.addAttribute("compradores", compradores);
@@ -54,28 +57,29 @@ public class MarketingController {
     }
 
     @PostMapping("/save")
-    public String save(Model model,@ModelAttribute("listaComprador") ListaUsuario listaComprador){
-        if (listaComprador.getUsuarioList().isEmpty() || listaComprador.getUsuarioList().size()==0){
+    public String save(Model model,@ModelAttribute("listaComprador") ListaUsuarioDTO listaComprador){
+        if (listaUsuarioService.usuariosRelacionados(listaComprador.getIdListaUsuario()).isEmpty()
+                || listaUsuarioService.usuariosRelacionados(listaComprador.getIdListaUsuario()).size()==0){
             model.addAttribute("error",true);
             return "listaComprador";
         }else{
-            this.listaUsuarioRepository.save(listaComprador);
-            List<Usuario> compradores = this.usuarioRepository.findByTipoUsuario(this.tipoUsuarioRepository.findByTipo("Comprador"));
-            for (Usuario comprador : compradores){
-                if (comprador.getListaUsuarioList().contains(compradores) && !listaComprador.getUsuarioList().contains(comprador)){
-                    List<ListaUsuario> lista = comprador.getListaUsuarioList();
+            this.listaUsuarioService.guardarLista(listaComprador);
+            List<UsuarioDTO> compradores = this.usuarioService.buscarPorTipoUsuario(this.tipoUsuarioService.buscarTipoUsuario(3));
+            for (UsuarioDTO comprador : compradores){
+                if (comprador.getListaUsuarioDTOList().contains(compradores) && !listaComprador.getUsuarioDTOList().contains(comprador)){
+                    List<ListaUsuarioDTO> lista = comprador.getListaUsuarioDTOList();
                     lista.remove(comprador);
-                    comprador.setListaUsuarioList(lista);
-                    this.usuarioRepository.save(comprador);
+                    comprador.setListaUsuarioDTOList(lista);
+                    this.usuarioService.guardarUsuario(comprador);
                 }
             }
 
-            for (Usuario comprador : listaComprador.getUsuarioList()){
-                if (!comprador.getListaUsuarioList().contains(listaComprador)) {
-                    List<ListaUsuario> lista = comprador.getListaUsuarioList();
+            for (UsuarioDTO comprador : listaComprador.getUsuarioDTOList()){
+                if (!comprador.getListaUsuarioDTOList().contains(listaComprador)) {
+                    List<ListaUsuarioDTO> lista = comprador.getListaUsuarioDTOList();
                     lista.add(listaComprador);
-                    comprador.setListaUsuarioList(lista);
-                    this.usuarioRepository.save(comprador);
+                    comprador.setListaUsuarioDTOList(lista);
+                    this.usuarioService.guardarUsuario(comprador);
                 }
             }
             return "redirect:/marketing/";
@@ -89,13 +93,13 @@ public class MarketingController {
 
     @GetMapping("{id}/delete")
     public String delete(@PathVariable("id") Integer id){
-        this.listaUsuarioRepository.deleteById(id);
+        this.listaUsuarioService.borrarLista(id);
         return "redirect:/marketing/";
     }
-
+    /*
     @GetMapping("{id}/send")
     public String send(@PathVariable("id") Integer id, HttpSession session){
-        List<Producto> promociones = this.productoRepository.findByEnPromocion(true);
+        List<Producto> promociones = this.productoService.findByEnPromocion(true);
         StringBuilder contenido = new StringBuilder();
         for (Producto promocion: promociones){
             contenido.append("Nombre: ").append(promocion.getNombre()).append("<br/>");
@@ -109,34 +113,35 @@ public class MarketingController {
         Usuario notificante = (Usuario)session.getAttribute("usuario");
         notificacionCreada.setNotificante(notificante);
         notificacionCreada.setContenido(contenido.toString());
-        ListaUsuario listaUsuario = this.listaUsuarioRepository.findById(id).orElse(null);
+        ListaUsuario listaUsuario = this.listaUsuarioService.findById(id).orElse(null);
         notificacionCreada.setUsuarioList(new ArrayList<>(listaUsuario.getUsuarioList()));
-        this.notificacionRepository.save(notificacionCreada);
+        this.notificacionService.save(notificacionCreada);
 
         for(Usuario comprador: listaUsuario.getUsuarioList()){
             List<Notificacion> notificaciones = comprador.getNotificacionList();
             notificaciones.add(notificacionCreada);
-            this.usuarioRepository.save(comprador);
+            this.usuarioService.save(comprador);
         }
         return "redirect:/marketing/";
     }
-
+    */
     @GetMapping("{id}/purcharsers")
     public String purcharsers(Model model, @PathVariable("id") Integer id){
-        ListaUsuario lista = this.listaUsuarioRepository.findById(id).orElse(null);
+        ListaUsuarioDTO lista = this.listaUsuarioService.buscarLista(id);
         model.addAttribute("lista",lista);
-        model.addAttribute("compradores",lista.getUsuarioList());
+        model.addAttribute("compradores",lista.getUsuarioDTOList());
         return "compradores";
     }
+    /*
     @GetMapping("{listId}/{userId}/messages")
     public String messages (Model model,
                             @PathVariable("listId") Integer listId,
                             @PathVariable("userId") Integer userId){
-        Usuario usuario = this.usuarioRepository.findById(userId).orElse(null);
+        Usuario usuario = this.usuarioService.findById(userId).orElse(null);
         List<Notificacion> notificaciones = usuario.getNotificacionList();
         model.addAttribute("notificaciones",notificaciones);
         model.addAttribute("comprador",usuario);
-        model.addAttribute("lista",this.listaUsuarioRepository.findById(listId).orElse(null));
+        model.addAttribute("lista",this.listaUsuarioService.findById(listId).orElse(null));
         return "mensajes";
     }
 
@@ -144,22 +149,23 @@ public class MarketingController {
     public String deleteMessage (Model model,
                                  @PathVariable("userId") Integer userId,
                                  @PathVariable("notificationId") Integer notificationId){
-        Usuario usuario = this.usuarioRepository.findById(userId).orElse(null);
+        Usuario usuario = this.usuarioService.findById(userId).orElse(null);
 
-        Notificacion notificacion = this.notificacionRepository.findById(notificationId).orElse(null);
+        Notificacion notificacion = this.notificacionService.findById(notificationId).orElse(null);
 
         List<Usuario> usuarios = notificacion.getUsuarioList();
         usuarios.remove(usuario);
         notificacion.setUsuarioList(usuarios);
-        this.notificacionRepository.save(notificacion);
+        this.notificacionService.save(notificacion);
         List<Notificacion> notificaciones = usuario.getNotificacionList();
         notificaciones.remove(notificacion);
         usuario.setNotificacionList(notificaciones);
-        this.usuarioRepository.save(usuario);
+        this.usuarioService.save(usuario);
         if (notificacion.getUsuarioList().isEmpty()){
-            this.notificacionRepository.delete(notificacion);
+            this.notificacionService.delete(notificacion);
         }
 
         return "redirect:/marketing/{listId}/{userId}/messages";
     }
+    */
 }

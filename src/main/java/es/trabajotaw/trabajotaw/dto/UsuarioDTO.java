@@ -7,6 +7,7 @@ package es.trabajotaw.trabajotaw.dto;
 
 
     import java.util.Date;
+    import java.util.List;
     import java.util.Objects;
 
     /**
@@ -25,7 +26,7 @@ public class UsuarioDTO {
     private Character sexo;
     private DireccionDTO direccion;
     private TipoUsuarioDTO tipoUsuario;
- 
+    private List<ListaUsuarioDTO> listaUsuarioDTOList;
     public UsuarioDTO() {
     }
     
@@ -115,6 +116,14 @@ public class UsuarioDTO {
 
     public void setTipoUsuario(TipoUsuarioDTO tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public List<ListaUsuarioDTO> getListaUsuarioDTOList(){
+        return listaUsuarioDTOList;
+    }
+
+    public void setListaUsuarioDTOList (List<ListaUsuarioDTO> listaUsuarioDTOList){
+        this.listaUsuarioDTOList = listaUsuarioDTOList;
     }
 
     @Override

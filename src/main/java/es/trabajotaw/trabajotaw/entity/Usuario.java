@@ -6,9 +6,11 @@
 package es.trabajotaw.trabajotaw.entity;
 
 
+import es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO;
 import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -284,6 +286,15 @@ public class Usuario {
         dto.setTipoUsuario(tipoUsuario.toDTO());
         dto.setFechaNacimiento(fechaNacimiento);
 
+        List<ListaUsuarioDTO> listaUsuarioDTO = null;
+        if (listaUsuarioList != null) {
+            listaUsuarioDTO = new ArrayList<>();
+            for (ListaUsuario lu:listaUsuarioList) {
+                listaUsuarioDTO.add(lu.toDTO());
+            }
+        }
+        dto.setListaUsuarioDTOList(listaUsuarioDTO);
+
         return dto;
     }
 
@@ -299,6 +310,14 @@ public class Usuario {
         this.setSexo(dto.getSexo());
         this.setTipoUsuario(new TipoUsuario(dto.getTipoUsuario()));
         this.setFechaNacimiento(dto.getFechaNacimiento());
+        List<ListaUsuario> listaUsuarioList = null;
+        if (listaUsuarioList != null){
+            listaUsuarioList = new ArrayList<>();
+            for (ListaUsuarioDTO ludto :dto.getListaUsuarioDTOList()) {
+                listaUsuarioList.add(new ListaUsuario(ludto));
+            }
+        }
+        this.setListaUsuarioList(listaUsuarioList);
     }
 
 }
