@@ -29,7 +29,6 @@ public class LoginController {
         Usuario user = this.usuarioRepository.findByNombreUsuarioAndContrasenya(usuario, clave);
         String goTo;
 
-
         if (user == null) {
             String strError = "El usuario o la clave son incorrectos";
             model.addAttribute("error", strError);
@@ -54,5 +53,9 @@ public class LoginController {
         }
         return goTo;
     }
-
+    @GetMapping("/salir")
+    public String doExit (HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
 }

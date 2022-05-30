@@ -3,11 +3,13 @@
     Created on : 22-abr-2022, 10:29:30
     Author     : Nicolás Zhao (100%)
 --%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.Map"%>
-<%@page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO"%>
-<%@page import="es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO"%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.entity.ListaUsuario" %>
+<%@ page import="es.trabajotaw.trabajotaw.entity.Usuario" %>
+
 <%--
 <%@page import="Usuario"%>
 <%@page import="ListaUsuario"%>
@@ -20,55 +22,40 @@
         <title>Nueva lista</title>
     </head>
     <%
-            ListaUsuarioDTO listaComprador = (ListaUsuarioDTO)request.getAttribute("listaComprador");
             Boolean error = (Boolean) request.getAttribute("error");
-            Map<UsuarioDTO,List<ListaUsuarioDTO>> relaciones = (Map<UsuarioDTO,List<ListaUsuarioDTO>>) request.getAttribute("relaciones");
-    %>    
+    %>
     <body>
         <jsp:include page="cabeceraMarketing.jsp" /> 
         <h1>Datos de la lista</h1>
         <%
-            if (error== null || !error){
-           
+            if (error == null || !error){
         %>
-        <form method="POST" action="ListaCompradorGuardarServlet">
-            <input type="hidden" name="id" value="<%= listaComprador==null? "": listaComprador.getIdListaUsuario() %>" />
+        <form:form method="POST" action="/marketing/save" modelAttribute="listaComprador">
+            <form:hidden path="idListaUsuario"/>
             <table>
                 <tr>
-                    <th>Nombre:</th>
-                    <td><input type="text" size="30" name="nombre" value="<%= listaComprador==null? "": listaComprador.getNombre() %>" required/></td>
+                    <th>Nombre</th>
+                    <td><form:input path="nombre"  required="required"/></td>
                 </tr>
                 <tr>
-                    <th>Compradores: </th>
+                    <th>Compradores:</th>
                 </tr>
-                    <%                  
-                        String checked;
-                        for (Map.Entry<UsuarioDTO,List<ListaUsuarioDTO>> entry : relaciones.entrySet()){
-                            List<ListaUsuarioDTO> listasRelacionadas = entry.getValue();
-                            checked = "";
-                            if(listaComprador != null && listasRelacionadas != null && listasRelacionadas.contains(listaComprador)){
-                                checked = "checked";
-                            }
-
-                %>
-                <tr><td><input type="checkbox" name="compradores" value="<%= entry.getKey().getIdUsuario() %>"  <%= checked %>/> <%= entry.getKey().getNombreUsuario()%></td></tr>
-                <%
-                        }
-                        
-                %>
-                
+                <c:forEach var="item" items="${compradores}">
+                    <tr><td><form:checkbox path="usuarioList" value="${item}" label="${item.nombreUsuario}"/></td></tr>
+                </c:forEach>
             </table>
                 <br/>
             <input type="submit" value="Confirmar" />
-        </form>
+            <a href="/marketing/return"><input type="button" value="Volver"/></a>
+        </form:form>
             <%
-                }else{
+            }else{
             %>
-            <h2>NO SE HA ELEGIDO NINGUN COMPRADOR</h2>
-            <%
-                }
-            %>
-            <br/>
-            <a href="ListaCompradorServlet"><input type="button" value="Volver"/></a>
+            <h2>NO SE HA ELEGIDO NINGUN COMPRADOR</h2><br/>
+            <a href="/marketing/return"><input type="button" value="Volver"/></a>
+        <%
+            }
+        %>
+
     </body>
 </html>
