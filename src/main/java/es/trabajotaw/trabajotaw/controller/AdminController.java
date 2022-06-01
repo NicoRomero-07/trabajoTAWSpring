@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -56,6 +57,14 @@ public class AdminController {
         List<TipoUsuarioDTO> tipoUsuarios = tiposUsuarioService.listarTipoUsuarios(null);
         List<CategoriaDTO> categorias = categoriasService.listarCategorias(null);
         List<CategoriaDTO> categoriasFavoritas = usuariosService.categoriasUsuario(id);
+        List<Character> listaSexo = new ArrayList();
+        listaSexo.add('H');
+        listaSexo.add('M');
+        List<String> listaTipoVia = new ArrayList();
+        listaTipoVia.add("OFICINA");
+        listaTipoVia.add("CALLE");
+        model.addAttribute("tipoVias",listaTipoVia);
+        model.addAttribute("sexos",listaSexo);
         model.addAttribute("categoriasFavoritas", categoriasFavoritas);
         model.addAttribute("categorias", categorias);
         model.addAttribute("usuario", usuario);
@@ -68,6 +77,20 @@ public class AdminController {
     public String doBorrarUsuario(Model model, HttpSession session, @PathVariable("id") Integer id){
         usuariosService.borrarUsuario(id);
         return "redirect:/administrador/administrarUsuarios";
+    }
+
+
+    @PostMapping(value = "/guardarUsuario")
+    public String doGuardarUsuario(@ModelAttribute("usuario") UsuarioDTO usuario){
+        /*usuariosService.modificarUsuario(usuario.getIdUsuario(),usuario.getNombreUsuario(),
+                usuario.getContrasenya(), usuario.getNombre(), usuario.getPrimerApellido(),
+                usuario.getSegundoApellido(),usuario.getEmail(),
+                usuario.getDireccion().getIdDireccion(),usuario.getSexo(),
+                usuario.getTipoUsuario().getIdTipoUsuario(),usuario.getFechaNacimiento(),
+                usuario.getCategoriasFavoritas());
+
+         */
+        return " ";
     }
 
     @GetMapping(value = "/administrarCategorias")
@@ -93,10 +116,10 @@ public class AdminController {
         return "redirect:/administrador/administrarCategorias";
     }
 
-    @GetMapping(value="/GuardarCategoria/{id}")
-    public String doGuardarCategoria(Model model, HttpSession session,@PathVariable("id") Integer id){
-
-        categoriasService.modificarCategoria(id,null);
+    @PostMapping(value="/guardarCategoria")
+    public String doGuardarCategoria(@ModelAttribute("categoria") CategoriaDTO categoria){
+        Categoria categoriaEntidad = new Categoria(categoria);
+        categoriasService.modificarCategoria(categoriaEntidad);
         return "redirect:/administrador/administrarCategorias";
     }
 

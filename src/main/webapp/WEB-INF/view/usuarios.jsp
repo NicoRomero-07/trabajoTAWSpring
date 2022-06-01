@@ -42,8 +42,8 @@
             <th></th>
         </tr>
     <%
-            List<Usuario> usuarios = (List)request.getAttribute("usuarios");
-                for (Usuario user: usuarios) {
+            List<UsuarioDTO> usuarios = (List)request.getAttribute("usuarios");
+                for (UsuarioDTO user: usuarios) {
     %> 
     
     <tr>

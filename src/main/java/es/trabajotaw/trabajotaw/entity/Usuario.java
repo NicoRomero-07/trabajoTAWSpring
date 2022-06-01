@@ -6,9 +6,13 @@
 package es.trabajotaw.trabajotaw.entity;
 
 
+import es.trabajotaw.trabajotaw.dto.CategoriaDTO;
 import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
+import es.trabajotaw.trabajotaw.service.CategoriaService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +33,7 @@ import java.util.List;
     , @NamedQuery(name = "Usuario.findBySegundoApellido", query = "SELECT u FROM Usuario u WHERE u.segundoApellido = :segundoApellido")
     , @NamedQuery(name = "Usuario.findByFechaNacimiento", query = "SELECT u FROM Usuario u WHERE u.fechaNacimiento = :fechaNacimiento")
     , @NamedQuery(name = "Usuario.findBySexo", query = "SELECT u FROM Usuario u WHERE u.sexo = :sexo")})
+
 public class Usuario {
 
     private static final long serialVersionUID = 1L;
@@ -82,6 +87,7 @@ public class Usuario {
     @ManyToOne(optional = false)
     private TipoUsuario tipoUsuario;
 
+
     public Usuario() {
     }
 
@@ -96,6 +102,31 @@ public class Usuario {
         this.email = email;
         this.nombre = nombre;
         this.primerApellido = primerApellido;
+    }
+
+    public Usuario(UsuarioDTO usuario) {
+        this.idUsuario=usuario.getIdUsuario();
+        setContrasenya(usuario.getContrasenya());
+        List<Categoria> categorias = new ArrayList<>();
+        for(CategoriaDTO c:usuario.getCategoriasFavoritas()){
+            categorias.add(new Categoria(c));
+        }
+        setCategoriaList(categorias);
+        setNombreUsuario(usuario.getNombreUsuario());
+        setNombre(usuario.getNombre());
+        setPrimerApellido(usuario.getPrimerApellido());
+        setSegundoApellido(usuario.getSegundoApellido());
+        Direccion direccion = new Direccion(usuario.getDireccion());
+        setDireccion(direccion);
+        setFechaNacimiento(usuario.getFechaNacimiento());
+        setEmail(usuario.getEmail());
+        //List<Usuario> listaUsuarios = new ArrayList<>();
+        //this.setListaUsuarioList();
+        //this.setNotificacionList();
+        //this.setTipoUsuario();
+        //this.setPujaList();
+        this.setSexo(usuario.getSexo());
+
     }
 
     public Integer getIdUsuario() {
@@ -283,6 +314,13 @@ public class Usuario {
         dto.setSexo(sexo);
         dto.setTipoUsuario(tipoUsuario.toDTO());
         dto.setFechaNacimiento(fechaNacimiento);
+        List<CategoriaDTO> listaDTO = null;
+
+        List<CategoriaDTO> listaDTOcategoria = new ArrayList<>();
+        for (Categoria categoria:categoriaList) {
+            listaDTO.add(categoria.toDTO());
+        }
+        dto.setCategoriasFavoritas(listaDTOcategoria);
 
         return dto;
     }
