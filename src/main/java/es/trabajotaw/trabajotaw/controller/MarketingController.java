@@ -58,28 +58,27 @@ public class MarketingController {
 
     @PostMapping("/save")
     public String save(Model model,@ModelAttribute("listaComprador") ListaUsuarioDTO listaComprador){
-        if (listaUsuarioService.usuariosRelacionados(listaComprador.getIdListaUsuario()).isEmpty()
-                || listaUsuarioService.usuariosRelacionados(listaComprador.getIdListaUsuario()).size()==0){
+        if (listaComprador.getUsuarioDTOList().isEmpty() || listaComprador.getUsuarioDTOList().size()==0){
             model.addAttribute("error",true);
             return "listaComprador";
         }else{
             this.listaUsuarioService.guardarLista(listaComprador);
             List<UsuarioDTO> compradores = this.usuarioService.buscarPorTipoUsuario(this.tipoUsuarioService.buscarTipoUsuario(3));
             for (UsuarioDTO comprador : compradores){
-                if (comprador.getListaUsuarioDTOList().contains(compradores) && !listaComprador.getUsuarioDTOList().contains(comprador)){
-                    List<ListaUsuarioDTO> lista = comprador.getListaUsuarioDTOList();
+                if (comprador.getListaUsuarioDTOList().contains(listaComprador.getIdListaUsuario()) && !listaComprador.getUsuarioDTOList().contains(comprador.getIdUsuario())){
+                    List<Integer> lista = comprador.getListaUsuarioDTOList();
                     lista.remove(comprador);
                     comprador.setListaUsuarioDTOList(lista);
                     this.usuarioService.guardarUsuario(comprador);
                 }
             }
 
-            for (UsuarioDTO comprador : listaComprador.getUsuarioDTOList()){
-                if (!comprador.getListaUsuarioDTOList().contains(listaComprador)) {
-                    List<ListaUsuarioDTO> lista = comprador.getListaUsuarioDTOList();
-                    lista.add(listaComprador);
-                    comprador.setListaUsuarioDTOList(lista);
-                    this.usuarioService.guardarUsuario(comprador);
+            for (Integer comprador : listaComprador.getUsuarioDTOList()){
+                if (!this.usuarioService.buscarUsuario(comprador).getListaUsuarioDTOList().contains(listaComprador.getIdListaUsuario())) {
+                    List<Integer> lista = this.usuarioService.buscarUsuario(comprador).getListaUsuarioDTOList();
+                    lista.add(listaComprador.getIdListaUsuario());
+                    this.usuarioService.buscarUsuario(comprador).setListaUsuarioDTOList(lista);
+                    this.usuarioService.guardarUsuario(this.usuarioService.buscarUsuario(comprador));
                 }
             }
             return "redirect:/marketing/";
@@ -129,7 +128,8 @@ public class MarketingController {
     public String purcharsers(Model model, @PathVariable("id") Integer id){
         ListaUsuarioDTO lista = this.listaUsuarioService.buscarLista(id);
         model.addAttribute("lista",lista);
-        model.addAttribute("compradores",lista.getUsuarioDTOList());
+        List<UsuarioDTO> usuarioDTOList = this.usuarioService.getUsuarioListFromId(lista.getUsuarioDTOList());
+        model.addAttribute("compradores",usuarioDTOList);
         return "compradores";
     }
     /*

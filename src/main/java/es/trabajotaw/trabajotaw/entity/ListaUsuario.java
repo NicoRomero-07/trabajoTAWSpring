@@ -104,30 +104,22 @@ public class ListaUsuario   {
 
         dto.setIdListaUsuario(this.idListaUsuario);
         dto.setNombre(this.nombre);
-        /*
-        List<UsuarioDTO> listaDTO = null;
+
+        List<Integer> listaDTO = null;
         if (this.usuarioList != null) {
             listaDTO = new ArrayList<>();
             for (Usuario usuario:this.usuarioList) {
-                listaDTO.add(usuario.toDTO());
+                listaDTO.add(usuario.getIdUsuario());
             }
         }
         dto.setUsuarioDTOList(listaDTO);
-        */
+
         return dto;
     }
 
-    public ListaUsuario(ListaUsuarioDTO dto){
+    public ListaUsuario(ListaUsuarioDTO dto, List<Usuario> usuarioList){
         this.setIdListaUsuario(dto.getIdListaUsuario());
         this.setNombre(dto.getNombre());
-
-        List<Usuario> usuarioList = null;
-        if (dto.getUsuarioDTOList() != null){
-            usuarioList = new ArrayList<>();
-            for (UsuarioDTO udto :dto.getUsuarioDTOList()) {
-                usuarioList.add(new Usuario(udto));
-            }
-        }
         this.setUsuarioList(usuarioList);
     }
 }

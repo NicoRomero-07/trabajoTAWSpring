@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 public class ListaUsuarioService {
     @Autowired
     ListaUsuarioRepository listaUsuarioRepository;
+    @Autowired
     UsuarioRepository usuarioRepository;
 
     public List<ListaUsuarioDTO> listaEntityADTO(List<ListaUsuario> lista) {
@@ -46,7 +47,7 @@ public class ListaUsuarioService {
     } 
     
     public ListaUsuarioDTO buscarLista (Integer id) {
-        ListaUsuario lista = this.listaUsuarioRepository.findById(id).orElse(null);
+        ListaUsuario lista = this.listaUsuarioRepository.findById(id).orElse(new ListaUsuario());
         return lista.toDTO();
     }
     
@@ -55,9 +56,18 @@ public class ListaUsuarioService {
     }
 
     public void guardarLista (ListaUsuarioDTO listaUsuarioDTO){
-        ListaUsuario listaUsuario = new ListaUsuario(listaUsuarioDTO);
+        List<Usuario> usuarioList = null;
+        if (listaUsuarioDTO.getUsuarioDTOList() != null && !listaUsuarioDTO.getUsuarioDTOList().isEmpty()){
+            usuarioList = new ArrayList<>();
+            for(Integer idUsuario : listaUsuarioDTO.getUsuarioDTOList()){
+                usuarioList.add(this.usuarioRepository.findById(idUsuario).orElse(null));
+            }
+        }
+        ListaUsuario listaUsuario = new ListaUsuario(listaUsuarioDTO, usuarioList);
         listaUsuarioRepository.save(listaUsuario);
     }
+
+
     
     private void rellenarLista (ListaUsuario lista,
                               String nombre, String[] listas) {
@@ -90,7 +100,7 @@ public class ListaUsuarioService {
     }
     
     public List<UsuarioDTO> usuariosRelacionados(Integer id){
-        ListaUsuario listaUsuario = this.listaUsuarioRepository.findById(id).orElse(null);
+        ListaUsuario listaUsuario = this.listaUsuarioRepository.findById(id).orElse(new ListaUsuario());
         List<UsuarioDTO> usuariosDTO = new ArrayList();
         List<Usuario> usuarios = listaUsuario.getUsuarioList();
         

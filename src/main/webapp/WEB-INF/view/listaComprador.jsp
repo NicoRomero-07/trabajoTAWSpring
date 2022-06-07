@@ -30,19 +30,19 @@
         <%
             if (error == null || !error){
         %>
+        <%--@elvariable id="listaComprador" type="es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO"--%>
         <form:form method="POST" action="/marketing/save" modelAttribute="listaComprador">
             <form:hidden path="idListaUsuario"/>
-            <table>
+            <table border="1">
                 <tr>
                     <th>Nombre</th>
                     <td><form:input path="nombre"  required="required"/></td>
                 </tr>
                 <tr>
                     <th>Compradores:</th>
+                    <td><form:checkboxes path="usuarioDTOList" items="${compradores}" itemLabel="nombreUsuario"
+                                         itemValue="idUsuario" delimiter="<br/>"/></td>
                 </tr>
-                <c:forEach var="item" items="${compradores}">
-                    <tr><td><form:checkbox path="usuarioDTOList" value="${item}" label="${item.nombreUsuario}"/></td></tr>
-                </c:forEach>
             </table>
                 <br/>
             <input type="submit" value="Confirmar" />

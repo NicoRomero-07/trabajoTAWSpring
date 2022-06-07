@@ -126,13 +126,13 @@ public class Notificacion   {
         dto.setIdNotificacion(idNotificacion);
         dto.setFechaEnvio(fechaEnvio);
         dto.setContenido(contenido);
-        dto.setNotificante(notificante.toDTO());
+        dto.setNotificante(notificante.getIdUsuario());
         return dto;
     }
 
-    public Notificacion(NotificacionDTO dto){
+    public Notificacion(NotificacionDTO dto, Usuario notificante){
         this.setIdNotificacion(dto.getIdNotificacion());
-        this.setNotificante(new Usuario(dto.getNotificante()));
+        this.setNotificante(notificante);
         this.setContenido(dto.getContenido());
         this.setFechaEnvio(dto.getFechaEnvio());
     }

@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 public class NotificacionService {
     @Autowired
     NotificacionRepository notificacionRepository;
+    @Autowired
     UsuarioRepository usuarioRepository;
 
     public List<NotificacionDTO> listaEntityADTO(List<Notificacion> lista) {

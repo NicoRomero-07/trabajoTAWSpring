@@ -14,7 +14,7 @@ public class ListaUsuarioDTO {
     
     private Integer idListaUsuario;
     private String nombre;
-    private List<UsuarioDTO> usuarioDTOList;
+    private List<Integer> usuarioDTOList;
 
     public ListaUsuarioDTO() {
     }
@@ -36,12 +36,14 @@ public class ListaUsuarioDTO {
         this.nombre = nombre;
     }
 
-    public List<UsuarioDTO> getUsuarioDTOList(){
+
+    public List<Integer> getUsuarioDTOList(){
         return usuarioDTOList;
     }
-    public void setUsuarioDTOList (List<UsuarioDTO> usuarioDTOList){
+    public void setUsuarioDTOList (List<Integer> usuarioDTOList){
         this.usuarioDTOList = usuarioDTOList;
     }
+
 
 
     @Override

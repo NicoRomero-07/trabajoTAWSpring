@@ -16,11 +16,13 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository ur;
     private CategoriaRepository cr;
+    @Autowired
     private TipoUsuarioRepository tur;
     private DireccionRepository dr;
     private DatosEstudioUsuarioRepository deur;
     private EstudioRepository er;
     private CategoriaService cs;
+    @Autowired
     private ListaUsuarioRepository lur;
 
     private List<UsuarioDTO> listaEntityADTO (List<Usuario> lista) {
@@ -65,9 +67,24 @@ public class UsuarioService {
         this.ur.delete(usuario);
     }
     public void guardarUsuario(UsuarioDTO usuarioDTO){
-        Usuario usuario = new Usuario(usuarioDTO);
+        List<ListaUsuario> listaUsuarioList = null;
+        if (usuarioDTO.getListaUsuarioDTOList() != null && !usuarioDTO.getListaUsuarioDTOList().isEmpty()){
+            listaUsuarioList = new ArrayList<>();
+            for(Integer idUsuario : usuarioDTO.getListaUsuarioDTOList()){
+                listaUsuarioList.add(this.lur.findById(idUsuario).orElse(null));
+            }
+        }
+        Usuario usuario = new Usuario(usuarioDTO,listaUsuarioList);
         this.ur.save(usuario);
     }
+    public List<UsuarioDTO> getUsuarioListFromId(List<Integer> ids){
+        List<Usuario> usuarioList = new ArrayList<>();
+        for (Integer id : ids){
+            usuarioList.add(this.ur.findById(id).orElse(null));
+        }
+        return this.listaEntityADTO(usuarioList);
+    }
+
     private void rellenarUsuario (Usuario usuario,
                                   String nombreUsuario, String contrasenya, String nombre, String primerApellido,
                                   String segundoApellido, String email, Integer direccion, Character sexo,

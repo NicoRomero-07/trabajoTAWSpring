@@ -286,11 +286,11 @@ public class Usuario {
         dto.setTipoUsuario(tipoUsuario.toDTO());
         dto.setFechaNacimiento(fechaNacimiento);
 
-        List<ListaUsuarioDTO> listaUsuarioDTO = null;
+        List<Integer> listaUsuarioDTO = null;
         if (listaUsuarioList != null) {
             listaUsuarioDTO = new ArrayList<>();
             for (ListaUsuario lu:listaUsuarioList) {
-                listaUsuarioDTO.add(lu.toDTO());
+                listaUsuarioDTO.add(lu.getIdListaUsuario());
             }
         }
         dto.setListaUsuarioDTOList(listaUsuarioDTO);
@@ -298,7 +298,7 @@ public class Usuario {
         return dto;
     }
 
-    public Usuario (UsuarioDTO dto){
+    public Usuario (UsuarioDTO dto, List<ListaUsuario> usuarioList){
         this.setIdUsuario(dto.getIdUsuario());
         this.setNombreUsuario(dto.getNombreUsuario());
         this.setContrasenya(dto.getContrasenya());
@@ -310,14 +310,7 @@ public class Usuario {
         this.setSexo(dto.getSexo());
         this.setTipoUsuario(new TipoUsuario(dto.getTipoUsuario()));
         this.setFechaNacimiento(dto.getFechaNacimiento());
-        List<ListaUsuario> listaUsuarioList = null;
-        if (listaUsuarioList != null){
-            listaUsuarioList = new ArrayList<>();
-            for (ListaUsuarioDTO ludto :dto.getListaUsuarioDTOList()) {
-                listaUsuarioList.add(new ListaUsuario(ludto));
-            }
-        }
-        this.setListaUsuarioList(listaUsuarioList);
+        this.setListaUsuarioList(usuarioList);
     }
 
 }

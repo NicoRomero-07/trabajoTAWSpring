@@ -61,6 +61,6 @@
             }
         %>
         <br>
-        <a href="0/edit">Crear nueva lista ...</a>
+        <a href="-1/edit">Crear nueva lista ...</a>
     </body>
 </html>

@@ -26,7 +26,7 @@ public class UsuarioDTO {
     private Character sexo;
     private DireccionDTO direccion;
     private TipoUsuarioDTO tipoUsuario;
-    private List<ListaUsuarioDTO> listaUsuarioDTOList;
+    private List<Integer> listaUsuarioDTOList;
     public UsuarioDTO() {
     }
     
@@ -118,11 +118,11 @@ public class UsuarioDTO {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public List<ListaUsuarioDTO> getListaUsuarioDTOList(){
+    public List<Integer> getListaUsuarioDTOList(){
         return listaUsuarioDTOList;
     }
 
-    public void setListaUsuarioDTOList (List<ListaUsuarioDTO> listaUsuarioDTOList){
+    public void setListaUsuarioDTOList (List<Integer> listaUsuarioDTOList){
         this.listaUsuarioDTOList = listaUsuarioDTOList;
     }
 

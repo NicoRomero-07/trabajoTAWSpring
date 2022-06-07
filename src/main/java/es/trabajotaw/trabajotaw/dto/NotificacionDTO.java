@@ -13,7 +13,7 @@ public class NotificacionDTO {
     private Integer idNotificacion;
     private String contenido;
     private Date fechaEnvio;
-    private UsuarioDTO notificante;
+    private Integer notificante;
 
     public NotificacionDTO() {
     }
@@ -43,11 +43,11 @@ public class NotificacionDTO {
         this.fechaEnvio = fechaEnvio;
     }
 
-    public UsuarioDTO getNotificante() {
+    public Integer getNotificante() {
         return notificante;
     }
     
-    public void setNotificante(UsuarioDTO notificante) {
+    public void setNotificante(Integer notificante) {
         this.notificante = notificante;
     }
 
