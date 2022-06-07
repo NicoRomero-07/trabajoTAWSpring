@@ -3,6 +3,7 @@
     Created on : 20-abr-2022, 17:12:51
     Author     : nicor(95%) Victor(5%)
 --%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@page import="java.util.Iterator"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -18,121 +19,56 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>JSP Page</title>
-</head>
-<%
-    List<TipoUsuarioDTO> listaTipoUsuario = (List)request.getAttribute("tipoUsuarios");
-    List<CategoriaDTO> listaCategorias = (List)request.getAttribute("categorias");
-    List<Character> listaSexo = new ArrayList();
-    listaSexo.add('H');
-    listaSexo.add('M');
-    List<String> listaTipoVia = new ArrayList();
-    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-    listaTipoVia.add("OFICINA");
-    listaTipoVia.add("CALLE");
-    UsuarioDTO usuario = (UsuarioDTO) request.getAttribute("usuario");
-    List<CategoriaDTO> listaCategoriasUsuario = (List<CategoriaDTO>) request.getAttribute("categoriasFavoritas");
-    String tipoUsuario = usuario.getTipoUsuario().getTipo();
-%>
-<body>
-<%if(tipoUsuario!=null){%>
-<jsp:include page="cabecera.jsp" />
-<%}%>
-<a href="/administrador/administrarUsuarios">Volver</a>
-<h1>Datos del usuario</h1>
-<form method="POST" action="UsuarioGuardarServlet">
-    <input type="hidden" name="idDireccion" value="<%= usuario==null? "": usuario.getDireccion().getIdDireccion() %>" />
-    <input type="hidden" name="id" value="<%= usuario==null? "": usuario.getIdUsuario() %>" />
-    Nombre de Usuario: <input type="text" size="30" name="nombreUsuario" value="<%= usuario==null? "": usuario.getNombreUsuario() %>" /> <br>
-    Contraseña: <input type="password" size="30" name="contrasenya" value="<%= usuario==null? "": usuario.getContrasenya() %>" /> <br>
-    Nombre: <input type="text" size="30" name="nombre" value="<%= usuario==null? "": usuario.getNombre() %>" /> <br>
-    Apellidos: <input type="text" size="30" name="primerApellido" value="<%= usuario==null? "": usuario.getPrimerApellido() %>" /> <input type="text" name="segundoApellido" size="30" value="<%= usuario==null? "": usuario.getSegundoApellido() %>" /><br>
-    Email:<input type="text" size="40" name="email" value="<%= usuario==null? "": usuario.getEmail() %>" /> <br>
-    Sexo:
-    <select name = "sexo">
-        <%
-            for (Character s : listaSexo) {
-                String selected = "";
-                if (usuario != null && usuario.getSexo().equals(s)) {
-                    selected = "selected";
-                }
-        %>
-        <option <%= selected %> value="<%= s %>"><%= s %></option>
-
-        <%
-            }
-        %>
-    </select><br>
-    Fecha Nacimiento: <input type="date" size="30" name="fechaNacimiento" value="<%= usuario==null? "" : usuario.getFechaNacimiento()!=null? new java.sql.Date(usuario.getFechaNacimiento().getTime()):""  %>" /> <br>
-    Tipo Usuario:
-    <select name="tipoUsuario">
-        <%
-            if(tipoUsuario != null && tipoUsuario.equalsIgnoreCase("Administrador")){
-                for (TipoUsuarioDTO uu : listaTipoUsuario) {
-                    String selected = "";
-                    if (usuario != null && usuario.getTipoUsuario().getTipo().equals(uu.getTipo())) {
-                        selected = "selected";
-                    }
-
-
-        %>
-        <option <%= selected %> value="<%= uu.getIdTipoUsuario() %>"><%= uu.getTipo() %></option>
-
-        <%
-            }
-        }else{
-            for (TipoUsuarioDTO uu : listaTipoUsuario.subList(1, 3)) {
-                String selected = "";
-                if (usuario != null && usuario.getTipoUsuario().getTipo().equals(uu.getTipo())) {
-                    selected = "selected";
-                }
-        %>
-        <option <%= selected %> value="<%= uu.getIdTipoUsuario() %>"><%= uu.getTipo() %></option>
-        <%
-                }
-            }
-        %>
-    </select><br>
-
-    Categorias Favoritas:
-
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
     <%
-
-        for (CategoriaDTO dc: listaCategorias) {
-            String checked = "";
-            if(tipoUsuario!=null && listaCategoriasUsuario !=null && listaCategoriasUsuario.contains(dc)) checked = "checked";
+        UsuarioDTO usuario = (UsuarioDTO) request.getAttribute("usuario");
+        String tipoUsuario = usuario.getTipoUsuario().getTipo();
     %>
-    <input name = "categorias" type = "checkbox" <%= checked %> value="<%= dc.getIdCategoria() %>"><%= dc.getNombre()%>
+    <body>
+    <%if(tipoUsuario!=null){%>
+    <jsp:include page="cabecera.jsp" />
+    <%}%>
+    <a methods="post" href="/administrador/administrarUsuarios">Volver</a>
+    <h1>Datos del usuario</h1>
+    <form:form method="POST" action="UsuarioGuardarServlet" modelAttribute="usuario">
+        <form:hidden path="direccion" />
+        <form:hidden path="idUsuario"/>
+        Nombre de Usuario: <form:input type="text" size="30" path="nombreUsuario" /> <br>
+        Contraseña: <form:input type="password" size="30" path="contrasenya"/> <br>
+        Nombre: <form:input type="text" size="30" path="nombre" /> <br>
+        Apellidos: <form:input type="text" size="30" path="primerApellido" /> <form:input type="text" name="segundoApellido" size="30" path="segundoApellido" /><br>
+        Email:<form:input type="text" size="40" path="email" /> <br>
+        Sexo:
+        <form:select path="sexo">
+            <form:option value="H"/>
+            <form:option value="M"/>
+        </form:select>
+        <br>
+        Fecha Nacimiento: <form:input type="date" size="30" path="fechaNacimiento" /> <br>
+        Tipo Usuario:
+        <form:select path="tipoUsuario">
+            <form:options items="${tipoUsuarios}" itemLabel="tipo" itemValue="idTipoUsuario" />
+        </form:select><br>
 
-    <%
+        Categorias Favoritas:
+        <form:radiobuttons path="categoriasFavoritas"/>
+        <br>
 
-        }
-    %>
-    <br>
-    Tipo de via:
-    <select name = "tipoVia">
-        <%
-            for (String s : listaTipoVia) {
-                String selected = "";
-                if (usuario != null && usuario.getDireccion().getTipo().equals(s)) {
-                    selected = "selected";
-                }
-        %>
-        <option <%= selected %> value="<%= s %>"><%= s %></option>
+        Tipo de via:
+        <form:select name = "tipoVias" path="direccion.tipo">
+            <form:option value="OFICINA"/>
+            <form:option value="CALLE"/>
+        </form:select><br>
+        Calle:<form:input type="text" size="40" path="direccion.calle" /> <br>
+        Numero:<form:input type="number" size="40" path="direccion.numero" /> <br>
+        Codigo Postal:<form:input type="number" size="40" path="direccion.codigoPostal" /> <br>
+        Planta:<form:input type="number" size="40" path="direccion.planta" /> <br>
+        Puerta:<form:input type="text" size="40" path="direccion.puerta" /> <br>
 
-        <%
-            }
-        %>
-    </select><br>
-    Calle:<input type="text" size="40" name="calle" value="<%= usuario==null? "": usuario.getDireccion().getCalle() %>" /> <br>
-    Numero:<input type="number" size="40" name="numero" value="<%= usuario==null? "": usuario.getDireccion().getNumero()%>" /> <br>
-    Codigo Postal:<input type="number" size="40" name="codigoPostal" value="<%= usuario==null? "": usuario.getDireccion().getCodigoPostal() %>" /> <br>
-    Planta:<input type="number" size="40" name="planta" value="<%= usuario==null? "": usuario.getDireccion().getPlanta() %>" /> <br>
-    Puerta:<input type="text" size="40" name="puerta" value="<%= usuario==null? "": usuario.getDireccion().getPuerta() %>" /> <br>
-
-    <input type="submit" value="Enviar" />
-</form>
-</body>
+        <form:button>Enviar</form:button>
+    </form:form>
+    </body>
 </html>

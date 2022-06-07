@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -23,6 +24,18 @@ public class CompradorPrincipalController {
     @GetMapping(value = "/vistaComprador")
     public String inicio(Model model, HttpSession session){
         return "comprador";
+    }
+
+    @PostMapping(value = "/verProductos")
+    public String buscarProductos(Model model, HttpSession session){
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        String busqueda = (String) model.getAttribute("buscador");
+        List<ProductoDTO> productosBuscados = productosService.listarProductos(busqueda);
+        List<ProductoDTO> productosFavoritos = productosService.buscarProductosFavoritos(usuario.toDTO().getIdUsuario());
+        model.addAttribute("productosBuscados", productosBuscados);
+        model.addAttribute("productosFavoritos", productosFavoritos);
+
+        return "listaProductosBuscados";
     }
 
     @GetMapping(value = "/productosComprados")

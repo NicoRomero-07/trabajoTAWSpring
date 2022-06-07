@@ -18,7 +18,7 @@
         <jsp:include page="cabecera.jsp" /> 
         <a href="/administrador/vistaAdministrador">Volver</a>
         <h1>Categorias</h1>
-    <form method="post" action="CategoriasServlet">
+    <form method="post" action="/administrador/administrarCategorias">
             Nombre de Categoria: <input type="text" name="filtroNombre" value="" />
             <input type="submit" value="Filtrar" />
     </form>
@@ -30,8 +30,8 @@
             <th></th>
         </tr>
     <%
-            List<Categoria> categorias = (List)request.getAttribute("categorias");
-                for (Categoria categoria: categorias) {
+            List<CategoriaDTO> categorias = (List)request.getAttribute("categorias");
+                for (CategoriaDTO categoria: categorias) {
     %> 
     
     <tr>

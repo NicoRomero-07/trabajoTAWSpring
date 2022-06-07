@@ -61,8 +61,6 @@ public class CategoriaService {
                               String nombreCategoria) {
 
         categoria.setNombre(nombreCategoria);
-
-
     }
 
     public void crearCategoria (String nombreCategoria) {
@@ -73,12 +71,7 @@ public class CategoriaService {
         this.cr.save(categoria);
     }
 
-    public void modificarCategoria (Integer id,
-                              String nombreCategoria) {
-
-        Categoria categoria = this.cr.getById(id);
-
-        this.rellenarCategoria(categoria, nombreCategoria);
+    public void modificarCategoria (Categoria categoria) {
 
         this.cr.save(categoria);
     }

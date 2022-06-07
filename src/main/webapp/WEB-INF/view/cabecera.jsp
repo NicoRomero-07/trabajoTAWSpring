@@ -9,10 +9,11 @@
 <%
     Usuario user = (Usuario)session.getAttribute("usuario");
     if (user == null) {
-        response.sendRedirect(request.getContextPath());
+%>
+<jsp:forward page="/" />
+<%
     }
 %>
-
 <table width="80%">
     <tr width="80%">
         <td>Bienvenido, <%= user.getEmail() %></td>
