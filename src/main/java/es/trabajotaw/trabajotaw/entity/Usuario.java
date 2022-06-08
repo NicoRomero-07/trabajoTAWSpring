@@ -5,7 +5,12 @@
  */
 package es.trabajotaw.trabajotaw.entity;
 
+
+import es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO;
+import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -265,4 +270,56 @@ public class Usuario {
     public void setCategoriaFavorita(Categoria c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public UsuarioDTO toDTO() {
+        UsuarioDTO dto = new UsuarioDTO();
+
+        dto.setIdUsuario(idUsuario);
+        dto.setNombreUsuario(nombreUsuario);
+        dto.setContrasenya(contrasenya);
+        dto.setNombre(nombre);
+        dto.setPrimerApellido(primerApellido);
+        dto.setSegundoApellido(segundoApellido);
+        dto.setEmail(email);
+        dto.setDireccion(direccion.toDTO());
+        dto.setSexo(sexo);
+        dto.setTipoUsuario(tipoUsuario.toDTO());
+        dto.setFechaNacimiento(fechaNacimiento);
+
+        List<Integer> listaUsuarioDTO = null;
+        if (listaUsuarioList != null) {
+            listaUsuarioDTO = new ArrayList<>();
+            for (ListaUsuario lu:listaUsuarioList) {
+                listaUsuarioDTO.add(lu.getIdListaUsuario());
+            }
+        }
+        dto.setListaUsuarioDTOList(listaUsuarioDTO);
+
+        List<Integer> notificacionDTOList = null;
+        if (notificacionList != null) {
+            notificacionDTOList = new ArrayList<>();
+            for (Notificacion n:notificacionList) {
+                notificacionDTOList.add(n.getIdNotificacion());
+            }
+        }
+        dto.setNotificacionDTOList(notificacionDTOList);
+        return dto;
+    }
+
+    public Usuario (UsuarioDTO dto, List<ListaUsuario> usuarioList, List<Notificacion> notificacionList){
+        this.setIdUsuario(dto.getIdUsuario());
+        this.setNombreUsuario(dto.getNombreUsuario());
+        this.setContrasenya(dto.getContrasenya());
+        this.setNombre(dto.getNombre());
+        this.setPrimerApellido(dto.getPrimerApellido());
+        this.setSegundoApellido(dto.getSegundoApellido());
+        this.setEmail(dto.getEmail());
+        this.setDireccion(new Direccion(dto.getDireccion()));
+        this.setSexo(dto.getSexo());
+        this.setTipoUsuario(new TipoUsuario(dto.getTipoUsuario()));
+        this.setFechaNacimiento(dto.getFechaNacimiento());
+        this.setListaUsuarioList(usuarioList);
+        this.setNotificacionList(notificacionList);
+    }
+
 }

@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package es.trabajotaw.trabajotaw.entity;
+
+
+import es.trabajotaw.trabajotaw.dto.DireccionDTO;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -66,6 +70,8 @@ public class Direccion   {
         this.numero = numero;
         this.codigoPostal = codigoPostal;
     }
+
+
 
     public Integer getIdDireccion() {
         return idDireccion;
@@ -155,6 +161,29 @@ public class Direccion   {
     @Override
     public String toString() {
         return "es.trabajotaw.entity.Direccion[ idDireccion=" + idDireccion + " ]";
+    }
+
+    public DireccionDTO toDTO() {
+        DireccionDTO dto = new DireccionDTO();
+
+        dto.setCalle(calle);
+        dto.setCodigoPostal(codigoPostal);
+        dto.setIdDireccion(idDireccion);
+        dto.setNumero(numero);
+        dto.setPlanta(planta);
+        dto.setPuerta(puerta);
+        dto.setTipo(tipo);
+
+        return dto;
+    }
+    public Direccion(DireccionDTO dto) {
+        this.setCalle(dto.getCalle());
+        this.setCodigoPostal(dto.getCodigoPostal());
+        this.setIdDireccion(dto.getIdDireccion());
+        this.setNumero(dto.getNumero());
+        this.setPlanta(dto.getPlanta());
+        this.setPuerta(dto.getPuerta());
+        this.setTipo(dto.getTipo());
     }
     
 }

@@ -4,9 +4,9 @@
     Author     : nicor
 --%>
 
-<%@page import="es.trabajotaw.trabajotaw.dto.CategoriaDTO"%>
 <%@page import="es.trabajotaw.trabajotaw.entity.Categoria"%>
 <%@page import="java.util.List"%>
+<%@ page import="es.trabajotaw.trabajotaw.dto.CategoriaDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,7 @@
     </head>
     <body>
         <jsp:include page="cabecera.jsp" /> 
-        <a href="AdministradorServlet">Volver</a>
+        <a href="/administrador/vistaAdministrador">Volver</a>
         <h1>Categorias</h1>
     <form method="post" action="CategoriasServlet">
             Nombre de Categoria: <input type="text" name="filtroNombre" value="" />
@@ -30,22 +30,22 @@
             <th></th>
         </tr>
     <%
-            List<CategoriaDTO> categorias = (List)request.getAttribute("categorias");
-                for (CategoriaDTO categoria: categorias) {
+            List<Categoria> categorias = (List)request.getAttribute("categorias");
+                for (Categoria categoria: categorias) {
     %> 
     
     <tr>
         <td><%= categoria.getIdCategoria() %></td>
         <td><%= categoria.getNombre() %></td>
         
-        <td><a href="CategoriaBorrarServlet?id=<%= categoria.getIdCategoria() %>">Borrar</a></td> 
-        <td><a href="CategoriaNuevoEditarServlet?id=<%= categoria.getIdCategoria() %>">Editar</a></td>  
+        <td><a href="/administrador/borrarCategoria/<%= categoria.getIdCategoria() %>">Borrar</a></td>
+        <td><a href="/administrador/administrarCategoria/<%= categoria.getIdCategoria() %>">Editar</a></td>
         
     </tr>
     <%
                 }
     %>
     </table>
-    <a href="CategoriaNuevoEditarServlet">Crear nueva categoria ... </a>
+    <a href="/administrador/administrarCategoria/>">Crear nueva categoria ... </a>
     </body>
 </html>

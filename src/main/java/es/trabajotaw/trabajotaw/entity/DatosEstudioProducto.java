@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package es.trabajotaw.trabajotaw.entity;
+
+import es.trabajotaw.trabajotaw.dto.DatosEstudioProductoDTO;
+
 import javax.persistence.*;
 
 /**
@@ -47,7 +50,7 @@ public class DatosEstudioProducto   {
     @Column(name = "PRECIO_ACTUAL")
     private Double precioActual;
     @JoinColumn(name = "ID", referencedColumnName = "ID_ESTUDIO", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @OneToOne(optional = true)
     private Estudio estudio;
 
     public DatosEstudioProducto() {
@@ -143,6 +146,20 @@ public class DatosEstudioProducto   {
     @Override
     public String toString() {
         return "es.trabajotaw.entity.DatosEstudioProducto[ id=" + id + " ]";
+    }
+
+    public DatosEstudioProductoDTO toDTO () {
+        DatosEstudioProductoDTO dto = new DatosEstudioProductoDTO();
+
+        dto.setId(id);
+        dto.setCategorias(categorias);
+        dto.setVendidos(vendidos);
+        dto.setPromocion(promocion);
+        dto.setPrecioSalida(precioSalida);
+        dto.setPrecioActual(precioActual);
+        dto.setEstudio(estudio);
+
+        return dto;
     }
     
 }
