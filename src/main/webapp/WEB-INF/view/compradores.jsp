@@ -46,12 +46,12 @@
         <td>${user.fechaNacimiento}</td>
         <td>${user.sexo}</td>
         <td>${user.tipoUsuario.tipo}</td>
-        <td><a href="${user.idUsuario}/messages">Ver bandeja de mesajes</a></td>
+        <td><a href="/marketing/${lista.idListaUsuario}/${user.idUsuario}/messages">Ver bandeja de mesajes</a></td>
         
     </tr>
         </c:forEach>
     </table>
     <br/>
-    <a href="/marketing/return"><input type="button" value="Volver"/></a>
+    <a href="/marketing"><input type="button" value="Volver"/></a>
     </body>
 </html>

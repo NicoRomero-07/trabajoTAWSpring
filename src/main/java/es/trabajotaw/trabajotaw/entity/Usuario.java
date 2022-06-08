@@ -295,10 +295,18 @@ public class Usuario {
         }
         dto.setListaUsuarioDTOList(listaUsuarioDTO);
 
+        List<Integer> notificacionDTOList = null;
+        if (notificacionList != null) {
+            notificacionDTOList = new ArrayList<>();
+            for (Notificacion n:notificacionList) {
+                notificacionDTOList.add(n.getIdNotificacion());
+            }
+        }
+        dto.setNotificacionDTOList(notificacionDTOList);
         return dto;
     }
 
-    public Usuario (UsuarioDTO dto, List<ListaUsuario> usuarioList){
+    public Usuario (UsuarioDTO dto, List<ListaUsuario> usuarioList, List<Notificacion> notificacionList){
         this.setIdUsuario(dto.getIdUsuario());
         this.setNombreUsuario(dto.getNombreUsuario());
         this.setContrasenya(dto.getContrasenya());
@@ -311,6 +319,7 @@ public class Usuario {
         this.setTipoUsuario(new TipoUsuario(dto.getTipoUsuario()));
         this.setFechaNacimiento(dto.getFechaNacimiento());
         this.setListaUsuarioList(usuarioList);
+        this.setNotificacionList(notificacionList);
     }
 
 }

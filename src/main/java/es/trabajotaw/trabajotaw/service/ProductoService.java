@@ -48,7 +48,10 @@ public class ProductoService {
         return this.listaEntityADTO(productos);
     }
 
-
+    public List<ProductoDTO> getProductosEnPromocion(){
+        List<Producto> promociones = this.productoRepository.findByEnPromocion(true);
+        return listaEntityADTO(promociones);
+    }
     private void rellenarProducto(Producto producto,
                                   String nombreProducto, String descripcion, Double precioSalida, String imagen, Date fechaInicio, Date fechaFin, String comprador, String publicador, Boolean promocion, Integer categoria) {
 

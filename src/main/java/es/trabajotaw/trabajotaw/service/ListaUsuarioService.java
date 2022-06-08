@@ -40,7 +40,7 @@ public class ListaUsuarioService {
         if (filtroNombre == null || filtroNombre.isEmpty()) {
             listas = this.listaUsuarioRepository.findAll();        
         } else {
-            listas = this.listaUsuarioRepository.findByNombreContaining(filtroNombre);
+            listas = this.listaUsuarioRepository.findByNombreContainsIgnoreCase('%'+filtroNombre+'%');
         }
         
         return this.listaEntityADTO(listas);                

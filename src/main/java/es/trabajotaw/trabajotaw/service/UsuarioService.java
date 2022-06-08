@@ -18,6 +18,8 @@ public class UsuarioService {
     private CategoriaRepository cr;
     @Autowired
     private TipoUsuarioRepository tur;
+    @Autowired
+    private NotificacionRepository notificacionRepository;
     private DireccionRepository dr;
     private DatosEstudioUsuarioRepository deur;
     private EstudioRepository er;
@@ -74,15 +76,30 @@ public class UsuarioService {
                 listaUsuarioList.add(this.lur.findById(idUsuario).orElse(null));
             }
         }
-        Usuario usuario = new Usuario(usuarioDTO,listaUsuarioList);
+
+        List<Notificacion> notificacionList = null;
+        if (usuarioDTO.getNotificacionDTOList() != null && !usuarioDTO.getNotificacionDTOList().isEmpty()){
+            notificacionList = new ArrayList<>();
+            for(Integer idNotificacion : usuarioDTO.getNotificacionDTOList()){
+                notificacionList.add(this.notificacionRepository.getById(idNotificacion));
+            }
+        }
+        Usuario usuario = new Usuario(usuarioDTO,listaUsuarioList,notificacionList);
         this.ur.save(usuario);
     }
-    public List<UsuarioDTO> getUsuarioListFromId(List<Integer> ids){
+    public List<UsuarioDTO> getUsuarioDTOListFromId(List<Integer> ids){
         List<Usuario> usuarioList = new ArrayList<>();
         for (Integer id : ids){
             usuarioList.add(this.ur.findById(id).orElse(null));
         }
         return this.listaEntityADTO(usuarioList);
+    }
+    public List<Integer> getIdsFromUsuarioDTOList(List<UsuarioDTO> usuarioList){
+        List<Integer> ids = new ArrayList<>();
+        for (UsuarioDTO usuario : usuarioList){
+            ids.add(usuario.getIdUsuario());
+        }
+        return ids;
     }
 
     private void rellenarUsuario (Usuario usuario,

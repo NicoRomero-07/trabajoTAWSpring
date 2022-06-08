@@ -38,6 +38,28 @@ public class NotificacionService {
         }
         return listaDTO;
     }
+    public NotificacionDTO guardarNotificacion(NotificacionDTO notificacionDTO){
+        Usuario notificante = this.usuarioRepository.findById(notificacionDTO.getNotificante()).orElse(null);
+
+        List<Usuario> notificados = null;
+        if (notificacionDTO.getUsuarioDTOList() != null && !notificacionDTO.getUsuarioDTOList().isEmpty()){
+            notificados = new ArrayList<>();
+            for(Integer id:notificacionDTO.getUsuarioDTOList()){
+                notificados.add(this.usuarioRepository.findById(id).orElse(null));
+            }
+        }
+        Notificacion notificacion = new Notificacion(notificacionDTO,notificante,notificados);
+        this.notificacionRepository.save(notificacion);
+        return notificacion.toDTO();
+    }
+
+    public List<NotificacionDTO> getNotificacionDTOListFromId(List<Integer> ids){
+        List<Notificacion> notificacionList = new ArrayList<>();
+        for (Integer id : ids){
+            notificacionList.add(this.notificacionRepository.findById(id).orElse(null));
+        }
+        return this.listaEntityADTO(notificacionList);
+    }
     public List<NotificacionDTO> listarNotificaciones () {
         return this.listaEntityADTO(this.notificacionRepository.findAll());                
     } 

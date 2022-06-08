@@ -21,15 +21,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Nueva lista</title>
     </head>
-    <%
-            Boolean error = (Boolean) request.getAttribute("error");
-    %>
     <body>
         <jsp:include page="cabeceraMarketing.jsp" /> 
         <h1>Datos de la lista</h1>
-        <%
-            if (error == null || !error){
-        %>
+        <c:choose>
+            <c:when test="${error == null || !error}">
+
+
         <%--@elvariable id="listaComprador" type="es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO"--%>
         <form:form method="POST" action="/marketing/save" modelAttribute="listaComprador">
             <form:hidden path="idListaUsuario"/>
@@ -45,17 +43,16 @@
                 </tr>
             </table>
                 <br/>
-            <input type="submit" value="Confirmar" />
-            <a href="/marketing/return"><input type="button" value="Volver"/></a>
+            <input type="submit" value="Confirmar"/>
+            <a href="/marketing"><input type="button" value="Volver"/></a>
         </form:form>
-            <%
-            }else{
-            %>
+            </c:when>
+            <c:otherwise>
             <h2>NO SE HA ELEGIDO NINGUN COMPRADOR</h2><br/>
-            <a href="/marketing/return"><input type="button" value="Volver"/></a>
-        <%
-            }
-        %>
+                <a href="/marketing"><input type="button" value="Volver"/></a>
+            </c:otherwise>
+        </c:choose>
+
 
     </body>
 </html>

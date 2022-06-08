@@ -2,6 +2,8 @@ package es.trabajotaw.trabajotaw.controller;
 
 import es.trabajotaw.trabajotaw.dao.*;
 import es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO;
+import es.trabajotaw.trabajotaw.dto.NotificacionDTO;
+import es.trabajotaw.trabajotaw.dto.ProductoDTO;
 import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
 import es.trabajotaw.trabajotaw.entity.ListaUsuario;
 import es.trabajotaw.trabajotaw.entity.Notificacion;
@@ -35,18 +37,18 @@ public class MarketingController {
     @Autowired
     NotificacionService notificacionService;
 
-    @GetMapping("/")
-    public String inicio(Model model, HttpSession session){
+    @GetMapping("")
+    public String inicio(Model model){
         model.addAttribute("listasCompradores",this.listaUsuarioService.listarListas(null));
         return "listasCompradores";
     }
-    @PostMapping("/filtro")
+    @PostMapping("")
     public String filtro(Model model, @RequestParam("filtroNombre") String filtroNombre){
         model.addAttribute("listasCompradores",this.listaUsuarioService.listarListas(filtroNombre));
         return "listasCompradores";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("{id}/edit")
     public String edit(Model model, @PathVariable int id){
         ListaUsuarioDTO listaComprador = this.listaUsuarioService.buscarLista(id);
         List<UsuarioDTO> compradores = this.usuarioService.getCompradores();
@@ -56,7 +58,7 @@ public class MarketingController {
         return "listaComprador";
     }
 
-    @PostMapping("/save")
+    @PostMapping("save")
     public String save(Model model,@ModelAttribute("listaComprador") ListaUsuarioDTO listaComprador){
         if (listaComprador.getUsuarioDTOList().isEmpty() || listaComprador.getUsuarioDTOList().size()==0){
             model.addAttribute("error",true);
@@ -85,7 +87,7 @@ public class MarketingController {
         }
 
     }
-    @GetMapping("/return")
+    @GetMapping("return")
     public String volver(){
         return "redirect:/marketing/";
     }
@@ -95,77 +97,77 @@ public class MarketingController {
         this.listaUsuarioService.borrarLista(id);
         return "redirect:/marketing/";
     }
-    /*
+
     @GetMapping("{id}/send")
     public String send(@PathVariable("id") Integer id, HttpSession session){
-        List<Producto> promociones = this.productoService.findByEnPromocion(true);
+        List<ProductoDTO> promociones = this.productoService.getProductosEnPromocion();
         StringBuilder contenido = new StringBuilder();
-        for (Producto promocion: promociones){
+        for (ProductoDTO promocion: promociones){
             contenido.append("Nombre: ").append(promocion.getNombre()).append("<br/>");
             contenido.append("Publicador: ").append(promocion.getPublicador().getNombreUsuario()).append("<br/>");
             contenido.append("Descripcion: ").append(promocion.getDescripcion()).append("<br/>");
             contenido.append("Precio de salida: ").append(promocion.getPrecioSalida()).append("€<br/><br/>");
         }
-        Notificacion notificacionCreada = new Notificacion();
+        NotificacionDTO notificacionCreada = new NotificacionDTO();
         Date now = new Date();
         notificacionCreada.setFechaEnvio(now);
         Usuario notificante = (Usuario)session.getAttribute("usuario");
-        notificacionCreada.setNotificante(notificante);
+        notificacionCreada.setNotificante(notificante.getIdUsuario());
         notificacionCreada.setContenido(contenido.toString());
-        ListaUsuario listaUsuario = this.listaUsuarioService.findById(id).orElse(null);
-        notificacionCreada.setUsuarioList(new ArrayList<>(listaUsuario.getUsuarioList()));
-        this.notificacionService.save(notificacionCreada);
+        ListaUsuarioDTO listaUsuario = this.listaUsuarioService.buscarLista(id);
+        notificacionCreada.setUsuarioDTOList(new ArrayList<>(listaUsuario.getUsuarioDTOList()));
+        notificacionCreada = this.notificacionService.guardarNotificacion(notificacionCreada);
 
-        for(Usuario comprador: listaUsuario.getUsuarioList()){
-            List<Notificacion> notificaciones = comprador.getNotificacionList();
-            notificaciones.add(notificacionCreada);
-            this.usuarioService.save(comprador);
+        for(Integer idComprador: listaUsuario.getUsuarioDTOList()){
+            UsuarioDTO comprador = this.usuarioService.buscarUsuario(idComprador);
+            List<Integer> notificaciones = comprador.getNotificacionDTOList();
+            notificaciones.add(notificacionCreada.getIdNotificacion());
+            comprador.setNotificacionDTOList(notificaciones);
+            this.usuarioService.guardarUsuario(comprador);
         }
         return "redirect:/marketing/";
     }
-    */
     @GetMapping("{id}/purcharsers")
     public String purcharsers(Model model, @PathVariable("id") Integer id){
         ListaUsuarioDTO lista = this.listaUsuarioService.buscarLista(id);
         model.addAttribute("lista",lista);
-        List<UsuarioDTO> usuarioDTOList = this.usuarioService.getUsuarioListFromId(lista.getUsuarioDTOList());
+        List<UsuarioDTO> usuarioDTOList = this.usuarioService.getUsuarioDTOListFromId(lista.getUsuarioDTOList());
         model.addAttribute("compradores",usuarioDTOList);
         return "compradores";
     }
-    /*
+
     @GetMapping("{listId}/{userId}/messages")
     public String messages (Model model,
                             @PathVariable("listId") Integer listId,
                             @PathVariable("userId") Integer userId){
-        Usuario usuario = this.usuarioService.findById(userId).orElse(null);
-        List<Notificacion> notificaciones = usuario.getNotificacionList();
+        UsuarioDTO usuario = this.usuarioService.buscarUsuario(userId);
+        List<Integer> idNotificaciones = usuario.getNotificacionDTOList();
+        List<NotificacionDTO> notificaciones = this.notificacionService.getNotificacionDTOListFromId(idNotificaciones);
         model.addAttribute("notificaciones",notificaciones);
         model.addAttribute("comprador",usuario);
-        model.addAttribute("lista",this.listaUsuarioService.findById(listId).orElse(null));
+        model.addAttribute("lista",this.listaUsuarioService.buscarLista(listId));
         return "mensajes";
     }
 
     @GetMapping("{listId}/{userId}/{notificationId}/deleteMessage")
-    public String deleteMessage (Model model,
-                                 @PathVariable("userId") Integer userId,
+    public String deleteMessage (@PathVariable("userId") Integer userId,
                                  @PathVariable("notificationId") Integer notificationId){
-        Usuario usuario = this.usuarioService.findById(userId).orElse(null);
+        UsuarioDTO usuario = this.usuarioService.buscarUsuario(userId);
 
-        Notificacion notificacion = this.notificacionService.findById(notificationId).orElse(null);
+        NotificacionDTO notificacion = this.notificacionService.buscarNotificacion(notificationId);
 
-        List<Usuario> usuarios = notificacion.getUsuarioList();
-        usuarios.remove(usuario);
-        notificacion.setUsuarioList(usuarios);
-        this.notificacionService.save(notificacion);
-        List<Notificacion> notificaciones = usuario.getNotificacionList();
-        notificaciones.remove(notificacion);
-        usuario.setNotificacionList(notificaciones);
-        this.usuarioService.save(usuario);
-        if (notificacion.getUsuarioList().isEmpty()){
-            this.notificacionService.delete(notificacion);
+        List<Integer> usuarios = notificacion.getUsuarioDTOList();
+        usuarios.remove(usuario.getIdUsuario());
+        notificacion.setUsuarioDTOList(usuarios);
+        this.notificacionService.guardarNotificacion(notificacion);
+        List<Integer> notificaciones = usuario.getNotificacionDTOList();
+        notificaciones.remove(notificacion.getIdNotificacion());
+        usuario.setNotificacionDTOList(notificaciones);
+        this.usuarioService.guardarUsuario(usuario);
+        if (notificacion.getUsuarioDTOList().isEmpty()){
+            this.notificacionService.borrarNotificacion(notificacion.getIdNotificacion());
         }
 
         return "redirect:/marketing/{listId}/{userId}/messages";
     }
-    */
 }

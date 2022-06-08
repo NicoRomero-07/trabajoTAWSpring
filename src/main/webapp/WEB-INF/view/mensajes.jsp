@@ -1,4 +1,5 @@
-<%-- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
     Document   : mensajes
     Created on : 02-may-2022, 9:49:28
     Author     : Nicolás Zhao (100%)
@@ -14,6 +15,9 @@
 <%@ page import="es.trabajotaw.trabajotaw.entity.Notificacion" %>
 <%@ page import="es.trabajotaw.trabajotaw.entity.ListaUsuario" %>
 <%@ page import="es.trabajotaw.trabajotaw.entity.Usuario" %>
+<%@ page import="es.trabajotaw.trabajotaw.dto.NotificacionDTO" %>
+<%@ page import="es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO" %>
+<%@ page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,45 +25,31 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Bandeja de mensajes</title>
     </head>
-    <%
-        List<Notificacion> notificaciones = (List)request.getAttribute("notificaciones");
-        Usuario comprador = (Usuario)request.getAttribute("comprador");
-        ListaUsuario lista = (ListaUsuario) request.getAttribute("lista");
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-    %>
     <body>
         <jsp:include page="cabeceraMarketing.jsp" /> 
         <h1>Bandeja de mensajes</h1>
-        <%
-            
-        if (notificaciones != null && !notificaciones.isEmpty()){
-        %>
+        <c:choose>
+        <c:when test="${notificaciones != null && !notificaciones.isEmpty()}">
         <table border="1">
         <tr>
             <th>FECHA ENVIO</th>
             <th>CONTENIDO</th>
             <th></th>                                                     
         </tr>
-        <%
-                for (Notificacion notificacion : notificaciones) {
-        %> 
+        <c:forEach var="notificacion" items="${notificaciones}">
          <tr>
-             <td><%= formatter.format(notificacion.getFechaEnvio())%></td>
-             <td><%= notificacion.getContenido() %></td>
-             <td><a href="/marketing/<%=lista.getIdListaUsuario()%>/<%=comprador.getIdUsuario()%>/<%=notificacion.getIdNotificacion()%>/deleteMessage">Borrar</a></td>
+             <td>${notificacion.fechaEnvio}</td>
+             <td>${notificacion.contenido}</td>
+             <td><a href="/marketing/${lista.idListaUsuario}/${comprador.idUsuario}/${notificacion.idNotificacion}/deleteMessage">Borrar</a></td>
          </tr>
-        <%
-             }
-        %>
+        </c:forEach>
         </table>
-        <%
-            }else{
-        %>
+        </c:when>
+        <c:otherwise>
         <h2>NO TIENE MENSAJES</h2>
-        <%
-            }
-        %>
+        </c:otherwise>
+        </c:choose>
         <br/>
-        <a href="/marketing/<%=lista.getIdListaUsuario()%>/purcharsers"><input type="button" value="Volver"/></a>
+        <a href="/marketing/${lista.idListaUsuario}/purcharsers"><input type="button" value="Volver"/></a>
     </body>
 </html>
