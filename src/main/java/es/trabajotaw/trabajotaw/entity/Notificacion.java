@@ -8,6 +8,7 @@ import es.trabajotaw.trabajotaw.dto.NotificacionDTO;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -126,7 +127,22 @@ public class Notificacion   {
         dto.setIdNotificacion(idNotificacion);
         dto.setFechaEnvio(fechaEnvio);
         dto.setContenido(contenido);
-        dto.setNotificante(notificante.toDTO());
+        dto.setNotificante(notificante.getIdUsuario());
+        List<Integer> notificados = null;
+        if (!usuarioList.isEmpty() && usuarioList.size()>0){
+            notificados = new ArrayList<>();
+            for (Usuario usuario: usuarioList)
+            notificados.add(usuario.getIdUsuario());
+        }
+        dto.setUsuarioDTOList(notificados);
         return dto;
+    }
+
+    public Notificacion(NotificacionDTO dto, Usuario notificante, List<Usuario> notificados){
+        this.setIdNotificacion(dto.getIdNotificacion());
+        this.setNotificante(notificante);
+        this.setContenido(dto.getContenido());
+        this.setFechaEnvio(dto.getFechaEnvio());
+        this.setUsuarioList(notificados);
     }
 }

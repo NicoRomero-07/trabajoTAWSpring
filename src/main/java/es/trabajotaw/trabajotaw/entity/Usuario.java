@@ -7,6 +7,7 @@ package es.trabajotaw.trabajotaw.entity;
 
 
 import es.trabajotaw.trabajotaw.dto.CategoriaDTO;
+import es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO;
 import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
 import es.trabajotaw.trabajotaw.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -322,7 +323,40 @@ public class Usuario {
         }
         dto.setCategoriasFavoritas(listaDTOcategoria);
 
+        List<Integer> listaUsuarioDTO = null;
+        if (listaUsuarioList != null) {
+            listaUsuarioDTO = new ArrayList<>();
+            for (ListaUsuario lu:listaUsuarioList) {
+                listaUsuarioDTO.add(lu.getIdListaUsuario());
+            }
+        }
+        dto.setListaUsuarioDTOList(listaUsuarioDTO);
+
+        List<Integer> notificacionDTOList = null;
+        if (notificacionList != null) {
+            notificacionDTOList = new ArrayList<>();
+            for (Notificacion n:notificacionList) {
+                notificacionDTOList.add(n.getIdNotificacion());
+            }
+        }
+        dto.setNotificacionDTOList(notificacionDTOList);
         return dto;
+    }
+
+    public Usuario (UsuarioDTO dto, List<ListaUsuario> usuarioList, List<Notificacion> notificacionList){
+        this.setIdUsuario(dto.getIdUsuario());
+        this.setNombreUsuario(dto.getNombreUsuario());
+        this.setContrasenya(dto.getContrasenya());
+        this.setNombre(dto.getNombre());
+        this.setPrimerApellido(dto.getPrimerApellido());
+        this.setSegundoApellido(dto.getSegundoApellido());
+        this.setEmail(dto.getEmail());
+        this.setDireccion(new Direccion(dto.getDireccion()));
+        this.setSexo(dto.getSexo());
+        this.setTipoUsuario(new TipoUsuario(dto.getTipoUsuario()));
+        this.setFechaNacimiento(dto.getFechaNacimiento());
+        this.setListaUsuarioList(usuarioList);
+        this.setNotificacionList(notificacionList);
     }
 
 }

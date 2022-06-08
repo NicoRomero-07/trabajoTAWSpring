@@ -27,7 +27,8 @@ public class UsuarioDTO {
     private DireccionDTO direccion;
     private TipoUsuarioDTO tipoUsuario;
     private List<CategoriaDTO> categoriasFavoritas;
- 
+    private List<Integer> listaUsuarioDTOList;
+    private List<Integer> notificacionDTOList;
     public UsuarioDTO() {
     }
     
@@ -126,7 +127,23 @@ public class UsuarioDTO {
         this.categoriasFavoritas=categoriasFavoritas;
     }
 
-    @Override
+    public List<Integer> getListaUsuarioDTOList(){
+        return listaUsuarioDTOList;
+    }
+
+    public void setListaUsuarioDTOList (List<Integer> listaUsuarioDTOList){
+        this.listaUsuarioDTOList = listaUsuarioDTOList;
+    }
+
+    public List<Integer> getNotificacionDTOList() {
+        return notificacionDTOList;
+    }
+
+    public void setNotificacionDTOList(List<Integer> notificacionDTOList) {
+        this.notificacionDTOList = notificacionDTOList;
+    }
+
+        @Override
     public int hashCode() {
         int hash = 3;
         hash = 61 * hash + Objects.hashCode(this.idUsuario);
