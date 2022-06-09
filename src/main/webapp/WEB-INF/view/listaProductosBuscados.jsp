@@ -98,6 +98,6 @@
                 %>
             </tr>
         </table>
-            <a href="CompradorPrincipalServlet">Volver</a>
+            <a href="/comprador/vistaComprador">Volver</a>
     </body>
 </html>

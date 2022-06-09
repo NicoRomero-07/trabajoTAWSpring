@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -27,10 +28,9 @@ public class CompradorPrincipalController {
     }
 
     @PostMapping(value = "/verProductos")
-    public String buscarProductos(Model model, HttpSession session){
+    public String buscarProductos(Model model, HttpSession session, @RequestParam("buscador") String buscador){
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        String busqueda = (String) model.getAttribute("buscador");
-        List<ProductoDTO> productosBuscados = productosService.listarProductos(busqueda);
+        List<ProductoDTO> productosBuscados = productosService.listarProductos(buscador);
         List<ProductoDTO> productosFavoritos = productosService.buscarProductosFavoritos(usuario.toDTO().getIdUsuario());
         model.addAttribute("productosBuscados", productosBuscados);
         model.addAttribute("productosFavoritos", productosFavoritos);
