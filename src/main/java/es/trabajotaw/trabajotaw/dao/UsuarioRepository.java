@@ -26,6 +26,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     List<Usuario> findByNombreUsuario(String comprador);
 
+    @Query("select u from Usuario u where upper(u.nombreUsuario) like upper(:nombreUsuario)")
+    List<Usuario> findAllByNombreUsuarioContaining(@Param("nombreUsuario") String nombreUsuario);
+
     List<Usuario> findByTipoUsuario(TipoUsuario tipo);
 
 }

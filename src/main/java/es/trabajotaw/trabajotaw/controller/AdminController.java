@@ -49,7 +49,13 @@ public class AdminController {
         model.addAttribute("usuarios", usuarios);
         return "usuarios";
     }
-
+    @PostMapping(value = "/administrarUsuarios")
+    public String doPostAdministrarUsuarios(Model model, HttpSession session, @RequestParam("filtroNombre") String filtroNombre){
+        if(filtroNombre==null) filtroNombre="";
+        List<UsuarioDTO> usuarios = usuariosService.listarUsuarios(filtroNombre);
+        model.addAttribute("usuarios", usuarios);
+        return "usuarios";
+    }
     @GetMapping(value = "/administrarUsuario/{id}")
     public String doAdministrarUsuario(Model model, HttpSession session, @PathVariable("id") Integer id){
 
@@ -73,7 +79,9 @@ public class AdminController {
 
     @PostMapping(value = "/guardarUsuario")
     public String doGuardarUsuario(@ModelAttribute() UsuarioDTO usuario){
+        List<Integer> idCategorias = usuario.getCategoriasFavoritas();
         Usuario usuarioEntidad = new Usuario(usuario);
+        usuariosService.guardarUsuario(usuario);
         usuariosService.modificarUsuario(usuarioEntidad);
         return "redirect:/administrador/administrarUsuarios";
     }
@@ -81,6 +89,13 @@ public class AdminController {
     @GetMapping(value = "/administrarCategorias")
     public String doAdministrarCategorias(Model model, HttpSession session){
         List<CategoriaDTO> categorias = categoriasService.listarCategorias(null);
+        model.addAttribute("categorias", categorias);
+        return "categorias";
+    }
+
+    @PostMapping(value = "/administrarCategorias")
+    public String doPostAdministrarCategorias(Model model, HttpSession session, @RequestParam("filtroNombre") String filtroNombre){
+        List<CategoriaDTO> categorias = categoriasService.listarCategorias(filtroNombre);
         model.addAttribute("categorias", categorias);
         return "categorias";
     }
@@ -114,7 +129,12 @@ public class AdminController {
         model.addAttribute("productos", productos);
         return "productos";
     }
-
+    @PostMapping(value = "/administrarProductos")
+    public String doAdministrarProductos(Model model, HttpSession session,@RequestParam("filtroNombre") String filtroNombre){
+        List<ProductoDTO> productos = productosService.listarProductos(filtroNombre);
+        model.addAttribute("productos", productos);
+        return "productos";
+    }
     @GetMapping(value = "/administrarProducto/{id}")
     public String doAdministrarProducto(Model model, HttpSession session, @PathVariable("id") Integer id){
         ProductoDTO producto = productosService.buscarProducto(id);

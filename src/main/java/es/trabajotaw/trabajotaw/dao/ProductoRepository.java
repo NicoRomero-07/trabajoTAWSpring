@@ -15,7 +15,8 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     @Query("select p FROM Producto p where p.publicador.idUsuario = :publicadorid")
     List<Producto> listaProductosPublicadorId(@Param("publicadorid") Integer publicadorid);
 
-    List<Producto> findByNombreContaining(String busqueda);
+    @Query("select p from Producto p where upper(p.nombre) like upper(:nombre)")
+    List<Producto> findByNombreContaining(String nombre);
 
     @Query("select p from Producto p where p.comprador.idUsuario = :idUsuario")
     List<Producto> listaProductosComprados(@Param("idUsuario") Integer idUsuario);

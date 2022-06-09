@@ -40,7 +40,7 @@ public class CategoriaService {
         if (filtroNombre == null || filtroNombre.isEmpty()) {
             categorias = this.cr.findAll();
         } else {
-            //categorias = this.cr.getByNombre(filtroNombre);
+            categorias = this.cr.findByNombreCategoria('%'+filtroNombre+'%');
         }
 
         return this.listaEntityADTO(categorias);

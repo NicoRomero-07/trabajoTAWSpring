@@ -44,7 +44,7 @@ public class UsuarioService {
         if (filtroNombre == null || filtroNombre.isEmpty()) {
             usuarios = this.ur.findAll();
         } else {
-            //usuarios = this.ur.findByNombreUsuario(filtroNombre);
+            usuarios = this.ur.findAllByNombreUsuarioContaining('%'+filtroNombre+'%');
         }
 
         return this.listaEntityADTO(usuarios);

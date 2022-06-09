@@ -42,7 +42,7 @@ public class ProductoService {
         if (busqueda == null || busqueda.isEmpty()) {
             productos = this.productoRepository.findAll();
         } else {
-            productos = this.productoRepository.findByNombreContaining(busqueda);
+            productos = this.productoRepository.findByNombreContaining('%'+busqueda+'%');
         }
 
         return this.listaEntityADTO(productos);
