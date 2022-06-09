@@ -85,7 +85,18 @@ public class AdminController {
         usuariosService.modificarUsuario(usuarioEntidad);
         return "redirect:/administrador/administrarUsuarios";
     }
+    @GetMapping(value="/nuevoUsuario")
+    public String doNuevoUsuario (Model model) {
+        UsuarioDTO usuario = new UsuarioDTO();
+        List<TipoUsuarioDTO> tipoUsuarios = tiposUsuarioService.listarTipoUsuarios(null);
+        List<CategoriaDTO> categorias = categoriasService.listarCategorias(null);
 
+        model.addAttribute("categorias", categorias);
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("tipoUsuarios", tipoUsuarios);
+
+        return "usuario";
+    }
     @GetMapping(value = "/administrarCategorias")
     public String doAdministrarCategorias(Model model, HttpSession session){
         List<CategoriaDTO> categorias = categoriasService.listarCategorias(null);
@@ -119,8 +130,16 @@ public class AdminController {
     @PostMapping(value="/guardarCategoria")
     public String doGuardarCategoria(@ModelAttribute("categoria") CategoriaDTO categoria){
         Categoria categoriaEntidad = new Categoria(categoria);
+
         categoriasService.modificarCategoria(categoriaEntidad);
         return "redirect:/administrador/administrarCategorias";
+    }
+
+    @GetMapping(value="/nuevaCategoria")
+    public String doNuevaCategoria (Model model) {
+        CategoriaDTO categoria = new CategoriaDTO();
+        model.addAttribute("categoria", categoria);
+        return "categoria";
     }
 
     @GetMapping(value = "/administrarProductos")

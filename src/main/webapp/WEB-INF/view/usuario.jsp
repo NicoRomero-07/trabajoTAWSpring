@@ -25,13 +25,11 @@
     </head>
     <%
         UsuarioDTO usuario = (UsuarioDTO) request.getAttribute("usuario");
-        String tipoUsuario = usuario.getTipoUsuario().getTipo();
         List<CategoriaDTO> categorias = (List) request.getAttribute("categorias");
     %>
     <body>
-    <%if(tipoUsuario!=null){%>
     <jsp:include page="cabecera.jsp" />
-    <%}%>
+
     <a methods="post" href="/administrador/administrarUsuarios">Volver</a>
     <h1>Datos del usuario</h1>
     <form:form method="POST" action="/administrador/guardarUsuario" modelAttribute="usuario">

@@ -46,6 +46,6 @@
                 }
     %>
     </table>
-    <a href="/administrador/administrarCategoria/>">Crear nueva categoria ... </a>
+    <a href="/administrador/nuevaCategoria">Crear nueva categoria ... </a>
     </body>
 </html>

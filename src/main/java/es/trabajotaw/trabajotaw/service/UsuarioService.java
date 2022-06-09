@@ -64,7 +64,7 @@ public class UsuarioService {
     }
 
     public void borrarUsuario (Integer id) {
-        Usuario usuario = this.ur.getById(id);
+        Usuario usuario = this.ur.findById(id).orElse(null);
 
         this.ur.delete(usuario);
     }

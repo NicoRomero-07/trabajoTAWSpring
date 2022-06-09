@@ -65,6 +65,6 @@
                 }
     %>
     </table>
-    <a href="UsuarioNuevoEditarServlet">Crear nuevo cliente ... </a>
+    <a href="/administrador/nuevoUsuario">Crear nuevo cliente ... </a>
     </body>
 </html>

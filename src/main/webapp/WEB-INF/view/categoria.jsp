@@ -18,7 +18,7 @@
     <body>
         <jsp:include page="cabecera.jsp" /> 
         <a href="/administrador/administrarCategorias">Volver</a>
-        <h1>Datos del usuario</h1>
+        <h1>Datos de la categoria</h1>
         <form:form method="POST" action="/administrador/guardarCategoria" modelAttribute="categoria">
             <form:hidden path ="idCategoria" />
             Nombre: <form:input type="text" size="30" path="nombre" /> <br/>
