@@ -34,6 +34,7 @@ public class UsuarioDTO {
     @ManyToOne(cascade = CascadeType.ALL)
     private DireccionDTO direccion;
     private TipoUsuarioDTO tipoUsuario;
+
     private List<Integer> categoriasFavoritas;
 
     public List<Integer> getCategoriasFavoritas() {
@@ -44,9 +45,12 @@ public class UsuarioDTO {
         this.categoriasFavoritas = idCategoriasFavoritas;
     }
 
-        public UsuarioDTO() {
+    private List<Integer> listaUsuarioDTOList;
+    private List<Integer> notificacionDTOList;
+
+    public UsuarioDTO() {
     }
-    
+
     public Integer getIdUsuario() {
         return idUsuario;
     }
@@ -118,7 +122,7 @@ public class UsuarioDTO {
     public void setSexo(Character sexo) {
         this.sexo = sexo;
     }
-    
+
     public DireccionDTO getDireccion() {
         return direccion;
     }
@@ -133,6 +137,22 @@ public class UsuarioDTO {
 
     public void setTipoUsuario(TipoUsuarioDTO tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public List<Integer> getListaUsuarioDTOList(){
+        return listaUsuarioDTOList;
+    }
+
+    public void setListaUsuarioDTOList (List<Integer> listaUsuarioDTOList){
+        this.listaUsuarioDTOList = listaUsuarioDTOList;
+    }
+
+    public List<Integer> getNotificacionDTOList() {
+        return notificacionDTOList;
+    }
+
+    public void setNotificacionDTOList(List<Integer> notificacionDTOList) {
+        this.notificacionDTOList = notificacionDTOList;
     }
 
     @Override

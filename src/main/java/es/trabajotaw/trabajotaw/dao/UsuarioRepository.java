@@ -1,5 +1,6 @@
 package es.trabajotaw.trabajotaw.dao;
 
+import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
 import es.trabajotaw.trabajotaw.entity.TipoUsuario;
 import es.trabajotaw.trabajotaw.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;

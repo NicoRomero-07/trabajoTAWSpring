@@ -5,6 +5,8 @@
  */
 package es.trabajotaw.trabajotaw.dto;
 
+import es.trabajotaw.trabajotaw.entity.TipoUsuario;
+
 /**
  *
  * @author nicor
@@ -16,7 +18,7 @@ public class TipoUsuarioDTO {
     public TipoUsuarioDTO(){
         
     }
-    
+
     public Integer getIdTipoUsuario() {
         return idTipoUsuario;
     }

@@ -1,10 +1,7 @@
 package es.trabajotaw.trabajotaw.service;
 
 import es.trabajotaw.trabajotaw.dao.*;
-import es.trabajotaw.trabajotaw.dto.CategoriaDTO;
-import es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO;
-import es.trabajotaw.trabajotaw.dto.NotificacionDTO;
-import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
+import es.trabajotaw.trabajotaw.dto.*;
 import es.trabajotaw.trabajotaw.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +16,15 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository ur;
     private CategoriaRepository cr;
+    @Autowired
     private TipoUsuarioRepository tur;
+    @Autowired
+    private NotificacionRepository notificacionRepository;
     private DireccionRepository dr;
     private DatosEstudioUsuarioRepository deur;
     private EstudioRepository er;
     private CategoriaService cs;
+    @Autowired
     private ListaUsuarioRepository lur;
 
     private List<UsuarioDTO> listaEntityADTO (List<Usuario> lista) {
@@ -48,22 +49,57 @@ public class UsuarioService {
 
         return this.listaEntityADTO(usuarios);
     }
-
-    /*
     public List<UsuarioDTO> getCompradores(){
-        List<Usuario> compradores = this.ur.getCompradores();
+        List<Usuario> compradores = this.ur.findByTipoUsuario(this.tur.findByTipo("Comprador"));
         return listaEntityADTO(compradores);
     }
-    */
     public UsuarioDTO buscarUsuario (Integer id) {
         Usuario usuario = this.ur.getById(id);
         return usuario.toDTO();
+    }
+
+    public List<UsuarioDTO> buscarPorTipoUsuario(TipoUsuarioDTO tipoUsuarioDTO){
+        List<Usuario> listaUsuarios =  ur.findByTipoUsuario(new TipoUsuario(tipoUsuarioDTO));
+        return this.listaEntityADTO(listaUsuarios);
     }
 
     public void borrarUsuario (Integer id) {
         Usuario usuario = this.ur.getById(id);
 
         this.ur.delete(usuario);
+    }
+    public void guardarUsuario(UsuarioDTO usuarioDTO){
+        List<ListaUsuario> listaUsuarioList = null;
+        if (usuarioDTO.getListaUsuarioDTOList() != null && !usuarioDTO.getListaUsuarioDTOList().isEmpty()){
+            listaUsuarioList = new ArrayList<>();
+            for(Integer idUsuario : usuarioDTO.getListaUsuarioDTOList()){
+                listaUsuarioList.add(this.lur.findById(idUsuario).orElse(null));
+            }
+        }
+
+        List<Notificacion> notificacionList = null;
+        if (usuarioDTO.getNotificacionDTOList() != null && !usuarioDTO.getNotificacionDTOList().isEmpty()){
+            notificacionList = new ArrayList<>();
+            for(Integer idNotificacion : usuarioDTO.getNotificacionDTOList()){
+                notificacionList.add(this.notificacionRepository.getById(idNotificacion));
+            }
+        }
+        Usuario usuario = new Usuario(usuarioDTO,listaUsuarioList,notificacionList);
+        this.ur.save(usuario);
+    }
+    public List<UsuarioDTO> getUsuarioDTOListFromId(List<Integer> ids){
+        List<Usuario> usuarioList = new ArrayList<>();
+        for (Integer id : ids){
+            usuarioList.add(this.ur.findById(id).orElse(null));
+        }
+        return this.listaEntityADTO(usuarioList);
+    }
+    public List<Integer> getIdsFromUsuarioDTOList(List<UsuarioDTO> usuarioList){
+        List<Integer> ids = new ArrayList<>();
+        for (UsuarioDTO usuario : usuarioList){
+            ids.add(usuario.getIdUsuario());
+        }
+        return ids;
     }
 
     private void rellenarUsuario (Usuario usuario,

@@ -37,10 +37,6 @@ public class TipoUsuario   {
 
     public TipoUsuario() {
     }
-    public TipoUsuario(TipoUsuarioDTO tipousuario) {
-        idTipoUsuario=tipousuario.getIdTipoUsuario();
-        setTipo(tipousuario.getTipo());
-    }
 
     public TipoUsuario(Integer idTipoUsuario) {
         this.idTipoUsuario = idTipoUsuario;
@@ -102,12 +98,17 @@ public class TipoUsuario   {
     }
 
     public TipoUsuarioDTO toDTO() {
-        TipoUsuarioDTO categoriaDTO = new TipoUsuarioDTO();
+        TipoUsuarioDTO tipoUsuarioDTO = new TipoUsuarioDTO();
 
-        categoriaDTO.setIdTipoUsuario(idTipoUsuario);
-        categoriaDTO.setTipo(tipo);
+        tipoUsuarioDTO.setIdTipoUsuario(idTipoUsuario);
+        tipoUsuarioDTO.setTipo(tipo);
 
-        return categoriaDTO;
+        return tipoUsuarioDTO;
+    }
+
+    public TipoUsuario (TipoUsuarioDTO dto){
+        this.setIdTipoUsuario(dto.getIdTipoUsuario());
+        this.setTipo(dto.getTipo());
     }
 
 }

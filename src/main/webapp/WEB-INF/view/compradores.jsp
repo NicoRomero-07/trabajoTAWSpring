@@ -1,4 +1,5 @@
-<%-- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
     Document   : usuarios
     Created on : 20-abr-2022, 15:18:27
     Author     : Nicolás Zhao (100%)
@@ -34,30 +35,23 @@
             <th>TIPO_USUARIO</th>
             <th></th>                                                     
         </tr>
-    <%
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");    
-        List<Usuario> compradores = (List)request.getAttribute("compradores");
-        ListaUsuario lista = (ListaUsuario) request.getAttribute("lista");
-                for (Usuario user: compradores) {
-    %>
+        <c:forEach var="user" items="${compradores}">
     <tr>
-        <td><%= user.getNombreUsuario() %></td>
-        <td><%= user.getContrasenya() %></td>
-        <td><%= user.getEmail() %></td>
-        <td><%= user.getNombre() %></td>
-        <td><%= user.getPrimerApellido() %></td>
-        <td><%= user.getSegundoApellido() %></td>
-        <td><%= formatter.format(user.getFechaNacimiento()) %></td>
-        <td><%= user.getSexo().charValue() %></td>
-        <td><%= user.getTipoUsuario().getTipo() %></td>
-        <td><a href="<%= user.getIdUsuario()%>/messages">Ver bandeja de mesajes</a></td>
+        <td>${user.nombreUsuario}</td>
+        <td>${user.contrasenya}</td>
+        <td>${user.email}</td>
+        <td>${user.nombre}</td>
+        <td>${user.primerApellido}</td>
+        <td>${user.segundoApellido}</td>
+        <td>${user.fechaNacimiento}</td>
+        <td>${user.sexo}</td>
+        <td>${user.tipoUsuario.tipo}</td>
+        <td><a href="/marketing/${lista.idListaUsuario}/${user.idUsuario}/messages">Ver bandeja de mesajes</a></td>
         
     </tr>
-    <%
-                }
-    %>
+        </c:forEach>
     </table>
     <br/>
-    <a href="/marketing/return"><input type="button" value="Volver"/></a>
+    <a href="/marketing"><input type="button" value="Volver"/></a>
     </body>
 </html>
