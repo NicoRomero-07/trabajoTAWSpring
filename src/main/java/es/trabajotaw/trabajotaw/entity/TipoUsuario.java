@@ -37,6 +37,10 @@ public class TipoUsuario   {
 
     public TipoUsuario() {
     }
+    public TipoUsuario(TipoUsuarioDTO tipousuario) {
+        idTipoUsuario=tipousuario.getIdTipoUsuario();
+        setTipo(tipousuario.getTipo());
+    }
 
     public TipoUsuario(Integer idTipoUsuario) {
         this.idTipoUsuario = idTipoUsuario;

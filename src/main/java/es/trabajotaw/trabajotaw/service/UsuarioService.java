@@ -108,6 +108,10 @@ public class UsuarioService {
         this.ur.save(usuario);
     }
 
+    public void modificarUsuario(Usuario usuario){
+        this.ur.save(usuario);
+    }
+
     public void modificarUsuario (Integer id,
                                   String nombreUsuario, String contrasenya, String nombre, String primerApellido,
                                   String segundoApellido, String email, Integer direccion, Character sexo,

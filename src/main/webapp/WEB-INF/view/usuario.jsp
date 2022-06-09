@@ -26,6 +26,7 @@
     <%
         UsuarioDTO usuario = (UsuarioDTO) request.getAttribute("usuario");
         String tipoUsuario = usuario.getTipoUsuario().getTipo();
+        List<CategoriaDTO> categorias = (List) request.getAttribute("categorias");
     %>
     <body>
     <%if(tipoUsuario!=null){%>
@@ -33,8 +34,7 @@
     <%}%>
     <a methods="post" href="/administrador/administrarUsuarios">Volver</a>
     <h1>Datos del usuario</h1>
-    <form:form method="POST" action="UsuarioGuardarServlet" modelAttribute="usuario">
-        <form:hidden path="direccion" />
+    <form:form method="POST" action="/administrador/guardarUsuario" modelAttribute="usuario">
         <form:hidden path="idUsuario"/>
         Nombre de Usuario: <form:input type="text" size="30" path="nombreUsuario" /> <br>
         Contraseña: <form:input type="password" size="30" path="contrasenya"/> <br>
@@ -49,12 +49,12 @@
         <br>
         Fecha Nacimiento: <form:input type="date" size="30" path="fechaNacimiento" /> <br>
         Tipo Usuario:
-        <form:select path="tipoUsuario">
+        <form:select path="tipoUsuario.idTipoUsuario">
             <form:options items="${tipoUsuarios}" itemLabel="tipo" itemValue="idTipoUsuario" />
         </form:select><br>
 
         Categorias Favoritas:
-        <form:radiobuttons path="categoriasFavoritas"/>
+        <form:checkboxes path="categoriasFavoritas" items="${categorias}" itemValue="idCategoria" itemLabel="nombre"/>
         <br>
 
         Tipo de via:

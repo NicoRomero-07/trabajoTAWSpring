@@ -6,6 +6,12 @@
 package es.trabajotaw.trabajotaw.dto;
 
 
+    import org.springframework.format.annotation.DateTimeFormat;
+
+    import javax.persistence.CascadeType;
+    import javax.persistence.ManyToMany;
+    import javax.persistence.ManyToOne;
+    import javax.persistence.OneToOne;
     import java.util.Date;
     import java.util.List;
     import java.util.Objects;
@@ -22,13 +28,23 @@ public class UsuarioDTO {
     private String nombre;
     private String primerApellido;
     private String segundoApellido;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaNacimiento;
     private Character sexo;
+    @ManyToOne(cascade = CascadeType.ALL)
     private DireccionDTO direccion;
     private TipoUsuarioDTO tipoUsuario;
-    private List<CategoriaDTO> categoriasFavoritas;
- 
-    public UsuarioDTO() {
+    private List<Integer> categoriasFavoritas;
+
+    public List<Integer> getCategoriasFavoritas() {
+        return categoriasFavoritas;
+    }
+
+    public void setCategoriasFavoritas(List<Integer> idCategoriasFavoritas) {
+        this.categoriasFavoritas = idCategoriasFavoritas;
+    }
+
+        public UsuarioDTO() {
     }
     
     public Integer getIdUsuario() {
@@ -117,13 +133,6 @@ public class UsuarioDTO {
 
     public void setTipoUsuario(TipoUsuarioDTO tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
-    }
-
-    public List<CategoriaDTO> getCategoriasFavoritas(){
-        return categoriasFavoritas;
-    }
-    public void setCategoriasFavoritas(List<CategoriaDTO> categoriasFavoritas){
-        this.categoriasFavoritas=categoriasFavoritas;
     }
 
     @Override

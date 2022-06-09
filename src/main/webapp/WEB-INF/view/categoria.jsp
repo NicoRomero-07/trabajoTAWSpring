@@ -24,5 +24,7 @@
             Nombre: <form:input type="text" size="30" path="nombre" /> <br/>
             <form:button>Enviar</form:button>
         </form:form>
+
+
     </body>
 </html>

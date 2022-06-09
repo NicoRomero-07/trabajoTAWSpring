@@ -56,16 +56,7 @@ public class AdminController {
         UsuarioDTO usuario = usuariosService.buscarUsuario(id);
         List<TipoUsuarioDTO> tipoUsuarios = tiposUsuarioService.listarTipoUsuarios(null);
         List<CategoriaDTO> categorias = categoriasService.listarCategorias(null);
-        List<CategoriaDTO> categoriasFavoritas = usuariosService.categoriasUsuario(id);
-        List<Character> listaSexo = new ArrayList();
-        listaSexo.add('H');
-        listaSexo.add('M');
-        List<String> listaTipoVia = new ArrayList();
-        listaTipoVia.add("OFICINA");
-        listaTipoVia.add("CALLE");
-        model.addAttribute("tipoVias",listaTipoVia);
-        model.addAttribute("sexos",listaSexo);
-        model.addAttribute("categoriasFavoritas", categoriasFavoritas);
+
         model.addAttribute("categorias", categorias);
         model.addAttribute("usuario", usuario);
         model.addAttribute("tipoUsuarios", tipoUsuarios);
@@ -81,16 +72,10 @@ public class AdminController {
 
 
     @PostMapping(value = "/guardarUsuario")
-    public String doGuardarUsuario(@ModelAttribute("usuario") UsuarioDTO usuario){
-        /*usuariosService.modificarUsuario(usuario.getIdUsuario(),usuario.getNombreUsuario(),
-                usuario.getContrasenya(), usuario.getNombre(), usuario.getPrimerApellido(),
-                usuario.getSegundoApellido(),usuario.getEmail(),
-                usuario.getDireccion().getIdDireccion(),usuario.getSexo(),
-                usuario.getTipoUsuario().getIdTipoUsuario(),usuario.getFechaNacimiento(),
-                usuario.getCategoriasFavoritas());
-
-         */
-        return " ";
+    public String doGuardarUsuario(@ModelAttribute() UsuarioDTO usuario){
+        Usuario usuarioEntidad = new Usuario(usuario);
+        usuariosService.modificarUsuario(usuarioEntidad);
+        return "redirect:/administrador/administrarUsuarios";
     }
 
     @GetMapping(value = "/administrarCategorias")
