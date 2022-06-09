@@ -54,7 +54,7 @@ public class UsuarioService {
         return listaEntityADTO(compradores);
     }
     public UsuarioDTO buscarUsuario (Integer id) {
-        Usuario usuario = this.ur.getById(id);
+        Usuario usuario = this.ur.findById(id).orElse(null);
         return usuario.toDTO();
     }
 
@@ -153,7 +153,7 @@ public class UsuarioService {
                                   String segundoApellido, String email, Integer direccion, Character sexo,
                                   Integer tipoUsuario, Date fechaNacimiento,String[] categoriasStr) {
 
-        Usuario usuario = this.ur.getById(id);
+        Usuario usuario = this.ur.findById(id).orElse(null);
 
         this.rellenarUsuario(usuario, nombreUsuario, contrasenya, nombre, primerApellido,
                 segundoApellido, email, direccion, sexo, tipoUsuario, fechaNacimiento, categoriasStr);
@@ -163,7 +163,7 @@ public class UsuarioService {
 
     public void modificarUsuario(Integer id, List<Integer> lista){
 
-        Usuario usuario = this.ur.getById(id);
+        Usuario usuario = this.ur.findById(id).orElse(null);
 
         List<ListaUsuario> listas = new ArrayList<>();
         for(Integer c : lista){
@@ -177,7 +177,7 @@ public class UsuarioService {
 
     public void modificarNotificacionesUsuario(Integer id, List<Integer> lista){
 
-        Usuario usuario = this.ur.getById(id);
+        Usuario usuario = this.ur.findById(id).orElse(null);
 
         List<Notificacion> listas = new ArrayList<>();
         for(Integer c : lista){
@@ -190,7 +190,7 @@ public class UsuarioService {
     }
 
     public List<CategoriaDTO> categoriasUsuario(Integer id){
-        Usuario usuario = this.ur.getById(id);
+        Usuario usuario = this.ur.findById(id).orElse(null);
         List<CategoriaDTO> categoriasDTO = new ArrayList();
         List<Categoria> categorias = usuario.getCategoriaList();
 
@@ -230,7 +230,7 @@ public class UsuarioService {
     */
 
     public List<ListaUsuarioDTO> listasUsuario(Integer id){
-        Usuario usuario = this.ur.getById(id);
+        Usuario usuario = this.ur.findById(id).orElse(null);
         List<ListaUsuarioDTO> listaDTO = new ArrayList();
         List<ListaUsuario> listas = usuario.getListaUsuarioList();
 
@@ -241,7 +241,7 @@ public class UsuarioService {
     }
 
     public List<NotificacionDTO> notificacionesUsuario (Integer id){
-        Usuario usuario = this.ur.getById(id);
+        Usuario usuario = this.ur.findById(id).orElse(null);
         List<NotificacionDTO> notificacionDTO = new ArrayList();
         List<Notificacion> notificaciones = usuario.getNotificacionList();
 

@@ -163,6 +163,15 @@ public class AdminController {
         return "producto";
     }
 
+    @GetMapping(value = "/nuevoProducto")
+    public String doNuevoProducto(Model model, HttpSession session){
+        ProductoDTO producto = new ProductoDTO();
+        List<CategoriaDTO> categorias = categoriasService.listarCategorias(null);
+        model.addAttribute("categorias", categorias);
+        model.addAttribute("producto", producto);
+        return "producto";
+    }
+
     @GetMapping(value = "/borrarProducto/{id}")
     public String doBorrarProducto(Model model, HttpSession session, @PathVariable("id") Integer id){
         productosService.borrarProducto(id);

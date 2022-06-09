@@ -68,6 +68,6 @@
             
         </table>
                 
-        <a href="ProductoNuevoEditarServlet"> Crear nuevo producto... </a>            
+        <a href="/administrador/nuevoProducto"> Crear nuevo producto... </a>
     </body>
 </html>

@@ -97,7 +97,7 @@ public class ProductoService {
     public void modificarProducto(Integer id,
                                   String nombreProducto, String descripcion, Double precioSalida, String imagen, Date fechaInicio, Date fechaFin, String comprador, String publicador, Boolean promocion, Integer categoria) {
 
-        Producto producto = this.productoRepository.getById(id);
+        Producto producto = this.productoRepository.findById(id).orElse(null);
 
         this.rellenarProducto(producto, nombreProducto, descripcion, precioSalida, imagen, fechaInicio, fechaFin, comprador, publicador, promocion, categoria);
 
@@ -105,7 +105,7 @@ public class ProductoService {
     }
 
     public ProductoDTO buscarProducto(Integer id) {
-        Producto p = productoRepository.getById(id);
+        Producto p = productoRepository.findById(id).orElse(null);
         return p.toDTO();
     }
 
@@ -114,7 +114,7 @@ public class ProductoService {
     }
 
     public void borrarProducto(Integer id) {
-        Producto producto = this.productoRepository.getById(id);
+        Producto producto = this.productoRepository.findById(id).orElse(null);
 
         this.productoRepository.delete(producto);
     }

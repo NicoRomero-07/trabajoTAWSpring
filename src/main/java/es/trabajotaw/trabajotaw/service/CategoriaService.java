@@ -52,7 +52,7 @@ public class CategoriaService {
     }
 
     public void borrarCategoria (Integer id) {
-        Categoria categoria = this.cr.getById(id);
+        Categoria categoria = this.cr.findById(id).orElse(null);
 
         this.cr.delete(categoria);
     }
