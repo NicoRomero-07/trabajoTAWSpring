@@ -129,7 +129,7 @@ public class Notificacion   {
         dto.setContenido(contenido);
         dto.setNotificante(notificante.getIdUsuario());
         List<Integer> notificados = null;
-        if (!usuarioList.isEmpty() && usuarioList.size()>0){
+        if (usuarioList!= null && !usuarioList.isEmpty()){
             notificados = new ArrayList<>();
             for (Usuario usuario: usuarioList)
             notificados.add(usuario.getIdUsuario());
