@@ -3,14 +3,14 @@ package es.trabajotaw.trabajotaw.controller;
 import es.trabajotaw.trabajotaw.dto.CategoriaDTO;
 import es.trabajotaw.trabajotaw.dto.ProductoDTO;
 import es.trabajotaw.trabajotaw.entity.Categoria;
+import es.trabajotaw.trabajotaw.entity.Producto;
 import es.trabajotaw.trabajotaw.entity.Usuario;
 import es.trabajotaw.trabajotaw.service.CategoriaService;
 import es.trabajotaw.trabajotaw.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -35,29 +35,29 @@ public class ListaVendedorController {
 
     @GetMapping(value = "/publicarProducto")
     public String doNuevoProducto(Model model, HttpSession session) {
-        model.addAttribute("producto", null);
+        ProductoDTO producto = new ProductoDTO();
+        Usuario user = (Usuario) session.getAttribute("usuario");
+        producto.setPublicador(user.toDTO());
+        model.addAttribute("producto", producto);
         List<CategoriaDTO> categorias = this.categoriaService.listarCategorias("");
         model.addAttribute("categorias", categorias);
-
+        model.addAttribute("isVendedor", 1);
+        model.addAttribute("isNew", 1);
         return "publicarProducto";
     }
 
-    @GetMapping(value = "/guardarProducto")
-    public String doGuardarProducto(Model model, HttpSession session) {
-        String nombreproducto = (String) model.getAttribute("nombreproducto");
-        String descripcion = (String) model.getAttribute("descripcion");
-        Integer preciosalida = (Integer) model.getAttribute("preciosalida");
-        String urlimagen = (String) model.getAttribute("imagen");
-        Date fechainicio = (Date) model.getAttribute("fechaInicio");
-        Date fechafin = (Date) model.getAttribute("fechaFin");
-        String comprador = "";
-        Boolean promocion = (Boolean) model.getAttribute("promocion");
-        Usuario publicador = (Usuario) session.getAttribute("usuario");
-        Integer categoria = (Integer) session.getAttribute("categoria");
+    @PostMapping(value = "/guardarProducto/{isNew}")
+    public String doGuardarProducto(@ModelAttribute("producto") ProductoDTO prod, @PathVariable("isNew") String isNew) {
 
-        this.productoService.crearProducto(nombreproducto, descripcion, preciosalida.doubleValue(), urlimagen,
-                fechainicio, fechafin, comprador, publicador.getNombreUsuario(), promocion, categoria);
+        this.usuarioService
 
-        return "guardarProducto";
+        Integer nuevo = Integer.parseInt(isNew);
+        if(nuevo == 1) {
+            this.productoService.crearProducto(prod.getNombre(), prod.getDescripcion(), prod.getPrecioSalida(), prod.getUrlFoto(), prod.getFechaInicioSubasta(), prod.getFechaFinSubasta(), prod.getComprador().getNombre(), prod.getPublicador().getNombre(), prod.getEnPromocion(), prod.getCategoria());
+        } else {
+            this.productoService.modificarProducto(prod.getIdProducto(), prod.getNombre(), prod.getDescripcion(), prod.getPrecioSalida(), prod.getUrlFoto(), prod.getFechaInicioSubasta(), prod.getFechaFinSubasta(), prod.getComprador().getNombre(), prod.getPublicador().getNombre(), prod.getEnPromocion(), prod.getCategoria());
+        }
+
+        return "redirect:/vendedor/listaProductos";
     }
 }

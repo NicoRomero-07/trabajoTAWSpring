@@ -21,26 +21,35 @@
     </head>
     <body>
         <h1>Producto</h1>
-        <a href="/vendedor/listaProductos">Volver</a>
-        <spring:url value="/vendedor/guardarProducto"/>
+        <a href="/vendedor/listaProductos">Volver</a><br/>
         <%
             ProductoDTO producto = (ProductoDTO) request.getAttribute("producto");
+            Integer isNew = (Integer) request.getAttribute("isNew");
         %>
-        <form:form method="post" modelAttribute="producto">
-            Nombre del Producto: <form:input path="nombre" type="text" />
-            Descripción: <form:input path="descripcion" type="text" />
-            Precio Salida: <form:input path="precioSalida" type="text" />
-            URL Imagen: <form:input path="urlFoto" type="text" />
-            Fecha inicio de subasta: <form:input path="fechInicioSubasta" type="text" />
-            Fecha fin de subasta: <form:input path="fechFinSubasta" type="text" />
-            Comprador: <form:input path="comprador" type="text" />
-            Publicador: <form:input path="publicador" type="text" />
+        <form:form method="post" modelAttribute="producto" action="/vendedor/guardarProducto/${isNew}">
+            <form:hidden path="idProducto"/>
+            Nombre del Producto: <form:input path="nombre"/><br/><br/>
+            Descripción: <form:textarea path="descripcion"/><br/><br/>
+            Precio Salida: <form:input path="precioSalida"/><br/><br/>
+            URL Imagen: <form:input path="urlFoto"/><br/><br/>
+            Fecha inicio de subasta: <form:input path="fechaInicioSubasta" type="date"/><br/><br/>
+            Fecha fin de subasta: <form:input path="fechaFinSubasta" type="date"/><br/><br/>
             Categoria: <form:select path="categoria">
-                            <%
-                                List<CategoriaDTO> categorias = (List) request.getAttribute("categorias");
-                            %>
-                            <form:options items="&{categorias}" itemLabel="nombre" itemValue="idCategoria"/>
-            </form:select>
+                            <form:options items="${categorias}" itemLabel="nombre" itemValue="idCategoria"/>
+                       </form:select><br/><br/>
+            <%
+                Integer isVendedor = (Integer) request.getAttribute("isVendedor");
+                if(isVendedor != 1) {
+            %>
+            Comprador: <form:input path="comprador"/><br/><br/>
+            Publicador: <form:input path="publicador"/><br/><br/>
+            <%} else {%>
+            <form:hidden path="comprador"/><br/><br/>
+            <form:hidden path="publicador"/><br/><br/>
+            <%
+                }
+                List<CategoriaDTO> categorias = (List) request.getAttribute("categorias");
+            %>
             <form:button>Enviar</form:button>
         </form:form>
 

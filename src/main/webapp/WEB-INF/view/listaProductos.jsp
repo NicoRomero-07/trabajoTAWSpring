@@ -36,7 +36,7 @@
             <%
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy hh:mm");
                 List<ProductoDTO> productos = (List) request.getAttribute("productos");
-                Integer idusuario = (Integer) request.getAttribute("publicadorid");
+                Integer idUsuario = (Integer) request.getAttribute("publicadorid");
                 for (ProductoDTO prod : productos) {
             %>
             <tr>
@@ -50,7 +50,7 @@
                 <td><%= prod.getComprador() == null ? "No Comprado" : prod.getComprador().getNombreUsuario()%></td>
                 <td><%= prod.getCategoria()%></td>
                 <td><%=prod.getEnPromocion() ? "Si" : "No"%></td>
-                <td><a href="ProductoNuevoEditarServlet?id=<%=prod.getIdProducto()%>&usuario=<%=idusuario%>"><input
+                <td><a href="vendedor/editarProducto/<%=prod.getIdProducto()%>/<%=idUsuario%>"><input
                         type="submit" value="Editar"></a></td>
                 <%
                     Date actualDate = new Date();
