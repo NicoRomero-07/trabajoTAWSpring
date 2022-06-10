@@ -5,12 +5,16 @@
 package es.trabajotaw.trabajotaw.dto;
 
 
+import es.trabajotaw.trabajotaw.entity.Usuario;
+
+import java.util.List;
 import java.util.Objects;
 
 public class ListaUsuarioDTO {
     
     private Integer idListaUsuario;
     private String nombre;
+    private List<Integer> usuarioDTOList;
 
     public ListaUsuarioDTO() {
     }
@@ -31,6 +35,16 @@ public class ListaUsuarioDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+
+    public List<Integer> getUsuarioDTOList(){
+        return usuarioDTOList;
+    }
+    public void setUsuarioDTOList (List<Integer> usuarioDTOList){
+        this.usuarioDTOList = usuarioDTOList;
+    }
+
+
 
     @Override
     public int hashCode() {

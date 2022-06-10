@@ -7,10 +7,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@ page import="es.trabajotaw.trabajotaw.entity.Producto" %>
-<<<<<<< HEAD
 <%@ page import="es.trabajotaw.trabajotaw.dto.ProductoDTO" %>
-=======
->>>>>>> alfon
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,8 +20,9 @@
         <a href="/administrador/vistaAdministrador">Volver</a>
         <h1>Productos</h1>
         
-        <form method="post" action="ProductosServlet">
+        <form method="post" action="/administrador/administrarProductos">
             Buscar productos: <input type="text" name="filtroNombre" value="" />
+            <input type="submit" value="Filtrar" />
         </form>
         <br>
         
@@ -45,10 +43,10 @@
             </tr>
             
                 <%
-                List<Producto> productos = (List)request.getAttribute("productos");
+                List<ProductoDTO> productos = (List)request.getAttribute("productos");
                 SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yy");
 
-                for (Producto prod: productos) {
+                for (ProductoDTO prod: productos) {
                 %>
             <tr>
                 <td><%= prod.getIdProducto()%></td>
@@ -70,6 +68,6 @@
             
         </table>
                 
-        <a href="ProductoNuevoEditarServlet"> Crear nuevo producto... </a>            
+        <a href="/administrador/nuevoProducto"> Crear nuevo producto... </a>
     </body>
 </html>

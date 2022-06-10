@@ -1,4 +1,5 @@
-<%-- 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--
     Document   : comprador
     Created on : 02-may-2022, 14:35:59
     Author     : Victor
@@ -13,8 +14,8 @@
     </head>
     <body>
         <h1>Bienvenido!</h1>
-        
-        <form method="post" action="BuscarProductosServlet">
+
+        <form method="post" action="/comprador/verProductos">
             Buscar productos: <input type="text" name="buscador" value="" />
         </form>
         <br>

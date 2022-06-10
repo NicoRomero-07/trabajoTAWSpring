@@ -6,7 +6,14 @@
 package es.trabajotaw.trabajotaw.dto;
 
 
+    import org.springframework.format.annotation.DateTimeFormat;
+
+    import javax.persistence.CascadeType;
+    import javax.persistence.ManyToMany;
+    import javax.persistence.ManyToOne;
+    import javax.persistence.OneToOne;
     import java.util.Date;
+    import java.util.List;
     import java.util.Objects;
 
     /**
@@ -21,14 +28,29 @@ public class UsuarioDTO {
     private String nombre;
     private String primerApellido;
     private String segundoApellido;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaNacimiento;
     private Character sexo;
+    @ManyToOne(cascade = CascadeType.ALL)
     private DireccionDTO direccion;
     private TipoUsuarioDTO tipoUsuario;
- 
+
+    private List<Integer> categoriasFavoritas;
+
+    public List<Integer> getCategoriasFavoritas() {
+        return categoriasFavoritas;
+    }
+
+    public void setCategoriasFavoritas(List<Integer> idCategoriasFavoritas) {
+        this.categoriasFavoritas = idCategoriasFavoritas;
+    }
+
+    private List<Integer> listaUsuarioDTOList;
+    private List<Integer> notificacionDTOList;
+
     public UsuarioDTO() {
     }
-    
+
     public Integer getIdUsuario() {
         return idUsuario;
     }
@@ -100,7 +122,7 @@ public class UsuarioDTO {
     public void setSexo(Character sexo) {
         this.sexo = sexo;
     }
-    
+
     public DireccionDTO getDireccion() {
         return direccion;
     }
@@ -115,6 +137,22 @@ public class UsuarioDTO {
 
     public void setTipoUsuario(TipoUsuarioDTO tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public List<Integer> getListaUsuarioDTOList(){
+        return listaUsuarioDTOList;
+    }
+
+    public void setListaUsuarioDTOList (List<Integer> listaUsuarioDTOList){
+        this.listaUsuarioDTOList = listaUsuarioDTOList;
+    }
+
+    public List<Integer> getNotificacionDTOList() {
+        return notificacionDTOList;
+    }
+
+    public void setNotificacionDTOList(List<Integer> notificacionDTOList) {
+        this.notificacionDTOList = notificacionDTOList;
     }
 
     @Override

@@ -55,6 +55,11 @@ public class Categoria   {
         this.nombre = nombre;
     }
 
+    public Categoria(CategoriaDTO c) {
+        this.idCategoria=c.getIdCategoria();
+        setNombre(c.getNombre());
+    }
+
     public Integer getIdCategoria() {
         return idCategoria;
     }

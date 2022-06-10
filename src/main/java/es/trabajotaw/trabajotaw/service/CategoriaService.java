@@ -40,7 +40,7 @@ public class CategoriaService {
         if (filtroNombre == null || filtroNombre.isEmpty()) {
             categorias = this.cr.findAll();
         } else {
-            //categorias = this.cr.getByNombre(filtroNombre);
+            categorias = this.cr.findByNombreCategoria('%'+filtroNombre+'%');
         }
 
         return this.listaEntityADTO(categorias);
@@ -52,7 +52,7 @@ public class CategoriaService {
     }
 
     public void borrarCategoria (Integer id) {
-        Categoria categoria = this.cr.getById(id);
+        Categoria categoria = this.cr.findById(id).orElse(null);
 
         this.cr.delete(categoria);
     }
@@ -61,8 +61,6 @@ public class CategoriaService {
                               String nombreCategoria) {
 
         categoria.setNombre(nombreCategoria);
-
-
     }
 
     public void crearCategoria (String nombreCategoria) {
@@ -73,12 +71,7 @@ public class CategoriaService {
         this.cr.save(categoria);
     }
 
-    public void modificarCategoria (Integer id,
-                              String nombreCategoria) {
-
-        Categoria categoria = this.cr.getById(id);
-
-        this.rellenarCategoria(categoria, nombreCategoria);
+    public void modificarCategoria (Categoria categoria) {
 
         this.cr.save(categoria);
     }

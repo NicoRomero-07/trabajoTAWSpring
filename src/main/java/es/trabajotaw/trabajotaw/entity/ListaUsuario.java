@@ -5,8 +5,10 @@
 package es.trabajotaw.trabajotaw.entity;
 
 import es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO;
+import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -103,7 +105,21 @@ public class ListaUsuario   {
         dto.setIdListaUsuario(this.idListaUsuario);
         dto.setNombre(this.nombre);
 
+        List<Integer> listaDTO = null;
+        if (this.usuarioList != null) {
+            listaDTO = new ArrayList<>();
+            for (Usuario usuario:this.usuarioList) {
+                listaDTO.add(usuario.getIdUsuario());
+            }
+        }
+        dto.setUsuarioDTOList(listaDTO);
+
         return dto;
     }
-    
+
+    public ListaUsuario(ListaUsuarioDTO dto, List<Usuario> usuarioList){
+        this.setIdListaUsuario(dto.getIdListaUsuario());
+        this.setNombre(dto.getNombre());
+        this.setUsuarioList(usuarioList);
+    }
 }

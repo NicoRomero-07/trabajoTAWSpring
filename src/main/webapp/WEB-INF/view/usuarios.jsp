@@ -22,7 +22,7 @@
         
         <a href="/administrador/vistaAdministrador">Volver</a>
         <h1>Usuarios</h1>
-    <form method="post" action="UsuariosServlet">
+    <form method="post" action="/administrador/administrarUsuarios">
             Nombre de Usuario: <input type="text" name="filtroNombre" value="" />
             <input type="submit" value="Filtrar" />
     </form>
@@ -42,8 +42,8 @@
             <th></th>
         </tr>
     <%
-            List<Usuario> usuarios = (List)request.getAttribute("usuarios");
-                for (Usuario user: usuarios) {
+            List<UsuarioDTO> usuarios = (List)request.getAttribute("usuarios");
+                for (UsuarioDTO user: usuarios) {
     %> 
     
     <tr>
@@ -65,6 +65,6 @@
                 }
     %>
     </table>
-    <a href="UsuarioNuevoEditarServlet">Crear nuevo cliente ... </a>
+    <a href="/administrador/nuevoUsuario">Crear nuevo cliente ... </a>
     </body>
 </html>

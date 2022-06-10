@@ -5,6 +5,7 @@
 package es.trabajotaw.trabajotaw.dto;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -13,7 +14,8 @@ public class NotificacionDTO {
     private Integer idNotificacion;
     private String contenido;
     private Date fechaEnvio;
-    private UsuarioDTO notificante;
+    private Integer notificante;
+    private List<Integer> usuarioDTOList;
 
     public NotificacionDTO() {
     }
@@ -43,12 +45,20 @@ public class NotificacionDTO {
         this.fechaEnvio = fechaEnvio;
     }
 
-    public UsuarioDTO getNotificante() {
+    public Integer getNotificante() {
         return notificante;
     }
     
-    public void setNotificante(UsuarioDTO notificante) {
+    public void setNotificante(Integer notificante) {
         this.notificante = notificante;
+    }
+
+    public List<Integer> getUsuarioDTOList() {
+        return usuarioDTOList;
+    }
+
+    public void setUsuarioDTOList(List<Integer> usuarioDTOList) {
+        this.usuarioDTOList = usuarioDTOList;
     }
 
     @Override

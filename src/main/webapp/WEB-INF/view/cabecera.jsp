@@ -9,15 +9,16 @@
 <%
     Usuario user = (Usuario)session.getAttribute("usuario");
     if (user == null) {
-        response.sendRedirect(request.getContextPath());
+%>
+<jsp:forward page="/" />
+<%
     }
 %>
-
 <table width="80%">
     <tr width="80%">
         <td>Bienvenido, <%= user.getEmail() %></td>
         <td>Session ID: <%= session.getId() %></td>
-        <td><a href="UsuariosServlet">Listado de usuarios</a></td>        
-        <td><a href="LogoutServlet">Salir</a></td>        
+        <td><a href="/administrador/administrarUsuarios">Listado de usuarios</a></td>
+        <td><a href="/salir">Salir</a></td>
     </tr>
 </table>

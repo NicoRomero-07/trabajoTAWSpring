@@ -38,7 +38,7 @@
             </tr>
             
                 <%
-                List<ProductoDTO> productos = (List)request.getAttribute("productos");
+                List<ProductoDTO> productos = (List)request.getAttribute("productosBuscados");
                 List<ProductoDTO> productosFavoritos = (List)request.getAttribute("productosFavoritos");
                 SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yy");
                 Date hoy = new Date();
