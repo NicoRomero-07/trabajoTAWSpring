@@ -41,7 +41,7 @@
                     <tr>
                         <td><%= est.getIdEstudio()%></td>
                         <td><%= est.getNombre()%> </td>            
-                        <td><%= est.getAnalista()%></td>
+                        <td><%= est.getAnalista().getNombreUsuario()%></td>
                         <td><%= est.getDescripcion()%></td>   
                         <td><a href="delete/<%= est.getIdEstudio() %>">Borrar</a></td>
                         <td><a href="edit/<%= est.getIdEstudio()%>">Editar</a></td>

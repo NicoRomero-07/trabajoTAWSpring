@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import es.trabajotaw.trabajotaw.dao.DatosEstudioProductoRepository;
 import es.trabajotaw.trabajotaw.dao.ProductoRepository;
+import es.trabajotaw.trabajotaw.dao.ProductoRepositoryCustom;
 import es.trabajotaw.trabajotaw.dao.UsuarioRepository;
 import es.trabajotaw.trabajotaw.dto.ProductoDTO;
+import es.trabajotaw.trabajotaw.entity.DatosEstudioProducto;
 import es.trabajotaw.trabajotaw.entity.Producto;
 import es.trabajotaw.trabajotaw.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,10 @@ public class ProductoService {
     private ProductoRepository productoRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private DatosEstudioProductoRepository datosEstudioProductoRepository;
+    @Autowired
+    private ProductoRepositoryCustom productoRepositoryCustom;
 
     public List<ProductoDTO> listaEntityADTO(List<Producto> lista) {
         List<ProductoDTO> listaDTO = null;
@@ -48,10 +55,6 @@ public class ProductoService {
         return this.listaEntityADTO(productos);
     }
 
-    public List<ProductoDTO> getProductosEnPromocion(){
-        List<Producto> promociones = this.productoRepository.findByEnPromocion(true);
-        return listaEntityADTO(promociones);
-    }
     private void rellenarProducto(Producto producto,
                                   String nombreProducto, String descripcion, Double precioSalida, String imagen, Date fechaInicio, Date fechaFin, String comprador, String publicador, Boolean promocion, Integer categoria) {
 
@@ -149,15 +152,14 @@ public class ProductoService {
 
         return this.listaEntityADTO(productos);
     }
-        /*
+
         public List<ProductoDTO> visualizarEstudio(Integer idEstudioProducto){
-            DatosEstudioProducto estudioProducto = this.depf.find(idEstudioProducto);
-            List<Producto> productos = productoRepository.visualizarEstudio(estudioProducto);
-            List<ProductoDTO> productosDTO = this.listaEntityADTO(productos);
-            return productosDTO;
+            DatosEstudioProducto estudioProducto = this.datosEstudioProductoRepository.getById(idEstudioProducto);
+            List<Producto> productos = this.productoRepositoryCustom.visualizarEstudio(estudioProducto);
+            return this.listaEntityADTO(productos);
         }
         public List<ProductoDTO> getProductosEnPromocion() {
-            return this.listaEntityADTO(this.productoRepository.getProductosPromocion());
+            return this.listaEntityADTO(this.productoRepository.findByEnPromocion(true));
         }
-     */
+
 }

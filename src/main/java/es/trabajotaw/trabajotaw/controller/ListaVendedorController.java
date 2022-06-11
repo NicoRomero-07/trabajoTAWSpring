@@ -49,8 +49,6 @@ public class ListaVendedorController {
     @PostMapping(value = "/guardarProducto/{isNew}")
     public String doGuardarProducto(@ModelAttribute("producto") ProductoDTO prod, @PathVariable("isNew") String isNew) {
 
-        this.usuarioService
-
         Integer nuevo = Integer.parseInt(isNew);
         if(nuevo == 1) {
             this.productoService.crearProducto(prod.getNombre(), prod.getDescripcion(), prod.getPrecioSalida(), prod.getUrlFoto(), prod.getFechaInicioSubasta(), prod.getFechaFinSubasta(), prod.getComprador().getNombre(), prod.getPublicador().getNombre(), prod.getEnPromocion(), prod.getCategoria());

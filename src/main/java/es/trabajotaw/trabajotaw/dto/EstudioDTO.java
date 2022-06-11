@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package es.trabajotaw.trabajotaw.dto;
-
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 /**
  *
@@ -14,10 +17,17 @@ package es.trabajotaw.trabajotaw.dto;
 public class EstudioDTO {
     private Integer idEstudio;
     private String nombre;
-    private Integer analista;
+    private UsuarioDTO analista;
     private String descripcion;
     private Boolean comprador;
     private Boolean vendedor;
+    private Boolean producto;
+    private DatosEstudioUsuarioDTO datosEstudioUsuario;
+    private DatosEstudioProductoDTO datosEstudioProducto;
+
+    public EstudioDTO() {
+    }
+
 
     public Integer getIdEstudio() {
         return idEstudio;
@@ -35,11 +45,11 @@ public class EstudioDTO {
         this.nombre = nombre;
     }
 
-    public Integer getAnalista() {
+    public UsuarioDTO getAnalista() {
         return analista;
     }
 
-    public void setAnalista(Integer analista) {
+    public void setAnalista(UsuarioDTO analista) {
         this.analista = analista;
     }
 
@@ -75,27 +85,19 @@ public class EstudioDTO {
         this.producto = producto;
     }
 
-    public Integer getDatosEstudioUsuario() {
+    public DatosEstudioUsuarioDTO getDatosEstudioUsuario() {
         return datosEstudioUsuario;
     }
 
-    public void setDatosEstudioUsuario(Integer datosEstudioUsuario) {
+    public void setDatosEstudioUsuario(DatosEstudioUsuarioDTO datosEstudioUsuario) {
         this.datosEstudioUsuario = datosEstudioUsuario;
     }
 
-    public Integer getDatosEstudioProducto() {
+    public DatosEstudioProductoDTO getDatosEstudioProducto() {
         return datosEstudioProducto;
     }
 
-    public void setDatosEstudioProducto(Integer datosEstudioProducto) {
+    public void setDatosEstudioProducto(DatosEstudioProductoDTO datosEstudioProducto) {
         this.datosEstudioProducto = datosEstudioProducto;
     }
-
-    private Boolean producto;
-    private Integer datosEstudioUsuario;
-    private Integer datosEstudioProducto;
-
-    public EstudioDTO() {
-    }
-
 }
