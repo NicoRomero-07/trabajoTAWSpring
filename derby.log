@@ -1,4 +1,5 @@
 ----------------------------------------------------------------
+<<<<<<< Updated upstream
 Sat Jun 11 12:18:08 CEST 2022:
 Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0181-5245-653d-00000577c320 
 on database directory C:\Users\nicor\OneDrive\UMA\Tercero\Tecnología de aplicaciones web\intelliJ\trabajoTAW\db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
@@ -6,8 +7,283 @@ Loaded from file:/C:/Users/nicor/.m2/repository/org/apache/derby/derby/10.14.2.0
 java.vendor=Oracle Corporation
 java.runtime.version=17.0.1+12-LTS-39
 user.dir=C:\Users\nicor\OneDrive\UMA\Tercero\Tecnología de aplicaciones web\intelliJ\trabajoTAW
+=======
+Sat Jun 11 16:49:05 UTC 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0181-53ab-4e57-0000076065a0 
+on database directory C:\Users\Alfonso\Documents\Estudios\TercerSemestre\TecAplWeb\trabajoTAWSpring\trabajoTAWSpring\db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7aec35a 
+Loaded from file:/C:/Users/Alfonso/AppData/Roaming/JetBrains/IntelliJIdea2021.3/jdbc-drivers/Apache%20Derby/10.15.2.0/derby-10.15.2.0.jar
+java.vendor=JetBrains s.r.o.
+java.runtime.version=11.0.13+7-b1751.25
+user.dir=C:\Users\Alfonso\Documents\Estudios\TercerSemestre\TecAplWeb\trabajoTAWSpring\trabajoTAWSpring
+>>>>>>> Stashed changes
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
+<<<<<<< Updated upstream
+=======
+Warning: While deleting a row from a table the index row for base table row (2,16) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (2,17) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (3,17) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (3,18) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (3,19) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (3,20) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (3,21) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (5,11) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (6,12) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (7,13) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (7,14) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (8,13) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (8,14) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (8,15) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (9,11) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (9,12) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (12,10) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (12,11) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (15,16) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (16,9) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (16,10) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (17,15) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (17,16) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (17,17) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (17,18) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (17,19) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (17,20) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (19,9) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (19,10) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (19,11) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (19,12) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (22,10) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (22,11) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (22,12) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (22,13) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (23,17) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (23,18) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (24,21) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (24,22) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (25,11) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (25,12) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (26,37) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (26,38) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (26,39) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (26,40) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (26,41) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (26,42) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (26,43) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (26,44) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (26,45) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (26,46) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (28,27) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (28,28) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (28,29) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (28,30) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (28,31) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (28,32) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (28,33) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (29,9) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (29,10) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+Warning: While deleting a row from a table the index row for base table row (29,11) was not found in index with conglomerate id 593.  This problem has automatically been corrected as part of the delete operation.
+----------------------------------------------------------------
+Sat Jun 11 16:49:05 UTC 2022:
+Shutting down instance a816c00e-0181-53ab-4e57-0000076065a0 on database directory C:\Users\Alfonso\Documents\Estudios\TercerSemestre\TecAplWeb\trabajoTAWSpring\trabajoTAWSpring\db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7aec35a 
+Sat Jun 11 16:49:05 UTC 2022 Thread[RMI TCP Connection(2)-127.0.0.1,5,RMI Runtime] Cleanup action starting
+java.sql.SQLException: Failed to start database 'C:/Users/Alfonso/Documents/Estudios/TercerSemestre/TecAplWeb/trabajoTAWSpring/trabajoTAWSpring/db' with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7aec35a, see the next exception for details.
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:115)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:141)
+	at org.apache.derby.impl.jdbc.Util.seeNextException(Util.java:252)
+	at org.apache.derby.impl.jdbc.EmbedConnection.bootDatabase(EmbedConnection.java:2855)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(EmbedConnection.java:411)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:660)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:656)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.apache.derby.iapi.jdbc.InternalDriver.getNewEmbedConnection(InternalDriver.java:654)
+	at org.apache.derby.iapi.jdbc.InternalDriver.connect(InternalDriver.java:300)
+	at org.apache.derby.iapi.jdbc.InternalDriver.connect(InternalDriver.java:967)
+	at org.apache.derby.jdbc.EmbeddedDriver.connect(EmbeddedDriver.java:125)
+	at com.intellij.database.remote.jdbc.helpers.JdbcHelperImpl.connect(JdbcHelperImpl.java:639)
+	at com.intellij.database.remote.jdbc.impl.RemoteDriverImpl.connect(RemoteDriverImpl.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: ERROR XJ040: Failed to start database 'C:/Users/Alfonso/Documents/Estudios/TercerSemestre/TecAplWeb/trabajoTAWSpring/trabajoTAWSpring/db' with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7aec35a, see the next exception for details.
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:300)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.wrapArgsForTransportAcrossDRDA(SQLExceptionFactory.java:170)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:75)
+	... 30 more
+Caused by: ERROR X0Y32: Statement 'odbc_getVersionColumns' already exists in Schema 'SYS'.
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:300)
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:295)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.addSPSDescriptor(DataDictionaryImpl.java:4332)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.createSPSSet(DataDictionaryImpl.java:10617)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.createSystemSps(DataDictionaryImpl.java:10585)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.updateMetadataSPSes(DataDictionaryImpl.java:14291)
+	at org.apache.derby.impl.sql.catalog.DD_Version.handleMinorRevisionChange(DD_Version.java:594)
+	at org.apache.derby.impl.sql.catalog.DD_Version.upgradeIfNeeded(DD_Version.java:249)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.loadDictionaryTables(DataDictionaryImpl.java:7935)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.boot(DataDictionaryImpl.java:827)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.boot(BaseMonitor.java:2002)
+	at org.apache.derby.impl.services.monitor.TopService.bootModule(TopService.java:334)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.startModule(BaseMonitor.java:538)
+	at org.apache.derby.impl.services.monitor.FileMonitor.startModule(FileMonitor.java:48)
+	at org.apache.derby.iapi.services.monitor.Monitor.bootServiceModule(Monitor.java:460)
+	at org.apache.derby.impl.db.BasicDatabase$5.run(BasicDatabase.java:1001)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.apache.derby.impl.db.BasicDatabase.bootServiceModule(BasicDatabase.java:995)
+	at org.apache.derby.impl.db.BasicDatabase.boot(BasicDatabase.java:205)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.boot(BaseMonitor.java:2002)
+	at org.apache.derby.impl.services.monitor.TopService.bootModule(TopService.java:334)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.bootService(BaseMonitor.java:1830)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.startProviderService(BaseMonitor.java:1696)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.findProviderAndStartService(BaseMonitor.java:1529)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.startPersistentService(BaseMonitor.java:999)
+	at org.apache.derby.iapi.services.monitor.Monitor.startPersistentService(Monitor.java:598)
+	at org.apache.derby.impl.jdbc.EmbedConnection$4.run(EmbedConnection.java:4042)
+	at org.apache.derby.impl.jdbc.EmbedConnection$4.run(EmbedConnection.java:4038)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.apache.derby.impl.jdbc.EmbedConnection.startPersistentService(EmbedConnection.java:4036)
+	at org.apache.derby.impl.jdbc.EmbedConnection.bootDatabase(EmbedConnection.java:2816)
+	... 27 more
+============= begin nested exception, level (1) ===========
+java.sql.SQLException: Statement 'odbc_getVersionColumns' already exists in Schema 'SYS'.
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(SQLExceptionFactory.java:115)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Util.java:230)
+	at org.apache.derby.impl.jdbc.EmbedConnection.bootDatabase(EmbedConnection.java:2849)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(EmbedConnection.java:411)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:660)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:656)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.apache.derby.iapi.jdbc.InternalDriver.getNewEmbedConnection(InternalDriver.java:654)
+	at org.apache.derby.iapi.jdbc.InternalDriver.connect(InternalDriver.java:300)
+	at org.apache.derby.iapi.jdbc.InternalDriver.connect(InternalDriver.java:967)
+	at org.apache.derby.jdbc.EmbeddedDriver.connect(EmbeddedDriver.java:125)
+	at com.intellij.database.remote.jdbc.helpers.JdbcHelperImpl.connect(JdbcHelperImpl.java:639)
+	at com.intellij.database.remote.jdbc.impl.RemoteDriverImpl.connect(RemoteDriverImpl.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: ERROR X0Y32: Statement 'odbc_getVersionColumns' already exists in Schema 'SYS'.
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:300)
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:295)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.addSPSDescriptor(DataDictionaryImpl.java:4332)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.createSPSSet(DataDictionaryImpl.java:10617)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.createSystemSps(DataDictionaryImpl.java:10585)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.updateMetadataSPSes(DataDictionaryImpl.java:14291)
+	at org.apache.derby.impl.sql.catalog.DD_Version.handleMinorRevisionChange(DD_Version.java:594)
+	at org.apache.derby.impl.sql.catalog.DD_Version.upgradeIfNeeded(DD_Version.java:249)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.loadDictionaryTables(DataDictionaryImpl.java:7935)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.boot(DataDictionaryImpl.java:827)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.boot(BaseMonitor.java:2002)
+	at org.apache.derby.impl.services.monitor.TopService.bootModule(TopService.java:334)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.startModule(BaseMonitor.java:538)
+	at org.apache.derby.impl.services.monitor.FileMonitor.startModule(FileMonitor.java:48)
+	at org.apache.derby.iapi.services.monitor.Monitor.bootServiceModule(Monitor.java:460)
+	at org.apache.derby.impl.db.BasicDatabase$5.run(BasicDatabase.java:1001)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.apache.derby.impl.db.BasicDatabase.bootServiceModule(BasicDatabase.java:995)
+	at org.apache.derby.impl.db.BasicDatabase.boot(BasicDatabase.java:205)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.boot(BaseMonitor.java:2002)
+	at org.apache.derby.impl.services.monitor.TopService.bootModule(TopService.java:334)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.bootService(BaseMonitor.java:1830)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.startProviderService(BaseMonitor.java:1696)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.findProviderAndStartService(BaseMonitor.java:1529)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.startPersistentService(BaseMonitor.java:999)
+	at org.apache.derby.iapi.services.monitor.Monitor.startPersistentService(Monitor.java:598)
+	at org.apache.derby.impl.jdbc.EmbedConnection$4.run(EmbedConnection.java:4042)
+	at org.apache.derby.impl.jdbc.EmbedConnection$4.run(EmbedConnection.java:4038)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.apache.derby.impl.jdbc.EmbedConnection.startPersistentService(EmbedConnection.java:4036)
+	at org.apache.derby.impl.jdbc.EmbedConnection.bootDatabase(EmbedConnection.java:2816)
+	... 27 more
+============= end nested exception, level (1) ===========
+============= begin nested exception, level (2) ===========
+ERROR X0Y32: Statement 'odbc_getVersionColumns' already exists in Schema 'SYS'.
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:300)
+	at org.apache.derby.shared.common.error.StandardException.newException(StandardException.java:295)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.addSPSDescriptor(DataDictionaryImpl.java:4332)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.createSPSSet(DataDictionaryImpl.java:10617)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.createSystemSps(DataDictionaryImpl.java:10585)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.updateMetadataSPSes(DataDictionaryImpl.java:14291)
+	at org.apache.derby.impl.sql.catalog.DD_Version.handleMinorRevisionChange(DD_Version.java:594)
+	at org.apache.derby.impl.sql.catalog.DD_Version.upgradeIfNeeded(DD_Version.java:249)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.loadDictionaryTables(DataDictionaryImpl.java:7935)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.boot(DataDictionaryImpl.java:827)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.boot(BaseMonitor.java:2002)
+	at org.apache.derby.impl.services.monitor.TopService.bootModule(TopService.java:334)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.startModule(BaseMonitor.java:538)
+	at org.apache.derby.impl.services.monitor.FileMonitor.startModule(FileMonitor.java:48)
+	at org.apache.derby.iapi.services.monitor.Monitor.bootServiceModule(Monitor.java:460)
+	at org.apache.derby.impl.db.BasicDatabase$5.run(BasicDatabase.java:1001)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.apache.derby.impl.db.BasicDatabase.bootServiceModule(BasicDatabase.java:995)
+	at org.apache.derby.impl.db.BasicDatabase.boot(BasicDatabase.java:205)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.boot(BaseMonitor.java:2002)
+	at org.apache.derby.impl.services.monitor.TopService.bootModule(TopService.java:334)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.bootService(BaseMonitor.java:1830)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.startProviderService(BaseMonitor.java:1696)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.findProviderAndStartService(BaseMonitor.java:1529)
+	at org.apache.derby.impl.services.monitor.BaseMonitor.startPersistentService(BaseMonitor.java:999)
+	at org.apache.derby.iapi.services.monitor.Monitor.startPersistentService(Monitor.java:598)
+	at org.apache.derby.impl.jdbc.EmbedConnection$4.run(EmbedConnection.java:4042)
+	at org.apache.derby.impl.jdbc.EmbedConnection$4.run(EmbedConnection.java:4038)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.apache.derby.impl.jdbc.EmbedConnection.startPersistentService(EmbedConnection.java:4036)
+	at org.apache.derby.impl.jdbc.EmbedConnection.bootDatabase(EmbedConnection.java:2816)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(EmbedConnection.java:411)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:660)
+	at org.apache.derby.iapi.jdbc.InternalDriver$1.run(InternalDriver.java:656)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at org.apache.derby.iapi.jdbc.InternalDriver.getNewEmbedConnection(InternalDriver.java:654)
+	at org.apache.derby.iapi.jdbc.InternalDriver.connect(InternalDriver.java:300)
+	at org.apache.derby.iapi.jdbc.InternalDriver.connect(InternalDriver.java:967)
+	at org.apache.derby.jdbc.EmbeddedDriver.connect(EmbeddedDriver.java:125)
+	at com.intellij.database.remote.jdbc.helpers.JdbcHelperImpl.connect(JdbcHelperImpl.java:639)
+	at com.intellij.database.remote.jdbc.impl.RemoteDriverImpl.connect(RemoteDriverImpl.java:54)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+============= end nested exception, level (2) ===========
+Cleanup action completed
+>>>>>>> Stashed changes
