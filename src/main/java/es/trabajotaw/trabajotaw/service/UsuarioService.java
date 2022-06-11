@@ -51,6 +51,13 @@ public class UsuarioService {
 
         return this.listaEntityADTO(usuarios);
     }
+
+    public UsuarioDTO findByNombreUsuario(String nombre) {
+        Usuario u = this.ur.findByNombreUsuario(nombre).get(0);
+        return u.toDTO();
+    }
+
+    /*
     public List<UsuarioDTO> getCompradores(){
         List<Usuario> compradores = this.ur.findByTipoUsuario(this.tur.findByTipo("Comprador"));
         return listaEntityADTO(compradores);

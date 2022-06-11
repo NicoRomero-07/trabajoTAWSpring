@@ -45,7 +45,7 @@ public class LoginController {
             }else if(user.getTipoUsuario().getTipo().equalsIgnoreCase("Comprador")){
                 goTo = "redirect:/comprador/vistaComprador";
             }else if(user.getTipoUsuario().getTipo().equalsIgnoreCase("Vendedor")){
-                goTo = "redirect:/ListaVendedorController/";
+                goTo = "redirect:/vendedor/listaProductos/";
             }else{
                 goTo = "login";
             }
