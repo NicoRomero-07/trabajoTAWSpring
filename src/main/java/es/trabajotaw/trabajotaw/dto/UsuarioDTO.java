@@ -6,12 +6,11 @@
 package es.trabajotaw.trabajotaw.dto;
 
 
+    import es.trabajotaw.trabajotaw.entity.Categoria;
     import org.springframework.format.annotation.DateTimeFormat;
 
     import javax.persistence.CascadeType;
-    import javax.persistence.ManyToMany;
     import javax.persistence.ManyToOne;
-    import javax.persistence.OneToOne;
     import java.util.Date;
     import java.util.List;
     import java.util.Objects;
@@ -36,6 +35,16 @@ public class UsuarioDTO {
     private TipoUsuarioDTO tipoUsuario;
 
     private List<Integer> categoriasFavoritas;
+
+        public List<Categoria> getCategoriasFavoritasEntity() {
+            return categoriasFavoritasEntity;
+        }
+
+        public void setCategoriasFavoritasEntity(List<Categoria> categoriasFavoritasEntity) {
+            this.categoriasFavoritasEntity = categoriasFavoritasEntity;
+        }
+
+        private List<Categoria> categoriasFavoritasEntity;
 
     public List<Integer> getCategoriasFavoritas() {
         return categoriasFavoritas;

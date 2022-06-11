@@ -6,11 +6,7 @@
 package es.trabajotaw.trabajotaw.entity;
 
 
-import es.trabajotaw.trabajotaw.dto.CategoriaDTO;
-import es.trabajotaw.trabajotaw.dto.ListaUsuarioDTO;
 import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
-import es.trabajotaw.trabajotaw.service.CategoriaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -70,21 +66,21 @@ public class Usuario {
     private Character sexo;
     @ManyToMany(mappedBy = "usuarioList")
     private List<ListaUsuario> listaUsuarioList;
-    @ManyToMany(mappedBy = "usuarioList")
+    @ManyToMany( cascade = {CascadeType.PERSIST}, mappedBy = "usuarioList")
     private List<Categoria> categoriaList;
     @JoinTable(name = "USUARIO_NOTIFICACION", joinColumns = {
         @JoinColumn(name = "RECIBIDOR", referencedColumnName = "ID_USUARIO")}, inverseJoinColumns = {
         @JoinColumn(name = "NOTIFICACION", referencedColumnName = "ID_NOTIFICACION")})
-    @ManyToMany
+    @ManyToMany()
     private List<Notificacion> notificacionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario1")
+    @OneToMany(mappedBy = "usuario1")
     private List<ListaProducto> listaProductoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comprador")
+    @OneToMany(mappedBy = "comprador")
     private List<Puja> pujaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "notificante")
+    @OneToMany(mappedBy = "notificante")
     private List<Notificacion> notificacionList1;
     @JoinColumn(name = "DIRECCION", referencedColumnName = "ID_DIRECCION")
-    @ManyToOne(optional = false,cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, optional = true)
     private Direccion direccion;
     @JoinColumn(name = "TIPO_USUARIO", referencedColumnName = "ID_TIPO_USUARIO")
     @ManyToOne(optional = false)
@@ -111,15 +107,8 @@ public class Usuario {
         this.idUsuario=usuario.getIdUsuario();
 
         setContrasenya(usuario.getContrasenya());
-        if(usuario.getCategoriasFavoritas()!=null){
-            List<Categoria> categorias = new ArrayList<>();
-            for(Integer c: usuario.getCategoriasFavoritas()){
-                categorias.add(new Categoria(c));
-            }
-            setCategoriaList(categorias);
-        }
 
-
+        setCategoriaList(usuario.getCategoriasFavoritasEntity());
         setNombreUsuario(usuario.getNombreUsuario());
         setNombre(usuario.getNombre());
         setPrimerApellido(usuario.getPrimerApellido());
@@ -322,15 +311,13 @@ public class Usuario {
         dto.setSexo(sexo);
         dto.setTipoUsuario(tipoUsuario.toDTO());
         dto.setFechaNacimiento(fechaNacimiento);
-        List<CategoriaDTO> listaDTO = null;
 
-        List<CategoriaDTO> listaDTOcategoria = new ArrayList<>();
         List<Integer> listIntegercategoria = new ArrayList<>();
         for (Categoria categoria:categoriaList) {
-            listaDTO.add(categoria.toDTO());
             listIntegercategoria.add(categoria.getIdCategoria());
         }
         dto.setCategoriasFavoritas(listIntegercategoria);
+        dto.setCategoriasFavoritasEntity(categoriaList);
 
         List<Integer> listaUsuarioDTO = null;
         if (listaUsuarioList != null) {

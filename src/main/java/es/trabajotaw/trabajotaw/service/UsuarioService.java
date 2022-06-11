@@ -4,8 +4,10 @@ import es.trabajotaw.trabajotaw.dao.*;
 import es.trabajotaw.trabajotaw.dto.*;
 import es.trabajotaw.trabajotaw.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.EntityManagerHolder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,6 +66,7 @@ public class UsuarioService {
     }
 
     public void borrarUsuario (Integer id) {
+
         Usuario usuario = this.ur.findById(id).orElse(null);
 
         this.ur.delete(usuario);
@@ -87,6 +90,9 @@ public class UsuarioService {
         Usuario usuario = new Usuario(usuarioDTO,listaUsuarioList,notificacionList);
         this.ur.save(usuario);
     }
+
+
+
     public List<UsuarioDTO> getUsuarioDTOListFromId(List<Integer> ids){
         List<Usuario> usuarioList = new ArrayList<>();
         for (Integer id : ids){
@@ -94,6 +100,8 @@ public class UsuarioService {
         }
         return this.listaEntityADTO(usuarioList);
     }
+
+
     public List<Integer> getIdsFromUsuarioDTOList(List<UsuarioDTO> usuarioList){
         List<Integer> ids = new ArrayList<>();
         for (UsuarioDTO usuario : usuarioList){
@@ -249,6 +257,14 @@ public class UsuarioService {
             notificacionDTO.add(c.toDTO());
         }
         return notificacionDTO;
+    }
+
+    public UsuarioDTO guardarUsuarioAdmin(UsuarioDTO usuario) {
+
+        Usuario usuarioEntity = new Usuario(usuario);
+
+        ur.save(usuarioEntity);
+        return usuarioEntity.toDTO();
     }
     /*
     public UsuarioDTO getUsuarioPujaMax(Integer idProducto) {

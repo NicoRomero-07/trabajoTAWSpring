@@ -11,7 +11,9 @@ package es.trabajotaw.trabajotaw.service;
 
 import es.trabajotaw.trabajotaw.dao.CategoriaRepository;
 import es.trabajotaw.trabajotaw.dto.CategoriaDTO;
+import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
 import es.trabajotaw.trabajotaw.entity.Categoria;
+import es.trabajotaw.trabajotaw.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,9 @@ public class CategoriaService {
 
     @Autowired
     CategoriaRepository cr;
+    @Autowired
+    UsuarioService us;
+
     private List<CategoriaDTO> listaEntityADTO (List<Categoria> lista) {
         List<CategoriaDTO> listaDTO = null;
         if (lista != null) {
@@ -57,6 +62,15 @@ public class CategoriaService {
         this.cr.delete(categoria);
     }
 
+    public List<Categoria> getCategoriaListFromId(List<Integer> ids){
+        List<Categoria> categoriaList = new ArrayList<>();
+        for (Integer id : ids){
+            categoriaList.add(this.cr.findById(id).orElse(null));
+        }
+        return categoriaList;
+    }
+
+
     private void rellenarCategoria (Categoria categoria,
                               String nombreCategoria) {
 
@@ -74,5 +88,21 @@ public class CategoriaService {
     public void modificarCategoria (Categoria categoria) {
 
         this.cr.save(categoria);
+    }
+
+    public void guardarCategorias(List<Categoria> categoriasFavoritasEntity, UsuarioDTO usuario) {
+
+        for(Categoria c : categoriasFavoritasEntity){
+            List<Usuario> usuarios =  c.getUsuarioList();
+
+            UsuarioDTO usuarioDTO = us.buscarUsuario(usuario.getIdUsuario());
+            Usuario usuarioEntity = new Usuario(usuarioDTO);
+            if(!c.getUsuarioList().contains(usuarioEntity)){
+                usuarios.add(new Usuario(usuarioDTO));
+                c.setUsuarioList(usuarios);
+            }
+
+            cr.save(c);
+        }
     }
 }

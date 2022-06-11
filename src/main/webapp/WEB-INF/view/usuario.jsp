@@ -50,11 +50,12 @@
         <form:select path="tipoUsuario.idTipoUsuario">
             <form:options items="${tipoUsuarios}" itemLabel="tipo" itemValue="idTipoUsuario" />
         </form:select><br>
-
+        <form:hidden path="categoriasFavoritasEntity"/>
         Categorias Favoritas:
         <form:checkboxes path="categoriasFavoritas" items="${categorias}" itemValue="idCategoria" itemLabel="nombre"/>
         <br>
 
+        <form:hidden path="direccion.idDireccion"/>
         Tipo de via:
         <form:select name = "tipoVias" path="direccion.tipo">
             <form:option value="OFICINA"/>

@@ -1,28 +1,14 @@
 package es.trabajotaw.trabajotaw.controller;
 
-import es.trabajotaw.trabajotaw.dao.CategoriaRepository;
-import es.trabajotaw.trabajotaw.dao.ProductoRepository;
-import es.trabajotaw.trabajotaw.dao.TipoUsuarioRepository;
-import es.trabajotaw.trabajotaw.dao.UsuarioRepository;
-import es.trabajotaw.trabajotaw.dto.CategoriaDTO;
-import es.trabajotaw.trabajotaw.dto.ProductoDTO;
-import es.trabajotaw.trabajotaw.dto.TipoUsuarioDTO;
-import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
+import es.trabajotaw.trabajotaw.dto.*;
 import es.trabajotaw.trabajotaw.entity.Categoria;
-import es.trabajotaw.trabajotaw.entity.Producto;
-import es.trabajotaw.trabajotaw.entity.TipoUsuario;
-import es.trabajotaw.trabajotaw.entity.Usuario;
-import es.trabajotaw.trabajotaw.service.CategoriaService;
-import es.trabajotaw.trabajotaw.service.ProductoService;
-import es.trabajotaw.trabajotaw.service.TipoUsuarioService;
-import es.trabajotaw.trabajotaw.service.UsuarioService;
+import es.trabajotaw.trabajotaw.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -37,6 +23,9 @@ public class AdminController {
     private ProductoService productosService;
     @Autowired
     private TipoUsuarioService tiposUsuarioService;
+    @Autowired
+    private DireccionService direccionService;
+
 
     @GetMapping(value = "/vistaAdministrador")
     public String inicio(Model model, HttpSession session){
@@ -80,14 +69,22 @@ public class AdminController {
     @PostMapping(value = "/guardarUsuario")
     public String doGuardarUsuario(@ModelAttribute() UsuarioDTO usuario){
         List<Integer> idCategorias = usuario.getCategoriasFavoritas();
-        Usuario usuarioEntidad = new Usuario(usuario);
-        usuariosService.guardarUsuario(usuario);
-        usuariosService.modificarUsuario(usuarioEntidad);
+        usuario.setCategoriasFavoritasEntity(categoriasService.getCategoriaListFromId(idCategorias));
+
+        UsuarioDTO usuarioDTOID = usuariosService.guardarUsuarioAdmin(usuario);
+        direccionService.modificarDireccion(usuario.getDireccion());
+        categoriasService.guardarCategorias(usuario.getCategoriasFavoritasEntity(), usuarioDTOID);
+
         return "redirect:/administrador/administrarUsuarios";
     }
     @GetMapping(value="/nuevoUsuario")
     public String doNuevoUsuario (Model model) {
         UsuarioDTO usuario = new UsuarioDTO();
+        DireccionDTO direccionDTO = new DireccionDTO();
+
+        DireccionDTO direccionDTOID = direccionService.guardarDireccion(direccionDTO);
+        usuario.setDireccion(direccionDTOID);
+
         List<TipoUsuarioDTO> tipoUsuarios = tiposUsuarioService.listarTipoUsuarios(null);
         List<CategoriaDTO> categorias = categoriasService.listarCategorias(null);
 
