@@ -4,6 +4,7 @@ import es.trabajotaw.trabajotaw.dao.*;
 import es.trabajotaw.trabajotaw.dto.*;
 import es.trabajotaw.trabajotaw.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.orm.jpa.EntityManagerHolder;
 import org.springframework.stereotype.Service;
 
@@ -17,17 +18,22 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository ur;
+    @Autowired
     private CategoriaRepository cr;
     @Autowired
     private TipoUsuarioRepository tur;
     @Autowired
     private NotificacionRepository notificacionRepository;
+    @Autowired
     private DireccionRepository dr;
+    @Autowired
     private DatosEstudioUsuarioRepository deur;
+    @Autowired
     private EstudioRepository er;
-    private CategoriaService cs;
     @Autowired
     private ListaUsuarioRepository lur;
+    @Autowired
+    private UsuarioRepositoryCustom urc;
 
     private List<UsuarioDTO> listaEntityADTO (List<Usuario> lista) {
         List<UsuarioDTO> listaDTO = null;
@@ -57,7 +63,7 @@ public class UsuarioService {
         return u.toDTO();
     }
 
-    /*
+
     public List<UsuarioDTO> getCompradores(){
         List<Usuario> compradores = this.ur.findByTipoUsuario(this.tur.findByTipo("Comprador"));
         return listaEntityADTO(compradores);
@@ -66,16 +72,12 @@ public class UsuarioService {
         Usuario usuario = this.ur.findById(id).orElse(null);
         return usuario.toDTO();
     }
-
     public List<UsuarioDTO> buscarPorTipoUsuario(TipoUsuarioDTO tipoUsuarioDTO){
         List<Usuario> listaUsuarios =  ur.findByTipoUsuario(new TipoUsuario(tipoUsuarioDTO));
         return this.listaEntityADTO(listaUsuarios);
     }
-
     public void borrarUsuario (Integer id) {
-
         Usuario usuario = this.ur.findById(id).orElse(null);
-
         this.ur.delete(usuario);
     }
     public void guardarUsuario(UsuarioDTO usuarioDTO){
@@ -86,7 +88,6 @@ public class UsuarioService {
                 listaUsuarioList.add(this.lur.findById(idUsuario).orElse(null));
             }
         }
-
         List<Notificacion> notificacionList = null;
         if (usuarioDTO.getNotificacionDTOList() != null && !usuarioDTO.getNotificacionDTOList().isEmpty()){
             notificacionList = new ArrayList<>();
@@ -97,9 +98,6 @@ public class UsuarioService {
         Usuario usuario = new Usuario(usuarioDTO,listaUsuarioList,notificacionList);
         this.ur.save(usuario);
     }
-
-
-
     public List<UsuarioDTO> getUsuarioDTOListFromId(List<Integer> ids){
         List<Usuario> usuarioList = new ArrayList<>();
         for (Integer id : ids){
@@ -107,8 +105,6 @@ public class UsuarioService {
         }
         return this.listaEntityADTO(usuarioList);
     }
-
-
     public List<Integer> getIdsFromUsuarioDTOList(List<UsuarioDTO> usuarioList){
         List<Integer> ids = new ArrayList<>();
         for (UsuarioDTO usuario : usuarioList){
@@ -116,12 +112,10 @@ public class UsuarioService {
         }
         return ids;
     }
-
     private void rellenarUsuario (Usuario usuario,
                                   String nombreUsuario, String contrasenya, String nombre, String primerApellido,
                                   String segundoApellido, String email, Integer direccion, Character sexo,
                                   Integer tipoUsuario, Date fechaNacimiento, String[] categoriasStr) {
-
         usuario.setNombreUsuario(nombreUsuario);
         usuario.setContrasenya(contrasenya);
         usuario.setNombre(nombre);
@@ -136,94 +130,70 @@ public class UsuarioService {
                 categorias.add(ca);
             }
         }
-
         usuario.setCategoriaList(categorias);
-
         TipoUsuario tu = this.tur.getById(tipoUsuario);
         usuario.setTipoUsuario(tu);
-
         usuario.setFechaNacimiento(fechaNacimiento);
         Direccion dd = this.dr.getById(direccion);
-
         usuario.setDireccion(dd);
-
     }
-
     public void crearUsuario (String nombreUsuario, String contrasenya, String nombre, String primerApellido,
                               String segundoApellido, String email, Integer direccion, Character sexo,
                               Integer tipoUsuario, Date fechaNacimiento,String[] categoriasStr) {
         Usuario usuario = new Usuario();
-
         this.rellenarUsuario(usuario, nombreUsuario, contrasenya, nombre, primerApellido, segundoApellido, email, direccion, sexo, tipoUsuario, fechaNacimiento,categoriasStr);
-
         this.ur.save(usuario);
     }
-
     public void modificarUsuario(Usuario usuario){
         this.ur.save(usuario);
     }
-
     public void modificarUsuario (Integer id,
                                   String nombreUsuario, String contrasenya, String nombre, String primerApellido,
                                   String segundoApellido, String email, Integer direccion, Character sexo,
                                   Integer tipoUsuario, Date fechaNacimiento,String[] categoriasStr) {
-
         Usuario usuario = this.ur.findById(id).orElse(null);
-
         this.rellenarUsuario(usuario, nombreUsuario, contrasenya, nombre, primerApellido,
                 segundoApellido, email, direccion, sexo, tipoUsuario, fechaNacimiento, categoriasStr);
-
         this.ur.save(usuario);
     }
-
     public void modificarUsuario(Integer id, List<Integer> lista){
-
         Usuario usuario = this.ur.findById(id).orElse(null);
-
         List<ListaUsuario> listas = new ArrayList<>();
         for(Integer c : lista){
             ListaUsuario l = this.lur.getById(c);
             listas.add(l);
         }
         usuario.setListaUsuarioList(listas);
-
         this.ur.save(usuario);
     }
-
     public void modificarNotificacionesUsuario(Integer id, List<Integer> lista){
-
         Usuario usuario = this.ur.findById(id).orElse(null);
-
         List<Notificacion> listas = new ArrayList<>();
         for(Integer c : lista){
             //Notificacion l = this.nr.getById(c);
             //listas.add(l);
         }
         usuario.setNotificacionList(listas);
-
         this.ur.save(usuario);
     }
-
     public List<CategoriaDTO> categoriasUsuario(Integer id){
         Usuario usuario = this.ur.findById(id).orElse(null);
         List<CategoriaDTO> categoriasDTO = new ArrayList();
         List<Categoria> categorias = usuario.getCategoriaList();
-
         for(Categoria c : categorias){
             categoriasDTO.add(c.toDTO());
         }
         return categoriasDTO;
     }
-    /*
+
     public List<UsuarioDTO> visualizarEstudio(Integer idEstudio,Integer idEstudioUsuario){
         Estudio estudio = this.er.getById(idEstudio);
         DatosEstudioUsuario estudioUsuario = this.deur.getById(idEstudioUsuario);
-        List<Usuario> usuarios = this.ur.visualizarEstudio(estudio,estudioUsuario);
+        List<Usuario> usuarios = this.urc.visualizarEstudio(estudio,estudioUsuario);
         List<UsuarioDTO> usuariosDTO = this.listaEntityADTO(usuarios);
         return usuariosDTO;
     }
 
-     */
 
     public List<UsuarioDTO> getAnalistas(){
         List<Usuario> usuarios = this.ur.getAnalistas();
@@ -235,14 +205,14 @@ public class UsuarioService {
         return this.listaEntityADTO(usuarios);
     }
 
-    /*
+
     public List<Double> getIngresosUsuarios(Integer idEstudio,Integer idEstudioUsuario){
         Estudio estudio = this.er.getById(idEstudio);
         DatosEstudioUsuario estudioUsuario = this.deur.getById(idEstudioUsuario);
-        List<Double> ingresos = this.ur.getIngresosUsuarios(estudio,estudioUsuario);
+        List<Double> ingresos = this.urc.getIngresosUsuarios(estudio,estudioUsuario);
         return ingresos;
     }
-    */
+
 
     public List<ListaUsuarioDTO> listasUsuario(Integer id){
         Usuario usuario = this.ur.findById(id).orElse(null);
@@ -277,7 +247,6 @@ public class UsuarioService {
     public UsuarioDTO getUsuarioPujaMax(Integer idProducto) {
         return this.ur.getUsuarioPujaMax(idProducto).toDTO();
     }
-
     public UsuarioDTO comprobarUsuario(String nombreUsuario,String clave){
         Usuario usuario = this.ur.comprobarUsuario(nombreUsuario, clave);
         return usuario == null ? null : usuario.toDTO();
