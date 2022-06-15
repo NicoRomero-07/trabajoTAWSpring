@@ -101,6 +101,18 @@ public class Producto   {
         this.comprador = comprador;
     }
 
+    public Producto(ProductoDTO producto) {
+        this.idProducto = producto.getIdProducto();
+        this.nombre = producto.getNombre();
+        this.precioSalida = producto.getPrecioSalida();
+        this.categoria = producto.getCategoria();
+        this.publicador = new Usuario(producto.getPublicador());
+        this.comprador = new Usuario(producto.getComprador());
+        this.enPromocion = producto.getEnPromocion();
+        this.fechaInicioSubasta = producto.getFechaInicioSubasta();
+        this.fechaFinSubasta = producto.getFechaFinSubasta();
+    }
+
     public Integer getIdProducto() {
         return idProducto;
     }

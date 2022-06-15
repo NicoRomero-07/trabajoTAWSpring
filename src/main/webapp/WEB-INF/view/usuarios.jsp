@@ -54,7 +54,7 @@
         <td><%= user.getNombre() %></td>
         <td><%= user.getPrimerApellido() %></td>
         <td><%= user.getSegundoApellido() %></td>
-        <td><%= format.format(user.getFechaNacimiento()) %></td>
+        <td><%= user.getFechaNacimiento()==null ? "":format.format(user.getFechaNacimiento()) %></td>
         <td><%= user.getSexo().charValue() %></td>
         <td><%= user.getTipoUsuario().getTipo() %></td>
         <td><a href="/administrador/borrarUsuario/<%= user.getIdUsuario() %>">Borrar</a></td>

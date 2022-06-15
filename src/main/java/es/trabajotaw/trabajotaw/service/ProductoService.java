@@ -162,4 +162,7 @@ public class ProductoService {
             return this.listaEntityADTO(this.productoRepository.findByEnPromocion(true));
         }
 
+    public void modificarProducto(Producto productoEntidad) {
+        productoRepository.save(productoEntidad);
+    }
 }

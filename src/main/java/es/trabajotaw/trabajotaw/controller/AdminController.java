@@ -1,7 +1,12 @@
 package es.trabajotaw.trabajotaw.controller;
+/*
+        Document   : AdminController
+        Author     : nicor
+*/
 
 import es.trabajotaw.trabajotaw.dto.*;
 import es.trabajotaw.trabajotaw.entity.Categoria;
+import es.trabajotaw.trabajotaw.entity.Producto;
 import es.trabajotaw.trabajotaw.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -155,6 +160,8 @@ public class AdminController {
     public String doAdministrarProducto(Model model, HttpSession session, @PathVariable("id") Integer id){
         ProductoDTO producto = productosService.buscarProducto(id);
         List<CategoriaDTO> categorias = categoriasService.listarCategorias(null);
+        List<UsuarioDTO>  usuarios = usuariosService.listarUsuarios(null);
+        model.addAttribute("usuarios", usuarios);
         model.addAttribute("categorias", categorias);
         model.addAttribute("producto", producto);
         return "producto";
@@ -164,6 +171,8 @@ public class AdminController {
     public String doNuevoProducto(Model model, HttpSession session){
         ProductoDTO producto = new ProductoDTO();
         List<CategoriaDTO> categorias = categoriasService.listarCategorias(null);
+        List<UsuarioDTO>  usuarios = usuariosService.listarUsuarios(null);
+        model.addAttribute("usuarios", usuarios);
         model.addAttribute("categorias", categorias);
         model.addAttribute("producto", producto);
         return "producto";
@@ -172,6 +181,18 @@ public class AdminController {
     @GetMapping(value = "/borrarProducto/{id}")
     public String doBorrarProducto(Model model, HttpSession session, @PathVariable("id") Integer id){
         productosService.borrarProducto(id);
+        return "redirect:/administrador/administrarProductos";
+    }
+
+    @PostMapping(value="/guardarProducto")
+    public String doGuardarProducto(@ModelAttribute("producto") ProductoDTO producto){
+        UsuarioDTO publicador = usuariosService.findById(producto.getPublicador().getIdUsuario());
+        producto.setPublicador(publicador);
+        UsuarioDTO comprador = usuariosService.findById(producto.getComprador().getIdUsuario());
+        producto.setComprador(comprador);
+
+        Producto productoEntidad = new Producto(producto);
+        productosService.modificarProducto(productoEntidad);
         return "redirect:/administrador/administrarProductos";
     }
 }

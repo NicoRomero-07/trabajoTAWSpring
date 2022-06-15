@@ -243,6 +243,10 @@ public class UsuarioService {
         ur.save(usuarioEntity);
         return usuarioEntity.toDTO();
     }
+
+    public UsuarioDTO findById(Integer id) {
+        return ur.findById(id).orElse(null).toDTO();
+    }
     /*
     public UsuarioDTO getUsuarioPujaMax(Integer idProducto) {
         return this.ur.getUsuarioPujaMax(idProducto).toDTO();

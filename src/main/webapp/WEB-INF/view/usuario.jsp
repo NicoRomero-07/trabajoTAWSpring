@@ -34,18 +34,18 @@
     <h1>Datos del usuario</h1>
     <form:form method="POST" action="/administrador/guardarUsuario" modelAttribute="usuario">
         <form:hidden path="idUsuario"/>
-        Nombre de Usuario: <form:input type="text" size="30" path="nombreUsuario" /> <br>
-        Contraseña: <form:input type="password" size="30" path="contrasenya"/> <br>
-        Nombre: <form:input type="text" size="30" path="nombre" /> <br>
-        Apellidos: <form:input type="text" size="30" path="primerApellido" /> <form:input type="text" name="segundoApellido" size="30" path="segundoApellido" /><br>
-        Email:<form:input type="text" size="40" path="email" /> <br>
+        Nombre de Usuario: <form:input type="text" size="30" path="nombreUsuario" required="true" /> <br>
+        Contraseña: <form:input type="password" size="30" path="contrasenya" required="true"/> <br>
+        Nombre: <form:input type="text" size="30" path="nombre" required="true"/> <br>
+        Apellidos: <form:input type="text" size="30" path="primerApellido" required="true"/> <form:input type="text" name="segundoApellido" size="30" path="segundoApellido" /><br>
+        Email:<form:input type="text" size="40" path="email" required="true"/> <br>
         Sexo:
         <form:select path="sexo">
             <form:option value="H"/>
             <form:option value="M"/>
         </form:select>
         <br>
-        Fecha Nacimiento: <form:input type="date" size="30" path="fechaNacimiento" /> <br>
+        Fecha Nacimiento: <form:input type="date" size="30" path="fechaNacimiento" required="true"/> <br>
         Tipo Usuario:
         <form:select path="tipoUsuario.idTipoUsuario">
             <form:options items="${tipoUsuarios}" itemLabel="tipo" itemValue="idTipoUsuario" />

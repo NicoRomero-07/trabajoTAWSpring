@@ -31,9 +31,9 @@
     URL Imagen: <form:input type="text" path="urlFoto" /><br><br>
     Fecha inicio de subasta: <form:input type = "date" path="fechaInicioSubasta"/><br><br>
     Fecha fin de subasta: <form:input type = "date" path="fechaFinSubasta" /><br><br>
-    Comprador: <form:input type = "text" path="comprador.nombreUsuario" /><br><br>
+    Comprador: <form:select path="comprador.idUsuario" items="${usuarios}" itemLabel="nombreUsuario" itemValue="idUsuario"/><br><br>
     Promocion: <form:checkbox path="enPromocion" /><br><br>
-    Publicador: <form:input type = "text" path="publicador.nombreUsuario"  /><br><br>
+    Publicador: <form:select path="publicador.idUsuario" items="${usuarios}" itemLabel="nombreUsuario" itemValue="idUsuario"/><br><br>
     Categoría:
     <form:select path="categoria" items="${categorias}" itemValue="idCategoria" itemLabel="nombre"/>
 
