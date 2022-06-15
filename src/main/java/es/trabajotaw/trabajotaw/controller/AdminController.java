@@ -186,13 +186,18 @@ public class AdminController {
 
     @PostMapping(value="/guardarProducto")
     public String doGuardarProducto(@ModelAttribute("producto") ProductoDTO producto){
-        UsuarioDTO publicador = usuariosService.findById(producto.getPublicador().getIdUsuario());
-        producto.setPublicador(publicador);
-        UsuarioDTO comprador = usuariosService.findById(producto.getComprador().getIdUsuario());
+        UsuarioDTO publicador = usuariosService.findByNombreUsuario(producto.getPublicador().getNombreUsuario());
+
+        UsuarioDTO comprador = usuariosService.findByNombreUsuario(producto.getComprador().getNombreUsuario());
         producto.setComprador(comprador);
 
-        Producto productoEntidad = new Producto(producto);
-        productosService.modificarProducto(productoEntidad);
+        if(publicador!=null){
+
+            producto.setPublicador(publicador);
+            Producto productoEntidad = new Producto(producto);
+            productosService.modificarProducto(productoEntidad);
+        }
+
         return "redirect:/administrador/administrarProductos";
     }
 }

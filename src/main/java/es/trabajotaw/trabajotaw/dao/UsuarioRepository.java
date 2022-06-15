@@ -27,7 +27,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     @Query("select u from Usuario u where upper(u.tipoUsuario.tipo) like upper('administrador')")
     List<Usuario> getAdministradores();
 
-    List<Usuario> findByNombreUsuario(String comprador);
+    @Query("select u from Usuario u where upper(u.nombreUsuario) like upper(:nombreUsuario)")
+    List<Usuario> findByNombreUsuario(@Param("nombreUsuario") String nombreUsuario);
 
     @Query("select u from Usuario u where upper(u.nombreUsuario) like upper(:nombreUsuario)")
     List<Usuario> findAllByNombreUsuarioContaining(@Param("nombreUsuario") String nombreUsuario);

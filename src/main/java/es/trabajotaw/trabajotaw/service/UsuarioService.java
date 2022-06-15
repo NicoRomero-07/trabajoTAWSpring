@@ -59,8 +59,14 @@ public class UsuarioService {
     }
 
     public UsuarioDTO findByNombreUsuario(String nombre) {
-        Usuario u = this.ur.findByNombreUsuario(nombre).get(0);
-        return u.toDTO();
+        List<Usuario> usuarios = this.ur.findByNombreUsuario(nombre);
+        Usuario u;
+        UsuarioDTO uDto = null;
+        if(usuarios.size()>0){
+            u = usuarios.get(0);
+            uDto = u.toDTO();
+        }
+        return uDto;
     }
 
 

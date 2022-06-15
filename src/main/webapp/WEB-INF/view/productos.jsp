@@ -53,7 +53,7 @@
                 <td><%= prod.getNombre()%></td>
                 <td><%= prod.getDescripcion()%></td>
                 <td><%= prod.getUrlFoto()%></td>
-                <td><%= prod.getCategoria()%></td>
+                <td><%= prod.getCategoria() %></td>
                 <td><%= fecha.format(prod.getFechaInicioSubasta())%></td>
                 <td><%= fecha.format(prod.getFechaFinSubasta())%></td>
                 <td><%= prod.getEnPromocion()? "Si":"No" %></td>

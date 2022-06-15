@@ -110,7 +110,12 @@ public class ProductoDTO {
 
     public void setComprador(UsuarioDTO comprador) {
         this.comprador = comprador;
-        this.compradorNombre = comprador.getNombreUsuario();
+        if(comprador!=null){
+            this.compradorNombre = comprador.getNombreUsuario();
+        }else{
+            this.compradorNombre = "";
+
+        }
     }
     
     public Date getFechaInicioSubasta(){

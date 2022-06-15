@@ -71,7 +71,7 @@ public class Producto   {
     @Temporal(TemporalType.DATE)
     private Date fechaFinSubasta;
     @JoinColumn(name = "COMPRADOR", referencedColumnName = "ID_USUARIO")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     
     private Usuario comprador;
     @ManyToMany(mappedBy = "productoList")
@@ -106,8 +106,9 @@ public class Producto   {
         this.nombre = producto.getNombre();
         this.precioSalida = producto.getPrecioSalida();
         this.categoria = producto.getCategoria();
+        this.descripcion = producto.getDescripcion();
         this.publicador = new Usuario(producto.getPublicador());
-        this.comprador = new Usuario(producto.getComprador());
+        if(producto.getComprador()!=null)  this.comprador = new Usuario(producto.getComprador());
         this.enPromocion = producto.getEnPromocion();
         this.fechaInicioSubasta = producto.getFechaInicioSubasta();
         this.fechaFinSubasta = producto.getFechaFinSubasta();
