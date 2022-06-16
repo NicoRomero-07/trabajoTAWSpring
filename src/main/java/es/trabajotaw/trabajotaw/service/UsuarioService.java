@@ -253,6 +253,7 @@ public class UsuarioService {
     public UsuarioDTO findById(Integer id) {
         return ur.findById(id).orElse(null).toDTO();
     }
+
     /*
     public UsuarioDTO getUsuarioPujaMax(Integer idProducto) {
         return this.ur.getUsuarioPujaMax(idProducto).toDTO();

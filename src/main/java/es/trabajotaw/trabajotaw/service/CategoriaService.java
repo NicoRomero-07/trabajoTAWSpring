@@ -105,4 +105,13 @@ public class CategoriaService {
             cr.save(c);
         }
     }
+
+    public void eliminarUsuarioCategoria(UsuarioDTO usuarioDTO) {
+        for(Categoria c: usuarioDTO.getCategoriasFavoritasEntity()){
+            List<Usuario> usuarios = c.getUsuarioList();
+            usuarios.remove(new Usuario(usuarioDTO));
+            c.setUsuarioList(usuarios);
+            cr.save(c);
+        }
+    }
 }

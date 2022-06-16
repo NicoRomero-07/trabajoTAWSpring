@@ -6,6 +6,7 @@ package es.trabajotaw.trabajotaw.controller;
 
 import es.trabajotaw.trabajotaw.dto.*;
 import es.trabajotaw.trabajotaw.entity.Categoria;
+import es.trabajotaw.trabajotaw.entity.ListaProducto;
 import es.trabajotaw.trabajotaw.entity.Producto;
 import es.trabajotaw.trabajotaw.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,12 @@ public class AdminController {
     private TipoUsuarioService tiposUsuarioService;
     @Autowired
     private DireccionService direccionService;
+    @Autowired
+    private ListaUsuarioService listaUsuarioService;
+    @Autowired
+    private NotificacionService notificacionService;
 
+    
 
     @GetMapping(value = "/vistaAdministrador")
     public String inicio(Model model, HttpSession session){
@@ -66,7 +72,14 @@ public class AdminController {
 
     @GetMapping(value = "/borrarUsuario/{id}")
     public String doBorrarUsuario(Model model, HttpSession session, @PathVariable("id") Integer id){
+        UsuarioDTO usuarioDTO = usuariosService.buscarUsuario(id);
+        categoriasService.eliminarUsuarioCategoria(usuarioDTO);
+        listaUsuarioService.eliminarUsuarioListaUsuario(usuarioDTO);
+        notificacionService.eliminarUsuarioNotificaion(usuarioDTO);
+
+
         usuariosService.borrarUsuario(id);
+
         return "redirect:/administrador/administrarUsuarios";
     }
 
@@ -78,7 +91,10 @@ public class AdminController {
 
         UsuarioDTO usuarioDTOID = usuariosService.guardarUsuarioAdmin(usuario);
         direccionService.modificarDireccion(usuario.getDireccion());
-        categoriasService.guardarCategorias(usuario.getCategoriasFavoritasEntity(), usuarioDTOID);
+        if(idCategorias.size()>0){
+            categoriasService.guardarCategorias(usuario.getCategoriasFavoritasEntity(), usuarioDTOID);
+
+        }
 
         return "redirect:/administrador/administrarUsuarios";
     }

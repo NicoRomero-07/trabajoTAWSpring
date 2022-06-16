@@ -53,7 +53,7 @@ public class Direccion   {
     @Column(name = "PUERTA")
     @Basic(optional = true)
     private String puerta;
-    @OneToMany(cascade = {CascadeType.ALL},orphanRemoval = true, mappedBy = "direccion")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "direccion")
     private List<Usuario> usuarioList;
 
     public Direccion() {

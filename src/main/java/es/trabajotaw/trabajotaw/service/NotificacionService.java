@@ -138,7 +138,24 @@ public class NotificacionService {
         
         return usuariosDTO;
     }
-    
-    
-    
+
+
+    public void eliminarUsuarioNotificaion(UsuarioDTO usuarioDTO) {
+
+        for(Integer i :usuarioDTO.getNotificacionDTOList()){
+            Notificacion notificacion = notificacionRepository.findById(i).orElse(null);
+
+            List<Usuario> usuarios = notificacion.getUsuarioList();
+            usuarios.remove(new Usuario(usuarioDTO));
+            notificacion.setUsuarioList(usuarios);
+            notificacionRepository.save(notificacion);
+
+        }
+
+        for(Integer i :usuarioDTO.getNotificacionDTOList1()){
+            Notificacion notificacion = notificacionRepository.findById(i).orElse(null);
+            notificacionRepository.delete(notificacion);
+
+        }
+    }
 }

@@ -109,5 +109,16 @@ public class ListaUsuarioService {
         }
         return usuariosDTO;
     }
-    
+
+    public void eliminarUsuarioListaUsuario(UsuarioDTO usuarioDTO) {
+        for(Integer i : usuarioDTO.getListaUsuarioDTOList()){
+            ListaUsuario listaUsuario = listaUsuarioRepository.findById(i).orElse(null);
+            List<Usuario> usuarios = listaUsuario.getUsuarioList();
+            usuarios.remove(new Usuario(usuarioDTO));
+            listaUsuario.setUsuarioList(usuarios);
+            listaUsuarioRepository.save(listaUsuario);
+
+
+        }
+    }
 }

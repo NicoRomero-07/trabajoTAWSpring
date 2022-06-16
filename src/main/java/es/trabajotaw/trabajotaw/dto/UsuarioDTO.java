@@ -57,6 +57,17 @@ public class UsuarioDTO {
     private List<Integer> listaUsuarioDTOList;
     private List<Integer> notificacionDTOList;
 
+        public List<Integer> getNotificacionDTOList1() {
+            return notificacionDTOList1;
+        }
+
+        public void setNotificacionDTOList1(List<Integer> notificacionDTOList1) {
+            this.notificacionDTOList1 = notificacionDTOList1;
+        }
+
+        private List<Integer> notificacionDTOList1;
+
+
     public UsuarioDTO() {
     }
 

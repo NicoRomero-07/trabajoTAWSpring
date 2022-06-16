@@ -68,20 +68,26 @@ public class Usuario {
     private List<ListaUsuario> listaUsuarioList;
     @ManyToMany( cascade = {CascadeType.PERSIST}, mappedBy = "usuarioList")
     private List<Categoria> categoriaList;
+
     @JoinTable(name = "USUARIO_NOTIFICACION", joinColumns = {
         @JoinColumn(name = "RECIBIDOR", referencedColumnName = "ID_USUARIO")}, inverseJoinColumns = {
         @JoinColumn(name = "NOTIFICACION", referencedColumnName = "ID_NOTIFICACION")})
     @ManyToMany()
     private List<Notificacion> notificacionList;
-    @OneToMany(mappedBy = "usuario1")
+
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "usuario1")
     private List<ListaProducto> listaProductoList;
-    @OneToMany(mappedBy = "comprador")
+
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "comprador")
     private List<Puja> pujaList;
+
     @OneToMany(mappedBy = "notificante")
     private List<Notificacion> notificacionList1;
+
     @JoinColumn(name = "DIRECCION", referencedColumnName = "ID_DIRECCION")
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, optional = true)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE}, optional = true)
     private Direccion direccion;
+
     @JoinColumn(name = "TIPO_USUARIO", referencedColumnName = "ID_TIPO_USUARIO")
     @ManyToOne(optional = false)
     private TipoUsuario tipoUsuario;
@@ -336,6 +342,18 @@ public class Usuario {
             }
         }
         dto.setNotificacionDTOList(notificacionDTOList);
+
+
+        List<Integer> notificacionDTOList1 = null;
+        if(notificacionList1!=null){
+            notificacionDTOList1 = new ArrayList<>();
+            for(Notificacion n : notificacionList1){
+                notificacionDTOList1.add(n.getIdNotificacion());
+            }
+        }
+
+        dto.setNotificacionDTOList1(notificacionDTOList1);
+
         return dto;
     }
 
