@@ -41,7 +41,6 @@ public class ListaVendedorController {
         model.addAttribute("producto", producto);
         List<CategoriaDTO> categorias = this.categoriaService.listarCategorias("");
         model.addAttribute("categorias", categorias);
-        model.addAttribute("isVendedor", 1);
         model.addAttribute("isNew", 1);
         return "publicarProducto";
     }
