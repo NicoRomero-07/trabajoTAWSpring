@@ -18,7 +18,7 @@
     </head>
     <body>
         
-        <form method="post" action="BuscarProductosServlet">
+        <form method="post" action="/comprador/verProductos">
             Buscar productos: <input type="text" name="buscador" value="" />
         </form>
         <br>
@@ -69,7 +69,7 @@
 
                         if(!productosFavoritos.contains(prod)){
                 %>
-                <td><a href="ProductoFavoritoNuevoServlet?id=<%=prod.getIdProducto() %>"><input type="submit" value="Añadir a favoritos"></a></td>
+                <td><a href="/comprador/vistaCompradorid=<%=prod.getIdProducto() %>"><input type="submit" value="Añadir a favoritos"></a></td>
                 <%
                         }else{
                 
@@ -85,7 +85,7 @@
                     if(subastado){
                 %>
                 
-                <td><a href="PujaServlet?id=<%=prod.getIdProducto()%>"><input type="submit" value="Pujar"></a></td>
+                <td><a href="/comprador/verPuja/<%=prod.getIdProducto()%>"><input type="submit" value="Pujar"></a></td>
                 <%
                     }else{
 

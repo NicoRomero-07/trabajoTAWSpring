@@ -1,16 +1,16 @@
 package es.trabajotaw.trabajotaw.controller;
 
 import es.trabajotaw.trabajotaw.dto.ProductoDTO;
+import es.trabajotaw.trabajotaw.dto.PujaDTO;
 import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
+import es.trabajotaw.trabajotaw.entity.Puja;
 import es.trabajotaw.trabajotaw.entity.Usuario;
 import es.trabajotaw.trabajotaw.service.ProductoService;
+import es.trabajotaw.trabajotaw.service.PujaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -21,6 +21,7 @@ public class CompradorPrincipalController {
 
     @Autowired
     private ProductoService productosService;
+    private PujaService pujaService;
 
     @GetMapping(value = "/vistaComprador")
     public String inicio(Model model, HttpSession session){
@@ -54,6 +55,15 @@ public class CompradorPrincipalController {
         return "productosFavoritos";
     }
 
+    @GetMapping(value = "/anyadirProductosFavoritos/{id}")
+    public String anyadirProductosFavoritos(Model model, HttpSession session, @PathVariable("id") Integer productoId){
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        List<ProductoDTO> productos = productosService.buscarProductosFavoritos(usuario.toDTO().getIdUsuario());
+        model.addAttribute("productosFavoritos", productos);
+        return "productosFavoritos";
+    }
+
     @GetMapping(value = "/notificaciones")
     public String doVerProductosNotificados(Model model, HttpSession session){
         Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -62,5 +72,45 @@ public class CompradorPrincipalController {
         model.addAttribute("favoritos", favoritos);
         model.addAttribute("pujas", pujas);
         return "notificaciones";
+    }
+
+    @GetMapping(value = "/verPuja/{idProducto}")
+    public String verPuja(Model model, HttpSession session, @PathVariable("idProducto") Integer idProducto){
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        ProductoDTO producto = productosService.buscarProducto(idProducto);
+        List<PujaDTO> pujas = pujaService.buscarPujasProducto(idProducto);
+        double precioActual = mayorPuja(pujas);
+        model.addAttribute("producto", producto);
+        model.addAttribute("precioActual", precioActual);
+        model.addAttribute("listaPujas", pujas);
+        return "puja";
+    }
+
+    @GetMapping(value = "/nuevaPuja/{idProducto}")
+    public String nuevaPuja(Model model, HttpSession session, @PathVariable("idProducto") Integer idProducto){
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        ProductoDTO producto = productosService.buscarProducto(idProducto);
+
+        double cantidad = (double) model.getAttribute("cantidad");
+
+        PujaDTO puja = new PujaDTO();
+        puja.setProducto(producto);
+        puja.setComprador(usuario.toDTO());
+        puja.setCantidad(cantidad);
+
+        pujaService.guardarPuja(usuario.getIdUsuario(), producto.getIdProducto(),cantidad);
+
+        return "redirect:/comprador/vistaComprador";
+    }
+
+    private double mayorPuja(List<PujaDTO> pujas){
+        double mayorPuja = 0;
+        for(PujaDTO p: pujas){
+            double cantidad = p.getCantidad();
+            if(cantidad > mayorPuja){
+                mayorPuja = cantidad;
+            }
+        }
+        return mayorPuja;
     }
 }

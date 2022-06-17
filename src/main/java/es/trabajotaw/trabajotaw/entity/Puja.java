@@ -6,6 +6,10 @@
 package es.trabajotaw.trabajotaw.entity;
 
 
+import es.trabajotaw.trabajotaw.dto.PujaDTO;
+import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
+import es.trabajotaw.trabajotaw.service.PujaService;
+
 import javax.persistence.*;
 
 /**
@@ -105,6 +109,17 @@ public class Puja   {
     @Override
     public String toString() {
         return "es.trabajotaw.entity.Puja[ idPuja=" + idPuja + " ]";
+    }
+
+    public PujaDTO toDTO() {
+        PujaDTO dto = new PujaDTO();
+
+        dto.setIdPuja(idPuja);
+        dto.setComprador(comprador.toDTO());
+        dto.setCantidad(cantidad);
+        dto.setProducto(producto.toDTO());
+
+        return dto;
     }
 
     
