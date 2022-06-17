@@ -25,7 +25,7 @@ public class CompradorPrincipalController {
     private PujaService pujaService;
     private ListaProductoService listaProductoService;
 
-    @GetMapping(value = "/vistaComprador")
+    @GetMapping(value = "/vistaComprador/{}")
     public String inicio(Model model, HttpSession session){
         return "comprador";
     }
