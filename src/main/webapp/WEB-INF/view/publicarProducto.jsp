@@ -29,7 +29,7 @@
         <form:form method="post" modelAttribute="producto" action="/vendedor/guardarProducto/${isNew}">
             <form:hidden path="idProducto"/>
             Nombre del Producto: <form:input path="nombre"/><br/><br/>
-            Descripción: <form:textarea path="descripcion"/><br/><br/>
+            Descripción: <form:textarea path="descripcion" rows="10" cols="50"/><br/><br/>
             Precio Salida: <form:input path="precioSalida"/><br/><br/>
             URL Imagen: <form:input path="urlFoto"/><br/><br/>
             Fecha inicio de subasta: <form:input path="fechaInicioSubasta" type="date"/><br/><br/>
