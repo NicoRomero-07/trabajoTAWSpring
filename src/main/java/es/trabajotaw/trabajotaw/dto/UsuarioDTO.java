@@ -6,6 +6,11 @@
 package es.trabajotaw.trabajotaw.dto;
 
 
+    import es.trabajotaw.trabajotaw.entity.Categoria;
+    import org.springframework.format.annotation.DateTimeFormat;
+
+    import javax.persistence.CascadeType;
+    import javax.persistence.ManyToOne;
     import java.util.Date;
     import java.util.List;
     import java.util.Objects;
@@ -22,15 +27,50 @@ public class UsuarioDTO {
     private String nombre;
     private String primerApellido;
     private String segundoApellido;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaNacimiento;
     private Character sexo;
+    @ManyToOne(cascade = CascadeType.ALL)
     private DireccionDTO direccion;
     private TipoUsuarioDTO tipoUsuario;
-    private List<CategoriaDTO> categoriasFavoritas;
- 
+
+    private List<Integer> categoriasFavoritas;
+
+        public List<Categoria> getCategoriasFavoritasEntity() {
+            return categoriasFavoritasEntity;
+        }
+
+        public void setCategoriasFavoritasEntity(List<Categoria> categoriasFavoritasEntity) {
+            this.categoriasFavoritasEntity = categoriasFavoritasEntity;
+        }
+
+        private List<Categoria> categoriasFavoritasEntity;
+
+    public List<Integer> getCategoriasFavoritas() {
+        return categoriasFavoritas;
+    }
+
+    public void setCategoriasFavoritas(List<Integer> idCategoriasFavoritas) {
+        this.categoriasFavoritas = idCategoriasFavoritas;
+    }
+
+    private List<Integer> listaUsuarioDTOList;
+    private List<Integer> notificacionDTOList;
+
+        public List<Integer> getNotificacionDTOList1() {
+            return notificacionDTOList1;
+        }
+
+        public void setNotificacionDTOList1(List<Integer> notificacionDTOList1) {
+            this.notificacionDTOList1 = notificacionDTOList1;
+        }
+
+        private List<Integer> notificacionDTOList1;
+
+
     public UsuarioDTO() {
     }
-    
+
     public Integer getIdUsuario() {
         return idUsuario;
     }
@@ -102,7 +142,7 @@ public class UsuarioDTO {
     public void setSexo(Character sexo) {
         this.sexo = sexo;
     }
-    
+
     public DireccionDTO getDireccion() {
         return direccion;
     }
@@ -119,11 +159,20 @@ public class UsuarioDTO {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public List<CategoriaDTO> getCategoriasFavoritas(){
-        return categoriasFavoritas;
+    public List<Integer> getListaUsuarioDTOList(){
+        return listaUsuarioDTOList;
     }
-    public void setCategoriasFavoritas(List<CategoriaDTO> categoriasFavoritas){
-        this.categoriasFavoritas=categoriasFavoritas;
+
+    public void setListaUsuarioDTOList (List<Integer> listaUsuarioDTOList){
+        this.listaUsuarioDTOList = listaUsuarioDTOList;
+    }
+
+    public List<Integer> getNotificacionDTOList() {
+        return notificacionDTOList;
+    }
+
+    public void setNotificacionDTOList(List<Integer> notificacionDTOList) {
+        this.notificacionDTOList = notificacionDTOList;
     }
 
     @Override

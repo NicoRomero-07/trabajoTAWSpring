@@ -5,6 +5,8 @@
  */
 package es.trabajotaw.trabajotaw.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -12,7 +14,8 @@ import java.util.Date;
  * @author Victor
  */
 public class ProductoDTO {
-    
+
+
     private Integer idProducto;
     private String nombre;
     private String descripcion;
@@ -21,9 +24,13 @@ public class ProductoDTO {
     private int categoria;
     private UsuarioDTO publicador;
     private boolean enPromocion;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date fechaInicioSubasta;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date fechaFinSubasta;
     private UsuarioDTO comprador;
+    private String compradorNombre;
+    private String publicadorNombre;
     
             
     public ProductoDTO() {
@@ -85,6 +92,7 @@ public class ProductoDTO {
 
     public void setPublicador(UsuarioDTO publicador) {
         this.publicador = publicador;
+        this.publicadorNombre = publicador.getNombreUsuario();
     }
 
     public Boolean getEnPromocion() {
@@ -102,6 +110,12 @@ public class ProductoDTO {
 
     public void setComprador(UsuarioDTO comprador) {
         this.comprador = comprador;
+        if(comprador!=null){
+            this.compradorNombre = comprador.getNombreUsuario();
+        }else{
+            this.compradorNombre = "";
+
+        }
     }
     
     public Date getFechaInicioSubasta(){
@@ -119,7 +133,23 @@ public class ProductoDTO {
     public void setFechaFinSubasta(Date fechaFinSubasta){
         this.fechaFinSubasta = fechaFinSubasta;
     }
-    
+
+    public String getCompradorNombre() {
+        return compradorNombre;
+    }
+
+    public void setCompradorNombre(String compradorNombre) {
+        this.compradorNombre = compradorNombre;
+    }
+
+    public String getPublicadorNombre() {
+        return publicadorNombre;
+    }
+
+    public void setPublicadorNombre(String publicadorNombre) {
+        this.publicadorNombre = publicadorNombre;
+    }
+
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set

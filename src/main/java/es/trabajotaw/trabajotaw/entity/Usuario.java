@@ -6,10 +6,8 @@
 package es.trabajotaw.trabajotaw.entity;
 
 
-import es.trabajotaw.trabajotaw.dto.CategoriaDTO;
 import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
-import es.trabajotaw.trabajotaw.service.CategoriaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -62,27 +60,34 @@ public class Usuario {
     private String segundoApellido;
     @Column(name = "FECHA_NACIMIENTO")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaNacimiento;
     @Column(name = "SEXO")
     private Character sexo;
     @ManyToMany(mappedBy = "usuarioList")
     private List<ListaUsuario> listaUsuarioList;
-    @ManyToMany(mappedBy = "usuarioList")
+    @ManyToMany( cascade = {CascadeType.PERSIST}, mappedBy = "usuarioList")
     private List<Categoria> categoriaList;
+
     @JoinTable(name = "USUARIO_NOTIFICACION", joinColumns = {
         @JoinColumn(name = "RECIBIDOR", referencedColumnName = "ID_USUARIO")}, inverseJoinColumns = {
         @JoinColumn(name = "NOTIFICACION", referencedColumnName = "ID_NOTIFICACION")})
-    @ManyToMany
+    @ManyToMany()
     private List<Notificacion> notificacionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario1")
+
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "usuario1")
     private List<ListaProducto> listaProductoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comprador")
+
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "comprador")
     private List<Puja> pujaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "notificante")
+
+    @OneToMany(mappedBy = "notificante")
     private List<Notificacion> notificacionList1;
+
     @JoinColumn(name = "DIRECCION", referencedColumnName = "ID_DIRECCION")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE, CascadeType.REMOVE}, optional = true)
     private Direccion direccion;
+
     @JoinColumn(name = "TIPO_USUARIO", referencedColumnName = "ID_TIPO_USUARIO")
     @ManyToOne(optional = false)
     private TipoUsuario tipoUsuario;
@@ -106,26 +111,24 @@ public class Usuario {
 
     public Usuario(UsuarioDTO usuario) {
         this.idUsuario=usuario.getIdUsuario();
+
         setContrasenya(usuario.getContrasenya());
-        List<Categoria> categorias = new ArrayList<>();
-        for(CategoriaDTO c:usuario.getCategoriasFavoritas()){
-            categorias.add(new Categoria(c));
-        }
-        setCategoriaList(categorias);
+
+        setCategoriaList(usuario.getCategoriasFavoritasEntity());
         setNombreUsuario(usuario.getNombreUsuario());
         setNombre(usuario.getNombre());
         setPrimerApellido(usuario.getPrimerApellido());
         setSegundoApellido(usuario.getSegundoApellido());
+
+        TipoUsuario tipoUsuario = new TipoUsuario(usuario.getTipoUsuario());
+        setTipoUsuario(tipoUsuario);
+
         Direccion direccion = new Direccion(usuario.getDireccion());
         setDireccion(direccion);
+
         setFechaNacimiento(usuario.getFechaNacimiento());
         setEmail(usuario.getEmail());
-        //List<Usuario> listaUsuarios = new ArrayList<>();
-        //this.setListaUsuarioList();
-        //this.setNotificacionList();
-        //this.setTipoUsuario();
-        //this.setPujaList();
-        this.setSexo(usuario.getSexo());
+        setSexo(usuario.getSexo());
 
     }
 
@@ -314,15 +317,60 @@ public class Usuario {
         dto.setSexo(sexo);
         dto.setTipoUsuario(tipoUsuario.toDTO());
         dto.setFechaNacimiento(fechaNacimiento);
-        List<CategoriaDTO> listaDTO = null;
 
-        List<CategoriaDTO> listaDTOcategoria = new ArrayList<>();
+        List<Integer> listIntegercategoria = new ArrayList<>();
         for (Categoria categoria:categoriaList) {
-            listaDTO.add(categoria.toDTO());
+            listIntegercategoria.add(categoria.getIdCategoria());
         }
-        dto.setCategoriasFavoritas(listaDTOcategoria);
+        dto.setCategoriasFavoritas(listIntegercategoria);
+        dto.setCategoriasFavoritasEntity(categoriaList);
+
+        List<Integer> listaUsuarioDTO = null;
+        if (listaUsuarioList != null) {
+            listaUsuarioDTO = new ArrayList<>();
+            for (ListaUsuario lu:listaUsuarioList) {
+                listaUsuarioDTO.add(lu.getIdListaUsuario());
+            }
+        }
+        dto.setListaUsuarioDTOList(listaUsuarioDTO);
+
+        List<Integer> notificacionDTOList = null;
+        if (notificacionList != null) {
+            notificacionDTOList = new ArrayList<>();
+            for (Notificacion n:notificacionList) {
+                notificacionDTOList.add(n.getIdNotificacion());
+            }
+        }
+        dto.setNotificacionDTOList(notificacionDTOList);
+
+
+        List<Integer> notificacionDTOList1 = null;
+        if(notificacionList1!=null){
+            notificacionDTOList1 = new ArrayList<>();
+            for(Notificacion n : notificacionList1){
+                notificacionDTOList1.add(n.getIdNotificacion());
+            }
+        }
+
+        dto.setNotificacionDTOList1(notificacionDTOList1);
 
         return dto;
+    }
+
+    public Usuario (UsuarioDTO dto, List<ListaUsuario> usuarioList, List<Notificacion> notificacionList){
+        this.setIdUsuario(dto.getIdUsuario());
+        this.setNombreUsuario(dto.getNombreUsuario());
+        this.setContrasenya(dto.getContrasenya());
+        this.setNombre(dto.getNombre());
+        this.setPrimerApellido(dto.getPrimerApellido());
+        this.setSegundoApellido(dto.getSegundoApellido());
+        this.setEmail(dto.getEmail());
+        this.setDireccion(new Direccion(dto.getDireccion()));
+        this.setSexo(dto.getSexo());
+        this.setTipoUsuario(new TipoUsuario(dto.getTipoUsuario()));
+        this.setFechaNacimiento(dto.getFechaNacimiento());
+        this.setListaUsuarioList(usuarioList);
+        this.setNotificacionList(notificacionList);
     }
 
 }

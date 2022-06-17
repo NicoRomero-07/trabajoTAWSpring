@@ -20,7 +20,12 @@ public class DireccionDTO {
     private String puerta;
     
     public DireccionDTO(){
-        
+        setTipo("OFICINA");
+        setCalle("");
+        setCodigoPostal(0);
+        setNumero(0);
+        setPuerta("");
+        setPlanta(0);
     }
     
     public Integer getIdDireccion() {

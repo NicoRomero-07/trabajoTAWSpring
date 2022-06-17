@@ -27,7 +27,7 @@
             <form:input size="20"  maxlength="20" path="nombre" required="true" /> <br><br>
             
             Analista: 
-            <form:select path="analista">
+            <form:select path="analista.idUsuario">
                 <form:options items="${usuarios}" itemLabel="nombreUsuario" itemValue="idUsuario"/>
             </form:select><br><br>
             

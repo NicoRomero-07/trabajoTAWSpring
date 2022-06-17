@@ -35,30 +35,39 @@ public class Direccion   {
     @Basic(optional = false)
     @Column(name = "ID_DIRECCION")
     private Integer idDireccion;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "TIPO")
     private String tipo;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "CALLE")
     private String calle;
-    @Basic(optional = false)
-     
+    @Basic(optional = true)
     @Column(name = "NUMERO")
     private int numero;
-    @Basic(optional = false)
-     
+    @Basic(optional = true)
     @Column(name = "CODIGO_POSTAL")
     private int codigoPostal;
+    @Basic(optional = true)
     @Column(name = "PLANTA")
     private Integer planta;
     @Column(name = "PUERTA")
+    @Basic(optional = true)
     private String puerta;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "direccion")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "direccion")
     private List<Usuario> usuarioList;
 
     public Direccion() {
     }
 
+    public Direccion(DireccionDTO direccion) {
+        //this.idDireccion = direccion.getIdDireccion();
+        setCalle(direccion.getCalle());
+        setCodigoPostal(direccion.getCodigoPostal());
+        setNumero(direccion.getNumero());
+        setPlanta(direccion.getPlanta());
+        setPuerta(direccion.getPuerta());
+        setTipo(direccion.getTipo());
+    }
     public Direccion(Integer idDireccion) {
         this.idDireccion = idDireccion;
     }
@@ -71,15 +80,7 @@ public class Direccion   {
         this.codigoPostal = codigoPostal;
     }
 
-    public Direccion(DireccionDTO direccion) {
-        this.idDireccion = direccion.getIdDireccion();
-        setCalle(direccion.getCalle());
-        setCodigoPostal(direccion.getCodigoPostal());
-        setNumero(direccion.getNumero());
-        setPlanta(direccion.getPlanta());
-        setPuerta(direccion.getPuerta());
-        setTipo(direccion.getTipo());
-    }
+
 
     public Integer getIdDireccion() {
         return idDireccion;
@@ -184,5 +185,5 @@ public class Direccion   {
 
         return dto;
     }
-    
+
 }

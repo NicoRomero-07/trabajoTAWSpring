@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import es.trabajotaw.trabajotaw.dao.DatosEstudioProductoRepository;
 import es.trabajotaw.trabajotaw.dao.ProductoRepository;
+import es.trabajotaw.trabajotaw.dao.ProductoRepositoryCustom;
 import es.trabajotaw.trabajotaw.dao.UsuarioRepository;
 import es.trabajotaw.trabajotaw.dto.ProductoDTO;
+import es.trabajotaw.trabajotaw.entity.DatosEstudioProducto;
 import es.trabajotaw.trabajotaw.entity.Producto;
 import es.trabajotaw.trabajotaw.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,10 @@ public class ProductoService {
     private ProductoRepository productoRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private DatosEstudioProductoRepository datosEstudioProductoRepository;
+    @Autowired
+    private ProductoRepositoryCustom productoRepositoryCustom;
 
     public List<ProductoDTO> listaEntityADTO(List<Producto> lista) {
         List<ProductoDTO> listaDTO = null;
@@ -42,12 +49,11 @@ public class ProductoService {
         if (busqueda == null || busqueda.isEmpty()) {
             productos = this.productoRepository.findAll();
         } else {
-            productos = this.productoRepository.findByNombreContaining(busqueda);
+            productos = this.productoRepository.findByNombreContaining('%'+busqueda+'%');
         }
 
         return this.listaEntityADTO(productos);
     }
-
 
     private void rellenarProducto(Producto producto,
                                   String nombreProducto, String descripcion, Double precioSalida, String imagen, Date fechaInicio, Date fechaFin, String comprador, String publicador, Boolean promocion, Integer categoria) {
@@ -94,7 +100,7 @@ public class ProductoService {
     public void modificarProducto(Integer id,
                                   String nombreProducto, String descripcion, Double precioSalida, String imagen, Date fechaInicio, Date fechaFin, String comprador, String publicador, Boolean promocion, Integer categoria) {
 
-        Producto producto = this.productoRepository.getById(id);
+        Producto producto = this.productoRepository.findById(id).orElse(null);
 
         this.rellenarProducto(producto, nombreProducto, descripcion, precioSalida, imagen, fechaInicio, fechaFin, comprador, publicador, promocion, categoria);
 
@@ -102,7 +108,7 @@ public class ProductoService {
     }
 
     public ProductoDTO buscarProducto(Integer id) {
-        Producto p = productoRepository.getById(id);
+        Producto p = productoRepository.findById(id).orElse(null);
         return p.toDTO();
     }
 
@@ -111,8 +117,9 @@ public class ProductoService {
     }
 
     public void borrarProducto(Integer id) {
-        Producto producto = this.productoRepository.getById(id);
+        Producto producto = this.productoRepository.findById(id).orElse(null);
 
+        assert producto != null;
         this.productoRepository.delete(producto);
     }
 
@@ -146,15 +153,17 @@ public class ProductoService {
 
         return this.listaEntityADTO(productos);
     }
-        /*
+
         public List<ProductoDTO> visualizarEstudio(Integer idEstudioProducto){
-            DatosEstudioProducto estudioProducto = this.depf.find(idEstudioProducto);
-            List<Producto> productos = productoRepository.visualizarEstudio(estudioProducto);
-            List<ProductoDTO> productosDTO = this.listaEntityADTO(productos);
-            return productosDTO;
+            DatosEstudioProducto estudioProducto = this.datosEstudioProductoRepository.getById(idEstudioProducto);
+            List<Producto> productos = this.productoRepositoryCustom.visualizarEstudio(estudioProducto);
+            return this.listaEntityADTO(productos);
         }
         public List<ProductoDTO> getProductosEnPromocion() {
-            return this.listaEntityADTO(this.productoRepository.getProductosPromocion());
+            return this.listaEntityADTO(this.productoRepository.findByEnPromocion(true));
         }
-     */
+
+    public void modificarProducto(Producto productoEntidad) {
+        productoRepository.save(productoEntidad);
+    }
 }

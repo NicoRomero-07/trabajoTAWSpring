@@ -1,6 +1,9 @@
 package es.trabajotaw.trabajotaw.controller;
 
+import es.trabajotaw.trabajotaw.dao.DatosEstudioProductoRepository;
+import es.trabajotaw.trabajotaw.dao.ProductoRepositoryCustom;
 import es.trabajotaw.trabajotaw.dto.*;
+import es.trabajotaw.trabajotaw.entity.DatosEstudioProducto;
 import es.trabajotaw.trabajotaw.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,8 @@ public class EstudiosController {
     private DatosEstudioProductoService estudioProductoService;
     @Autowired
     private DatosEstudioUsuarioService estudioUsuarioService;
+    @Autowired
+    private ProductoService productoService;
 
 
     @GetMapping("analista")
@@ -62,7 +67,7 @@ public class EstudiosController {
         return "redirect:/analista/";
     }
 
-    /*
+
     @GetMapping("analista/show/{id}")
     public String show(Model model, @PathVariable String id, HttpSession session){
         EstudioDTO estudio = (EstudioDTO) this.estudioService.getById(Integer.parseInt(id));
@@ -82,7 +87,7 @@ public class EstudiosController {
         }
         return "visualizarEstudio";
     }
-    */
+
 
     @GetMapping("analista/edit/{id}")
     public String edit(Model model, @PathVariable String id, HttpSession session){
@@ -116,9 +121,9 @@ public class EstudiosController {
         EstudioDTO estudioDTO;
         if (estudio.getIdEstudio() == null) {    // Crear nuevo estudio
             estudioDTO = estudioService.save(estudio.getNombre(),
-                    estudio.getAnalista().toString(),estudio.getDescripcion(),element,null,null);
+                    estudio.getAnalista().getIdUsuario(),estudio.getDescripcion(),element,null,null);
         } else {
-            estudioDTO = estudioService.save(estudio.getIdEstudio().toString(),estudio.getNombre(),estudio.getAnalista().toString(),estudio.getDescripcion(),element,null,null);
+            estudioDTO = estudioService.save(estudio.getIdEstudio().toString(),estudio.getNombre(),estudio.getAnalista().getIdUsuario(),estudio.getDescripcion(),element,null,null);
         }
         return "redirect:/analista/estudio/save/datosEstudio/" + estudioDTO.getIdEstudio();
     }
@@ -187,4 +192,5 @@ public class EstudiosController {
         }
 
     }
+
 }

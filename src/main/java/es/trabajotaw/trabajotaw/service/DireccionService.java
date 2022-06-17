@@ -1,6 +1,15 @@
 package es.trabajotaw.trabajotaw.service;
 
+import es.trabajotaw.trabajotaw.dao.DireccionRepository;
+import es.trabajotaw.trabajotaw.dto.DireccionDTO;
+import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
+import es.trabajotaw.trabajotaw.entity.Direccion;
+import es.trabajotaw.trabajotaw.entity.Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -8,6 +17,30 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DireccionService {
+    @Autowired
+    DireccionRepository dr;
+
+    public DireccionDTO guardarDireccion(DireccionDTO direccion) {
+        Direccion direccionEntity = new Direccion(direccion);
+        dr.save(direccionEntity);
+        return direccionEntity.toDTO();
+    }
+
+    public void modificarDireccion(DireccionDTO direccion) {
+        Direccion direccionEntity = new Direccion(direccion);
+        dr.save(direccionEntity);
+    }
+
+    public void borrarUsuarioDireccion(Integer id) {
+        Direccion direccion = this.dr.findById(id).orElse(null);
+        direccion.setUsuarioList(new ArrayList<>());
+        this.dr.save(direccion);
+    }
+
+    public void borrarDireccion(Integer idDireccion) {
+        Direccion direccion = this.dr.findById(idDireccion).orElse(null);
+        this.dr.delete(direccion);
+    }
 
     /*
     @EJB DireccionFacade df;

@@ -22,7 +22,7 @@
         
         <a href="/administrador/vistaAdministrador">Volver</a>
         <h1>Usuarios</h1>
-    <form method="post" action="UsuariosServlet">
+    <form method="post" action="/administrador/administrarUsuarios">
             Nombre de Usuario: <input type="text" name="filtroNombre" value="" />
             <input type="submit" value="Filtrar" />
     </form>
@@ -54,7 +54,7 @@
         <td><%= user.getNombre() %></td>
         <td><%= user.getPrimerApellido() %></td>
         <td><%= user.getSegundoApellido() %></td>
-        <td><%= format.format(user.getFechaNacimiento()) %></td>
+        <td><%= user.getFechaNacimiento()==null ? "":format.format(user.getFechaNacimiento()) %></td>
         <td><%= user.getSexo().charValue() %></td>
         <td><%= user.getTipoUsuario().getTipo() %></td>
         <td><a href="/administrador/borrarUsuario/<%= user.getIdUsuario() %>">Borrar</a></td>
@@ -65,6 +65,6 @@
                 }
     %>
     </table>
-    <a href="UsuarioNuevoEditarServlet">Crear nuevo cliente ... </a>
+    <a href="/administrador/nuevoUsuario">Crear nuevo cliente ... </a>
     </body>
 </html>

@@ -40,7 +40,10 @@ public class Categoria   {
     @JoinTable(name = "CATEGORIAS_FAVORITAS", joinColumns = {
         @JoinColumn(name = "CATEGORIA", referencedColumnName = "ID_CATEGORIA")}, inverseJoinColumns = {
         @JoinColumn(name = "USUARIO", referencedColumnName = "ID_USUARIO")})
-    @ManyToMany
+    @ManyToMany(
+            cascade = {
+                    CascadeType.PERSIST
+            })
     private List<Usuario> usuarioList;
 
     public Categoria() {
