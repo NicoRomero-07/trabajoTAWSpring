@@ -5,6 +5,7 @@ import es.trabajotaw.trabajotaw.dto.PujaDTO;
 import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
 import es.trabajotaw.trabajotaw.entity.Puja;
 import es.trabajotaw.trabajotaw.entity.Usuario;
+import es.trabajotaw.trabajotaw.service.ListaProductoService;
 import es.trabajotaw.trabajotaw.service.ProductoService;
 import es.trabajotaw.trabajotaw.service.PujaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class CompradorPrincipalController {
     @Autowired
     private ProductoService productosService;
     private PujaService pujaService;
+    private ListaProductoService listaProductoService;
 
     @GetMapping(value = "/vistaComprador")
     public String inicio(Model model, HttpSession session){
@@ -59,9 +61,9 @@ public class CompradorPrincipalController {
     public String anyadirProductosFavoritos(Model model, HttpSession session, @PathVariable("id") Integer productoId){
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
-        List<ProductoDTO> productos = productosService.buscarProductosFavoritos(usuario.toDTO().getIdUsuario());
-        model.addAttribute("productosFavoritos", productos);
-        return "productosFavoritos";
+        listaProductoService.nuevoProductoFavorito(productoId,usuario.getIdUsuario());
+
+        return "redirect:comprador/productosFavoritos";
     }
 
     @GetMapping(value = "/notificaciones")
