@@ -2,11 +2,13 @@ package es.trabajotaw.trabajotaw.controller;
 
 import es.trabajotaw.trabajotaw.dto.CategoriaDTO;
 import es.trabajotaw.trabajotaw.dto.ProductoDTO;
+import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
 import es.trabajotaw.trabajotaw.entity.Categoria;
 import es.trabajotaw.trabajotaw.entity.Producto;
 import es.trabajotaw.trabajotaw.entity.Usuario;
 import es.trabajotaw.trabajotaw.service.CategoriaService;
 import es.trabajotaw.trabajotaw.service.ProductoService;
+import es.trabajotaw.trabajotaw.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +25,12 @@ public class ListaVendedorController {
     private ProductoService productoService;
     @Autowired
     private CategoriaService categoriaService;
+    @Autowired
+    private UsuarioService usuarioService;
 
-    @GetMapping(value = "/listaProductos")
-    public String doListaProductos(Model model, HttpSession session) {
-        Usuario user = (Usuario) session.getAttribute("usuario");
+    @GetMapping(value = "/listaProductos/{id}")
+    public String doListaProductos(Model model, @PathVariable("id") String id) {
+        UsuarioDTO user = this.usuarioService.findById(Integer.parseInt(id));
         List<ProductoDTO> productos = this.productoService.listaProductosLogin(user.getIdUsuario());
         model.addAttribute("productos", productos);
         model.addAttribute("publicadorid", user.getIdUsuario());
@@ -41,7 +45,6 @@ public class ListaVendedorController {
         model.addAttribute("producto", producto);
         List<CategoriaDTO> categorias = this.categoriaService.listarCategorias("");
         model.addAttribute("categorias", categorias);
-        model.addAttribute("isVendedor", 1);
         model.addAttribute("isNew", 1);
         return "publicarProducto";
     }

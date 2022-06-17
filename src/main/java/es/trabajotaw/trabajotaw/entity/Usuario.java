@@ -318,10 +318,14 @@ public class Usuario {
         dto.setTipoUsuario(tipoUsuario.toDTO());
         dto.setFechaNacimiento(fechaNacimiento);
 
-        List<Integer> listIntegercategoria = new ArrayList<>();
-        for (Categoria categoria:categoriaList) {
-            listIntegercategoria.add(categoria.getIdCategoria());
+        List<Integer> listIntegercategoria = null;
+        if(categoriaList!=null){
+            listIntegercategoria = new ArrayList<>();
+            for (Categoria categoria:categoriaList) {
+                listIntegercategoria.add(categoria.getIdCategoria());
+            }
         }
+
         dto.setCategoriasFavoritas(listIntegercategoria);
         dto.setCategoriasFavoritasEntity(categoriaList);
 

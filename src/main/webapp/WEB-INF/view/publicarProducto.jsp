@@ -29,7 +29,7 @@
         <form:form method="post" modelAttribute="producto" action="/vendedor/guardarProducto/${isNew}">
             <form:hidden path="idProducto"/>
             Nombre del Producto: <form:input path="nombre"/><br/><br/>
-            Descripción: <form:textarea path="descripcion"/><br/><br/>
+            Descripción: <form:textarea path="descripcion" rows="10" cols="50"/><br/><br/>
             Precio Salida: <form:input path="precioSalida"/><br/><br/>
             URL Imagen: <form:input path="urlFoto"/><br/><br/>
             Fecha inicio de subasta: <form:input path="fechaInicioSubasta" type="date"/><br/><br/>
@@ -37,17 +37,10 @@
             Categoria: <form:select path="categoria">
                             <form:options items="${categorias}" itemLabel="nombre" itemValue="idCategoria"/>
                        </form:select><br/><br/>
+
+            <form:hidden path="comprador.nombreUsuario"/><br/><br/>
+            <form:hidden path="publicador.nombreUsuario"/><br/><br/>
             <%
-                Integer isVendedor = (Integer) request.getAttribute("isVendedor");
-                if(isVendedor != 1) {
-            %>
-            Comprador: <form:input path="comprador"/><br/><br/>
-            Publicador: <form:input path="publicador"/><br/><br/>
-            <%} else {%>
-            <form:hidden path="comprador"/><br/><br/>
-            <form:hidden path="publicador"/><br/><br/>
-            <%
-                }
                 List<CategoriaDTO> categorias = (List) request.getAttribute("categorias");
             %>
             <form:button>Enviar</form:button>

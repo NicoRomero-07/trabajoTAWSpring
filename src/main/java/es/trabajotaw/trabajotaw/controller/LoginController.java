@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,9 +25,10 @@ public class LoginController {
 
     @PostMapping("/autentica")
     public String doAutentica (Model model,
-                               @RequestParam("nombreusuario") String usuario, @RequestParam("contrasenya") String clave, HttpSession session) {
+                               @RequestParam("nombreusuario") String usuario, @RequestParam("contrasenya") String clave) {
 
         Usuario user = this.usuarioRepository.findByNombreUsuarioAndContrasenya(usuario, clave);
+        String id = user.getIdUsuario().toString();
         String goTo;
 
         if (user == null) {
@@ -34,8 +36,6 @@ public class LoginController {
             model.addAttribute("error", strError);
             goTo = "login";
         } else {
-            session.setAttribute("usuario", user);
-
             if(user.getTipoUsuario().getTipo().equalsIgnoreCase("Administrador")){
                 goTo = "redirect:/administrador/vistaAdministrador";
             }else if (user.getTipoUsuario().getTipo().equalsIgnoreCase("Analista")){
@@ -43,9 +43,9 @@ public class LoginController {
             }else if (user.getTipoUsuario().getTipo().equalsIgnoreCase("Marketing")){
                 goTo = "redirect:/marketing/";
             }else if(user.getTipoUsuario().getTipo().equalsIgnoreCase("Comprador")){
-                goTo = "redirect:/comprador/vistaComprador";
+                goTo = "redirect:/comprador/vistaComprador/" + id;
             }else if(user.getTipoUsuario().getTipo().equalsIgnoreCase("Vendedor")){
-                goTo = "redirect:/vendedor/listaProductos/";
+                goTo = "redirect:/vendedor/listaProductos/" + id;
             }else{
                 goTo = "login";
             }
