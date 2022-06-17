@@ -24,10 +24,11 @@ public class LoginController {
     }
 
     @PostMapping("/autentica")
-    public String doAutentica (Model model,
+    public String doAutentica (HttpSession session ,Model model,
                                @RequestParam("nombreusuario") String usuario, @RequestParam("contrasenya") String clave) {
 
         Usuario user = this.usuarioRepository.findByNombreUsuarioAndContrasenya(usuario, clave);
+        session.setAttribute("usuario",user);
         String id = user.getIdUsuario().toString();
         String goTo;
 
