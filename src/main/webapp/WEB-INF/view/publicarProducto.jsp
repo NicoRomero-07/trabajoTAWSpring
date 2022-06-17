@@ -24,26 +24,25 @@
         <a href="/vendedor/listaProductos">Volver</a><br/>
         <%
             ProductoDTO producto = (ProductoDTO) request.getAttribute("producto");
-            Integer isNew = (Integer) request.getAttribute("isNew");
         %>
-        <form:form method="post" modelAttribute="producto" action="/vendedor/guardarProducto/${isNew}">
+        <form:form method="POST" modelAttribute="producto" action="/vendedor/guardarProducto">
             <form:hidden path="idProducto"/>
-            Nombre del Producto: <form:input path="nombre"/><br/><br/>
-            Descripción: <form:textarea path="descripcion" rows="10" cols="50"/><br/><br/>
-            Precio Salida: <form:input path="precioSalida"/><br/><br/>
-            URL Imagen: <form:input path="urlFoto"/><br/><br/>
-            Fecha inicio de subasta: <form:input path="fechaInicioSubasta" type="date"/><br/><br/>
+            Nombre del Producto: <form:input type="text" path="nombre"/><br/><br/>
+            Descripción: <br/><br/><form:textarea type="text" path="descripcion" rows="10" cols="50"/><br/><br/>
+            Precio Salida: <form:input type="number" path="precioSalida"/><br/><br/>
+            URL Imagen: <form:input type="text" path="urlFoto"/><br/><br/>
+            Fecha inicio de subasta: <form:input  path="fechaInicioSubasta" type="date"/><br/><br/>
             Fecha fin de subasta: <form:input path="fechaFinSubasta" type="date"/><br/><br/>
             Categoria: <form:select path="categoria">
                             <form:options items="${categorias}" itemLabel="nombre" itemValue="idCategoria"/>
                        </form:select><br/><br/>
 
-            <form:hidden path="comprador.nombreUsuario"/><br/><br/>
-            <form:hidden path="publicador.nombreUsuario"/><br/><br/>
             <%
                 List<CategoriaDTO> categorias = (List) request.getAttribute("categorias");
             %>
             <form:button>Enviar</form:button>
+            <form:hidden path="comprador.nombreUsuario"/><br/><br/>
+            <form:hidden path="publicador.nombreUsuario"/><br/><br/>
         </form:form>
 
         </form>
