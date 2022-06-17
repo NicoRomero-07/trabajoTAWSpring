@@ -11,7 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    Usuario user = (Usuario) session.getAttribute("usuario");
+    UsuarioDTO user = (UsuarioDTO) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect(request.getContextPath());
     }
@@ -20,7 +20,6 @@
 <table width="80%">
     <tr width="80%">
         <td>Bienvenido, <%= user.getEmail() %></td>
-        <td>Session ID: <%= session.getId() %></td>
         <td><a href="ListaVendedorServlet">Tus Productos</a></td>        
         <td><a href="/">Salir</a></td>
     </tr>

@@ -10,6 +10,7 @@
 <%@page import="java.text.SimpleDateFormat" %>
 <%@page import="es.trabajotaw.trabajotaw.dto.ProductoDTO" %>
 <%@page import="java.util.List" %>
+<%@ page import="es.trabajotaw.trabajotaw.dto.UsuarioDTO" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,6 @@
         <title>Listado de Productos</title>
     </head>
     <body>
-        <jsp:include page="cabeceraVendedor.jsp"/>
         <table border="1">
             <tr>
                 <th>ID_PRODUCTO</th>
@@ -50,13 +50,13 @@
                 <td><%= prod.getComprador() == null ? "No Comprado" : prod.getComprador().getNombreUsuario()%></td>
                 <td><%= prod.getCategoria()%></td>
                 <td><%=prod.getEnPromocion() ? "Si" : "No"%></td>
-                <td><a href="vendedor/editarProducto/<%=prod.getIdProducto()%>/<%=idUsuario%>"><input
+                <td><a href="/vendedor/editarProducto/<%=prod.getIdProducto()%>/<%=idUsuario%>"><input
                         type="submit" value="Editar"></a></td>
                 <%
                     Date actualDate = new Date();
                     if (prod.getFechaFinSubasta().after(actualDate)) {
                 %>
-                <td><a href="TerminarPujaServlet?id=<%=prod.getIdProducto()%>"><input type="submit" value="Terminar puja"></a></td>
+                <td><a href="/vendedor/terminarPuja/<%=prod.getIdProducto()%>/<%=idUsuario%>"><input type="submit" value="Terminar puja"></a></td>
                 <%
                     } else {
                 %>
@@ -64,12 +64,12 @@
                 <%
                     }
                 %>
-                <td><a href="ProductoBorrarServlet?id=<%=prod.getIdProducto()%>"><input type="submit" value="Borrar"></a></td>
+                <td><a href="/vendedor/borrarProducto/<%=prod.getIdProducto()%>/<%=idUsuario%>"><input type="submit" value="Borrar"></a></td>
                 <%
                     }
                 %>
             </tr>
         </table>
-        <br><a href="/vendedor/publicarProducto"><input type="submit" value="Nuevo Producto"/></a>
+        <br><a href="/vendedor/publicarProducto/<%=idUsuario%>"><input type="submit" value="Nuevo Producto"/></a>
     </body>
 </html>
