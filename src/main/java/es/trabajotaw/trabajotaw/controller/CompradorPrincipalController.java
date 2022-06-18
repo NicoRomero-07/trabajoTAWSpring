@@ -141,7 +141,8 @@ public class CompradorPrincipalController {
             pujaService.guardarPuja(usuario.getIdUsuario(), producto.getIdProducto(),cantidad);
             redirect = "redirect:/comprador/vistaComprador";
         }else{
-            redirect = "redirect/comprador/pujaError";
+            model.addAttribute("producto",producto);
+            redirect = "pujaError";
         }
 
         return redirect;

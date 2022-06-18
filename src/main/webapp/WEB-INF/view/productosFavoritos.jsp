@@ -64,8 +64,8 @@
                 }
 
                 %>
-                <td><a href="/borrarProductosFavoritos/<%=prod.getIdProducto() %>"><input type="submit" value="Quitar de favoritos"></a></td>
-                <td><a href="/verPuja/<%=prod.getIdProducto()%>"><input type="submit" value="Pujar"></a></td>
+                <td><a href="/comprador/borrarProductosFavoritos/<%=prod.getIdProducto() %>"><input type="submit" value="Quitar de favoritos"></a></td>
+                <td><a href="/comprador/verPuja/<%=prod.getIdProducto()%>"><input type="submit" value="Pujar"></a></td>
                 <%
                   }  
                 %>
