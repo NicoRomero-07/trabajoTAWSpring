@@ -19,7 +19,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     @Query("select u from Usuario u where upper(u.nombreUsuario) like upper(:usuario) and upper(u.contrasenya) like upper(:clave)")
     Usuario comprobarUsuario(@Param("usuario") String nombreUsuario, @Param("clave") String clave);
 
-    Usuario findByNombreUsuarioAndContrasenya(String nombreUsuario,String contrasenya);
+    Usuario findByNombreUsuarioAndContrasenya (String nombreUsuario,String contrasenya);
 
     @Query("select u from Usuario u where upper(u.tipoUsuario.tipo) like upper('analista')")
     List<Usuario> getAnalistas();

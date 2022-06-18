@@ -24,6 +24,6 @@
         <a href="/comprador/productosComprados"><input type="button" value="Productos comprados" /></a>
         <a href="/comprador/notificaciones"><input type="button" value="Notificaciones" /></a> <br><br>
         
-        <a href="LogoutServlet">Salir</a>
+        <a href="/salir">Salir</a>
     </body>
 </html>

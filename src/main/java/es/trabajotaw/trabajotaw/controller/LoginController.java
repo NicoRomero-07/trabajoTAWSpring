@@ -30,10 +30,11 @@ public class LoginController {
     }
 
     @PostMapping("/autentica")
-    public String doAutentica (Model model,
+    public String doAutentica (HttpSession session ,Model model,
                                @RequestParam("nombreusuario") String usuario, @RequestParam("contrasenya") String clave) {
 
         Usuario user = this.usuarioRepository.findByNombreUsuarioAndContrasenya(usuario, clave);
+        session.setAttribute("usuario",user);
         String id = user.getIdUsuario().toString();
         String goTo;
 
@@ -49,7 +50,7 @@ public class LoginController {
             }else if (user.getTipoUsuario().getTipo().equalsIgnoreCase("Marketing")){
                 goTo = "redirect:/marketing/";
             }else if(user.getTipoUsuario().getTipo().equalsIgnoreCase("Comprador")){
-                goTo = "redirect:/comprador/vistaComprador/" + id;
+                goTo = "redirect:/comprador/vistaComprador/";
             }else if(user.getTipoUsuario().getTipo().equalsIgnoreCase("Vendedor")){
                 goTo = "redirect:/vendedor/listaProductos/" + id;
             }else{
