@@ -1,6 +1,10 @@
 package es.trabajotaw.trabajotaw.controller;
 
 import es.trabajotaw.trabajotaw.dao.UsuarioRepository;
+import es.trabajotaw.trabajotaw.dto.CategoriaDTO;
+import es.trabajotaw.trabajotaw.dto.DireccionDTO;
+import es.trabajotaw.trabajotaw.dto.TipoUsuarioDTO;
+import es.trabajotaw.trabajotaw.dto.UsuarioDTO;
 import es.trabajotaw.trabajotaw.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,12 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class LoginController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
 
     @GetMapping("/")
     public String doInit () {
