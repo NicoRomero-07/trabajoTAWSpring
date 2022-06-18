@@ -28,7 +28,7 @@
             </table>
             <br/>
             <input type="submit" value="Enviar" />
-            <a href="/"><input type="button" value="Registrarse"/></a>
+            <a href="/registro"><input type="button" value="Registrarse"/></a>
         </form>
     </body>
 </html>
