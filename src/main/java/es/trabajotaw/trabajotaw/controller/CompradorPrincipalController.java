@@ -22,10 +22,14 @@ public class CompradorPrincipalController {
 
     @Autowired
     private ProductoService productosService;
+
+    @Autowired
     private PujaService pujaService;
+
+    @Autowired
     private ListaProductoService listaProductoService;
 
-    @GetMapping(value = "/vistaComprador/{}")
+    @GetMapping(value = "/vistaComprador")
     public String inicio(Model model, HttpSession session){
         return "comprador";
     }
@@ -33,8 +37,8 @@ public class CompradorPrincipalController {
     @PostMapping(value = "/verProductos")
     public String buscarProductos(Model model, HttpSession session, @RequestParam("buscador") String buscador){
         Usuario usuario = (Usuario) session.getAttribute("usuario");
+        List<ProductoDTO> productosFavoritos = productosService.buscarProductosFavoritos(usuario.getIdUsuario());
         List<ProductoDTO> productosBuscados = productosService.listarProductos(buscador);
-        List<ProductoDTO> productosFavoritos = productosService.buscarProductosFavoritos(usuario.toDTO().getIdUsuario());
         model.addAttribute("productosBuscados", productosBuscados);
         model.addAttribute("productosFavoritos", productosFavoritos);
 
@@ -49,13 +53,35 @@ public class CompradorPrincipalController {
         return "productosComprados";
     }
 
+    @GetMapping(value = "/filtrarProductosComprados")
+    public String doFiltrarProductosComprados(Model model, HttpSession session, @RequestParam("buscador") String buscador){
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        List<ProductoDTO> productos = productosService.filtrarProductosComprados(usuario.getIdUsuario(),buscador);
+        model.addAttribute("productosFavoritos", productos);
+
+        return "productosFavoritos";
+    }
+
     @GetMapping(value = "/productosFavoritos")
     public String doVerProductosFavoritos(Model model, HttpSession session){
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         List<ProductoDTO> productos = productosService.buscarProductosFavoritos(usuario.toDTO().getIdUsuario());
         model.addAttribute("productosFavoritos", productos);
+
         return "productosFavoritos";
     }
+
+
+    @GetMapping(value = "/filtrarProductosFavoritos")
+    public String doFiltrarProductosFavoritos(Model model, HttpSession session, @RequestParam("buscador") String buscador){
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        List<ProductoDTO> productos = productosService.filtrarProductosFavoritos(usuario.getIdUsuario(),buscador);
+        model.addAttribute("productosFavoritos", productos);
+
+        return "productosFavoritos";
+    }
+
+
 
     @GetMapping(value = "/anyadirProductosFavoritos/{id}")
     public String anyadirProductosFavoritos(Model model, HttpSession session, @PathVariable("id") Integer productoId){
@@ -63,7 +89,16 @@ public class CompradorPrincipalController {
 
         listaProductoService.nuevoProductoFavorito(productoId,usuario.getIdUsuario());
 
-        return "redirect:comprador/productosFavoritos";
+        return "redirect:/comprador/productosFavoritos";
+    }
+
+    @GetMapping(value = "/borrarProductosFavoritos/{id}")
+    public String borrarProductosFavoritos(Model model, HttpSession session, @PathVariable("id") Integer productoId){
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        listaProductoService.borrarProductoFavorito(productoId,usuario.getIdUsuario());
+
+        return "redirect:/comprador/productosFavoritos";
     }
 
     @GetMapping(value = "/notificaciones")
@@ -88,22 +123,47 @@ public class CompradorPrincipalController {
         return "puja";
     }
 
-    @GetMapping(value = "/nuevaPuja/{idProducto}")
-    public String nuevaPuja(Model model, HttpSession session, @PathVariable("idProducto") Integer idProducto){
+    @PostMapping(value = "/nuevaPuja/{idProducto}")
+    public String nuevaPuja(Model model, HttpSession session, @PathVariable("idProducto") Integer idProducto,
+                            @RequestParam("cantidad") double cantidad){
+
+        String redirect = "";
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         ProductoDTO producto = productosService.buscarProducto(idProducto);
 
-        double cantidad = (double) model.getAttribute("cantidad");
+        List<PujaDTO> pujas = pujaService.buscarPujasProducto(idProducto);
 
-        PujaDTO puja = new PujaDTO();
-        puja.setProducto(producto);
-        puja.setComprador(usuario.toDTO());
-        puja.setCantidad(cantidad);
+        if(cantidad > mayorPuja(pujas)){
+            PujaDTO puja = new PujaDTO();
+            puja.setProducto(producto);
+            puja.setComprador(usuario.toDTO());
+            puja.setCantidad(cantidad);
+            pujaService.guardarPuja(usuario.getIdUsuario(), producto.getIdProducto(),cantidad);
+            redirect = "redirect:/comprador/vistaComprador";
+        }else{
+            redirect = "redirect/comprador/pujaError";
+        }
 
-        pujaService.guardarPuja(usuario.getIdUsuario(), producto.getIdProducto(),cantidad);
-
-        return "redirect:/comprador/vistaComprador";
+        return redirect;
     }
+
+    @PostMapping(value = "/filtrarProductosFavoritos")
+    public String filtrarProductosFavoritos(Model model, HttpSession session, @RequestParam("buscador") String buscador){
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        List<ProductoDTO> productosFavoritos = productosService.buscarProductosFavoritos(usuario.getIdUsuario());
+        List<ProductoDTO> productosBuscados = productosService.listarProductos(buscador);
+        model.addAttribute("productosBuscados", productosBuscados);
+        model.addAttribute("productosFavoritos", productosFavoritos);
+
+        return "listaProductosBuscados";
+    }
+
+    @GetMapping(value = "/pujaError")
+    public String doVerErrorPuja(Model model, HttpSession session){
+
+        return "pujaError";
+    }
+
 
     private double mayorPuja(List<PujaDTO> pujas){
         double mayorPuja = 0;

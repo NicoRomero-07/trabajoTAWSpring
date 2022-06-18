@@ -142,13 +142,25 @@ public class ProductoService {
 
 
 
-    public List<ProductoDTO> filtrarProductosComprados(Integer idProducto, String filtro){
+    public List<ProductoDTO> filtrarProductosComprados(Integer idUsuario, String filtro){
         List<Producto> productos;
 
         if (filtro == null || filtro.isEmpty()) {
-            productos = this.productoRepository.filtrarProductosComprados(idProducto, null);
+            productos = this.productoRepository.filtrarProductosComprados(idUsuario, null);
         } else {
-            productos = this.productoRepository.filtrarProductosComprados(idProducto, filtro);
+            productos = this.productoRepository.filtrarProductosComprados(idUsuario, filtro);
+        }
+
+        return this.listaEntityADTO(productos);
+    }
+
+    public List<ProductoDTO> filtrarProductosFavoritos(Integer idUsuario, String filtro){
+        List<Producto> productos;
+
+        if (filtro == null || filtro.isEmpty()) {
+            productos = this.productoRepository.filtrarProductosFavoritos(idUsuario, null);
+        } else {
+            productos = this.productoRepository.filtrarProductosFavoritos(idUsuario, filtro);
         }
 
         return this.listaEntityADTO(productos);

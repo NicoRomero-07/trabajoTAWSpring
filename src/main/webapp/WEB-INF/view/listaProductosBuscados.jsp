@@ -69,12 +69,12 @@
 
                         if(!productosFavoritos.contains(prod)){
                 %>
-                <td><a href="/comprador/vistaCompradorid=<%=prod.getIdProducto() %>"><input type="submit" value="Añadir a favoritos"></a></td>
+                <td><a href="/comprador/anyadirProductosFavoritos/<%=prod.getIdProducto() %>"><input type="submit" value="Añadir a favoritos"></a></td>
                 <%
                         }else{
                 
                 %>
-                <td><a href="ProductoFavoritoBorrarServlet?id=<%=prod.getIdProducto() %>"><input type="submit" value="Quitar de favoritos"></a></td>
+                <td><a href="/comprador/borrarProductosFavoritos/<%=prod.getIdProducto() %>"><input type="submit" value="Quitar de favoritos"></a></td>
 
                 <%
                         }

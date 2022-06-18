@@ -18,7 +18,7 @@
           ProductoDTO p = (ProductoDTO) request.getAttribute("producto");
         %>
         No puedes pujar con una cantidad menor al precio actual<br>
-        <form method="post" action="PujaServlet?id=<%=p.getIdProducto()%>">
+        <form method="post" action="/comprador/puja<%=p.getIdProducto()%>">
             <input type="submit" value="De acuerdo">
         </form>
     </body>

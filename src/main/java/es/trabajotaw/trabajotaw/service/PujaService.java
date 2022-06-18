@@ -19,7 +19,11 @@ public class PujaService {
 
     @Autowired
     private PujaRepository pujaRepository;
+
+    @Autowired
     private ProductoRepository productoRepository;
+
+    @Autowired
     private UsuarioRepository usuarioRepository;
 
     private List<PujaDTO> listaEntityADTO (List<Puja> lista) {
@@ -34,7 +38,8 @@ public class PujaService {
     }
 
     public List<PujaDTO> buscarPujasProducto(Integer idProducto){
-        List<Puja> pujas = pujaRepository.findByProducto(idProducto);
+        Producto p = productoRepository.getById(idProducto);
+        List<Puja> pujas = pujaRepository.findByProducto(p);
         return listaEntityADTO(pujas);
     }
 
