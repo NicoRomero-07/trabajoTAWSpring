@@ -36,7 +36,8 @@
                 List<ProductoDTO> productos = (List)request.getAttribute("productosComprados");
                 SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yy");
 
-                for (ProductoDTO prod: productos) {
+                if(productos != null){
+                    for (ProductoDTO prod: productos) {
                 %>
             <tr>
                 <td><%= prod.getIdProducto()%></td>
@@ -46,7 +47,8 @@
                 <td><%= prod.getCategoria()%></td>
                 <td><%= fecha.format(prod.getFechaFinSubasta())%></td>
                 <%
-                  }  
+                    }
+                }
                 %>
             </tr>
         </table>

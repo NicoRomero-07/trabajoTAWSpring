@@ -41,7 +41,8 @@
                 List<ProductoDTO> productos = (List)request.getAttribute("productosFavoritos");
                 SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yy");
 
-                for (ProductoDTO prod: productos) {
+                if(productos != null){
+                    for (ProductoDTO prod: productos) {
                 %>
             <tr>
                 <td><%= prod.getIdProducto()%></td>
@@ -53,21 +54,22 @@
                 <td><%= fecha.format(prod.getFechaInicioSubasta())%></td>
                 <td><%= fecha.format(prod.getFechaFinSubasta())%></td>
                 <%
-               if(prod.getEnPromocion()) { 
+                        if(prod.getEnPromocion()) {
                 %>
                 <td>Si</td>
                 <%
-                } else {
+                        } else {
                 %>
                 <td>No</td>      
                 <%
-                }
+                        }
 
                 %>
                 <td><a href="/comprador/borrarProductosFavoritos/<%=prod.getIdProducto() %>"><input type="submit" value="Quitar de favoritos"></a></td>
                 <td><a href="/comprador/verPuja/<%=prod.getIdProducto()%>"><input type="submit" value="Pujar"></a></td>
                 <%
-                  }  
+                    }
+                        }
                 %>
             </tr>
         </table>

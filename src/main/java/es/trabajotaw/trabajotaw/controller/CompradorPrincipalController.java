@@ -53,13 +53,13 @@ public class CompradorPrincipalController {
         return "productosComprados";
     }
 
-    @GetMapping(value = "/filtrarProductosComprados")
+    @PostMapping(value = "/filtrarProductosComprados")
     public String doFiltrarProductosComprados(Model model, HttpSession session, @RequestParam("buscador") String buscador){
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         List<ProductoDTO> productos = productosService.filtrarProductosComprados(usuario.getIdUsuario(),buscador);
         model.addAttribute("productosFavoritos", productos);
 
-        return "productosFavoritos";
+        return "productosComprados";
     }
 
     @GetMapping(value = "/productosFavoritos")
@@ -70,17 +70,6 @@ public class CompradorPrincipalController {
 
         return "productosFavoritos";
     }
-
-
-    @GetMapping(value = "/filtrarProductosFavoritos")
-    public String doFiltrarProductosFavoritos(Model model, HttpSession session, @RequestParam("buscador") String buscador){
-        Usuario usuario = (Usuario) session.getAttribute("usuario");
-        List<ProductoDTO> productos = productosService.filtrarProductosFavoritos(usuario.getIdUsuario(),buscador);
-        model.addAttribute("productosFavoritos", productos);
-
-        return "productosFavoritos";
-    }
-
 
 
     @GetMapping(value = "/anyadirProductosFavoritos/{id}")
@@ -151,12 +140,10 @@ public class CompradorPrincipalController {
     @PostMapping(value = "/filtrarProductosFavoritos")
     public String filtrarProductosFavoritos(Model model, HttpSession session, @RequestParam("buscador") String buscador){
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        List<ProductoDTO> productosFavoritos = productosService.buscarProductosFavoritos(usuario.getIdUsuario());
-        List<ProductoDTO> productosBuscados = productosService.listarProductos(buscador);
-        model.addAttribute("productosBuscados", productosBuscados);
+        List<ProductoDTO> productosFavoritos = productosService.filtrarProductosFavoritos(usuario.getIdUsuario(), buscador);
         model.addAttribute("productosFavoritos", productosFavoritos);
 
-        return "listaProductosBuscados";
+        return "productosFavoritos";
     }
 
     @GetMapping(value = "/pujaError")
