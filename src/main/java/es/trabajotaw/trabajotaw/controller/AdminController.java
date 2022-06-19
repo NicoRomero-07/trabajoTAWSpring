@@ -36,7 +36,7 @@ public class AdminController {
     @Autowired
     private NotificacionService notificacionService;
 
-    
+
 
     @GetMapping(value = "/vistaAdministrador")
     public String inicio(Model model, HttpSession session){

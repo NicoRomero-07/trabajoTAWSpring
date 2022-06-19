@@ -118,7 +118,6 @@ public class ProductoService {
 
     public void borrarProducto(Integer id) {
         Producto producto = this.productoRepository.findById(id).orElse(null);
-
         assert producto != null;
         this.productoRepository.delete(producto);
     }
