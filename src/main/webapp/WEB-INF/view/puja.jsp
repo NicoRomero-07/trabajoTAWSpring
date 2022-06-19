@@ -3,7 +3,8 @@
     Created on : 13-may-2022, 10:43:08
     Author     : Victor
 --%>
-
+<%@ taglib prefix="form"
+           uri="http://www.springframework.org/tags/form" %>
 <%@page import="es.trabajotaw.trabajotaw.dto.PujaDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="es.trabajotaw.trabajotaw.dto.ProductoDTO"%>
@@ -23,12 +24,12 @@
         %>
         Producto: <%= p.getNombre()%> <br>
         Precio actual: <%= listaPujas.isEmpty()? p.getPrecioSalida() : precioActual %>
-        <form method="post" action="PujaNuevoServlet?id=<%=p.getIdProducto()%>">
+        <form method="post" action="/comprador/nuevaPuja/<%=p.getIdProducto()%>">
         Cantidad: <input type="text" name="cantidad"><br>
         Enviar: <input type="submit">
         </form>
         
-        <a href="BuscarProductosServlet">Volver</a>
+        <a href="/comprador/vistaComprador">Volver</a>
         
     </body>
 </html>

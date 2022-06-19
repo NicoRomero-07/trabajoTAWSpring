@@ -12,6 +12,9 @@ import java.util.List;
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
+    @Query("select p from Producto p")
+    List<Producto> listaProductos();
+
     @Query("select p FROM Producto p where p.publicador.idUsuario = :publicadorid")
     List<Producto> listaProductosPublicadorId(@Param("publicadorid") Integer publicadorid);
 

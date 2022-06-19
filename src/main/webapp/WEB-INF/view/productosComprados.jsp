@@ -17,7 +17,7 @@
     <body>
         <h1>Productos comprados</h1>
         
-        <form method="post" action="BuscarProductosCompradosServlet">
+        <form method="post" action="/comprador/filtrarProductosComprados">
             Buscar productos: <input type="text" name="buscador" value="" />
         </form>
         <br>

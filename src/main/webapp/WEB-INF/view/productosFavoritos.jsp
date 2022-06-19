@@ -17,7 +17,7 @@
     <body>
         <h1>Lista de favoritos</h1>
         
-        <form method="post" action="BuscarProductosFavoritosServlet">
+        <form method="post" action="/comprador/filtrarProductosFavoritos">
             Buscar productos: <input type="text" name="buscador" value="" />
         </form>
         <br>
@@ -64,8 +64,8 @@
                 }
 
                 %>
-                <td><a href="ProductoFavoritoBorrarServlet?id=<%=prod.getIdProducto() %>"><input type="submit" value="Quitar de favoritos"></a></td>
-                <td><a href="PujaServlet?id=<%=prod.getIdProducto()%>"><input type="submit" value="Pujar"></a></td>
+                <td><a href="/comprador/borrarProductosFavoritos/<%=prod.getIdProducto() %>"><input type="submit" value="Quitar de favoritos"></a></td>
+                <td><a href="/comprador/verPuja/<%=prod.getIdProducto()%>"><input type="submit" value="Pujar"></a></td>
                 <%
                   }  
                 %>
